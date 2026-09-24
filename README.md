@@ -1,4 +1,4 @@
-# xbm-demo
+# xbm
 
 Sticky monorepo for weekday X-bookmark tech demos.
 

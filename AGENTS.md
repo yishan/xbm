@@ -1,4 +1,4 @@
-# Agent rules — xbm-demo
+# Agent rules — xbm
 
 Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 
