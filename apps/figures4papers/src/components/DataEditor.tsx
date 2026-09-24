@@ -1,73 +1,46 @@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
-  LINE_SERIES,
-  METRIC_KEYS,
-  METRIC_LABELS,
+  SERIES_KEYS,
+  USAGE_METER,
+  formatCell,
+  type AbRow,
   type ChartKind,
-  type LinePoint,
-  type LineSeriesKey,
-  type MetricKey,
-  type MetricRow,
-} from "@/data/sample"
+} from "@/data/jev"
 
 type Props = {
   kind: ChartKind
-  metrics: MetricRow[]
-  lineData: LinePoint[]
-  activeMetric: MetricKey
-  onActiveMetricChange: (key: MetricKey) => void
-  onMetricChange: (rowIndex: number, key: MetricKey | "method", value: string) => void
-  onLineChange: (rowIndex: number, key: "epoch" | LineSeriesKey, value: string) => void
+  rows: AbRow[]
+  onRowChange: (
+    rowIndex: number,
+    key: "metric" | "short" | "without" | "with",
+    value: string,
+  ) => void
 }
 
-export function DataEditor({
-  kind,
-  metrics,
-  lineData,
-  activeMetric,
-  onActiveMetricChange,
-  onMetricChange,
-  onLineChange,
-}: Props) {
+export function DataEditor({ kind, rows, onRowChange }: Props) {
   if (kind === "line") {
     return (
       <div className="space-y-3">
-        <Label className="text-sm font-medium">Training curve data</Label>
+        <Label className="text-sm font-medium">
+          Weekly usage meter (read-only defaults)
+        </Label>
+        <p className="text-muted-foreground text-xs">
+          37% → 38% → 39%. Does not prove token savings; includes chat overhead.
+        </p>
         <div className="overflow-x-auto rounded-lg border">
-          <table className="w-full min-w-[420px] text-sm">
+          <table className="w-full text-sm">
             <thead className="bg-muted/60 text-left">
               <tr>
-                <th className="px-2 py-2 font-medium">Epoch</th>
-                {LINE_SERIES.map((s) => (
-                  <th key={s} className="px-2 py-2 font-medium">
-                    {s}
-                  </th>
-                ))}
+                <th className="px-2 py-2 font-medium">Phase</th>
+                <th className="px-2 py-2 font-medium">%</th>
               </tr>
             </thead>
             <tbody>
-              {lineData.map((row, i) => (
-                <tr key={i} className="border-t">
-                  <td className="p-1">
-                    <Input
-                      type="number"
-                      className="h-8"
-                      value={row.epoch}
-                      onChange={(e) => onLineChange(i, "epoch", e.target.value)}
-                    />
-                  </td>
-                  {LINE_SERIES.map((s) => (
-                    <td key={s} className="p-1">
-                      <Input
-                        type="number"
-                        step="0.1"
-                        className="h-8"
-                        value={row[s]}
-                        onChange={(e) => onLineChange(i, s, e.target.value)}
-                      />
-                    </td>
-                  ))}
+              {USAGE_METER.map((row) => (
+                <tr key={row.phase} className="border-t">
+                  <td className="px-2 py-2">{row.phase}</td>
+                  <td className="px-2 py-2">{row.percent}</td>
                 </tr>
               ))}
             </tbody>
@@ -79,62 +52,68 @@ export function DataEditor({
 
   return (
     <div className="space-y-3">
-      {kind === "bar" && (
-        <div className="space-y-1.5">
-          <Label htmlFor="metric-select">Bar metric</Label>
-          <select
-            id="metric-select"
-            className="border-input bg-background h-8 w-full rounded-lg border px-2 text-sm"
-            value={activeMetric}
-            onChange={(e) => onActiveMetricChange(e.target.value as MetricKey)}
-          >
-            {METRIC_KEYS.map((key) => (
-              <option key={key} value={key}>
-                {METRIC_LABELS[key]}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <Label className="text-sm font-medium">Method metrics</Label>
+      <Label className="text-sm font-medium">
+        Without / With Jev (editable; defaults match chatgpt_pack.json)
+      </Label>
       <div className="overflow-x-auto rounded-lg border">
-        <table className="w-full min-w-[520px] text-sm">
+        <table className="w-full min-w-[420px] text-sm">
           <thead className="bg-muted/60 text-left">
             <tr>
-              <th className="px-2 py-2 font-medium">Method</th>
-              {METRIC_KEYS.map((key) => (
-                <th key={key} className="px-2 py-2 font-medium">
-                  {METRIC_LABELS[key]}
-                </th>
-              ))}
+              <th className="px-2 py-2 font-medium">Metric</th>
+              <th className="px-2 py-2 font-medium">{SERIES_KEYS.without}</th>
+              <th className="px-2 py-2 font-medium">{SERIES_KEYS.with}</th>
             </tr>
           </thead>
           <tbody>
-            {metrics.map((row, i) => (
-              <tr key={i} className="border-t">
-                <td className="p-1">
+            {rows.map((row, i) => (
+              <tr key={row.metric} className="border-t">
+                <td className="p-1 align-middle">
                   <Input
-                    className="h-8"
-                    value={row.method}
-                    onChange={(e) => onMetricChange(i, "method", e.target.value)}
+                    className="h-8 min-w-[140px]"
+                    value={row.short}
+                    title={row.metric}
+                    onChange={(e) => onRowChange(i, "short", e.target.value)}
                   />
                 </td>
-                {METRIC_KEYS.map((key) => (
-                  <td key={key} className="p-1">
-                    <Input
-                      type="number"
-                      step="0.1"
-                      className="h-8"
-                      value={row[key]}
-                      onChange={(e) => onMetricChange(i, key, e.target.value)}
-                    />
-                  </td>
-                ))}
+                <td className="p-1">
+                  <Input
+                    type="number"
+                    step="any"
+                    className="h-8"
+                    value={row.without}
+                    onChange={(e) => onRowChange(i, "without", e.target.value)}
+                  />
+                </td>
+                <td className="p-1">
+                  <Input
+                    type="number"
+                    step="any"
+                    className="h-8"
+                    value={
+                      row.unit === "$" && row.with !== 0
+                        ? formatCell(row.with, "$")
+                        : row.with
+                    }
+                    onChange={(e) => onRowChange(i, "with", e.target.value)}
+                  />
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {kind === "radar" && (
+        <p className="text-muted-foreground text-xs">
+          Radar uses overlapping count metrics only (excludes wall time, $,
+          tokens).
+        </p>
+      )}
+      {kind === "bar" && (
+        <p className="text-muted-foreground text-xs">
+          Bar chart omits tiny $ / token rows so count and time scales stay
+          readable; full values remain in the table.
+        </p>
+      )}
     </div>
   )
 }

@@ -2,46 +2,53 @@
 
 ## Goal
 
-A single-user web demo that lets you edit sample scientific metrics and render publication-style bar, radar, and line charts, then export the current figure as PNG.
+A single-user showcase page that renders **real Jev A/B comparison data** as paper-style figures (grouped bar / radar / usage-meter line) with PNG export.
+
+Primary story: **Without Jev vs With Jev** from a recorded local-run proxy (2026-09-19) — **not** a formal benchmark, and **not** proof of token savings.
+
+## Showcase dataset
+
+| Source | Role |
+|--------|------|
+| `grok-bot-jev/examples/chatgpt_pack.json` | Authoritative numbers (`tasks`, `timing_comparison`, `grok_bot_meter`, `jev`) |
+| `grok-bot-jev/examples/ab_results.md` | Human-readable summary + caveats |
+
+**Main figure** — Sample B, 24-candidate ≥200k filter timing: wall 53.803 s vs 4.125 s (13.0×), pages 14 vs 5, searches 2 vs 0. Shared collection 104.5 s excluded from both arms.
+
+**Secondary figure** — five-task proxies: retries 3→0, skills 6→3, model-research pages 10→4 / searches 5→2 (plus remaining recorded proxies).
+
+Do **not** use the 2026-09-20 shadow RTT (~0.67 s) as the main comparison.
 
 ## Single-user MVP
 
 **In scope**
-- Switch between bar, radar, and line chart types
-- Edit underlying sample numbers (method names + metrics) in the UI
-- Clean paper-figure look: white background, title, axis labels, legend
-- Export the visible figure as PNG
+- Tabs: Main (200k timing) / Secondary (five-task proxies)
+- Chart types: grouped bar (Without | With), radar (count metrics), line (usage meter 37→38→39)
+- Editable cells with defaults matching the pack JSON
+- Caveats / footnotes on-page
+- Clean paper-figure look + PNG export of the figure region
 - Runnable with `bun install && bun run dev` from this directory
 
 **Explicitly out of scope**
-- Full Claude Skill wiring from the upstream repo
+- Claiming formal benchmark or proven token savings
+- Inventing extra metrics beyond the pack / ab_results
+- Full Claude Skill wiring from the upstream figures4papers repo
 - Paper PDF / LaTeX pipeline
 - Multi-user / auth
-- Custom drawing beyond what Recharts + PNG export need
 - Touching other apps or root monorepo tooling
 
-## Outcome-oriented tasks
-
-1. Scaffold Vite + React + TypeScript under `apps/figures4papers/` with `bunfig.toml` (`minimumReleaseAge = 259200`) before install.
-2. Init shadcn/ui (minimalist) and add Button, Card, Input, Tabs, Label (and Select if needed).
-3. Ship sample paper datasets (methods × metrics) with editable cells.
-4. Render bar / radar / line charts with a publication-style layout.
-5. Wire PNG export of the figure region.
-6. Verify build + dev; capture screenshot and short demo video under `artifacts/`.
-
-## Stack (with rationale)
+## Stack
 
 | Choice | Rationale |
 |--------|-----------|
 | Bun | Monorepo default runtime / package manager |
-| Vite + React + TypeScript | Official light SPA scaffold; one-screen MVP does not need a full framework |
-| Tailwind + shadcn/ui (minimalist) | Opinionated, on-demand UI without custom design system |
-| Recharts | Prebuilt React charts (bar, radar, line) with solid axis/legend support |
-| html-to-image | Simple DOM → PNG export of the figure card |
+| Vite + React + TypeScript | Light SPA scaffold |
+| Tailwind + shadcn/ui | On-demand UI |
+| Recharts | Bar / radar / line |
+| html-to-image | DOM → PNG export |
 
 ## Deferred
 
-- Claude Skill / MCP integration (upstream focus; not needed for interactive demo)
+- Claude Skill / MCP integration
 - PDF / multi-panel publication layouts
-- Import/export of CSV or plotting scripts
-- Theme presets matching specific conference style guides
+- CSV import of other A/B runs

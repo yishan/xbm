@@ -16,22 +16,25 @@ import {
   YAxis,
 } from "recharts"
 import {
-  FIGURE_TITLE,
-  LINE_SERIES,
-  METRIC_KEYS,
-  METRIC_LABELS,
+  FIGURE_TITLES,
+  META,
   SERIES_COLORS,
+  SERIES_KEYS,
+  USAGE_LINE_TITLE,
+  USAGE_METER,
+  chartRows,
+  radarRows,
+  toGroupedBarData,
+  toRadarData,
+  type AbRow,
   type ChartKind,
-  type LinePoint,
-  type MetricKey,
-  type MetricRow,
-} from "@/data/sample"
+  type FigureId,
+} from "@/data/jev"
 
 type Props = {
+  figure: FigureId
   kind: ChartKind
-  metrics: MetricRow[]
-  lineData: LinePoint[]
-  activeMetric: MetricKey
+  rows: AbRow[]
 }
 
 const paperAxis = {
@@ -40,95 +43,97 @@ const paperAxis = {
   tickLine: false,
 }
 
-export function FigureChart({ kind, metrics, lineData, activeMetric }: Props) {
+export function FigureChart({ figure, kind, rows }: Props) {
+  const barData = toGroupedBarData(chartRows(rows))
+  const radarData = toRadarData(radarRows(rows))
+
   return (
-    <div className="flex h-full w-full flex-col bg-white p-6 text-neutral-900">
-      <p className="mb-4 text-center text-sm font-medium leading-snug">
-        {FIGURE_TITLE}
+    <div className="flex h-full w-full flex-col bg-white p-5 text-neutral-900">
+      <p className="mb-3 text-center text-[13px] font-medium leading-snug">
+        {FIGURE_TITLES[figure]}
       </p>
+      {figure === "timing-200k" && kind === "bar" && (
+        <p className="mb-2 text-center text-[11px] text-neutral-600">
+          Shared collection {META.collectSecondsSharedExcluded} s excluded ·
+          reported ratio {META.reportedSpeedupX}× with Jev · pool n=
+          {META.poolN}
+        </p>
+      )}
       <div className="min-h-0 flex-1">
         <ResponsiveContainer width="100%" height="100%">
           {kind === "bar" ? (
             <BarChart
-              data={metrics}
-              margin={{ top: 8, right: 16, left: 8, bottom: 8 }}
+              data={barData}
+              margin={{ top: 8, right: 16, left: 8, bottom: 48 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
-              <XAxis dataKey="method" {...paperAxis} />
-              <YAxis
+              <XAxis
+                dataKey="metric"
                 {...paperAxis}
-                domain={[0, 100]}
-                label={{
-                  value: METRIC_LABELS[activeMetric],
-                  angle: -90,
-                  position: "insideLeft",
-                  style: { fontSize: 12, fill: "#333" },
-                }}
+                interval={0}
+                angle={-28}
+                textAnchor="end"
+                height={60}
               />
+              <YAxis {...paperAxis} />
               <Tooltip />
               <Legend />
               <Bar
-                dataKey={activeMetric}
-                name={METRIC_LABELS[activeMetric]}
+                dataKey={SERIES_KEYS.without}
                 fill={SERIES_COLORS[0]}
+                radius={[2, 2, 0, 0]}
+              />
+              <Bar
+                dataKey={SERIES_KEYS.with}
+                fill={SERIES_COLORS[1]}
                 radius={[2, 2, 0, 0]}
               />
             </BarChart>
           ) : kind === "radar" ? (
             <RadarChart
-              data={METRIC_KEYS.map((key) => {
-                const point: Record<string, string | number> = {
-                  metric: METRIC_LABELS[key],
-                }
-                for (const row of metrics) {
-                  point[row.method] = row[key]
-                }
-                return point
-              })}
-              margin={{ top: 16, right: 32, left: 32, bottom: 16 }}
+              data={radarData}
+              margin={{ top: 16, right: 40, left: 40, bottom: 16 }}
             >
               <PolarGrid stroke="#ccc" />
-              <PolarAngleAxis dataKey="metric" tick={{ fontSize: 11, fill: "#333" }} />
+              <PolarAngleAxis
+                dataKey="metric"
+                tick={{ fontSize: 11, fill: "#333" }}
+              />
               <PolarRadiusAxis
                 angle={30}
-                domain={[60, 100]}
                 tick={{ fontSize: 10, fill: "#666" }}
               />
               <Tooltip />
               <Legend />
-              {metrics.map((row, i) => (
-                <Radar
-                  key={row.method}
-                  name={row.method}
-                  dataKey={row.method}
-                  stroke={SERIES_COLORS[i % SERIES_COLORS.length]}
-                  fill={SERIES_COLORS[i % SERIES_COLORS.length]}
-                  fillOpacity={0.15}
-                  strokeWidth={2}
-                />
-              ))}
+              <Radar
+                name={SERIES_KEYS.without}
+                dataKey={SERIES_KEYS.without}
+                stroke={SERIES_COLORS[0]}
+                fill={SERIES_COLORS[0]}
+                fillOpacity={0.15}
+                strokeWidth={2}
+              />
+              <Radar
+                name={SERIES_KEYS.with}
+                dataKey={SERIES_KEYS.with}
+                stroke={SERIES_COLORS[1]}
+                fill={SERIES_COLORS[1]}
+                fillOpacity={0.15}
+                strokeWidth={2}
+              />
             </RadarChart>
           ) : (
             <LineChart
-              data={lineData}
+              data={USAGE_METER}
               margin={{ top: 8, right: 16, left: 8, bottom: 8 }}
             >
               <CartesianGrid strokeDasharray="3 3" stroke="#ddd" />
-              <XAxis
-                dataKey="epoch"
-                {...paperAxis}
-                label={{
-                  value: "Epoch",
-                  position: "insideBottom",
-                  offset: -2,
-                  style: { fontSize: 12, fill: "#333" },
-                }}
-              />
+              <XAxis dataKey="phase" {...paperAxis} />
               <YAxis
                 {...paperAxis}
-                domain={[40, 90]}
+                domain={[30, 45]}
                 label={{
-                  value: "Accuracy (%)",
+                  value: "Weekly usage %",
                   angle: -90,
                   position: "insideLeft",
                   style: { fontSize: 12, fill: "#333" },
@@ -136,20 +141,23 @@ export function FigureChart({ kind, metrics, lineData, activeMetric }: Props) {
               />
               <Tooltip />
               <Legend />
-              {LINE_SERIES.map((series, i) => (
-                <Line
-                  key={series}
-                  type="monotone"
-                  dataKey={series}
-                  stroke={SERIES_COLORS[i % SERIES_COLORS.length]}
-                  strokeWidth={2}
-                  dot={{ r: 3 }}
-                />
-              ))}
+              <Line
+                type="monotone"
+                dataKey="percent"
+                name="Usage meter %"
+                stroke={SERIES_COLORS[2]}
+                strokeWidth={2}
+                dot={{ r: 4 }}
+              />
             </LineChart>
           )}
         </ResponsiveContainer>
       </div>
+      {kind === "line" && (
+        <p className="mt-2 text-center text-[11px] text-neutral-600">
+          {USAGE_LINE_TITLE}
+        </p>
+      )}
     </div>
   )
 }
