@@ -1,5 +1,15 @@
 {
-  "proposed": [],
+  "proposed": [
+    {
+      "id": "2102246563049603260",
+      "title": "figures4papers",
+      "url": "https://x.com/GitHub_Daily/status/2102246563049603260",
+      "date": "2026-09-24",
+      "tech": "figures4papers",
+      "repo": "https://github.com/ChenLiu-1996/figures4papers",
+      "slug": "figures4papers"
+    }
+  ],
   "built": [],
   "skipped": []
 }
