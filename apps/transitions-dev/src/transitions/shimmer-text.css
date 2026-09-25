@@ -1,0 +1,46 @@
+/* Shimmer text — a masked highlight sweeps across the status text */
+.t-shimmer {
+  background: linear-gradient(
+      90deg,
+      var(--shimmer-base, #a1a1aa) 0%,
+      var(--shimmer-base, #a1a1aa) 40%,
+      var(--shimmer-hi, #18181b) 50%,
+      var(--shimmer-base, #a1a1aa) 60%,
+      var(--shimmer-base, #a1a1aa) 100%
+    )
+    0 0 / 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: t-shimmer 1.9s linear infinite;
+}
+
+@keyframes t-shimmer {
+  from { background-position: 100% 0; }
+  to { background-position: 0% 0; }
+}
+
+/* status swap: new line enters with a short blur */
+.t-shimmer-swap {
+  display: inline-block;
+  animation: t-shimmer-swap 380ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes t-shimmer-swap {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-shimmer {
+    animation: none;
+    background: none;
+    color: var(--shimmer-base, #71717a);
+  }
+  .t-shimmer-swap {
+    animation: none;
+  }
+}

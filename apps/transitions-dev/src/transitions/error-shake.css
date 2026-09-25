@@ -1,0 +1,46 @@
+/* Error state shake — decaying horizontal shake + message reveal */
+.t-shake[data-shake] {
+  animation: t-shake 440ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes t-shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-7px); }
+  30% { transform: translateX(6px); }
+  45% { transform: translateX(-4px); }
+  60% { transform: translateX(3px); }
+  75% { transform: translateX(-2px); }
+  90% { transform: translateX(1px); }
+}
+
+/* message: animate height via grid rows, plus fade/slide */
+.t-shake-msg {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    grid-template-rows 260ms cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 200ms ease,
+    transform 260ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.t-shake-msg > * {
+  overflow: hidden;
+}
+
+.t-shake-msg[data-show="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-shake[data-shake] {
+    animation: none;
+  }
+  .t-shake-msg {
+    transition: opacity 120ms ease;
+    transform: none;
+  }
+}
