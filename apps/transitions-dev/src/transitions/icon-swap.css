@@ -1,0 +1,28 @@
+/* Icon swap — outgoing icon shrinks + blurs while the new one scales in */
+.t-swap {
+  display: grid;
+  place-items: center;
+}
+
+.t-swap > * {
+  grid-area: 1 / 1;
+  transition:
+    opacity 180ms ease,
+    filter 220ms ease,
+    transform 360ms cubic-bezier(0.3, 1.4, 0.5, 1);
+  transition-delay: var(--delay, 0ms);
+}
+
+.t-swap > [data-shown="false"] {
+  opacity: 0;
+  filter: blur(4px);
+  transform: scale(0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-swap > * {
+    transition: opacity 120ms ease;
+    filter: none !important;
+    transform: none !important;
+  }
+}

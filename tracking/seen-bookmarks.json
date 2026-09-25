@@ -10,6 +10,18 @@
       "repo": "https://github.com/ChenLiu-1996/figures4papers",
       "slug": "figures4papers",
       "built": "2026-09-24"
+    },
+    {
+      "id": "2098801944756154391",
+      "title": "transitions.dev",
+      "url": "https://x.com/jonathan_wilke/status/2098801944756154391",
+      "date": "2026-09-25",
+      "tech": "transitions.dev",
+      "site": "https://transitions.dev",
+      "slug": "transitions-dev",
+      "folder": "all-bookmarks",
+      "why": "High bubbling sentiment (~7.5k bookmarks); UI transitions for AI agents; strong screenshot/video demo fit",
+      "built": "2026-09-25"
     }
   ],
   "skipped": []

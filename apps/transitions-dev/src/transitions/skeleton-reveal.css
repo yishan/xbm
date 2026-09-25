@@ -1,0 +1,51 @@
+/* Skeleton loader and reveal — pulse, then cross-fade to content */
+.t-skel {
+  display: grid;
+}
+
+.t-skel > * {
+  grid-area: 1 / 1; /* stack skeleton + content */
+}
+
+.t-skel-bone {
+  animation: t-skel-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes t-skel-pulse {
+  50% { opacity: 0.45; }
+}
+
+.t-skel-placeholder,
+.t-skel-content {
+  transition:
+    opacity 360ms ease,
+    filter 420ms ease,
+    transform 480ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.t-skel[data-loading="false"] .t-skel-placeholder {
+  opacity: 0;
+  filter: blur(4px);
+}
+
+.t-skel[data-loading="true"] .t-skel-content {
+  opacity: 0;
+  filter: blur(6px);
+  transform: translateY(4px);
+}
+
+.t-skel[data-loading="false"] .t-skel-content {
+  transition-delay: 80ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .t-skel-bone {
+    animation: none;
+  }
+  .t-skel-placeholder,
+  .t-skel-content {
+    transition: opacity 150ms ease;
+    filter: none !important;
+    transform: none !important;
+  }
+}
