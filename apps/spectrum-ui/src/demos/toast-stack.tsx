@@ -1,0 +1,78 @@
+import { ToastStack, useToastStack } from "@/blocks/toast-stack"
+
+export function ToastStackDemo() {
+  const { toasts, push, update, dismiss } = useToastStack([
+    {
+      status: "info",
+      title: "Todo archived",
+      description: "You can restore it from settings",
+    },
+  ])
+
+  const runAgent = () => {
+    const id = push({
+      status: "loading",
+      title: "Agent is browsing…",
+    })
+    window.setTimeout(() => {
+      update(id, {
+        status: "success",
+        title: "Found 12 sources",
+        description: "Primary and secondary research complete",
+        action: {
+          label: "Open",
+          onClick: () => dismiss(id),
+        },
+      })
+    }, 1600)
+  }
+
+  const runFail = () => {
+    const id = push({
+      status: "loading",
+      title: "Agent is browsing…",
+    })
+    window.setTimeout(() => {
+      update(id, {
+        status: "error",
+        title: "Rate limit hit",
+        description: "Try again in a few seconds",
+        action: {
+          label: "Retry",
+          onClick: () => dismiss(id),
+        },
+      })
+    }, 1600)
+  }
+
+  return (
+    <div className="flex w-full flex-col items-center gap-2 p-2">
+      <div className="flex gap-2">
+        <button
+          type="button"
+          data-testid="toast-push"
+          onClick={runAgent}
+          className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-zinc-700"
+        >
+          Run agent task
+        </button>
+        <button
+          type="button"
+          data-testid="toast-fail"
+          onClick={runFail}
+          className="rounded-md bg-rose-100 px-3 py-1.5 text-xs font-medium text-rose-700 transition-colors hover:bg-rose-200"
+        >
+          Fail
+        </button>
+      </div>
+
+      <div className="relative h-[190px] w-full">
+        <ToastStack
+          className="absolute bottom-2 left-1/2 -translate-x-1/2"
+          toasts={toasts}
+          onDismiss={dismiss}
+        />
+      </div>
+    </div>
+  )
+}
