@@ -22,6 +22,18 @@
       "folder": "all-bookmarks",
       "why": "High bubbling sentiment (~7.5k bookmarks); UI transitions for AI agents; strong screenshot/video demo fit",
       "built": "2026-09-25"
+    },
+    {
+      "id": "2099784285775593630",
+      "title": "Spectrum UI",
+      "url": "https://x.com/dingyi/status/2099784285775593630",
+      "date": "2026-09-28",
+      "tech": "Spectrum UI",
+      "site": "https://ui.spectrumhq.in/",
+      "repo": "https://github.com/arihantcodes/spectrum-ui",
+      "slug": "spectrum-ui",
+      "why": "Animated shadcn/Tailwind/Motion component library for AI-agent UIs; strong screenshot/video demo fit",
+      "built": "2026-09-28"
     }
   ],
   "skipped": []
