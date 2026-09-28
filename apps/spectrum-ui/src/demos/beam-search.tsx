@@ -4,7 +4,7 @@ import { BeamSearch } from "@/blocks/beam-search"
 export function BeamSearchDemo() {
   const [query, setQuery] = useState("")
 
-  const chips = ["Research fonts", "Optimize code", "Summarize demo"]
+  const chips = ["Research", "Refactor", "Summarize"]
 
   return (
     <div className="flex w-full flex-col items-center gap-3 p-4">
@@ -15,7 +15,7 @@ export function BeamSearchDemo() {
             key={chip}
             type="button"
             onClick={() => setQuery(chip)}
-            className="rounded-full border border-zinc-200 bg-white px-3 py-1 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
+            className="whitespace-nowrap rounded-full border border-zinc-200 bg-white px-2 py-0.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
           >
             {chip}
           </button>

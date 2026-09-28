@@ -1,3 +1,6 @@
+// Bell button that swings on new notifications, with a rolling unread-count badge.
+// Inspired by Spectrum UI (ui.spectrumhq.in). Re-implemented from scratch.
+
 import { useEffect, useRef, useState } from "react"
 import { AnimatePresence, motion, useReducedMotionConfig } from "motion/react"
 import { Bell } from "lucide-react"

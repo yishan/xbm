@@ -1,16 +1,13 @@
-import { useEffect } from "react"
 import { ToastStack, useToastStack } from "@/blocks/toast-stack"
 
 export function ToastStackDemo() {
-  const { toasts, push, update, dismiss } = useToastStack()
-
-  useEffect(() => {
-    push({
+  const { toasts, push, update, dismiss } = useToastStack([
+    {
       status: "info",
       title: "Todo archived",
       description: "You can restore it from settings",
-    })
-  }, [push])
+    },
+  ])
 
   const runAgent = () => {
     const id = push({
@@ -49,7 +46,7 @@ export function ToastStackDemo() {
   }
 
   return (
-    <div className="flex min-h-[300px] w-full flex-col items-center gap-4 p-4">
+    <div className="flex w-full flex-col items-center gap-2 p-2">
       <div className="flex gap-2">
         <button
           type="button"
@@ -69,7 +66,13 @@ export function ToastStackDemo() {
         </button>
       </div>
 
-      <ToastStack toasts={toasts} onDismiss={dismiss} />
+      <div className="relative h-[190px] w-full">
+        <ToastStack
+          className="absolute bottom-2 left-1/2 -translate-x-1/2"
+          toasts={toasts}
+          onDismiss={dismiss}
+        />
+      </div>
     </div>
   )
 }

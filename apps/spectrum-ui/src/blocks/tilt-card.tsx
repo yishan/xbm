@@ -1,4 +1,7 @@
-import { useRef } from "react"
+// 3D card that tilts toward the pointer with parallax depth layers and a moving glare.
+// Inspired by Spectrum UI (ui.spectrumhq.in). Re-implemented from scratch.
+
+import { useRef, useState } from "react"
 import type { HTMLAttributes, MouseEvent, ReactNode } from "react"
 import {
   motion,
@@ -9,7 +12,7 @@ import {
 } from "motion/react"
 import { cn } from "@/lib/utils"
 
-type TiltCardProps = {
+export type TiltCardProps = {
   title?: string
   subtitle?: string
   children?: ReactNode
@@ -27,6 +30,7 @@ export function TiltCard({
 }: TiltCardProps) {
   const ref = useRef<HTMLDivElement>(null)
   const reducedMotion = useReducedMotionConfig()
+  const [hovered, setHovered] = useState(false)
 
   const rotateX = useMotionValue(0)
   const rotateY = useMotionValue(0)
@@ -38,9 +42,15 @@ export function TiltCard({
   const springGlareX = useSpring(glareX, { stiffness: 200, damping: 22 })
   const springGlareY = useSpring(glareY, { stiffness: 200, damping: 22 })
 
-  const glareBackground = useMotionTemplate`radial-gradient(circle at ${springGlareX}% ${springGlareY}%, rgba(125,211,252,0.45), transparent 65%)`
+  const glareOpacity = useMotionValue(0)
+  const springGlareOpacity = useSpring(glareOpacity, { stiffness: 160, damping: 24 })
+
+  const glareBackground = useMotionTemplate`radial-gradient(circle at ${springGlareX}% ${springGlareY}%, rgba(255,255,255,0.55), rgba(125,211,252,0.18) 35%, transparent 65%)`
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+    glareOpacity.set(1)
+    setHovered(true)
+
     if (reducedMotion || !ref.current) return
 
     const rect = ref.current.getBoundingClientRect()
@@ -60,38 +70,56 @@ export function TiltCard({
     glareY.set(50)
   }
 
+  const handleMouseEnter = () => {
+    setHovered(true)
+    glareOpacity.set(1)
+  }
+
+  const handleMouseLeave = () => {
+    setHovered(false)
+    glareOpacity.set(0)
+    handleReset()
+  }
+
+  const shadow = hovered
+    ? "0 24px 48px -12px rgba(24, 24, 27, 0.25)"
+    : "0 6px 16px -12px rgba(24, 24, 27, 0.10)"
+
   return (
     <div
       ref={ref}
       {...divProps}
       data-testid="tilt-card"
-      style={{ perspective: 800 }}
-      className={cn("relative", className)}
+      style={{ perspective: 800, boxShadow: shadow }}
+      className={cn("relative rounded-2xl", className)}
     >
       <motion.div
-        onMouseMove={reducedMotion ? undefined : handleMouseMove}
-        onMouseLeave={reducedMotion ? undefined : handleReset}
+        onMouseEnter={handleMouseEnter}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
         style={{
           rotateX: reducedMotion ? 0 : springRotateX,
           rotateY: reducedMotion ? 0 : springRotateY,
           transformStyle: "preserve-3d",
           willChange: "transform",
         }}
-        className="relative h-[170px] w-[260px] overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm"
+        className="relative h-[170px] w-[260px] rounded-2xl border border-zinc-200 bg-white"
       >
-        <motion.div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 rounded-2xl"
-          style={{
-            backgroundImage: reducedMotion ? undefined : glareBackground,
-          }}
-        />
-
         <div
-          className="relative flex h-full flex-col justify-between p-4"
-          style={{ transform: "translateZ(12px)" }}
+          aria-hidden
+          className="pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-2xl"
         >
-          <div className="flex items-center gap-3" style={{ transform: "translateZ(20px)" }}>
+          <motion.div
+            className="absolute inset-0 rounded-2xl"
+            style={{
+              backgroundImage: reducedMotion ? undefined : glareBackground,
+              opacity: springGlareOpacity,
+            }}
+          />
+        </div>
+
+        <div className="relative flex h-full flex-col justify-between p-4">
+          <div className="flex items-center gap-3" style={{ transform: "translateZ(40px)" }}>
             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-sky-400" />
             <div>
               <p className="text-sm font-semibold text-zinc-900">{title}</p>
@@ -100,9 +128,9 @@ export function TiltCard({
           </div>
 
           {children ? (
-            <div style={{ transform: "translateZ(10px)" }}>{children}</div>
+            <div style={{ transform: "translateZ(24px)" }}>{children}</div>
           ) : (
-            <div className="flex gap-2">
+            <div className="flex gap-2" style={{ transform: "translateZ(24px)" }}>
               <div className="rounded-md bg-zinc-100 px-2 py-1 text-[10px] font-medium text-zinc-600">
                 3 tasks
               </div>

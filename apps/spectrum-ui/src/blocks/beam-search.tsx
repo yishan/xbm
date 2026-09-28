@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { motion, useReducedMotionConfig } from "motion/react"
 import { Search } from "lucide-react"
 import { cn } from "@/lib/utils"
@@ -13,13 +13,10 @@ interface BeamSearchProps {
 }
 
 export function BeamSearch({ value, onChange, className }: BeamSearchProps) {
-  const [internalValue, setInternalValue] = useState(value ?? "")
+  const [internalValue, setInternalValue] = useState("")
+  const currentValue = value ?? internalValue
   const [focused, setFocused] = useState(false)
   const reducedMotion = useReducedMotionConfig()
-
-  useEffect(() => {
-    if (value !== undefined) setInternalValue(value)
-  }, [value])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const next = e.target.value
@@ -38,7 +35,7 @@ export function BeamSearch({ value, onChange, className }: BeamSearchProps) {
         <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
         <input
           type="text"
-          value={internalValue}
+          value={currentValue}
           onChange={handleChange}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
@@ -51,17 +48,28 @@ export function BeamSearch({ value, onChange, className }: BeamSearchProps) {
         </kbd>
       </div>
 
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-px overflow-hidden rounded-b-xl">
+      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[6px] overflow-hidden rounded-b-xl">
         {focused ? (
           reducedMotion ? (
-            <div className="h-full w-full bg-gradient-to-r from-transparent via-sky-400 to-transparent" />
+            <>
+              <div className="absolute inset-x-0 bottom-0 h-[6px] bg-gradient-to-r from-transparent via-sky-500 to-violet-500 opacity-80 blur-sm" />
+              <div className="absolute inset-x-0 bottom-0 h-[2px] bg-gradient-to-r from-transparent via-sky-500 to-violet-500" />
+            </>
           ) : (
-            <motion.div
-              className="absolute inset-y-0 w-[35%] bg-gradient-to-r from-transparent via-sky-400 to-transparent"
-              initial={false}
-              animate={{ left: ["-35%", "100%"] }}
-              transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
-            />
+            <>
+              <motion.div
+                className="absolute bottom-0 w-[35%] h-[6px] bg-gradient-to-r from-transparent via-sky-500 to-violet-500 opacity-80 blur-sm"
+                initial={false}
+                animate={{ left: ["-35%", "100%"] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
+              />
+              <motion.div
+                className="absolute bottom-0 w-[35%] h-[2px] bg-gradient-to-r from-transparent via-sky-500 to-violet-500"
+                initial={false}
+                animate={{ left: ["-35%", "100%"] }}
+                transition={{ duration: 1.8, repeat: Infinity, ease: "linear" }}
+              />
+            </>
           )
         ) : null}
       </div>
