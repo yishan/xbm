@@ -34,6 +34,18 @@
       "slug": "spectrum-ui",
       "why": "Animated shadcn/Tailwind/Motion component library for AI-agent UIs; strong screenshot/video demo fit",
       "built": "2026-09-28"
+    },
+    {
+      "id": "2104101588466074028",
+      "title": "ObsidianUI",
+      "url": "https://x.com/athrix_codes/status/2104101588466074028",
+      "date": "2026-09-29",
+      "tech": "ObsidianUI",
+      "site": "https://obsidianui.dev",
+      "repo": "https://github.com/Atharvsinh-codez/ObsidianUI",
+      "slug": "obsidian-ui",
+      "why": "Open-source React + Tailwind + Motion/GSAP component library (WebGL/canvas effects, shadcn registry, agent-friendly docs); strong screenshot/video demo fit",
+      "built": "2026-09-29"
     }
   ],
   "skipped": []
