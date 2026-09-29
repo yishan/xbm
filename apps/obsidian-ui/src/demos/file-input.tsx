@@ -12,7 +12,7 @@ export function FileInputDemo() {
   };
 
   return (
-    <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-4">
+    <div className="flex h-full w-full flex-col items-center justify-center gap-2 px-4 pt-8 pb-3">
       <FileInput className="w-full max-w-[300px]" injectFiles={injectFiles} />
       <button
         type="button"

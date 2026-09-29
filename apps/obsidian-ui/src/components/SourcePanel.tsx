@@ -78,7 +78,7 @@ export function SourcePanel({ def }: { def: BlockDef }) {
             transition={{ duration: reduceMotion ? 0 : 0.2, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="rounded-xl border border-white/10 bg-black/60 p-3">
+            <div className="pt-2">
               <div className="mb-2 font-mono text-[11px] text-zinc-500">
                 src/blocks/{def.file}
               </div>

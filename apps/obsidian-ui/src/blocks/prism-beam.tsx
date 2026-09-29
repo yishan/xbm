@@ -1,3 +1,5 @@
+// Prism Beam — drag to aim a light beam through a glass prism; it disperses into a spectrum (Canvas 2D).
+// Inspired by ObsidianUI (obsidianui.dev, MIT). Re-implemented from scratch.
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
@@ -251,7 +253,7 @@ const drawScene = (
   ctx.restore();
 
   const colors = ["#ff3b3b", "#ff8a00", "#ffd400", "#3dff6e", "#22d3ee", "#3b82f6", "#a855f7"];
-  const iors = [1.38, 1.42, 1.46, 1.5, 1.54, 1.58, 1.62];
+  const iors = [1.28, 1.31, 1.34, 1.37, 1.4, 1.43, 1.46];
 
   colors.forEach((color, index) => {
     const ior = iors[index];
@@ -286,7 +288,7 @@ const drawScene = (
       { x: exitPoint.x + exitDir.x * 2000, y: exitPoint.y + exitDir.y * 2000 },
       color,
       color,
-      10,
+      6,
       1.5,
     );
   });

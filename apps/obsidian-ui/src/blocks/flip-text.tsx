@@ -1,3 +1,5 @@
+// Flip Text — characters flip in 3D with a staggered wave on hover.
+// Inspired by ObsidianUI (obsidianui.dev, MIT). Re-implemented from scratch.
 import { useCallback, useEffect, useRef, useState } from "react"
 import { motion, useAnimationControls, useReducedMotionConfig } from "motion/react"
 import { cn } from "@/lib/utils"

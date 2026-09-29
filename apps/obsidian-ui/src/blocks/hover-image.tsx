@@ -56,7 +56,6 @@ export function HoverImage({
       const containerRect = container.getBoundingClientRect()
       const rowRect = row.getBoundingClientRect()
       const thumbW = thumb.offsetWidth || 132
-      const thumbH = thumb.offsetHeight || 92
 
       const x = rowRect.right - containerRect.left - thumbW / 2
       const y = rowRect.top + rowRect.height / 2 - containerRect.top
@@ -99,7 +98,7 @@ export function HoverImage({
             rotation: targetRotation,
             duration: 0.3,
             ease: "power2.out",
-            overwrite: true,
+            overwrite: "auto",
           })
         }
       }
@@ -117,7 +116,7 @@ export function HoverImage({
           scale: 1,
           duration: reducedMotion ? 0 : 0.35,
           ease: "power2.out",
-          overwrite: true,
+          overwrite: "auto",
         })
       }
 
@@ -147,7 +146,7 @@ export function HoverImage({
           scale: 1,
           duration: reducedMotion ? 0 : 0.35,
           ease: "power2.out",
-          overwrite: true,
+          overwrite: "auto",
         })
       }
 
@@ -165,7 +164,7 @@ export function HoverImage({
         scale: 0,
         duration: reducedMotion ? 0 : 0.35,
         ease: "power2.out",
-        overwrite: true,
+        overwrite: "auto",
       })
     }
 
@@ -187,7 +186,7 @@ export function HoverImage({
             scale: 0,
             duration: reducedMotion ? 0 : 0.35,
             ease: "power2.out",
-            overwrite: true,
+            overwrite: "auto",
           })
         }
       }
@@ -234,7 +233,7 @@ export function HoverImage({
       y,
       duration: reducedMotion ? 0 : 0.45,
       ease: "power3.out",
-      overwrite: true,
+      overwrite: "auto",
     })
   }, [activeIndex, reducedMotion, projects.length])
 
@@ -244,7 +243,7 @@ export function HoverImage({
     const shouldDim = hoveredIndex !== -1 && !isHovered && !isActive
 
     return cn(
-      "group flex items-center justify-between border-b border-white/10 py-2.5",
+      "group flex items-center justify-between border-b border-white/10 py-2",
       "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
       isHovered ? "text-white" : "",
       shouldDim ? "text-zinc-600" : "text-zinc-200",
@@ -280,7 +279,7 @@ export function HoverImage({
               }
             }}
           >
-            <span className="text-xl font-medium">{project.title}</span>
+            <span className="text-lg font-medium">{project.title}</span>
             <span className="text-xs text-zinc-500">{project.label}</span>
           </div>
         ))}

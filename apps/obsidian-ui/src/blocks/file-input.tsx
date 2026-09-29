@@ -175,7 +175,7 @@ export function FileInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-              className="flex h-[170px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 px-4 text-center cursor-pointer transition-colors hover:border-white/25"
+              className="flex h-[150px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 px-4 text-center cursor-pointer transition-colors hover:border-white/25"
               role="button"
               tabIndex={0}
               onClick={openPicker}
@@ -207,7 +207,7 @@ export function FileInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-              className="flex h-[170px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-violet-400/60 bg-violet-500/5 px-4 text-center"
+              className="flex h-[150px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-violet-400/60 bg-violet-500/5 px-4 text-center"
             >
               <motion.div
                 animate={{ y: -4, scale: 1.08 }}

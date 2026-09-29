@@ -235,7 +235,8 @@ export function LiquidMetalButton({
       button.removeEventListener("pointerleave", handleLeave)
       gl.deleteBuffer(buffer)
       gl.deleteProgram(program)
-      gl.getExtension("WEBGL_lose_context")?.loseContext()
+      // No loseContext(): StrictMode re-runs this effect on the same canvas, and a
+      // lost context cannot be reused synchronously. Resources are freed above.
     }
   }, [reducedMotion, speed])
 

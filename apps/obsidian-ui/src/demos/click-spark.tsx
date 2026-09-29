@@ -20,6 +20,8 @@ export function ClickSparkDemo() {
       <ClickSpark
         className="h-full w-full"
         sparkColor={SPARK_COLORS[colorIndex]}
+        sparkSize={16}
+        sparkRadius={28}
         onSpark={handleSpark}
         reducedMotion={reducedMotion}
       >

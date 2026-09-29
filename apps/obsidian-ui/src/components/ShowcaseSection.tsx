@@ -3,7 +3,7 @@ import { MousePointerClick, RotateCcw } from "lucide-react"
 import type { BlockDef } from "@/blocks/types"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import SourcePanel from "./SourcePanel"
+import { SourcePanel } from "./SourcePanel"
 
 const categoryDot: Record<BlockDef["category"], string> = {
   WebGL: "bg-fuchsia-400",

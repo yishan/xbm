@@ -1,3 +1,5 @@
+// Lens Gallery — an infinite draggable art grid seen through a barrel-distortion lens (raw WebGL).
+// Inspired by ObsidianUI (obsidianui.dev, MIT). Re-implemented from scratch.
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
@@ -214,13 +216,13 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+    gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, atlas);
 
     const tileAspect = TILE_W / TILE_H;
     const stepXNorm = TILE_H_NORM * tileAspect * (1 + GAP_NORM);
     const stepYNorm = TILE_H_NORM * (1 + GAP_NORM);
 
-    let cssWidth = 0;
     let cssHeight = 0;
     let offsetX = 0;
     let offsetY = 0;
@@ -285,7 +287,6 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
     const resizeObserver = ResizeObserver
       ? new ResizeObserver(() => {
           const rect = wrapper.getBoundingClientRect();
-          cssWidth = rect.width;
           cssHeight = rect.height;
           const dpr = Math.min(window.devicePixelRatio || 1, 2);
           const w = Math.max(1, Math.floor(rect.width * dpr));
@@ -343,9 +344,6 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
       offsetX += (event.deltaY + event.deltaX) * 0.0012;
-      if (cssHeight > 0) {
-        offsetX = offsetX; // keep normalized
-      }
       render();
       if (!reducedMotionRef.current) startLoop();
     };
@@ -399,7 +397,8 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       gl.deleteTexture(texture);
       gl.deleteBuffer(positionBuffer);
       gl.deleteProgram(program);
-      gl.getExtension("WEBGL_lose_context")?.loseContext();
+      // No loseContext(): StrictMode re-runs this effect on the same canvas, and a
+      // lost context cannot be reused synchronously. Resources are freed above.
     };
   }, []);
 

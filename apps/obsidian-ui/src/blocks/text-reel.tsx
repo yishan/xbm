@@ -52,7 +52,6 @@ export function TextReel({
     if (els.length !== totalWords) return;
 
     const base = Math.abs(baseSpeed);
-    const velocityDirection = reducedMotion ? 0 : -1;
     let velocity = reducedMotion ? 0 : -base;
     let lastDirectionSign = -1;
     let activeIndex = -1;
@@ -89,7 +88,7 @@ export function TextReel({
           nearestIndex = i;
         }
 
-        const opacity = 0.25 + 0.75 * Math.exp(-distance * 0.8);
+        const opacity = 0.25 + 0.75 * Math.exp(-(distance / lineHeightPx) * 1.6);
         el.style.opacity = String(Math.min(1, Math.max(0.25, opacity)));
       }
 
@@ -227,9 +226,10 @@ export function TextReel({
           WebkitMaskImage:
             "linear-gradient(to bottom, transparent, black 25%, black 75%, transparent)",
           height: `${WINDOW_LINES * LINE_HEIGHT}em`,
+          fontSize,
         }}
       >
-        <div className="flex items-center gap-4" style={{ fontSize }}>
+        <div className="flex items-center gap-4">
           <span className="text-zinc-500">{prefix}</span>
           <div
             className="relative overflow-hidden"
