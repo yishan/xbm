@@ -106,6 +106,8 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
   const reducedMotionRef = useRef(effectiveReducedMotion);
   reducedMotionRef.current = effectiveReducedMotion;
 
+  const controlsRef = useRef<{ startLoop: () => void; stopLoop: () => void; render: () => void } | null>(null);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const wrapper = wrapperRef.current;
@@ -283,6 +285,15 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       rafId = requestAnimationFrame(tick);
     };
 
+    const stopLoop = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
+    controlsRef.current = { startLoop, stopLoop, render };
+
     const ResizeObserver = window.ResizeObserver;
     const resizeObserver = ResizeObserver
       ? new ResizeObserver(() => {
@@ -300,6 +311,27 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
         })
       : null;
     if (resizeObserver) resizeObserver.observe(wrapper);
+
+    const IntersectionObserverCtor = window.IntersectionObserver;
+    const intersectionObserver = IntersectionObserverCtor
+      ? new IntersectionObserverCtor(
+          (entries) => {
+            const entry = entries[0];
+            if (!entry) return;
+            if (entry.isIntersecting) {
+              if (reducedMotionRef.current) {
+                render();
+              } else {
+                startLoop();
+              }
+            } else {
+              stopLoop();
+            }
+          },
+          { threshold: 0 }
+        )
+      : null;
+    if (intersectionObserver) intersectionObserver.observe(wrapper);
 
     const handlePointerDown = (event: PointerEvent) => {
       dragging = true;
@@ -386,8 +418,10 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
     }
 
     return () => {
-      if (rafId !== null) cancelAnimationFrame(rafId);
+      stopLoop();
       if (resizeObserver) resizeObserver.disconnect();
+      if (intersectionObserver) intersectionObserver.disconnect();
+      controlsRef.current = null;
       canvas.removeEventListener("pointerdown", handlePointerDown);
       canvas.removeEventListener("pointermove", handlePointerMove);
       canvas.removeEventListener("pointerup", handlePointerUp);
@@ -401,6 +435,17 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       // lost context cannot be reused synchronously. Resources are freed above.
     };
   }, []);
+
+  useEffect(() => {
+    const controls = controlsRef.current;
+    if (!controls) return;
+    if (effectiveReducedMotion) {
+      controls.stopLoop();
+      controls.render();
+    } else {
+      controls.startLoop();
+    }
+  }, [effectiveReducedMotion]);
 
   return (
     <div

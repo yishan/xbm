@@ -378,6 +378,18 @@ export function PrismBeam({
       rafId = requestAnimationFrame(loop);
     };
 
+    const startLoop = () => {
+      if (reducedMotion || rafId !== null) return;
+      rafId = requestAnimationFrame(loop);
+    };
+
+    const stopLoop = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    };
+
     initSize();
 
     if (!didInitRef.current) {
@@ -397,7 +409,7 @@ export function PrismBeam({
     if (reducedMotion) {
       drawStatic();
     } else {
-      rafId = requestAnimationFrame(loop);
+      startLoop();
     }
 
     const getPoint = (event: PointerEvent): Point => {
@@ -491,8 +503,23 @@ export function PrismBeam({
 
     resizeObserver.observe(wrapper);
 
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      const [entry] = entries;
+
+      if (!entry) return;
+
+      if (entry.isIntersecting) {
+        startLoop();
+      } else {
+        stopLoop();
+      }
+    });
+
+    intersectionObserver.observe(wrapper);
+
     return () => {
       if (rafId !== null) cancelAnimationFrame(rafId);
+      intersectionObserver.disconnect();
       resizeObserver.disconnect();
 
       wrapper.removeEventListener("pointerdown", handlePointerDown);
