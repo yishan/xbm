@@ -1,0 +1,8 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "echo 'skip: scripts/build-all.sh installs each app'",
+  "buildCommand": "bash scripts/build-all.sh",
+  "outputDirectory": "dist",
+  "trailingSlash": true
+}
