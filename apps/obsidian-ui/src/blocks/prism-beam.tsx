@@ -121,7 +121,7 @@ const refractExit = (dir: Point, normal: Point, ior: number): Point | null => {
   if (sin2 > 1) return null;
 
   const cosR = Math.sqrt(1 - sin2);
-  const refracted = add(scale(dir, eta), scale(normal, eta * cosI - cosR));
+  const refracted = add(scale(dir, eta), scale(normal, cosR - eta * cosI));
   const length = Math.hypot(refracted.x, refracted.y);
 
   return length < 1e-9 ? null : { x: refracted.x / length, y: refracted.y / length };
@@ -253,7 +253,7 @@ const drawScene = (
   ctx.restore();
 
   const colors = ["#ff3b3b", "#ff8a00", "#ffd400", "#3dff6e", "#22d3ee", "#3b82f6", "#a855f7"];
-  const iors = [1.28, 1.31, 1.34, 1.37, 1.4, 1.43, 1.46];
+  const iors = [1.3, 1.34, 1.38, 1.42, 1.46, 1.5, 1.54];
 
   colors.forEach((color, index) => {
     const ior = iors[index];
@@ -261,26 +261,32 @@ const drawScene = (
     const insideDir = refractEnter(direction, entryNormal, ior);
     if (!insideDir) return;
 
-    const insideOrigin = add(entryPoint, scale(insideDir, 0.1));
-    const exit = intersectRayEdges(insideOrigin, insideDir, edges, entry.edgeIndex);
+    // Trace inside the glass; on total internal reflection, bounce (max 2 times).
+    let from = entryPoint;
+    let dir = insideDir;
+    let fromEdge = entry.edgeIndex;
+    let exitPoint: Point | null = null;
+    let exitDir: Point | null = null;
 
-    if (!exit) return;
+    for (let bounce = 0; bounce < 3 && !exitDir; bounce++) {
+      const hit = intersectRayEdges(add(from, scale(dir, 0.1)), dir, edges, fromEdge);
+      if (!hit) return;
+      const normal = edges[hit.edgeIndex].normal;
 
-    const exitPoint = exit.point;
-    const exitNormal = edges[exit.edgeIndex].normal;
-    const exitDir = refractExit(insideDir, exitNormal, ior);
+      drawRay(ctx, from, hit.point, "rgba(255,255,255,0.14)", "rgba(255,255,255,0.7)", 5, 1.0);
 
-    if (!exitDir) return;
+      const out = refractExit(dir, normal, ior);
+      if (out) {
+        exitPoint = hit.point;
+        exitDir = out;
+      } else {
+        dir = normalize(sub(dir, scale(normal, 2 * dot(dir, normal))));
+        from = hit.point;
+        fromEdge = hit.edgeIndex;
+      }
+    }
 
-    drawRay(
-      ctx,
-      entryPoint,
-      exitPoint,
-      "rgba(255,255,255,0.14)",
-      "rgba(255,255,255,0.7)",
-      5,
-      1.0,
-    );
+    if (!exitPoint || !exitDir) return;
 
     drawRay(
       ctx,
