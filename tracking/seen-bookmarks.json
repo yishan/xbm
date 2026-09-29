@@ -46,6 +46,19 @@
       "slug": "obsidian-ui",
       "why": "Open-source React + Tailwind + Motion/GSAP component library (WebGL/canvas effects, shadcn registry, agent-friendly docs); strong screenshot/video demo fit",
       "built": "2026-09-29"
+    },
+    {
+      "id": "2075195594797453646",
+      "title": "docu.md",
+      "url": "https://x.com/kiwiflysky/status/2075195594797453646",
+      "date": "2026-09-30",
+      "tech": "docu.md",
+      "site": "https://docu.md/",
+      "repo": "https://github.com/markdown-viewer/markdown-viewer-extension",
+      "slug": "docu-md",
+      "folder": "Tools",
+      "why": "Markdown \u2192 polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
+      "built": "2026-09-30"
     }
   ],
   "skipped": []
