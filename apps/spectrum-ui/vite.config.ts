@@ -8,6 +8,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
 export default defineConfig({
+  // Served at https://li.yishan.app/spectrum-ui/ (root vercel.json + scripts/build-all.ts)
+  base: "/spectrum-ui/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
