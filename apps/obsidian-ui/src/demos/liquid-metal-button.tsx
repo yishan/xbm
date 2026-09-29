@@ -22,7 +22,7 @@ export function LiquidMetalButtonDemo() {
           Upgrade
         </LiquidMetalButton>
       </div>
-      <p className="text-xs text-zinc-500">Clicked {count} times</p>
+      <p className="text-xs text-zinc-500">Clicked {count} {count === 1 ? "time" : "times"}</p>
     </div>
   )
 }

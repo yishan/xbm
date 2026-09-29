@@ -35,7 +35,7 @@ export function ClickSparkDemo() {
             <Zap />
           </button>
           <p className="text-sm text-zinc-400">Click anywhere</p>
-          <p className="text-xs text-zinc-500">{sparkCount} sparks</p>
+          <p className="text-xs text-zinc-500">{sparkCount} {sparkCount === 1 ? "spark" : "sparks"}</p>
         </div>
       </ClickSpark>
     </div>

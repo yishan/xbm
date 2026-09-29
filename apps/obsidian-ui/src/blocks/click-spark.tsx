@@ -96,7 +96,8 @@ export function ClickSpark({
     const bursts = burstsRef.current;
     for (let i = bursts.length - 1; i >= 0; i--) {
       const burst = bursts[i];
-      const t = (now - burst.start) / burst.duration;
+      // rAF timestamps can be slightly earlier than the click's performance.now()
+      const t = Math.max(0, (now - burst.start) / burst.duration);
       if (t >= 1) {
         bursts.splice(i, 1);
         continue;
