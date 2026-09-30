@@ -1,12 +1,14 @@
 # docu.md
 
-Single-page showcase of the **[docu.md](https://docu.md/)** product experience: open sample markdown docs, see a polished live preview with Mermaid diagrams, toggle themes, and mock one-click export — without vendoring any GPLv3 rendering engine.
+Single-page showcase of the **[docu.md](https://docu.md/)** product experience: open sample markdown docs, see a polished live preview with Mermaid diagrams, toggle themes, and export real PDFs (rendered by a small Cloudflare Worker) or standalone HTML — without vendoring any GPLv3 rendering engine.
 
 Source pick: X post [kiwiflysky/status/2075195594797453646](https://x.com/kiwiflysky/status/2075195594797453646).
 
 ![screenshot](./artifacts/screenshot.png)
 
-Video: [`artifacts/demo.webm`](./artifacts/demo.webm)
+Video: [`artifacts/demo.webm`](./artifacts/demo.webm) · PDF export: [`artifacts/pdf-export.webm`](./artifacts/pdf-export.webm)
+
+![PDF export — rendered pages](./artifacts/pdf-export.png)
 
 ## What you get
 
@@ -17,7 +19,7 @@ Video: [`artifacts/demo.webm`](./artifacts/demo.webm)
 | Rich MD | Tables, fenced code, callouts, lists, links |
 | Diagrams | Mermaid (MIT) flow / sequence / ER / class + a hand-drawn non-crossing architecture SVG |
 | Themes | Light · Dark · Reading (warm paper) |
-| Export chips | DOCX / PDF / HTML / EPUB — mocked toasts only |
+| Export | **PDF** — real, rendered by a Cloudflare Worker with Browser Rendering ([`worker/`](./worker/)) · **HTML** — real, client-side standalone file · DOCX / EPUB — labelled *mock* |
 
 ## Run
 
@@ -27,6 +29,8 @@ bun run dev      # http://localhost:5173/docu-md/
 bun run build
 bun run lint
 ```
+
+PDF export calls `VITE_PDF_API` (default `https://docu-md-pdf.liyishan.workers.dev`), e.g. `VITE_PDF_API=http://localhost:8787 bun run dev`. Worker setup and deploy: [`worker/README.md`](./worker/README.md).
 
 `vite.config.ts` sets `base: "/docu-md/"` so production lives at `https://li.yishan.app/docu-md/`.
 

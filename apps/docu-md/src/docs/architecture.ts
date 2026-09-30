@@ -9,7 +9,7 @@ export const architecture = {
 
 ## Layers
 
-1. **Shell** — sidebar, toolbar, theme, mock export
+1. **Shell** — sidebar, toolbar, theme, export (PDF via Cloudflare Worker)
 2. **Documents** — typed sample markdown modules
 3. **Renderer** — \`react-markdown\` + GFM + highlight + Mermaid fences
 4. **Diagrams** — Mermaid for flow/sequence/ER; \`ArchitectureSvg\` for the static map
@@ -67,6 +67,6 @@ The interactive SVG below (injected by the demo shell when this doc is open) kee
 
 - Path-based deploy: \`base: "/docu-md/"\`
 - No hard-coded root-absolute asset URLs in \`src/\`
-- Export chips are UI-only (toast)
+- PDF export is rendered by a Cloudflare Worker (Browser Rendering)
 `,
 } as const

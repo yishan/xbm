@@ -19,7 +19,10 @@ export function PreviewPane({ source }: PreviewPaneProps) {
         <Badge variant="secondary">rendered</Badge>
       </div>
       <ScrollArea className="flex-1">
-        <article className="mx-auto max-w-3xl px-6 py-8">
+        <article
+          className="mx-auto max-w-3xl px-6 py-8"
+          data-export-root=""
+        >
           <MarkdownView source={source} />
         </article>
       </ScrollArea>
