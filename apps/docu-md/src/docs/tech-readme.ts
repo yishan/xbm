@@ -50,7 +50,7 @@ flowchart LR
   B --> C{Valid?}
   C -->|yes| D[Live preview]
   C -->|no| E[Lint errors]
-  D --> F[Export mock]
+  D --> F[Export PDF / HTML]
 \`\`\`
 
 ## Why this demo

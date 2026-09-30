@@ -1,10 +1,21 @@
 // Showcase UI inspired by docu.md (https://docu.md/). Re-implemented with a permissive stack.
 // Do not vendor GPLv3 engines from markdown-viewer.
-import { BookOpen, Code, Columns2, FileDown, FileText, Moon, Sun } from "lucide-react"
+import { useState } from "react"
+import {
+  BookOpen,
+  Code,
+  Columns2,
+  FileDown,
+  FileText,
+  Loader2,
+  Moon,
+  Sun,
+} from "lucide-react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { exportHtml, exportPdf } from "@/lib/export"
 
 export type ViewMode = "split" | "source" | "preview"
 export type ThemeMode = "light" | "dark" | "reading"
@@ -31,14 +42,43 @@ const THEME_META: Record<ThemeMode, { label: string; icon: typeof Sun }> = {
   reading: { label: "Reading", icon: BookOpen },
 }
 
-const EXPORT_FORMATS = ["DOCX", "PDF", "HTML", "EPUB"] as const
+const EXPORT_FORMATS = [
+  { id: "pdf", label: "PDF", real: true },
+  { id: "html", label: "HTML", real: true },
+  { id: "docx", label: "DOCX", real: false },
+  { id: "epub", label: "EPUB", real: false },
+] as const
 
 export function Toolbar({ viewMode, onViewMode, theme, onTheme, docTitle }: ToolbarProps) {
   const { label: themeLabel, icon: ThemeIcon } = THEME_META[theme]
+  const [pdfBusy, setPdfBusy] = useState(false)
 
   const cycleTheme = () => {
     const next = THEME_CYCLE[(THEME_CYCLE.indexOf(theme) + 1) % THEME_CYCLE.length]
     onTheme(next)
+  }
+
+  const handleHtmlExport = async () => {
+    try {
+      await exportHtml(docTitle)
+      toast.success("HTML downloaded")
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "HTML export failed")
+    }
+  }
+
+  const handlePdfExport = async () => {
+    if (pdfBusy) return
+    setPdfBusy(true)
+    const id = toast.loading("Rendering PDF on Cloudflare…")
+    try {
+      await exportPdf(docTitle, undefined, (msg) => toast.loading(msg, { id }))
+      toast.success("PDF downloaded", { id })
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : "PDF export failed", { id })
+    } finally {
+      setPdfBusy(false)
+    }
   }
 
   return (
@@ -82,19 +122,43 @@ export function Toolbar({ viewMode, onViewMode, theme, onTheme, docTitle }: Tool
       <Separator orientation="vertical" className="mx-1 h-6" />
 
       <div className="flex items-center gap-1">
-        {EXPORT_FORMATS.map((format) => (
-          <Button
-            key={format}
-            size="sm"
-            variant="outline"
-            onClick={() => toast.success(`${format} export mocked — demo only`)}
-            data-testid={`export-${format.toLowerCase()}`}
-            title={`Export ${format} (mock)`}
-          >
-            <FileDown />
-            <span className="hidden md:inline">{format}</span>
-          </Button>
-        ))}
+        {EXPORT_FORMATS.map(({ id, label, real }) => {
+          const busy = id === "pdf" && pdfBusy
+
+          const onExport = () => {
+            if (id === "pdf") {
+              void handlePdfExport()
+            } else if (id === "html") {
+              void handleHtmlExport()
+            } else {
+              toast.info(`${label} export is mocked in this demo`)
+            }
+          }
+
+          return (
+            <Button
+              key={id}
+              size="sm"
+              variant={real ? "outline" : "ghost"}
+              onClick={onExport}
+              disabled={busy}
+              aria-busy={id === "pdf" ? pdfBusy : undefined}
+              data-state={id === "pdf" ? (pdfBusy ? "loading" : "idle") : undefined}
+              data-testid={`export-${id}`}
+              title={
+                real
+                  ? `Export ${label}`
+                  : `Export ${label} (mock — not implemented in this demo)`
+              }
+            >
+              {busy ? <Loader2 className="animate-spin" /> : <FileDown />}
+              <span className="hidden md:inline">{label}</span>
+              {real ? null : (
+                <span className="hidden text-[10px] text-muted-foreground md:inline">mock</span>
+              )}
+            </Button>
+          )
+        })}
       </div>
     </div>
   )

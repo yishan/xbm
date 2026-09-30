@@ -79,7 +79,8 @@ function MarkdownContent({ source }: { source: string }) {
           return (
             <pre className="overflow-x-auto rounded-xl border border-zinc-800 bg-zinc-950 p-4 text-sm text-zinc-100">
               <code className={className} {...props}>
-                {content.replace(/\n$/, "")}
+                {/* keep highlighted child nodes (String(children) would print [object Object]) */}
+                {children}
               </code>
             </pre>
           );

@@ -23,7 +23,7 @@ Content-Type: application/json
 | \`GET\` | \`/v1/docs\` | List sample documents |
 | \`GET\` | \`/v1/docs/:id\` | Fetch one document |
 | \`POST\` | \`/v1/render\` | Render markdown → HTML |
-| \`POST\` | \`/v1/export\` | Mock export (DOCX/PDF/…) |
+| \`POST\` | \`/v1/export\` | Export (PDF real, DOCX/EPUB mocked) |
 
 ### \`POST /v1/render\`
 
@@ -45,7 +45,7 @@ Response:
 }
 \`\`\`
 
-> **Warning:** Export is mocked in this gallery demo. Buttons toast success only.
+> **Warning:** In this demo only PDF (Cloudflare Worker) and HTML (client-side) export are real; DOCX / EPUB are mocked.
 
 ## Sequence
 
