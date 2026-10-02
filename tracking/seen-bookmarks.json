@@ -59,6 +59,18 @@
       "folder": "Tools",
       "why": "Markdown \u2192 polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
       "built": "2026-09-30"
+    },
+    {
+      "id": "2104558493244281026",
+      "title": "AntV Infographic",
+      "url": "https://x.com/Huahuazo/status/2104558493244281026",
+      "date": "2026-10-01",
+      "tech": "AntV Infographic",
+      "repo": "https://github.com/antvis/Infographic",
+      "slug": "antv-infographic",
+      "folder": "all-bookmarks",
+      "why": "MIT SVG infographic framework (~200 templates); strong visual gallery fit when scoped folders had no undemoed candidate",
+      "built": "2026-10-01"
     }
   ],
   "skipped": []
