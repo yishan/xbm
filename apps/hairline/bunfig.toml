@@ -1,0 +1,4 @@
+[install]
+minimumReleaseAge = 259200
+# Owner-approved 2026-10-05 exception for the exact pinned 0.2.0 release.
+minimumReleaseAgeExcludes = ["@lucasmarkes/hairline"]

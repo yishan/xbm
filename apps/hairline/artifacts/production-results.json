@@ -1,0 +1,14 @@
+{
+  "url": "http://127.0.0.1:4397/hairline/",
+  "errors": [],
+  "failed_http": [],
+  "result": "passed",
+  "checks": [
+    "Root index includes 9 demos and Hairline link",
+    "Production /hairline/ entry and all 19 SVGs render",
+    "Theme changes and Chinese layer readout",
+    "Production manual collaboration finishes with 3 handoffs",
+    "390px production layout has no horizontal overflow",
+    "No page errors or HTTP >=400"
+  ]
+}

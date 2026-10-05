@@ -1,0 +1,354 @@
+[build-all] using bun 1.4.2 at /tmp/xbm-hairline-bun/node_modules/.bin/bun
+
+[build-all] ===== antv-infographic =====
+[build-all] (apps/antv-infographic) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 520 installs across 584 packages (no changes) [211.00ms]
+[build-all] (apps/antv-infographic) $ bun run build
+$ tsc -b && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 4307 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                0.54 kB │ gzip:   0.33 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2      7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2        8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2         15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2        16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2            29.40 kB
+dist/assets/index-LCzyCPwo.css                                49.50 kB │ gzip:   8.92 kB
+dist/assets/index-mCg44x4g.js                              1,186.11 kB │ gzip: 382.14 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 702ms
+
+[build-all] ===== docu-md =====
+[build-all] (apps/docu-md) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 650 installs across 716 packages (no changes) [166.00ms]
+[build-all] (apps/docu-md) $ bun run build
+$ tsc -b && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 5222 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                0.51 kB │ gzip:   0.32 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2      7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2        8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2         15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2        16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2            29.40 kB
+dist/assets/index-DNbsRoI9.css                                58.39 kB │ gzip:  10.92 kB
+dist/assets/array-BifhSqXX.js                                  0.10 kB │ gzip:   0.11 kB
+dist/assets/channel-Cc1-AnPx.js                                0.11 kB │ gzip:   0.12 kB
+dist/assets/pie-WAS4IAKB-B6KLKY7H.js                           0.12 kB │ gzip:   0.12 kB
+dist/assets/info-A6RAGUB7-rJIIQt4C.js                          0.12 kB │ gzip:   0.12 kB
+dist/assets/radar-RG4KPBEZ-B_QF3GOs.js                         0.12 kB │ gzip:   0.12 kB
+dist/assets/packet-AYTQ26CC-BbSRUK-j.js                        0.12 kB │ gzip:   0.12 kB
+dist/assets/cynefin-OW5HDTMX-BXyAjlzN.js                       0.12 kB │ gzip:   0.13 kB
+dist/assets/treemap-WGGIJYW6-DCVW9eD3.js                       0.12 kB │ gzip:   0.12 kB
+dist/assets/wardley-WFR3VGLG-CATkU6xi.js                       0.12 kB │ gzip:   0.13 kB
+dist/assets/gitGraph-4MIJSDKK-6bG_y7UE.js                      0.12 kB │ gzip:   0.13 kB
+dist/assets/railroad-74A4TZTK-BGXjOZsF.js                      0.12 kB │ gzip:   0.13 kB
+dist/assets/treeView-Q6P3EWNA-HdzkCkma.js                      0.12 kB │ gzip:   0.13 kB
+dist/assets/railroad-peg-WCYAUIDC-CD3IECsq.js                  0.13 kB │ gzip:   0.13 kB
+dist/assets/architecture-7GRP2DOG-PcXhdMPO.js                  0.13 kB │ gzip:   0.13 kB
+dist/assets/railroad-abnf-HS5TGJTU-BGjEm_jQ.js                 0.13 kB │ gzip:   0.13 kB
+dist/assets/railroad-ebnf-LZEXJU2U-JlebEJEs.js                 0.13 kB │ gzip:   0.13 kB
+dist/assets/eventmodeling-NTZA5JFV-B8H8N88_.js                 0.13 kB │ gzip:   0.13 kB
+dist/assets/init-C-OQMol4.js                                   0.14 kB │ gzip:   0.12 kB
+dist/assets/chunk-Y2CYZVJY-DsF7k-Jl.js                         0.15 kB │ gzip:   0.14 kB
+dist/assets/chunk-2Q5K7J3B-C1jixKkw.js                         0.19 kB │ gzip:   0.16 kB
+dist/assets/chunk-JWPE2WC7-DVXcaiue.js                         0.22 kB │ gzip:   0.17 kB
+dist/assets/chunk-XXDRQBXY-BWHzH68F.js                         0.26 kB │ gzip:   0.22 kB
+dist/assets/chunk-5VM5RSS4-ZNzvKenW.js                         0.36 kB │ gzip:   0.27 kB
+dist/assets/chunk-WEXAMYUT-XxbgclZM.js                         0.57 kB │ gzip:   0.40 kB
+dist/assets/flowDiagram-KWPJA3E3-B6lEz-oT.js                   0.57 kB │ gzip:   0.31 kB
+dist/assets/chunk-J5ZVWO5B-oDCd-gWO.js                         0.63 kB │ gzip:   0.43 kB
+dist/assets/infoDiagram-VRGFBTTK-DdUA_q1W.js                   0.65 kB │ gzip:   0.41 kB
+dist/assets/swimlanesDiagram-TC7HE7FX-DDt5KAVk.js              0.83 kB │ gzip:   0.48 kB
+dist/assets/sizeCapture-INFHLROL-3uHXrFqA.js                   0.87 kB │ gzip:   0.51 kB
+dist/assets/chunk-DUW6YSOI-Dgx8z5s3.js                         0.89 kB │ gzip:   0.46 kB
+dist/assets/line-DM73P5M6.js                                   0.94 kB │ gzip:   0.47 kB
+dist/assets/ordinal-BDEzSJ7C.js                                1.17 kB │ gzip:   0.56 kB
+dist/assets/chunk-5DYCD2WN-DNd4nRQm.js                         1.41 kB │ gzip:   0.79 kB
+dist/assets/railroadDiagram-XR7U4H2S-NQ2psNtJ.js               1.65 kB │ gzip:   0.76 kB
+dist/assets/abnfDiagram-O67JEVCF-By5OTaf4.js                   1.84 kB │ gzip:   0.89 kB
+dist/assets/chunk-7PRAP22T-D-cmYJdr.js                         1.95 kB │ gzip:   0.95 kB
+dist/assets/chunk-GWA4HPMP-TRGHjpPH.js                         1.97 kB │ gzip:   0.88 kB
+dist/assets/pegDiagram-GJSIUBJH-CUbctJ2a.js                    2.01 kB │ gzip:   0.94 kB
+dist/assets/ebnfDiagram-ZINNZB2B-Dnsi4Agt.js                   2.05 kB │ gzip:   0.88 kB
+dist/assets/dist-EoZ7Pb6P.js                                   2.16 kB │ gzip:   0.96 kB
+dist/assets/path-fybaL0A-.js                                   2.27 kB │ gzip:   0.98 kB
+dist/assets/arc-DXzhdL23.js                                    3.47 kB │ gzip:   1.46 kB
+dist/assets/diagram-MLGK6HIB-lGgCsjDc.js                       4.28 kB │ gzip:   1.84 kB
+dist/assets/defaultLocale-BFoDCU3G.js                          4.63 kB │ gzip:   2.12 kB
+dist/assets/chunk-NETBCI7D-8-PRq5rh.js                         5.43 kB │ gzip:   2.50 kB
+dist/assets/linear-DBaL3p9T.js                                 5.51 kB │ gzip:   2.25 kB
+dist/assets/chunk-742MDFTN-B65LsI54.js                         5.83 kB │ gzip:   2.68 kB
+dist/assets/diagram-MPIPVDR6-CTrazz1O.js                       6.06 kB │ gzip:   2.56 kB
+dist/assets/pieDiagram-5QR66LMP-BZ1XBZiD.js                    6.22 kB │ gzip:   2.59 kB
+dist/assets/diagram-CDSNMT55-CVDhLXGI.js                       8.19 kB │ gzip:   3.65 kB
+dist/assets/cynefinDiagram-VND7K2PF-O21MInNr.js                9.93 kB │ gzip:   3.50 kB
+dist/assets/diagram-ATOU4E4O-C2C3djNZ.js                      10.65 kB │ gzip:   4.11 kB
+dist/assets/chunk-3FUC2YCW-DOq3kYnb.js                        10.72 kB │ gzip:   4.30 kB
+dist/assets/chunk-UA2S7LBM-BgUM_dry.js                        14.83 kB │ gzip:   4.19 kB
+dist/assets/chunk-GTNCS2PH-CD2sQJmU.js                        15.64 kB │ gzip:   4.35 kB
+dist/assets/diagram-3UASUU5V-BxIsw1l9.js                      15.75 kB │ gzip:   5.52 kB
+dist/assets/mermaid-parser.core-CfnczF7D.js                   16.58 kB │ gzip:   3.92 kB
+dist/assets/ishikawaDiagram-OU5B5YK6-BWqgguMy.js              17.31 kB │ gzip:   6.53 kB
+dist/assets/kanban-definition-PNTS6WVX-NrdrVhIB.js            20.26 kB │ gzip:   7.14 kB
+dist/assets/sankeyDiagram-IPEJSGJF-DrmIGIAB.js                22.78 kB │ gzip:   8.25 kB
+dist/assets/journeyDiagram-ZHPQQLJL-BPoF-FYN.js               23.16 kB │ gzip:   8.16 kB
+dist/assets/mindmap-definition-NLK3R4M7-CWTQgO4A.js           23.44 kB │ gzip:   7.99 kB
+dist/assets/graphlib-DS17s2tU.js                              23.90 kB │ gzip:   8.31 kB
+dist/assets/wardleyDiagram-VNRHLVJA-C0iwVqYd.js               25.20 kB │ gzip:   6.54 kB
+dist/assets/rough.esm-Dy-Kn_BL.js                             27.10 kB │ gzip:   8.85 kB
+dist/assets/gitGraphDiagram-X574FWY7-DjOolbyg.js              29.00 kB │ gzip:   8.55 kB
+dist/assets/timeline-definition-EJHVYXUP-CS8mGlXD.js          30.45 kB │ gzip:  10.03 kB
+dist/assets/erDiagram-OPXOYQCR-6ig5tJYO.js                    30.64 kB │ gzip:  10.56 kB
+dist/assets/chunk-ZIGJFQKS-8L-AG1T4.js                        30.74 kB │ gzip:   8.51 kB
+dist/assets/requirementDiagram-PLB6GJNP-BBP3y_a6.js           31.06 kB │ gzip:   9.82 kB
+dist/assets/quadrantDiagram-O4NWA36T-RQOxz1_r.js              33.52 kB │ gzip:   9.74 kB
+dist/assets/chunk-Z7XXMR3K-CKownyMy.js                        37.41 kB │ gzip:   8.06 kB
+dist/assets/vennDiagram-UO4OBE2U-DnZGFl4w.js                  41.18 kB │ gzip:  15.12 kB
+dist/assets/stateDiagram-v2-GCMORJYK-dq1yNQOi.js              41.54 kB │ gzip:  13.89 kB
+dist/assets/blockDiagram-BEXU5L5S-C92oH37R.js                 42.46 kB │ gzip:  13.87 kB
+dist/assets/xychartDiagram-PMCCYNJV-LRGrsrxU.js               44.14 kB │ gzip:  12.21 kB
+dist/assets/src-Crkw892S.js                                   45.67 kB │ gzip:  16.00 kB
+dist/assets/dagre-6A5THRUB-hbYsfSMQ.js                        47.83 kB │ gzip:  17.10 kB
+dist/assets/classDiagram-v2-NBCMYWYE-Clj8hJA7.js              49.70 kB │ gzip:  16.14 kB
+dist/assets/chunk-MBY4JIJT-D7ZECxZd.js                        51.87 kB │ gzip:  16.63 kB
+dist/assets/chunk-7M6MHVWA-mZunKP86.js                        62.72 kB │ gzip:  20.33 kB
+dist/assets/c4Diagram-YGBWAQC7-ChISUowy.js                    65.08 kB │ gzip:  18.60 kB
+dist/assets/ganttDiagram-FUAMR5RP-Cjrt3BTx.js                 69.34 kB │ gzip:  22.73 kB
+dist/assets/diagram-22UHCM2B-QbtoT6Zn.js                      80.49 kB │ gzip:  25.16 kB
+dist/assets/cose-bilkent-JH36ORCC-BVAwBFSn.js                 81.24 kB │ gzip:  21.53 kB
+dist/assets/mermaid.core-CTiUOy4a.js                          83.95 kB │ gzip:  29.01 kB
+dist/assets/swimlanes-2SLR337P-BQVmXwZA.js                   106.24 kB │ gzip:  36.11 kB
+dist/assets/chunk-7INBJB4K-2DRBaLcc.js                       115.49 kB │ gzip:  29.18 kB
+dist/assets/sequenceDiagram-PO4LG4MO-DCwcfor0.js             117.31 kB │ gzip:  31.31 kB
+dist/assets/architectureDiagram-NJMV4G6O-CNBWs4hY.js         148.90 kB │ gzip:  41.12 kB
+dist/assets/usecaseDiagram-POWQR4AR-Cyfb4o4m.js              211.24 kB │ gzip:  58.23 kB
+dist/assets/chunk-O7XYJQB3-CieIFyVL.js                       239.46 kB │ gzip:  39.57 kB
+dist/assets/katex-ZlcWpGUi.js                                258.68 kB │ gzip:  77.43 kB
+dist/assets/cytoscape.esm-Yq6u8L66.js                        434.85 kB │ gzip: 137.78 kB
+dist/assets/chunk-FOHPRMQF-DzxwRta7.js                       662.10 kB │ gzip: 143.16 kB
+dist/assets/index-m6mScRUr.js                                667.64 kB │ gzip: 210.25 kB
+dist/assets/elk-276RUBZZ-Ds4VP9ku.js                       1,456.40 kB │ gzip: 453.22 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 1.39s
+
+[build-all] ===== figures4papers =====
+[build-all] (apps/figures4papers) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 464 installs across 531 packages (no changes) [122.00ms]
+[build-all] (apps/figures4papers) $ bun run build
+$ tsc -b && vite build
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2574 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.50 kB │ gzip:   0.30 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-C79i1i47.css                              47.47 kB │ gzip:   8.70 kB
+dist/assets/index-B-8JRFlN.js                              721.09 kB │ gzip: 215.12 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 464ms
+
+[build-all] ===== hairline =====
+[build-all] (apps/hairline) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 428 installs across 494 packages (no changes) [123.00ms]
+[build-all] (apps/hairline) $ bun run build
+$ tsc -b && vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 1998 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   0.62 kB │ gzip:   0.43 kB
+dist/assets/index-BphhuKuX.css   36.47 kB │ gzip:   7.68 kB
+dist/assets/index-2JA7HZQ1.js   352.09 kB │ gzip: 121.75 kB
+
+✓ built in 371ms
+
+[build-all] ===== obsidian-ui =====
+[build-all] (apps/obsidian-ui) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 432 installs across 499 packages (no changes) [117.00ms]
+[build-all] (apps/obsidian-ui) $ bun run build
+$ tsc -b && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 2442 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.71 kB │ gzip:   0.43 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-BpP3kZg3.css                              57.78 kB │ gzip:  10.46 kB
+dist/assets/index-Bc32BYkT.js                              676.04 kB │ gzip: 212.26 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 439ms
+
+[build-all] ===== pdfcn =====
+[build-all] (apps/pdfcn) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
++ @types/node@26.6.3
++ @types/react@19.3.0
++ @types/react-dom@19.3.0
++ @vitejs/plugin-react@6.1.1
++ oxlint@1.86.0
++ typescript@6.0.3
++ vite@8.3.2
++ @fontsource-variable/geist@5.3.0
++ @tailwindcss/vite@4.3.3
++ class-variance-authority@0.7.1
++ clsx@2.1.1
++ cn@0.4.0
++ lucide-react@1.49.0
++ next-themes@0.4.6
++ radix-ui@1.6.7
++ react@19.3.0
++ react-dom@19.3.0
++ shadcn@4.21.1
++ sonner@2.0.8
++ tailwind-merge@3.7.0
++ tailwindcss@4.3.3
++ tw-animate-css@1.4.0
+
+427 packages installed [755.00ms]
+[build-all] (apps/pdfcn) $ bun run build
+$ tsc -b && vite build
+vite v8.3.2 building client environment for production...
+transforming...
+✓ 2020 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.80 kB │ gzip:   0.46 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-B1Yn8-JX.css                              83.08 kB │ gzip:  14.08 kB
+dist/assets/index-C513IDvt.js                              478.50 kB │ gzip: 148.87 kB
+
+✓ built in 497ms
+
+[build-all] ===== shadcn-admin =====
+[build-all] (apps/shadcn-admin) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 480 installs across 547 packages (no changes) [128.00ms]
+[build-all] (apps/shadcn-admin) $ bun run build
+$ tsc -b && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 2782 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                0.97 kB │ gzip:   0.55 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2      7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2        8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2         15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2        16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2            29.40 kB
+dist/assets/index-BY6cu5sD.css                               103.37 kB │ gzip:  16.80 kB
+dist/assets/index-0-H0_uuq.js                              1,144.36 kB │ gzip: 342.17 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 564ms
+
+[build-all] ===== spectrum-ui =====
+[build-all] (apps/spectrum-ui) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 431 installs across 498 packages (no changes) [108.00ms]
+[build-all] (apps/spectrum-ui) $ bun run build
+$ tsc -b && vite build
+vite v8.3.1 building client environment for production...
+transforming...
+✓ 2442 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.68 kB │ gzip:   0.40 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-DlWwfnF3.css                              50.58 kB │ gzip:   9.46 kB
+dist/assets/index-jmSpJFgu.js                              547.73 kB │ gzip: 168.30 kB
+
+[plugin builtin:vite-reporter]
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 450ms
+
+[build-all] ===== transitions-dev =====
+[build-all] (apps/transitions-dev) $ bun install --frozen-lockfile
+bun install v1.4.2 (744846f84)
+
+Checked 427 installs across 494 packages (no changes) [139.00ms]
+[build-all] (apps/transitions-dev) $ bun run build
+$ tsc -b && vite build
+vite v8.3.0 building client environment for production...
+transforming...
+✓ 2031 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                              0.68 kB │ gzip:   0.39 kB
+dist/assets/geist-cyrillic-ext-wght-normal-DjL33-gN.woff2    7.42 kB
+dist/assets/geist-vietnamese-wght-normal-6IgcOCM7.woff2      8.00 kB
+dist/assets/geist-cyrillic-wght-normal-BEAKL7Jp.woff2       15.08 kB
+dist/assets/geist-latin-ext-wght-normal-DC-KSUi6.woff2      16.51 kB
+dist/assets/geist-latin-wght-normal-BgDaEnEv.woff2          29.40 kB
+dist/assets/index-61dGJ7SD.css                              58.00 kB │ gzip:  11.32 kB
+dist/assets/index-Bmn9toRx.js                              346.27 kB │ gzip: 109.33 kB
+
+✓ built in 301ms
+
+[build-all] wrote dist/index.html with 9 demos: antv-infographic, docu-md, figures4papers, hairline, obsidian-ui, pdfcn, shadcn-admin, spectrum-ui, transitions-dev
