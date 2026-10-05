@@ -57,7 +57,7 @@
       "repo": "https://github.com/markdown-viewer/markdown-viewer-extension",
       "slug": "docu-md",
       "folder": "Tools",
-      "why": "Markdown \u2192 polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
+      "why": "Markdown → polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
       "built": "2026-09-30"
     },
     {
@@ -97,6 +97,32 @@
       "folder": "unfiled",
       "why": "MIT React PDF components/blocks with themes; diversifies the gallery toward printable document UI; approved by Yishan 2026-10-04",
       "built": "2026-10-05"
+    },
+    {
+      "id": "2106502812498632707",
+      "title": "Hairline",
+      "url": "https://x.com/lucasmarkes__/status/2106502812498632707",
+      "date": "2026-10-04",
+      "tech": "Hairline (isometric hairline React figures, v0.2)",
+      "site": "https://hairline.lucasmarkes.com",
+      "repo": "https://github.com/lucasmarkes/hairline",
+      "slug": "hairline",
+      "folder": "unfiled",
+      "why": "MIT React hairline figure library; built as apps/hairline/ and merged to main in PR #12 (2026-10-05 13:07 +08); tracking entry added later by the slideblocks run",
+      "built": "2026-10-05"
+    },
+    {
+      "id": "2103065656480690337",
+      "title": "SlideBlocks",
+      "url": "https://x.com/geekbb/status/2103065656480690337",
+      "date": "2026-09-24",
+      "tech": "SlideBlocks (agent skill for Slidev decks with block layouts)",
+      "site": "https://uniuni2000.github.io/slideblocks-skill/#/1",
+      "repo": "https://github.com/UniUni2000/slideblocks-skill",
+      "slug": "slideblocks",
+      "folder": "unfiled",
+      "why": "MIT agent skill that turns sources into polished web slide decks; adds a presentations category to the gallery; approved by Yishan 2026-10-05 with deck topic Personal Agent 的发展现状",
+      "built": "2026-10-06"
     }
   ],
   "skipped": []
