@@ -1,5 +1,5 @@
 // Showcase inspired by shadcn-labs/pdfcn (MIT). https://github.com/shadcn-labs/pdfcn
-import { Download, ExternalLink, Monitor, Moon, Sun } from "lucide-react"
+import { Download, ExternalLink, Loader2, Monitor, Moon, RotateCcw, Sun } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -18,10 +18,17 @@ import {
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { useTheme, type Theme } from "@/components/theme-provider"
 import { PDF_THEMES, type PdfThemeId } from "@/lib/pdf-themes"
+import { cn } from "@/lib/utils"
+
+export type ExportState = {
+  status: "idle" | "loading" | "error"
+  message?: string
+}
 
 type AppHeaderProps = {
   pdfThemeId: PdfThemeId
   onPdfThemeChange: (id: PdfThemeId) => void
+  exportState: ExportState
   onExport: () => void
 }
 
@@ -31,10 +38,22 @@ const THEME_OPTIONS: { value: Theme; label: string; icon: typeof Sun }[] = [
   { value: "system", label: "System", icon: Monitor },
 ]
 
-export function AppHeader({ pdfThemeId, onPdfThemeChange, onExport }: AppHeaderProps) {
+export function AppHeader({
+  pdfThemeId,
+  onPdfThemeChange,
+  exportState,
+  onExport,
+}: AppHeaderProps) {
   const { theme, setTheme } = useTheme()
 
   const ActiveIcon = theme === "light" ? Sun : theme === "dark" ? Moon : Monitor
+
+  const exportLabel =
+    exportState.status === "loading"
+      ? (exportState.message ?? "Exporting…")
+      : exportState.status === "error"
+        ? "Retry export"
+        : "Export PDF"
 
   return (
     <header className="flex h-14 items-center gap-2 border-b bg-background px-3 md:px-4">
@@ -72,9 +91,30 @@ export function AppHeader({ pdfThemeId, onPdfThemeChange, onExport }: AppHeaderP
         </Select>
       </div>
 
-      <Button size="sm" onClick={onExport} data-testid="export-btn">
-        <Download className="size-4" />
-        Export PDF
+      <Button
+        size="sm"
+        variant={exportState.status === "error" ? "outline" : "default"}
+        onClick={onExport}
+        disabled={exportState.status === "loading"}
+        aria-busy={exportState.status === "loading"}
+        aria-label={exportLabel}
+        title={exportState.status === "error" ? exportState.message : undefined}
+        data-testid="export-btn"
+        data-state={exportState.status}
+        className={cn(
+          exportState.status === "loading" && "min-w-[8.5rem]",
+          exportState.status === "error" &&
+            "border-destructive/50 text-destructive hover:text-destructive",
+        )}
+      >
+        {exportState.status === "loading" ? (
+          <Loader2 className="size-4 animate-spin" />
+        ) : exportState.status === "error" ? (
+          <RotateCcw className="size-4" />
+        ) : (
+          <Download className="size-4" />
+        )}
+        <span className="hidden max-w-[16rem] truncate sm:inline-block">{exportLabel}</span>
       </Button>
 
       <DropdownMenu>

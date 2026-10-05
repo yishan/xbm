@@ -131,25 +131,25 @@ export function InvoiceBlock() {
             <tr className="border-b border-[color:var(--pdf-border)]">
               <th
                 scope="col"
-                className="pb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-subtle)]"
+                className="pb-3 text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-muted)]"
               >
                 Description
               </th>
               <th
                 scope="col"
-                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-subtle)]"
+                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-muted)]"
               >
                 Qty
               </th>
               <th
                 scope="col"
-                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-subtle)]"
+                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-muted)]"
               >
                 Unit
               </th>
               <th
                 scope="col"
-                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-subtle)]"
+                className="pb-3 text-right text-[11px] font-medium uppercase tracking-[0.14em] text-[color:var(--pdf-muted)]"
               >
                 Amount
               </th>

@@ -11,7 +11,7 @@ createRoot(document.getElementById("root")!).render(
     <ThemeProvider>
       <TooltipProvider delayDuration={0}>
         <App />
-        <Toaster richColors position="top-right" />
+        <Toaster richColors position="bottom-right" />
       </TooltipProvider>
     </ThemeProvider>
   </StrictMode>,

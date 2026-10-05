@@ -37,6 +37,7 @@ export function BlockSidebar({ activeId, onSelect }: BlockSidebarProps) {
                   onClick={() => onSelect(b.id)}
                   tooltip={b.name}
                   data-testid={`block-${b.id}`}
+                  className="h-auto py-2"
                 >
                   <div className="flex min-w-0 flex-col items-start gap-0.5">
                     <span className="truncate text-sm">{b.name}</span>

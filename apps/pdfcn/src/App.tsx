@@ -1,20 +1,75 @@
 // Showcase inspired by shadcn-labs/pdfcn (MIT). https://github.com/shadcn-labs/pdfcn
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { toast } from "sonner"
 
-import { AppHeader } from "@/components/app-header"
+import { AppHeader, type ExportState } from "@/components/app-header"
 import { BlockSidebar } from "@/components/block-sidebar"
 import { PreviewPane } from "@/components/preview-pane"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import { DEFAULT_BLOCK, type BlockId } from "@/lib/blocks"
+import { exportPdf, findPdfPage } from "@/lib/pdf-export"
 import { DEFAULT_PDF_THEME, type PdfThemeId } from "@/lib/pdf-themes"
 
 export function App() {
   const [blockId, setBlockId] = useState<BlockId>(DEFAULT_BLOCK)
   const [pdfThemeId, setPdfThemeId] = useState<PdfThemeId>(DEFAULT_PDF_THEME)
+  const [exportState, setExportState] = useState<ExportState>({ status: "idle" })
+  const abortRef = useRef<AbortController | null>(null)
 
-  const onExport = () => {
-    toast.success("Export is a preview-only mock — no PDF file is generated.")
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort()
+    }
+  }, [])
+
+  useEffect(() => {
+    setExportState((current) => (current.status === "error" ? { status: "idle" } : current))
+  }, [blockId, pdfThemeId])
+
+  const onExport = async () => {
+    if (exportState.status === "loading") {
+      return
+    }
+
+    const pageEl = findPdfPage()
+    if (!pageEl) {
+      setExportState({ status: "error", message: "Preview not ready" })
+      return
+    }
+
+    const controller = new AbortController()
+    abortRef.current = controller
+
+    setExportState({ status: "loading", message: "Exporting…" })
+
+    try {
+      const filename = await exportPdf({
+        pageEl,
+        blockId,
+        themeId: pdfThemeId,
+        signal: controller.signal,
+        onStatus: (message) => setExportState({ status: "loading", message }),
+      })
+
+      setExportState({ status: "idle" })
+      toast.success(`Downloaded ${filename}`)
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") {
+        return
+      }
+
+      const message = error instanceof Error ? error.message : "PDF export failed"
+      setExportState({ status: "error", message })
+      toast.error(message, {
+        id: "pdf-export",
+        duration: 10000,
+        action: { label: "Retry", onClick: () => void onExport() },
+      })
+    } finally {
+      if (abortRef.current === controller) {
+        abortRef.current = null
+      }
+    }
   }
 
   return (
@@ -25,6 +80,7 @@ export function App() {
           <AppHeader
             pdfThemeId={pdfThemeId}
             onPdfThemeChange={setPdfThemeId}
+            exportState={exportState}
             onExport={onExport}
           />
           <PreviewPane blockId={blockId} pdfThemeId={pdfThemeId} />
