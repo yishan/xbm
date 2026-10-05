@@ -57,7 +57,7 @@
       "repo": "https://github.com/markdown-viewer/markdown-viewer-extension",
       "slug": "docu-md",
       "folder": "Tools",
-      "why": "Markdown → polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
+      "why": "Markdown \u2192 polished document + readable diagrams (Mermaid/PlantUML-style); diversifies gallery beyond component libraries",
       "built": "2026-09-30"
     },
     {
@@ -84,6 +84,19 @@
       "folder": "unfiled",
       "why": "MIT admin dashboard UI built with shadcn/ui, Vite and TanStack Router (sidebar, data tables, forms, auth, themes); approved by Yishan as the alternative to pdfcn",
       "built": "2026-10-02"
+    },
+    {
+      "id": "2104840500847263794",
+      "title": "pdfcn",
+      "url": "https://x.com/shadcnlabs/status/2104840500847263794",
+      "date": "2026-10-04",
+      "tech": "pdfcn (shadcn/ui PDF document blocks)",
+      "site": "https://pdfcn.dev",
+      "repo": "https://github.com/shadcn-labs/pdfcn",
+      "slug": "pdfcn",
+      "folder": "unfiled",
+      "why": "MIT React PDF components/blocks with themes; diversifies the gallery toward printable document UI; approved by Yishan 2026-10-04",
+      "built": "2026-10-05"
     }
   ],
   "skipped": []
