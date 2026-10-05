@@ -1,0 +1,474 @@
+{
+  "url": "http://127.0.0.1:5187/hairline/",
+  "figures": [
+    {
+      "id": "exploded",
+      "svg_shapes": 19,
+      "read_samples": [
+        "gap 2.5",
+        "gap 4.4",
+        "gap 9.3",
+        "gap 23.6",
+        "04 · popover · z 52.9",
+        "gap 31.9",
+        "gap 21.6",
+        "gap 12.6",
+        "gap 22.8"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "terrain",
+      "svg_shapes": 173,
+      "read_samples": [
+        "cell 0·2",
+        "cell 2·2",
+        "cell 8·2",
+        "cell 0·2",
+        "cell 2·2",
+        "cell 8·2",
+        "cell 0·2",
+        "cell 2·2",
+        "cell 8·2"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "phosphor",
+      "svg_shapes": 57,
+      "read_samples": [
+        "paint",
+        "paint",
+        "paint",
+        "paint",
+        "paint",
+        "paint",
+        "paint",
+        "paint",
+        "paint"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "riffle",
+      "svg_shapes": 107,
+      "read_samples": [
+        "rest",
+        "02",
+        "rest",
+        "rest",
+        "02",
+        "rest",
+        "rest",
+        "02",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "slow",
+      "svg_shapes": 75,
+      "read_samples": [
+        "rate 0.73×",
+        "rate 0.60× · #0141",
+        "rate 0.60× · #0144",
+        "rate 0.30×",
+        "rate 0.06× · #0141",
+        "rate 0.05× · #0144",
+        "rate 0.14×",
+        "rate 0.20× · #0141",
+        "rate 0.20× · #0144"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "turntable",
+      "svg_shapes": 34,
+      "read_samples": [
+        "az 013° · el 30°",
+        "az 262° · el 31°",
+        "az 157° · el 27°",
+        "az 211° · el 28°",
+        "az 180° · el 31°",
+        "az 097° · el 29°",
+        "az 095° · el 29°",
+        "az 033° · el 31°",
+        "az 313° · el 28°"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "elevator",
+      "svg_shapes": 60,
+      "read_samples": [
+        "floor 3",
+        "floor 2",
+        "ground",
+        "floor 3",
+        "floor 2",
+        "ground",
+        "floor 3",
+        "floor 2",
+        "ground"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "keyboard",
+      "svg_shapes": 124,
+      "read_samples": [
+        "rest",
+        "key n",
+        "rest",
+        "rest",
+        "key n",
+        "rest",
+        "rest",
+        "key n",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "phone",
+      "svg_shapes": 37,
+      "read_samples": [
+        "shell",
+        "shell",
+        "glass",
+        "shell",
+        "battery",
+        "board",
+        "shell",
+        "shell",
+        "glass"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "laptop",
+      "svg_shapes": 16,
+      "read_samples": [
+        "lid 99°",
+        "lid 63°",
+        "lid 27°",
+        "lid 149°",
+        "lid 91°",
+        "lid 33°",
+        "lid 124°",
+        "lid 77°",
+        "lid 30°"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "terminal",
+      "svg_shapes": 93,
+      "read_samples": [
+        "rest",
+        "line 47",
+        "rest",
+        "rest",
+        "line 47",
+        "rest",
+        "rest",
+        "line 47",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "cabinet",
+      "svg_shapes": 101,
+      "read_samples": [
+        "rest",
+        "blade 8",
+        "rest",
+        "rest",
+        "blade 8",
+        "rest",
+        "rest",
+        "blade 8",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "branches",
+      "svg_shapes": 61,
+      "read_samples": [
+        "rest",
+        "main · 4",
+        "main · 8",
+        "rest",
+        "main · 4",
+        "main · 8",
+        "rest",
+        "main · 4",
+        "main · 8"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "vault",
+      "svg_shapes": 37,
+      "read_samples": [
+        "rest",
+        "dial 45",
+        "dial 55",
+        "dial 44",
+        "dial 51",
+        "dial 68",
+        "dial 60",
+        "dial 62",
+        "dial 91"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "lockers",
+      "svg_shapes": 76,
+      "read_samples": [
+        "rest",
+        "locker 04",
+        "rest",
+        "rest",
+        "locker 04",
+        "rest",
+        "rest",
+        "locker 04",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "padlock",
+      "svg_shapes": 6,
+      "read_samples": [
+        "locked",
+        "45°",
+        "6°",
+        "locked",
+        "99°",
+        "14°",
+        "locked",
+        "89°",
+        "12°"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "patch",
+      "svg_shapes": 184,
+      "read_samples": [
+        "rest",
+        "port 19",
+        "rest",
+        "rest",
+        "port 19",
+        "rest",
+        "rest",
+        "port 19",
+        "rest"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "dish",
+      "svg_shapes": 58,
+      "read_samples": [
+        "az 68 · el 44",
+        "az 45 · el 34",
+        "az 22 · el 28",
+        "az 98 · el 50",
+        "az 45 · el 26",
+        "az 352 · el 12",
+        "az 83 · el 47",
+        "az 45 · el 30",
+        "az 7 · el 20"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    },
+    {
+      "id": "router",
+      "svg_shapes": 62,
+      "read_samples": [
+        "antenna 1 · 39°",
+        "antenna 2 · 5°",
+        "antenna 4 · 32°",
+        "antenna 1 · 39°",
+        "antenna 2 · 5°",
+        "antenna 4 · 32°",
+        "antenna 1 · 39°",
+        "antenna 2 · 5°",
+        "antenna 4 · 32°"
+      ],
+      "themes": [
+        "dark",
+        "light"
+      ],
+      "intensity": [
+        0,
+        1,
+        0.5
+      ]
+    }
+  ],
+  "checks": [
+    "All 19 render SVG, Chinese accessible labels, onRead samples; light/dark and intensity 0/0.5/1",
+    "Seven category counts, selection validity and previous/next wrap",
+    "Riffle keyboard navigation",
+    "System theme responds to preference changes",
+    "Collaboration: automatic completion, duplicate start/completion, pause, manual step, reset and timer cleanup",
+    "Leaving collaboration pauses and retains state",
+    "320/390/768px: all 19 SVGs, no horizontal overflow, touch readout and collaboration controls",
+    "Reduced motion: all SVGs render; Phosphor/Slow idle loops stop; manual collaboration completes",
+    "No browser console/page errors"
+  ],
+  "errors": [],
+  "result": "passed"
+}
