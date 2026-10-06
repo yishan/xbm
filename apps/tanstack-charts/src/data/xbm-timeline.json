@@ -1,0 +1,152 @@
+{
+  "source": "git log --merges --first-parent main (yishan/xbm)",
+  "generatedAt": "3763e41",
+  "rows": [
+    {
+      "pr": 1,
+      "sha": "592e3ea",
+      "mergedAt": "2026-09-24T15:58",
+      "day": "2026-09-24",
+      "branch": "demo/figures4papers",
+      "kind": "demo",
+      "apps": [
+        "figures4papers"
+      ]
+    },
+    {
+      "pr": 2,
+      "sha": "58ce05b",
+      "mergedAt": "2026-09-25T11:50",
+      "day": "2026-09-25",
+      "branch": "demo/transitions-dev",
+      "kind": "demo",
+      "apps": [
+        "transitions-dev"
+      ]
+    },
+    {
+      "pr": 3,
+      "sha": "d5403a0",
+      "mergedAt": "2026-09-28T10:26",
+      "day": "2026-09-28",
+      "branch": "demo/spectrum-ui",
+      "kind": "demo",
+      "apps": [
+        "spectrum-ui"
+      ]
+    },
+    {
+      "pr": 4,
+      "sha": "51fcf73",
+      "mergedAt": "2026-09-29T11:23",
+      "day": "2026-09-29",
+      "branch": "demo/obsidian-ui",
+      "kind": "demo",
+      "apps": [
+        "obsidian-ui"
+      ]
+    },
+    {
+      "pr": 5,
+      "sha": "469c6ff",
+      "mergedAt": "2026-09-29T13:11",
+      "day": "2026-09-29",
+      "branch": "infra/path-deploy",
+      "kind": "infra",
+      "apps": [
+        "figures4papers",
+        "obsidian-ui",
+        "spectrum-ui",
+        "transitions-dev"
+      ]
+    },
+    {
+      "pr": 6,
+      "sha": "176c7cf",
+      "mergedAt": "2026-09-30T01:32",
+      "day": "2026-09-30",
+      "branch": "demo/docu-md",
+      "kind": "demo",
+      "apps": [
+        "docu-md"
+      ]
+    },
+    {
+      "pr": 7,
+      "sha": "3327256",
+      "mergedAt": "2026-09-30T10:49",
+      "day": "2026-09-30",
+      "branch": "demo/docu-md-pdf",
+      "kind": "update",
+      "apps": [
+        "docu-md"
+      ]
+    },
+    {
+      "pr": 8,
+      "sha": "26be0e0",
+      "mergedAt": "2026-10-02T11:11",
+      "day": "2026-10-02",
+      "branch": "demo/antv-infographic",
+      "kind": "demo",
+      "apps": [
+        "antv-infographic"
+      ]
+    },
+    {
+      "pr": 9,
+      "sha": "e5a49f7",
+      "mergedAt": "2026-10-02T11:12",
+      "day": "2026-10-02",
+      "branch": "demo/shadcn-admin",
+      "kind": "demo",
+      "apps": [
+        "shadcn-admin"
+      ]
+    },
+    {
+      "pr": 11,
+      "sha": "6d14c1e",
+      "mergedAt": "2026-10-05T12:22",
+      "day": "2026-10-05",
+      "branch": "demo/pdfcn-pdf",
+      "kind": "demo",
+      "apps": [
+        "pdfcn"
+      ]
+    },
+    {
+      "pr": 12,
+      "sha": "62b39ae",
+      "mergedAt": "2026-10-05T13:07",
+      "day": "2026-10-05",
+      "branch": "demo/hairline",
+      "kind": "demo",
+      "apps": [
+        "hairline"
+      ]
+    },
+    {
+      "pr": 13,
+      "sha": "d832061",
+      "mergedAt": "2026-10-06T01:39",
+      "day": "2026-10-06",
+      "branch": "demo/slideblocks",
+      "kind": "demo",
+      "apps": [
+        "slideblocks"
+      ]
+    },
+    {
+      "pr": 14,
+      "sha": "3763e41",
+      "mergedAt": "2026-10-06T12:03",
+      "day": "2026-10-06",
+      "branch": "fix/slideblocks-localstorage",
+      "kind": "fix",
+      "apps": [
+        "slideblocks"
+      ]
+    }
+  ]
+}
