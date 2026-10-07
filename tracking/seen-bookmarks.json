@@ -136,6 +136,19 @@
       "folder": "unfiled",
       "why": "MIT TypeScript chart grammar on D3 primitives with a React adapter; first data-chart library in the gallery; dashboard of xbm merge history and agent-cost numbers from Nutrient's 2026-10-06 brief; approved by Yishan 2026-10-06 21:45",
       "built": "2026-10-07"
+    },
+    {
+      "id": "2107410561545928983",
+      "title": "Answer me with HTML",
+      "url": "https://x.com/GitHub_Daily/status/2107410561545928983",
+      "date": "2026-10-06",
+      "tech": "answer-me-with-html v0.4.14 (am CLI: Markdown draft -> single-file offline HTML, 3 themes x light/dark, ASD-STE100 check)",
+      "site": "https://github.com/QingYunA/answer-me-with-html",
+      "repo": "https://github.com/QingYunA/answer-me-with-html",
+      "slug": "answer-me-with-html",
+      "folder": "unfiled",
+      "why": "MIT agent output format with an STE100 mode that matches the running STE trial; pages explain xbm itself (nightly pipeline, Vercel-vs-Worker rule, gallery timeline); approved by Yishan 2026-10-08 00:23, manual start after the 22:17 skip",
+      "built": "2026-10-08"
     }
   ],
   "skipped": []
