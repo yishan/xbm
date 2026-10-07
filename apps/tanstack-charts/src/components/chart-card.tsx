@@ -3,7 +3,6 @@ import type { JSX, ReactNode } from "react"
 import { Badge } from "@/components/ui/badge"
 import {
   Card,
-  CardAction,
   CardContent,
   CardDescription,
   CardFooter,
@@ -38,17 +37,19 @@ export function ChartCard({
 }: ChartCardProps): JSX.Element {
   return (
     <Card id={id} className={cn("gap-3 overflow-hidden", className)}>
-      <CardHeader>
-        <CardTitle className="flex flex-wrap items-center gap-2 text-base font-semibold">
-          <span>{title}</span>
-          {exampleData ? <Badge variant="outline">Example data</Badge> : null}
-        </CardTitle>
-        {description ? <CardDescription>{description}</CardDescription> : null}
-        {actions ? (
-          <CardAction className="col-start-1 row-start-3 max-w-full justify-self-start sm:col-start-2 sm:row-span-2 sm:row-start-1 sm:justify-self-end">
-            <div className="flex flex-wrap items-center gap-2">{actions}</div>
-          </CardAction>
-        ) : null}
+      <CardHeader className="@container">
+        <div className="flex min-w-0 flex-col gap-3 @3xl:flex-row @3xl:items-start @3xl:justify-between">
+          <div className="grid min-w-0 gap-1">
+            <CardTitle className="flex flex-wrap items-center gap-2 text-base font-semibold">
+              <span>{title}</span>
+              {exampleData ? <Badge variant="outline">Example data</Badge> : null}
+            </CardTitle>
+            {description ? <CardDescription>{description}</CardDescription> : null}
+          </div>
+          {actions ? (
+            <div className="flex min-w-0 max-w-full shrink-0 flex-wrap items-center gap-2">{actions}</div>
+          ) : null}
+        </div>
       </CardHeader>
       <CardContent className="px-3 sm:px-6">
         <div className="ts-chart-card min-w-0">{children}</div>

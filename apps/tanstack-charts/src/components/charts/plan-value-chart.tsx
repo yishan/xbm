@@ -22,7 +22,7 @@ const usd = new Intl.NumberFormat("en-US", {
 
 const rows = PLAN_VALUE.map((row) => ({
   ...row,
-  axisLabel: `${row.plan} · ${row.model}`,
+  axisLabel: row.plan,
 }))
 
 const definition = defineChart({
@@ -33,7 +33,7 @@ const definition = defineChart({
       color: "provider",
       radius: { end: 4 },
       inset: 2,
-      maxThickness: 96,
+      maxThickness: 120,
     }),
     ruleY([200], {
       stroke: "currentColor",
@@ -43,14 +43,31 @@ const definition = defineChart({
     text(rows, {
       x: "axisLabel",
       y: "usedUsd",
-      text: (d) => `${usd.format(d.usedUsd)} · ${d.quotaNote}`,
+      text: (d) => usd.format(d.usedUsd),
       dy: -12,
+      fontSize: 13,
+      fontWeight: 600,
+    }),
+    text(rows, {
+      x: "axisLabel",
+      y: "usedUsd",
+      text: "model",
+      dy: 18,
+      fill: "white",
       fontSize: 12,
       fontWeight: 600,
     }),
+    text(rows, {
+      x: "axisLabel",
+      y: "usedUsd",
+      text: "quotaNote",
+      dy: 34,
+      fill: "white",
+      fontSize: 10.5,
+    }),
   ],
   scales: {
-    x: { scale: () => scaleBand<string>().padding(0.35) },
+    x: { scale: () => scaleBand<string>().padding(0.2) },
     y: {
       scale: scaleLinear().domain([0, 3200]),
       grid: true,

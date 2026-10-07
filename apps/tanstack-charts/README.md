@@ -20,10 +20,10 @@ A one-page dashboard built with TanStack Charts 1.0 — five responsive SVG char
 
 The article numbers were quoted in Nutrient's Readwise brief of 2026-10-06 and copied into `src/data/sources.ts`; no other numbers are used, and each chart caption names its source. There is no example data.
 
-The timeline data is `src/data/xbm-timeline.json`, generated from `git log --merges --first-parent main` (dates in Asia/Shanghai):
+The timeline data is `src/data/xbm-timeline.json`, generated from `git log --merges --first-parent origin/main` (dates in Asia/Shanghai):
 
 ```bash
-bun scripts/gen-timeline.ts   # from apps/tanstack-charts/, needs the repo's git history
+git fetch origin main && bun scripts/gen-timeline.ts   # from apps/tanstack-charts/, needs the repo's git history
 ```
 
 ## Run

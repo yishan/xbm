@@ -1,5 +1,5 @@
 {
-  "source": "git log --merges --first-parent main (yishan/xbm)",
+  "source": "git log --merges --first-parent origin/main (yishan/xbm)",
   "generatedAt": "3763e41",
   "rows": [
     {

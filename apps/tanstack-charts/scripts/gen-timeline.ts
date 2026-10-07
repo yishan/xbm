@@ -2,15 +2,17 @@
 // One row per merged PR on main (first-parent merge commits), dated in Asia/Shanghai.
 // kind: "infra" / "fix" from the branch prefix (infra/*, fix/*); otherwise "demo" if the PR
 // added a new apps/<slug>/package.json, else "update" (a change to an existing demo).
-// Usage (from apps/tanstack-charts/): bun scripts/gen-timeline.ts
+// Usage (from apps/tanstack-charts/): git fetch origin main && bun scripts/gen-timeline.ts [ref]
+// ref defaults to origin/main.
 import { execSync } from "node:child_process"
 import { writeFileSync } from "node:fs"
 
 const git = (args: string) =>
   execSync(`git ${args}`, { encoding: "utf8", env: { ...process.env, TZ: "Asia/Shanghai" } }).trim()
 
+const ref = process.argv[2] ?? "origin/main"
 const log = git(
-  "log --merges --first-parent main --date=format-local:%Y-%m-%dT%H:%M --pretty=%h%x09%ad%x09%s",
+  `log --merges --first-parent ${ref} --date=format-local:%Y-%m-%dT%H:%M --pretty=%h%x09%ad%x09%s`,
 )
 const rows = log
   .split("\n")
@@ -35,6 +37,6 @@ const rows = log
 
 writeFileSync(
   new URL("../src/data/xbm-timeline.json", import.meta.url),
-  JSON.stringify({ source: "git log --merges --first-parent main (yishan/xbm)", generatedAt: git("log -1 --format=%h main"), rows }, null, 2) + "\n",
+  JSON.stringify({ source: `git log --merges --first-parent ${ref} (yishan/xbm)`, generatedAt: git(`log -1 --format=%h ${ref}`), rows }, null, 2) + "\n",
 )
 console.log(`wrote ${rows.length} merged PRs`)

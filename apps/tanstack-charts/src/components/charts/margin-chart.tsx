@@ -98,7 +98,7 @@ export function MarginChart({ className }: { className?: string }) {
           scale: () => scaleBand<string>().domain(MODELS).padding(0.3),
         },
         y: {
-          scale: scaleLinear().domain([-400, 100]),
+          scale: scaleLinear().domain([-450, 120]),
           grid: true,
           axis: {
             label: "Gross margin (%)",

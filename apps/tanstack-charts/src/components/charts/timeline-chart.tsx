@@ -43,70 +43,72 @@ export function TimelineChart({ className }: { className?: string }) {
 
   const summary = timelineSummary()
 
-  const definition = useMemo(() => {
+  const colorScale = useMemo(() => {
     const selectedKinds = MERGE_KINDS.filter((kind) => kinds.includes(kind))
-    const colorScale = scaleOrdinal<string, string>()
+    return scaleOrdinal<string, string>()
       .domain(selectedKinds.map((kind) => MERGE_KIND_LABEL[kind]))
       .range(selectedKinds.map((kind) => KIND_COLOR[kind]))
+  }, [kinds])
 
-    const viewName = VIEW_LABEL[view]
+  const dailyDefinition = useMemo(() => {
+    const viewName = VIEW_LABEL.daily
+    const rows = dailyByKind(kinds).map((row) => ({
+      ...row,
+      kindLabel: MERGE_KIND_LABEL[row.kind],
+    }))
 
-    if (view === "daily") {
-      const rows = dailyByKind(kinds).map((row) => ({
-        ...row,
-        kindLabel: MERGE_KIND_LABEL[row.kind],
-      }))
-
-      return defineChart({
-        marks: [
-          barY(rows, {
-            x: "label",
-            y: "count",
-            color: "kindLabel",
-            radius: 3,
-            inset: 1,
-          }),
-        ],
-        scales: {
-          x: {
-            scale: () => scaleBand<string>().padding(0.25),
-            axis: {
-              label: "Day (Asia/Shanghai)",
-              tickLabels: { rotate: -45 },
+    return defineChart({
+      marks: [
+        barY(rows, {
+          x: "label",
+          y: "count",
+          color: "kindLabel",
+          radius: 3,
+          inset: 1,
+        }),
+      ],
+      scales: {
+        x: {
+          scale: () => scaleBand<string>().padding(0.25),
+          axis: {
+            label: "Day (Asia/Shanghai)",
+            tickLabels: { rotate: -45 },
+          },
+        },
+        y: {
+          scale: scaleLinear,
+          nice: true,
+          grid: true,
+          axis: {
+            label: "Merged PRs",
+            ticks: {
+              format: (value) =>
+                Number.isInteger(value) ? String(value) : "",
             },
           },
-          y: {
-            scale: scaleLinear,
-            nice: true,
-            grid: true,
-            axis: {
-              label: "Merged PRs",
-              ticks: {
-                format: (value) =>
-                  Number.isInteger(value) ? String(value) : "",
-              },
-            },
-          },
         },
-        color: {
-          scale: colorScale,
-          legend: colorLegend({ placement: "bottom" }),
+      },
+      color: {
+        scale: colorScale,
+        legend: colorLegend({ placement: "bottom" }),
+      },
+      focus: "group-x",
+      svgAnimation: true,
+      tooltip: {
+        use: tooltip,
+        formatGroup: (points) => {
+          const label = points[0]?.datum.label ?? ""
+          return [
+            `${label} · ${viewName}`,
+            ...points.map((point) => `${point.datum.kindLabel}: ${point.datum.count}`),
+          ].join("\n")
         },
-        focus: "group-x",
-        svgAnimation: true,
-        tooltip: {
-          use: tooltip,
-          formatGroup: (points) => {
-            const label = points[0]?.datum.label ?? ""
-            return [
-              `${label} · ${viewName}`,
-              ...points.map((point) => `${point.datum.kindLabel}: ${point.datum.count}`),
-            ].join("\n")
-          },
-        },
-      })
-    }
+      },
+    })
+  }, [kinds, colorScale])
 
+  const cumulativeDefinition = useMemo(() => {
+    const viewName = VIEW_LABEL.cumulative
     const rows = cumulativeByKind(kinds).map((row) => ({
       ...row,
       kindLabel: MERGE_KIND_LABEL[row.kind],
@@ -157,7 +159,7 @@ export function TimelineChart({ className }: { className?: string }) {
         },
       },
     })
-  }, [view, kinds])
+  }, [kinds, colorScale])
 
   const controls = (
     <div className="flex flex-wrap items-center gap-2">
@@ -188,6 +190,7 @@ export function TimelineChart({ className }: { className?: string }) {
           if (next.length === 0) return
           setKinds(MERGE_KINDS.filter((kind) => next.includes(kind)))
         }}
+        className="flex-wrap"
         data-testid="timeline-kind-toggle"
       >
         {MERGE_KINDS.map((kind) => (
@@ -229,12 +232,21 @@ export function TimelineChart({ className }: { className?: string }) {
       className={className}
     >
       <div data-testid="chart-timeline">
-        <Chart
-          definition={definition}
-          height={300}
-          ariaLabel="Merged pull requests per day on yishan/xbm"
-          ariaDescription="Stacked bars of merged pull requests per calendar day, or a cumulative running total line chart, split by merge kind (new demo, demo update, fix, infra). Use the view toggle to switch between per-day and cumulative, and the kind chips to show or hide kinds."
-        />
+        {view === "daily" ? (
+          <Chart
+            definition={dailyDefinition}
+            height={300}
+            ariaLabel="Merged pull requests per day on yishan/xbm"
+            ariaDescription="Stacked bars of merged pull requests per calendar day, split by merge kind (new demo, demo update, fix, infra)."
+          />
+        ) : (
+          <Chart
+            definition={cumulativeDefinition}
+            height={300}
+            ariaLabel="Running total of merged pull requests on yishan/xbm"
+            ariaDescription="Cumulative running total of merged pull requests per calendar day, one line per merge kind (new demo, demo update, fix, infra)."
+          />
+        )}
       </div>
     </ChartCard>
   )

@@ -1,7 +1,8 @@
-import { barX, defineChart, text, tooltip } from "@tanstack/charts"
+import { barX, defineChart, text } from "@tanstack/charts"
 import { scaleBand } from "@tanstack/charts/scales/band"
 import { scaleLinear } from "@tanstack/charts/scales/linear"
 import { Chart } from "@tanstack/charts/react"
+import { tooltip } from "@tanstack/charts/tooltip"
 
 import { ChartCard } from "@/components/chart-card"
 import { JEV_LATENCY, SOURCES } from "@/data/sources"
@@ -42,9 +43,11 @@ const jevLatencyDefinition = defineChart({
   tooltip: {
     use: tooltip,
     format: (point) =>
-      `${point.datum.label} in one call: ${point.datum.ms} ms (≈ ${(
-        point.datum.ms / point.datum.questions
-      ).toFixed(1)} ms per question)`,
+      point.datum.questions > 1
+        ? `${point.datum.label} in one call: ${point.datum.ms} ms (≈ ${(
+            point.datum.ms / point.datum.questions
+          ).toFixed(1)} ms per question, derived)`
+        : `${point.datum.label} in one call: ${point.datum.ms} ms`,
   },
 })
 
