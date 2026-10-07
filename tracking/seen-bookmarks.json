@@ -123,6 +123,19 @@
       "folder": "unfiled",
       "why": "MIT agent skill that turns sources into polished web slide decks; adds a presentations category to the gallery; approved by Yishan 2026-10-05 with deck topic Personal Agent 的发展现状",
       "built": "2026-10-06"
+    },
+    {
+      "id": "2107141729111736483",
+      "title": "TanStack Charts",
+      "url": "https://x.com/tan_stack/status/2107141729111736483",
+      "date": "2026-10-05",
+      "tech": "TanStack Charts 1.0 (@tanstack/charts 1.0.0, React adapter @tanstack/charts/react)",
+      "site": "https://tanstack.com/charts",
+      "repo": "https://github.com/TanStack/charts",
+      "slug": "tanstack-charts",
+      "folder": "unfiled",
+      "why": "MIT TypeScript chart grammar on D3 primitives with a React adapter; first data-chart library in the gallery; dashboard of xbm merge history and agent-cost numbers from Nutrient's 2026-10-06 brief; approved by Yishan 2026-10-06 21:45",
+      "built": "2026-10-07"
     }
   ],
   "skipped": []

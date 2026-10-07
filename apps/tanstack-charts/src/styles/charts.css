@@ -1,0 +1,36 @@
+:root {
+  /* TanStack Charts palette — light */
+  --ts-chart-1: #2563eb;
+  --ts-chart-2: #f97316;
+  --ts-chart-3: #10b981;
+  --ts-chart-4: #8b5cf6;
+  --ts-chart-5: #ec4899;
+  --ts-chart-6: #64748b;
+
+  /* TanStack Charts tooltip chrome (shadcn tokens) */
+  --ts-chart-tooltip-background: var(--popover);
+  --ts-chart-tooltip-color: var(--popover-foreground);
+  --ts-chart-tooltip-border: 1px solid var(--border);
+  --ts-chart-tooltip-border-radius: 0.5rem;
+  --ts-chart-tooltip-shadow: 0 8px 24px rgb(0 0 0 / 0.12);
+  --ts-chart-tooltip-font: 500 12px/1.4 var(--font-sans);
+}
+
+.dark {
+  /* TanStack Charts palette — brighter for dark backgrounds */
+  --ts-chart-1: #60a5fa;
+  --ts-chart-2: #fb923c;
+  --ts-chart-3: #34d399;
+  --ts-chart-4: #a78bfa;
+  --ts-chart-5: #f472b6;
+  --ts-chart-6: #94a3b8;
+}
+
+.ts-chart-card {
+  color: var(--foreground);
+  font-size: 12px;
+}
+
+.ts-chart-card .ts-chart-host {
+  width: 100%;
+}
