@@ -1,0 +1,236 @@
+{
+ "generated": "2026-10-08T16:39:25.663Z",
+ "sources": {
+  "demos": "git log --first-parent origin/main (head 1850b4c), first commit adding apps/<slug>/package.json",
+  "prs": "git log --first-parent --merges origin/main",
+  "runs": "/workspace/xbm-nightly/<date>/status.md (nightly run notes on the build box)",
+  "schedule": "nightly pipeline: 19:55 pick, 22:00 build, 05:53 report (Asia/Shanghai)"
+ },
+ "head": "1850b4c",
+ "demos": [
+  {
+   "slug": "figures4papers",
+   "merged": "2026-09-24 15:58",
+   "commit": "592e3ea",
+   "pr": 1
+  },
+  {
+   "slug": "transitions-dev",
+   "merged": "2026-09-25 11:50",
+   "commit": "58ce05b",
+   "pr": 2
+  },
+  {
+   "slug": "spectrum-ui",
+   "merged": "2026-09-28 10:26",
+   "commit": "d5403a0",
+   "pr": 3
+  },
+  {
+   "slug": "obsidian-ui",
+   "merged": "2026-09-29 11:23",
+   "commit": "51fcf73",
+   "pr": 4
+  },
+  {
+   "slug": "docu-md",
+   "merged": "2026-09-30 01:32",
+   "commit": "176c7cf",
+   "pr": 6
+  },
+  {
+   "slug": "antv-infographic",
+   "merged": "2026-10-02 11:11",
+   "commit": "26be0e0",
+   "pr": 8
+  },
+  {
+   "slug": "shadcn-admin",
+   "merged": "2026-10-02 11:12",
+   "commit": "e5a49f7",
+   "pr": 9
+  },
+  {
+   "slug": "pdfcn",
+   "merged": "2026-10-05 12:22",
+   "commit": "6d14c1e",
+   "pr": 11
+  },
+  {
+   "slug": "hairline",
+   "merged": "2026-10-05 13:07",
+   "commit": "62b39ae",
+   "pr": 12
+  },
+  {
+   "slug": "slideblocks",
+   "merged": "2026-10-06 01:39",
+   "commit": "d832061",
+   "pr": 13
+  },
+  {
+   "slug": "tanstack-charts",
+   "merged": "2026-10-07 13:23",
+   "commit": "ce5fd1d",
+   "pr": 15
+  },
+  {
+   "slug": "answer-me-with-html",
+   "merged": "2026-10-08 01:20",
+   "commit": "1850b4c",
+   "pr": 16
+  }
+ ],
+ "merges": [
+  {
+   "date": "2026-10-08",
+   "pr": 16,
+   "branch": "demo/answer-me-with-html"
+  },
+  {
+   "date": "2026-10-07",
+   "pr": 15,
+   "branch": "demo/tanstack-charts"
+  },
+  {
+   "date": "2026-10-06",
+   "pr": 14,
+   "branch": "fix/slideblocks-localstorage"
+  },
+  {
+   "date": "2026-10-06",
+   "pr": 13,
+   "branch": "demo/slideblocks"
+  },
+  {
+   "date": "2026-10-05",
+   "pr": 12,
+   "branch": "demo/hairline"
+  },
+  {
+   "date": "2026-10-05",
+   "pr": 11,
+   "branch": "demo/pdfcn-pdf"
+  },
+  {
+   "date": "2026-10-02",
+   "pr": 9,
+   "branch": "demo/shadcn-admin"
+  },
+  {
+   "date": "2026-10-02",
+   "pr": 8,
+   "branch": "demo/antv-infographic"
+  },
+  {
+   "date": "2026-09-30",
+   "pr": 7,
+   "branch": "demo/docu-md-pdf"
+  },
+  {
+   "date": "2026-09-30",
+   "pr": 6,
+   "branch": "demo/docu-md"
+  },
+  {
+   "date": "2026-09-29",
+   "pr": 5,
+   "branch": "infra/path-deploy"
+  },
+  {
+   "date": "2026-09-29",
+   "pr": 4,
+   "branch": "demo/obsidian-ui"
+  },
+  {
+   "date": "2026-09-28",
+   "pr": 3,
+   "branch": "demo/spectrum-ui"
+  },
+  {
+   "date": "2026-09-25",
+   "pr": 2,
+   "branch": "demo/transitions-dev"
+  },
+  {
+   "date": "2026-09-24",
+   "pr": 1,
+   "branch": "demo/figures4papers"
+  }
+ ],
+ "perWeek": {
+  "labels": [
+   "09-21",
+   "09-28",
+   "10-05"
+  ],
+  "demos": [
+   2,
+   5,
+   5
+  ],
+  "prs": [
+   2,
+   7,
+   6
+  ]
+ },
+ "runs": [
+  {
+   "date": "2026-09-30",
+   "slug": "docu-md",
+   "finished": "2026-09-30 00:21",
+   "at": "00:21",
+   "result": "done"
+  },
+  {
+   "date": "2026-10-01",
+   "slug": "antv-infographic",
+   "finished": "2026-09-30 22:20",
+   "at": "22:20",
+   "result": "done"
+  },
+  {
+   "date": "2026-10-02",
+   "slug": "shadcn-admin",
+   "finished": "2026-10-02 01:10",
+   "at": "01:10",
+   "result": "manual"
+  },
+  {
+   "date": "2026-10-05",
+   "slug": "pdfcn",
+   "finished": "2026-10-04 22:14",
+   "at": "22:14",
+   "result": "done"
+  },
+  {
+   "date": "2026-10-06",
+   "slug": "slideblocks",
+   "finished": "2026-10-05 22:30",
+   "at": "22:30",
+   "result": "done"
+  },
+  {
+   "date": "2026-10-07",
+   "slug": "tanstack-charts",
+   "finished": null,
+   "at": "22:20",
+   "result": "stopped"
+  },
+  {
+   "date": "2026-10-08",
+   "slug": "answer-me-with-html",
+   "finished": "2026-10-08 01:16",
+   "at": "01:16",
+   "result": "manual"
+  },
+  {
+   "date": "2026-10-09",
+   "slug": "ascii-rest",
+   "finished": null,
+   "at": "00:25",
+   "result": "running"
+  }
+ ]
+}

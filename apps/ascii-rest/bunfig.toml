@@ -1,0 +1,6 @@
+[install]
+minimumReleaseAge = 259200
+# Exception approved by Yishan on 2026-10-09 00:24 Asia/Shanghai for this demo only:
+# ascii.rest 0.2.1 was published 2026-10-08 14:16 UTC (< 3 days old). It is pinned to
+# exactly "0.2.1" in package.json. Every other package still needs the 3-day age.
+minimumReleaseAgeExcludes = ["ascii.rest"]
