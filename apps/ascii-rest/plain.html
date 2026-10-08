@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>plain html · ascii.rest × xbm</title>
+  <meta name="description" content="Animated ascii art with no framework and no build step: every picture on this page is one &lt;ascii-art&gt; tag.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Crect width=%2216%22 height=%2216%22 rx=%223%22 fill=%22%2315803d%22/%3E%3C/svg%3E" />
+  <script type="module">import "ascii.rest/element"</script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #fbfbf9;
+      --fg: #1c1c1a;
+      --muted: #6b6b64;
+      --border: #e2e2dc;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0c0c0b;
+        --fg: #e9e9e4;
+        --muted: #9a9a92;
+        --border: #2a2a27;
+      }
+    }
+
+    html.light {
+      color-scheme: light;
+      --bg: #fbfbf9;
+      --fg: #1c1c1a;
+      --muted: #6b6b64;
+      --border: #e2e2dc;
+    }
+
+    html.dark {
+      color-scheme: dark;
+      --bg: #0c0c0b;
+      --fg: #e9e9e4;
+      --muted: #9a9a92;
+      --border: #2a2a27;
+    }
+
+    :root:has(#dark:checked) {
+      color-scheme: dark;
+      --bg: #0c0c0b;
+      --fg: #e9e9e4;
+      --muted: #9a9a92;
+      --border: #2a2a27;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0 auto;
+      max-width: 960px;
+      padding: 16px;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .bar nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .bar a {
+      color: var(--fg);
+      text-decoration: none;
+    }
+
+    .bar a:hover { text-decoration: underline; }
+
+    .bar [aria-current="page"] { color: var(--muted); }
+
+    .dark-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: 1.4rem;
+    }
+
+    .lede {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.9em;
+      overflow-wrap: anywhere;
+    }
+
+    /* Each figure says how many columns its piece has (--cols); text pieces scale to fit the figure. */
+    figure { container-type: inline-size; }
+    ascii-art {
+      font-size: min(12px, calc(100cqw / (var(--cols, 64) * 0.61)));
+      color: inherit;
+      overflow: hidden;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    figure {
+      margin: 0;
+      min-width: 0;
+      overflow: hidden;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+    }
+
+    figcaption {
+      margin-top: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 12px;
+      color: var(--muted);
+      overflow-wrap: anywhere;
+    }
+
+    footer {
+      margin-top: 24px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    footer a { color: inherit; }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <nav>
+      <a href="./">gallery</a>
+      <a href="./fleet.html">fleet</a>
+      <a href="./plain.html" aria-current="page">plain html</a>
+    </nav>
+    <label class="dark-toggle"><input type="checkbox" id="dark"> dark</label>
+  </header>
+
+  <main>
+    <h1>plain html, one tag</h1>
+    <p class="lede">This page has no React and no build-time code of its own. Each picture below is one <code>&lt;ascii-art piece="…"&gt;</code> tag; the only script is the ascii.rest element module. The same tag works without a bundler with <code>&lt;script type="module" src="https://ascii.rest/ascii.js"&gt;</code>.</p>
+
+    <div class="grid">
+      <figure style="--cols: 40">
+        <ascii-art piece="donut" label="a lit torus turning on two axes, after donut.c"></ascii-art>
+        <figcaption>&lt;ascii-art piece="donut"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 200">
+        <ascii-art piece="night-coast" label="a lighthouse turning its beam under moonlit clouds over a dark sea"></ascii-art>
+        <figcaption>&lt;ascii-art piece="night-coast"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 64">
+        <ascii-art piece="rust" label="the r in its cog, in ferris orange"></ascii-art>
+        <figcaption>&lt;ascii-art piece="rust"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 64">
+        <ascii-art piece="rust" mono label="the rust logo drawn in one ink"></ascii-art>
+        <figcaption>&lt;ascii-art piece="rust" mono&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 66">
+        <ascii-art piece="spinners" label="twelve loading spinners side by side, each with its name"></ascii-art>
+        <figcaption>&lt;ascii-art piece="spinners"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 48">
+        <ascii-art piece="progress-bar" fps="12" label="five bar styles filling at uneven paces, percent at right"></ascii-art>
+        <figcaption>&lt;ascii-art piece="progress-bar" fps="12"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 44">
+        <ascii-art piece="typewriter" label="phrases typed and deleted in turn behind a blinking cursor" options='{"prefix":"xbm ","phrases":["nightly demo 13.","one tag.","no build step."]}'></ascii-art>
+        <figcaption>&lt;ascii-art piece="typewriter" options='{"prefix":"xbm ","phrases":["nightly demo 13.","one tag.","no build step."]}'&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 63">
+        <ascii-art piece="matrix-rain" label="streams of glyphs falling, heavy at the head, thin behind"></ascii-art>
+        <figcaption>&lt;ascii-art piece="matrix-rain"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 60">
+        <ascii-art piece="lorenz" label="one lorenz trajectory looping both wings, older loops fading"></ascii-art>
+        <figcaption>&lt;ascii-art piece="lorenz"&gt;</figcaption>
+      </figure>
+
+      <figure style="--cols: 61">
+        <ascii-art piece="split-flap" label="a departures board for the 2026-10-09 nightly pipeline" options='{"title":"nightly","start":"19:50","flights":[["19:55","pick","08","done"],["22:00","build","08","skipped"],["00:25","build","09","running"],["05:53","report","09","scheduled"]]}'></ascii-art>
+        <figcaption>&lt;ascii-art piece="split-flap" options='{"title":"nightly","start":"19:50","flights":[["19:55","pick","08","done"],["22:00","build","08","skipped"],["00:25","build","09","running"],["05:53","report","09","scheduled"]]}'&gt; · real schedule for 2026-10-09</figcaption>
+      </figure>
+
+      <figure style="--cols: 64">
+        <ascii-art piece="uptime-bar" label="example data: 60-day uptime bars simulated by the piece, labelled with the three routines" options='{"services":["pick 19:55","build 22:00","report 05:53"]}'></ascii-art>
+        <figcaption>&lt;ascii-art piece="uptime-bar" options='{"services":["pick 19:55","build 22:00","report 05:53"]}'&gt; · example data: bars are simulated by the piece</figcaption>
+      </figure>
+    </div>
+  </main>
+
+  <footer>
+    <p>pieces by ascii.rest 0.2.1 — MIT © @bas3line · <a href="https://ascii.rest">ascii.rest</a> · <a href="https://github.com/bas3line/ascii">github.com/bas3line/ascii</a></p>
+  </footer>
+</body>
+</html>

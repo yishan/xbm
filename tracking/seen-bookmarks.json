@@ -149,6 +149,19 @@
       "folder": "unfiled",
       "why": "MIT agent output format with an STE100 mode that matches the running STE trial; pages explain xbm itself (nightly pipeline, Vercel-vs-Worker rule, gallery timeline); approved by Yishan 2026-10-08 00:23, manual start after the 22:17 skip",
       "built": "2026-10-08"
+    },
+    {
+      "id": "2107800389395636271",
+      "title": "ascii.rest",
+      "url": "https://x.com/inlovewithgo/status/2107800389395636271",
+      "date": "2026-10-07",
+      "tech": "ascii.rest 0.2.1 (animated ascii art pieces: React component ascii.rest/react, <ascii-art> web component; 208 pieces) — pinned, release-age exception for this package only",
+      "site": "https://ascii.rest",
+      "repo": "https://github.com/bas3line/ascii",
+      "slug": "ascii-rest",
+      "folder": "unfiled",
+      "why": "MIT TypeScript library of plain monospace motion that matches Yishan's short plain-text style; gallery of all pieces plus an agent-fleet status page built from pieces with real data (git log, nightly runs); approved by Yishan 2026-10-09 00:07, manual start 00:24",
+      "built": "2026-10-09"
     }
   ],
   "skipped": []
