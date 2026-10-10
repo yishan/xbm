@@ -69,10 +69,10 @@ export function SwipeToDeleteDemo() {
                     className={`h-9 w-9 shrink-0 rounded-full bg-gradient-to-br ${row.gradient}`}
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-zinc-900">{row.title}</p>
-                    <p className="text-xs text-zinc-500">{row.subtitle}</p>
+                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{row.title}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{row.subtitle}</p>
                   </div>
-                  <span className="text-xs tabular-nums text-zinc-400">{row.time}</span>
+                  <span className="text-xs tabular-nums text-zinc-400 dark:text-zinc-500">{row.time}</span>
                 </div>
               </SwipeToDelete>
             </motion.div>
@@ -84,7 +84,7 @@ export function SwipeToDeleteDemo() {
         <button
           type="button"
           onClick={reset}
-          className="self-center text-xs font-medium text-zinc-600 underline-offset-2 hover:underline"
+          className="self-center text-xs font-medium text-zinc-600 dark:text-zinc-400 underline-offset-2 hover:underline"
         >
           Reset
         </button>

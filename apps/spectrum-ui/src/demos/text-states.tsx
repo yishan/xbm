@@ -37,7 +37,7 @@ export function TextStatesDemo() {
     <div className="flex flex-col items-center gap-4">
       <div
         data-testid="text-states"
-        className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 shadow-sm"
+        className="flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 shadow-sm"
       >
         <motion.span
           className="h-2 w-2 shrink-0 rounded-full"
@@ -49,7 +49,7 @@ export function TextStatesDemo() {
         <TextStates
           text={status.label}
           icon={<Icon className="h-4 w-4" aria-hidden />}
-          className="text-sm font-medium text-zinc-900"
+          className="text-sm font-medium text-zinc-900 dark:text-zinc-100"
         />
       </div>
 
@@ -58,7 +58,7 @@ export function TextStatesDemo() {
           type="button"
           onClick={() => setAuto(true)}
           className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
-            auto ? "bg-zinc-900 text-white" : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+            auto ? "bg-zinc-900 dark:bg-zinc-700 text-white" : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
           }`}
         >
           Auto
@@ -73,8 +73,8 @@ export function TextStatesDemo() {
             }}
             className={`rounded-full px-2.5 py-1 text-xs font-medium transition-colors ${
               !auto && idx === index
-                ? "bg-zinc-900 text-white"
-                : "bg-zinc-100 text-zinc-600 hover:bg-zinc-200"
+                ? "bg-zinc-900 dark:bg-zinc-700 text-white"
+                : "bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
             }`}
           >
             {state.label}

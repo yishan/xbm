@@ -73,11 +73,11 @@ export function AgentStatus({ auto = true, className }: AgentStatusProps) {
   const Icon = status.Icon
 
   return (
-    <div className={cn("flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 shadow-sm", className)}>
+    <div className={cn("flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 shadow-sm", className)}>
       <TextStates
         text={status.label}
         icon={<Icon className="h-4 w-4" aria-hidden />}
-        className="text-sm font-medium text-zinc-900"
+        className="text-sm font-medium text-zinc-900 dark:text-zinc-100"
       />
     </div>
   )

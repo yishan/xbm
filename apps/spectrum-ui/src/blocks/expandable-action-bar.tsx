@@ -63,7 +63,7 @@ export function ExpandableActionBar({
         }
       }}
       className={cn(
-        "flex w-fit items-center gap-1 rounded-full border border-zinc-200 bg-white p-1 shadow-sm",
+        "flex w-fit items-center gap-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-1 shadow-sm",
         className
       )}
     >
@@ -81,14 +81,14 @@ export function ExpandableActionBar({
             onFocus={() => setActive(item.id)}
             onClick={() => handleActionClick(item)}
             className={cn(
-              "relative flex h-9 items-center rounded-full px-2.5 text-sm font-medium text-zinc-600 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300",
-              isActive ? "text-zinc-900" : "hover:text-zinc-700"
+              "relative flex h-9 items-center rounded-full px-2.5 text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-700",
+              isActive ? "text-zinc-900 dark:text-zinc-100" : "hover:text-zinc-700 dark:hover:text-zinc-300"
             )}
           >
             {isActive && (
               <motion.span
                 layoutId={reducedMotion ? undefined : "action-bar-highlight"}
-                className="absolute inset-0 rounded-full bg-zinc-100"
+                className="absolute inset-0 rounded-full bg-zinc-100 dark:bg-zinc-800"
                 transition={{ type: "spring", stiffness: 400, damping: 32 }}
                 aria-hidden
               />

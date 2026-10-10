@@ -52,7 +52,7 @@ export function ToastStackDemo() {
           type="button"
           data-testid="toast-push"
           onClick={runAgent}
-          className="rounded-md bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-zinc-700"
+          className="rounded-md bg-zinc-900 dark:bg-zinc-700 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-zinc-700"
         >
           Run agent task
         </button>
@@ -60,7 +60,7 @@ export function ToastStackDemo() {
           type="button"
           data-testid="toast-fail"
           onClick={runFail}
-          className="rounded-md bg-rose-100 px-3 py-1.5 text-xs font-medium text-rose-700 transition-colors hover:bg-rose-200"
+          className="rounded-md bg-rose-100 dark:bg-rose-900/40 px-3 py-1.5 text-xs font-medium text-rose-700 dark:text-rose-300 transition-colors hover:bg-rose-200 dark:hover:bg-rose-900/60"
         >
           Fail
         </button>

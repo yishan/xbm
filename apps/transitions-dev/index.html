@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>transitions.dev gallery — xbm demo</title>
     <meta name="description" content="Interactive gallery of essential UI transitions, re-implemented from scratch and inspired by transitions.dev." />
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Follow the system light/dark setting (shadcn's .dark class).
+      ;(() => {
+        const m = matchMedia("(prefers-color-scheme: dark)")
+        const apply = () => document.documentElement.classList.toggle("dark", m.matches)
+        apply()
+        m.addEventListener("change", apply)
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

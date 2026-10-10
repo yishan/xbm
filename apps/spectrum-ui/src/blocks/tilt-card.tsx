@@ -103,7 +103,7 @@ export function TiltCard({
           transformStyle: "preserve-3d",
           willChange: "transform",
         }}
-        className="relative h-[170px] w-[260px] rounded-2xl border border-zinc-200 bg-white"
+        className="relative h-[170px] w-[260px] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900"
       >
         <div
           aria-hidden
@@ -122,8 +122,8 @@ export function TiltCard({
           <div className="flex items-center gap-3" style={{ transform: "translateZ(40px)" }}>
             <div className="h-10 w-10 rounded-full bg-gradient-to-br from-violet-500 to-sky-400" />
             <div>
-              <p className="text-sm font-semibold text-zinc-900">{title}</p>
-              <p className="text-xs text-zinc-500">{subtitle}</p>
+              <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100">{title}</p>
+              <p className="text-xs text-zinc-500 dark:text-zinc-400">{subtitle}</p>
             </div>
           </div>
 
@@ -131,10 +131,10 @@ export function TiltCard({
             <div style={{ transform: "translateZ(24px)" }}>{children}</div>
           ) : (
             <div className="flex gap-2" style={{ transform: "translateZ(24px)" }}>
-              <div className="rounded-md bg-zinc-100 px-2 py-1 text-[10px] font-medium text-zinc-600">
+              <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-600 dark:text-zinc-400">
                 3 tasks
               </div>
-              <div className="rounded-md bg-zinc-100 px-2 py-1 text-[10px] font-medium text-zinc-600">
+              <div className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-1 text-[10px] font-medium text-zinc-600 dark:text-zinc-400">
                 2h left
               </div>
             </div>

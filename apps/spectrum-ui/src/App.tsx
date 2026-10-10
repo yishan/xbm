@@ -23,7 +23,7 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
-      <div className="min-h-svh bg-zinc-50/70">
+      <div className="min-h-svh bg-zinc-50/70 dark:bg-zinc-950/70">
         <header className="mx-auto max-w-6xl px-5 pt-12 pb-8 sm:px-8">
           <div className="flex flex-wrap items-center gap-2">
             <Badge variant="outline" className="bg-background">

@@ -117,10 +117,10 @@ export function MorphButton({ onClick, labels, className }: MorphButtonProps) {
       data-testid="morph-button"
       className={cn(
         "relative inline-flex h-10 min-w-[128px] items-center justify-center gap-2 overflow-hidden rounded-full border px-4 text-sm font-medium shadow-sm transition-colors",
-        status === "idle" && "border-zinc-200 bg-white text-zinc-900 hover:bg-zinc-50",
-        status === "loading" && "border-zinc-200 bg-white text-zinc-600",
-        status === "success" && "border-emerald-200 bg-emerald-50 text-emerald-700",
-        status === "error" && "border-rose-200 bg-rose-50 text-rose-700",
+        status === "idle" && "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-50 dark:hover:bg-zinc-950",
+        status === "loading" && "border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-600 dark:text-zinc-400",
+        status === "success" && "border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300",
+        status === "error" && "border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300",
         className
       )}
     >

@@ -9,6 +9,16 @@
       content="Spectrum UI showcase — xbm demo. Animated components for agent UIs, rebuilt with React, Motion, and Tailwind."
     />
     <title>Spectrum UI showcase — xbm demo</title>
+    <meta name="color-scheme" content="light dark" />
+    <script>
+      // Follow the system light/dark setting (shadcn's .dark class).
+      ;(() => {
+        const m = matchMedia("(prefers-color-scheme: dark)")
+        const apply = () => document.documentElement.classList.toggle("dark", m.matches)
+        apply()
+        m.addEventListener("change", apply)
+      })()
+    </script>
   </head>
   <body>
     <div id="root"></div>

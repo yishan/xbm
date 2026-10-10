@@ -28,11 +28,11 @@ export function BeamSearch({ value, onChange, className }: BeamSearchProps) {
     <div className={cn("relative", className)}>
       <div
         className={cn(
-          "relative h-11 rounded-xl border border-zinc-200 bg-white shadow-sm transition-shadow",
-          focused && "ring-2 ring-sky-200"
+          "relative h-11 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm transition-shadow",
+          focused && "ring-2 ring-sky-200 dark:ring-sky-800"
         )}
       >
-        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400" />
+        <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-zinc-400 dark:text-zinc-500" />
         <input
           type="text"
           value={currentValue}
@@ -41,9 +41,9 @@ export function BeamSearch({ value, onChange, className }: BeamSearchProps) {
           onBlur={() => setFocused(false)}
           placeholder="Ask the agent anything…"
           data-testid="beam-search"
-          className="h-full w-full rounded-xl bg-transparent pl-9 pr-12 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
+          className="h-full w-full rounded-xl bg-transparent pl-9 pr-12 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none"
         />
-        <kbd className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded border border-zinc-200 bg-zinc-50 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500">
+        <kbd className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 rounded border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 px-1.5 py-0.5 text-[10px] font-medium text-zinc-500 dark:text-zinc-400">
           ⌘K
         </kbd>
       </div>

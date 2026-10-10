@@ -35,7 +35,7 @@ export function NotificationBell({ count, onClick, className }: NotificationBell
       aria-label={`Notifications${count > 0 ? `, ${count} unread` : ""}`}
       animate={swing ? { rotate: [0, -18, 14, -10, 6, 0] } : { rotate: 0 }}
       transition={swing ? { duration: 0.7, ease: "easeInOut" } : { duration: 0.2 }}
-      className={`relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-700 shadow-sm hover:bg-zinc-50 ${className ?? ""}`}
+      className={`relative inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-zinc-700 dark:text-zinc-300 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-950 ${className ?? ""}`}
     >
       <Bell className="h-5 w-5" />
 

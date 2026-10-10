@@ -105,7 +105,7 @@ export function TransitionCard({ def, index, globalTrigger }: { def: TransitionD
                 </button>
               ))}
             </div>
-            <pre className="max-h-64 overflow-auto rounded-lg bg-zinc-950 p-3 font-mono text-[11px] leading-relaxed text-zinc-200">
+            <pre className="max-h-64 overflow-auto rounded-lg bg-zinc-950 dark:bg-zinc-800 p-3 font-mono text-[11px] leading-relaxed text-zinc-200 dark:text-zinc-700">
               <code>{snippet}</code>
             </pre>
           </div>

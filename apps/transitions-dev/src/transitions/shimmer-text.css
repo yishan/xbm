@@ -15,6 +15,12 @@
   animation: t-shimmer 1.9s linear infinite;
 }
 
+/* dark theme: light highlight on a dimmer base */
+.dark .t-shimmer {
+  --shimmer-base: #71717a;
+  --shimmer-hi: #fafafa;
+}
+
 @keyframes t-shimmer {
   from { background-position: 100% 0; }
   to { background-position: 0% 0; }
@@ -39,6 +45,9 @@
     animation: none;
     background: none;
     color: var(--shimmer-base, #71717a);
+  }
+  .dark .t-shimmer {
+    --shimmer-base: #a1a1aa;
   }
   .t-shimmer-swap {
     animation: none;

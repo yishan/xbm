@@ -22,11 +22,11 @@ export function MorphButtonDemo() {
         onClick={() => setFail((f) => !f)}
         data-testid="morph-fail"
         aria-pressed={fail}
-        className="inline-flex items-center gap-2 text-xs font-medium text-zinc-500 hover:text-zinc-700"
+        className="inline-flex items-center gap-2 text-xs font-medium text-zinc-500 dark:text-zinc-400 hover:text-zinc-700 dark:hover:text-zinc-300"
       >
         <span
           className={`h-3 w-3 rounded-full border transition-colors ${
-            fail ? "border-rose-500 bg-rose-500" : "border-zinc-300 bg-white"
+            fail ? "border-rose-500 bg-rose-500" : "border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900"
           }`}
         />
         Simulate failure

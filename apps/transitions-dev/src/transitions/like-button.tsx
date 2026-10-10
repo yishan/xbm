@@ -29,7 +29,7 @@ export function LikeButton({ trigger }: DemoProps) {
       aria-pressed={liked}
       className={cn(
         "flex items-center gap-2 rounded-full border bg-card py-2 pr-4 pl-3 text-sm font-medium shadow-sm transition-colors hover:bg-muted",
-        liked && "border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100",
+        liked && "border-rose-200 dark:border-rose-800 bg-rose-50 dark:bg-rose-950/40 text-rose-600 hover:bg-rose-100 dark:hover:bg-rose-900/40",
       )}
     >
       <span className="t-like size-5 text-rose-500" data-liked={liked}>
