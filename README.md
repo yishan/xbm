@@ -1,6 +1,6 @@
 # xbm
 
-Sticky monorepo for weekday X-bookmark tech demos.
+Sticky monorepo for tech demos picked from X bookmarks and GitHub stars.
 
 - One app per pick under `apps/<slug>/`
 - Plans from `skills/project-planning/`
