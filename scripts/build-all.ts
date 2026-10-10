@@ -6,6 +6,8 @@
  *   dist/demos.json        the same list as JSON, for yishan.li's "随手试验" section (fetched at its build time)
  *   dist/<slug>/           apps/<slug>/dist (each app sets vite `base: "/<slug>/"`)
  *   dist/_thumbs/<slug>.png  copied from apps/<slug>/artifacts/screenshot.png (if present)
+ *   dist/_thumbs/<slug>-dark.png  copied from apps/<slug>/artifacts/screenshot-dark.png (if present)
+ *   (both screenshots come from scripts/shoot.ts; the index and yishan.li pick one by color scheme)
  *
  * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← Experiments" pill
  * linking back to the index (injectHomeLink) — apps should not add their own.
@@ -22,7 +24,7 @@ const APPS = join(ROOT, "apps")
 const OUT = join(ROOT, "dist")
 const SITE = "https://li.yishan.app"
 
-type Demo = { slug: string; name: string; description: string; thumb: string | null; date: string | null }
+type Demo = { slug: string; name: string; description: string; thumb: string | null; thumbDark: string | null; date: string | null }
 
 function run(cmd: string[], cwd: string): boolean {
   console.log(`[build-all] (${cwd.replace(ROOT + "/", "")}) $ ${cmd.join(" ")}`)
@@ -91,6 +93,7 @@ function demosJson(demos: Demo[]): string {
         title: d.name,
         desc: d.description,
         thumb: d.thumb ? `${SITE}${d.thumb}` : null,
+        thumbDark: d.thumbDark ? `${SITE}${d.thumbDark}` : null,
         date: d.date,
         url: `${SITE}/${d.slug}/`,
       })),
@@ -162,9 +165,12 @@ function injectHomeLink(slug: string): number {
 function indexHtml(demos: Demo[]): string {
   const cards = demos
     .map((d) => {
-      const thumb = d.thumb
+      const img = d.thumb
         ? `<img src="${esc(d.thumb)}" alt="${esc(d.name)} screenshot" loading="lazy" decoding="async">`
         : `<div class="ph">${esc(d.slug)}</div>`
+      const thumb = d.thumb && d.thumbDark
+        ? `<picture><source srcset="${esc(d.thumbDark)}" media="(prefers-color-scheme: dark)">${img}</picture>`
+        : img
       return `      <li>
         <a class="card" href="/${esc(d.slug)}/">
           <div class="thumb">${thumb}</div>
@@ -187,7 +193,10 @@ function indexHtml(demos: Demo[]): string {
 <link rel="canonical" href="${SITE}/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181b'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' fill='%23fafafa' text-anchor='middle'%3Exbm%3C/text%3E%3C/svg%3E">
 <style>
-  :root { color-scheme: dark; --bg:#09090b; --card:#111113; --line:#27272a; --fg:#fafafa; --mute:#a1a1aa; --dim:#71717a; }
+  :root { color-scheme: light dark; --bg:#fafafa; --card:#ffffff; --line:#e4e4e7; --line-hover:#a1a1aa; --ph:#f4f4f5; --fg:#18181b; --mute:#52525b; --dim:#71717a; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#09090b; --card:#111113; --line:#27272a; --line-hover:#52525b; --ph:#18181b; --fg:#fafafa; --mute:#a1a1aa; --dim:#71717a; }
+  }
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; -webkit-font-smoothing:antialiased; }
   main { max-width:1120px; margin:0 auto; padding:64px 24px 80px; }
@@ -199,8 +208,9 @@ function indexHtml(demos: Demo[]): string {
   header .zh { color:var(--dim); font-size:14px; margin-top:2px; }
   ul { list-style:none; margin:40px 0 0; padding:0; display:grid; gap:20px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
   .card { display:flex; flex-direction:column; height:100%; color:inherit; text-decoration:none; background:var(--card); border:1px solid var(--line); border-radius:14px; overflow:hidden; transition:border-color .15s, transform .15s; }
-  .card:hover, .card:focus-visible { border-color:#52525b; transform:translateY(-2px); outline:none; }
-  .thumb { aspect-ratio:16/10; background:#18181b; border-bottom:1px solid var(--line); overflow:hidden; }
+  .card:hover, .card:focus-visible { border-color:var(--line-hover); transform:translateY(-2px); outline:none; }
+  .thumb { aspect-ratio:16/10; background:var(--ph); border-bottom:1px solid var(--line); overflow:hidden; }
+  .thumb picture { display:contents; }
   .thumb img { width:100%; height:100%; object-fit:cover; object-position:top; display:block; }
   .ph { height:100%; display:grid; place-items:center; color:var(--dim); font-family:ui-monospace, SFMono-Regular, Menlo, monospace; }
   .body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
@@ -257,9 +267,15 @@ function main() {
       cpSync(shot, join(OUT, "_thumbs", `${slug}.png`))
       thumb = `/_thumbs/${slug}.png`
     }
+    const shotDark = join(dir, "artifacts", "screenshot-dark.png")
+    let thumbDark: string | null = null
+    if (existsSync(shotDark)) {
+      cpSync(shotDark, join(OUT, "_thumbs", `${slug}-dark.png`))
+      thumbDark = `/_thumbs/${slug}-dark.png`
+    }
     const date = dates.get(slug) ?? null
     if (!date) console.warn(`[build-all] ${slug}: no "built" date in tracking/seen-bookmarks.json — listed last, hidden on yishan.li`)
-    demos.push({ slug, ...readMeta(dir, slug), thumb, date })
+    demos.push({ slug, ...readMeta(dir, slug), thumb, thumbDark, date })
   }
 
   demos.sort(byDateDesc)

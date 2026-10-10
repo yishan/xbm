@@ -17,7 +17,9 @@ type CategoryFilter = "all" | TemplateCategory
 export default function App() {
   const [activeId, setActiveId] = useState<string>(() => SAMPLES[0]?.id ?? "")
   const [activeCategory, setActiveCategory] = useState<CategoryFilter>("all")
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(
+    () => window.matchMedia("(prefers-color-scheme: dark)").matches,
+  )
 
   useEffect(() => {
     const root = document.documentElement
@@ -82,7 +84,7 @@ export default function App() {
             </section>
 
             {activeSample ? (
-              <PreviewPane sample={activeSample} />
+              <PreviewPane sample={activeSample} dark={dark} />
             ) : (
               <div className="flex flex-1 items-center justify-center rounded-xl border border-dashed border-border text-sm text-muted-foreground">
                 No templates in this category yet.

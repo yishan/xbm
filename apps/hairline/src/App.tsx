@@ -89,7 +89,7 @@ function Collaboration({ flow, dispatch, intensity, theme }: { flow: Flow; dispa
 }
 
 export default function App() {
-  const [theme, setTheme] = useState<Theme>('light')
+  const [theme, setTheme] = useState<Theme>('auto')
   const [intensity, setIntensity] = useState(.5)
   const [view, setView] = useState<'gallery'|'flow'>('gallery')
   const [category, setCategory] = useState<Category|'all'>('all')

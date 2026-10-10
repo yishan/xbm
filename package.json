@@ -1,0 +1,12 @@
+{
+  "name": "xbm",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "bash scripts/build-all.sh",
+    "shoot": "bun scripts/shoot.ts"
+  },
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
+}

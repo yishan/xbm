@@ -6,10 +6,11 @@ import { cn } from '@/lib/utils'
 
 type InfographicCanvasProps = {
   syntax: string
+  dark?: boolean
   className?: string
 }
 
-export function InfographicCanvas({ syntax, className }: InfographicCanvasProps) {
+export function InfographicCanvas({ syntax, dark = false, className }: InfographicCanvasProps) {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const instanceRef = useRef<InstanceType<typeof Infographic> | null>(null)
   const [error, setError] = useState<string | null>(null)
@@ -36,6 +37,7 @@ export function InfographicCanvas({ syntax, className }: InfographicCanvasProps)
       width: '100%',
       height: '100%',
       editable: false,
+      theme: dark ? 'dark' : 'light',
     })
 
     try {
@@ -58,7 +60,7 @@ export function InfographicCanvas({ syntax, className }: InfographicCanvasProps)
       }
       container.replaceChildren()
     }
-  }, [syntax])
+  }, [syntax, dark])
 
   return (
     <div
