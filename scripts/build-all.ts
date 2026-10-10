@@ -6,12 +6,15 @@
  *   dist/<slug>/           apps/<slug>/dist (each app sets vite `base: "/<slug>/"`)
  *   dist/_thumbs/<slug>.png  copied from apps/<slug>/artifacts/screenshot.png (if present)
  *
+ * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← xbm demos" pill
+ * linking back to the index (injectHomeLink) — apps should not add their own.
+ *
  * Used by the root vercel.json (via scripts/build-all.sh). Run locally with:
  *   bash scripts/build-all.sh            # all apps
  *   bash scripts/build-all.sh obsidian-ui  # only some apps (index still lists built ones)
  */
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs"
-import { join, resolve } from "node:path"
+import { join, relative, resolve } from "node:path"
 
 const ROOT = resolve(import.meta.dir, "..")
 const APPS = join(ROOT, "apps")
@@ -86,6 +89,41 @@ function buildApp(slug: string): boolean {
   return true
 }
 
+/**
+ * Self-contained "← xbm demos" pill injected before </body> of every built demo page.
+ * target="_top" so it also leaves the app when a page is shown in an iframe (answer-me-with-html).
+ * `all:initial` shields it from app CSS (Tailwind preflight, global `a` styles, …).
+ */
+const HOME_LINK_ID = "xbm-home-link"
+const HOME_LINK_SNIPPET = `<style id="${HOME_LINK_ID}-style">#${HOME_LINK_ID}{all:initial;position:fixed;z-index:2147483000;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));display:inline-block;box-sizing:border-box;padding:3px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(24,24,27,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 1px 3px rgba(0,0,0,.25);color:#e4e4e7;font:500 11px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer;opacity:.78;transition:opacity .15s}#${HOME_LINK_ID}:hover,#${HOME_LINK_ID}:focus-visible{opacity:1;color:#fafafa;background:rgba(24,24,27,.9)}#${HOME_LINK_ID}:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}@media print{#${HOME_LINK_ID}{display:none!important}}</style><a id="${HOME_LINK_ID}" href="${SITE}/" target="_top" title="All xbm demos · li.yishan.app">← xbm demos</a>`
+
+function htmlFiles(dir: string): string[] {
+  const out: string[] = []
+  for (const name of readdirSync(dir)) {
+    const p = join(dir, name)
+    if (statSync(p).isDirectory()) out.push(...htmlFiles(p))
+    else if (/\.html?$/i.test(name)) out.push(p)
+  }
+  return out
+}
+
+/** Inject HOME_LINK_SNIPPET into every HTML file under dist/<slug>/ (idempotent; skips files without </body>). */
+function injectHomeLink(slug: string): number {
+  let n = 0
+  for (const file of htmlFiles(join(OUT, slug))) {
+    const html = readFileSync(file, "utf8")
+    if (html.includes(`id="${HOME_LINK_ID}"`)) continue
+    const i = html.toLowerCase().lastIndexOf("</body>")
+    if (i < 0) {
+      console.log(`[build-all] ${slug}: no </body>, skipped home link in ${relative(OUT, file)}`)
+      continue
+    }
+    writeFileSync(file, html.slice(0, i) + HOME_LINK_SNIPPET + "\n" + html.slice(i))
+    n++
+  }
+  return n
+}
+
 function indexHtml(demos: Demo[]): string {
   const cards = demos
     .map((d) => {
@@ -118,7 +156,10 @@ function indexHtml(demos: Demo[]): string {
   * { box-sizing: border-box; }
   body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; -webkit-font-smoothing:antialiased; }
   main { max-width:1120px; margin:0 auto; padding:64px 24px 80px; }
+  header .top { display:flex; align-items:baseline; justify-content:space-between; gap:16px; flex-wrap:wrap; }
   header h1 { margin:0; font-size:32px; letter-spacing:-0.02em; font-weight:650; }
+  header .by { color:var(--dim); font:13px ui-monospace, SFMono-Regular, Menlo, monospace; text-decoration:none; }
+  header .by:hover, header .by:focus-visible { color:var(--mute); text-decoration:underline; text-underline-offset:3px; }
   header p { margin:8px 0 0; color:var(--mute); }
   header .zh { color:var(--dim); font-size:14px; margin-top:2px; }
   ul { list-style:none; margin:40px 0 0; padding:0; display:grid; gap:20px; grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
@@ -139,14 +180,17 @@ function indexHtml(demos: Demo[]): string {
 <body>
 <main>
   <header>
-    <h1>xbm demos</h1>
+    <div class="top">
+      <h1>xbm demos</h1>
+      <a class="by" href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a>
+    </div>
     <p>Weekday tech demos rebuilt from X bookmarks — one path per demo.</p>
     <p class="zh">来自 X 书签的技术 demo 合集，每个 demo 一个路径。</p>
   </header>
   <ul>
 ${cards}
   </ul>
-  <footer>${demos.length} demos · source: <a href="https://github.com/yishan/xbm">github.com/yishan/xbm</a></footer>
+  <footer>${demos.length} demos · source: <a href="https://github.com/yishan/xbm">github.com/yishan/xbm</a> · by <a href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a></footer>
 </main>
 </body>
 </html>
@@ -169,6 +213,8 @@ function main() {
   for (const slug of slugs) {
     console.log(`\n[build-all] ===== ${slug} =====`)
     if (!buildApp(slug)) { failed.push(slug); continue }
+    const injected = injectHomeLink(slug)
+    console.log(`[build-all] ${slug}: injected home link into ${injected} html file(s)`)
     const dir = join(APPS, slug)
     const shot = join(dir, "artifacts", "screenshot.png")
     let thumb: string | null = null
