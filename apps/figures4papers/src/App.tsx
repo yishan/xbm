@@ -184,7 +184,7 @@ export default function App() {
               <CardContent>
                 <div
                   ref={figureRef}
-                  className="h-[520px] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm"
+                  className="h-[520px] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm dark:border-neutral-700"
                 >
                   <FigureChart figure={figure} kind={kind} rows={rows} />
                 </div>
