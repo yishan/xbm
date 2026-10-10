@@ -1,2 +1,3 @@
 # Root deploy build output (scripts/build-all.sh)
 /dist
+node_modules/

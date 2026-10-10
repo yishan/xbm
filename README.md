@@ -25,6 +25,7 @@ New `apps/<slug>/` directories are picked up automatically at `https://li.yishan
 
 ```bash
 bash scripts/build-all.sh     # -> dist/index.html + dist/demos.json + dist/<slug>/
+bun install && bun scripts/shoot.ts [slug…]  # -> apps/<slug>/artifacts/screenshot(-dark).png (light/dark index thumbnails)
 python3 -m http.server 4391 --directory dist   # then open http://localhost:4391/
 ```
 
