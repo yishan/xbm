@@ -8,6 +8,7 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 - `apps/<kebab-slug>/worker/` — optional Cloudflare Worker backend for that app (see **Backends** below)
 - `skills/project-planning/` — planning skill (read before coding)
 - `tracking/seen-bookmarks.json` — proposed/built bookmark ids (do not re-propose)
+- `.github/workflows/rebuild-yishan-li.yml` — after each successful Production deploy, calls yishan.li's Vercel deploy hook (secret `YISHAN_LI_DEPLOY_HOOK`) so its demo list refreshes. Do not edit per demo.
 - `vercel.json` + `scripts/` — **shared deploy setup** (one Vercel project `xbm`, custom domain `li.yishan.app`). `scripts/build-all.sh` builds every `apps/*/` with a `package.json` into `dist/<slug>/` and generates the index page `dist/index.html`. Do not edit per demo.
 
 ## Hard rules
@@ -21,7 +22,7 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 7. App must be runnable with `bun install && bun run dev` from `apps/<slug>/`.
 8. One Vercel project for all demos (path per app), not one project per app. Every app is served at `https://li.yishan.app/<slug>/` and picked up automatically by the root build — no deploy config per app.
 9. Every app's `vite.config.ts` must set `base: "/<slug>/"` (slug = directory name). Keep asset paths base-aware: no hard-coded root-absolute URLs like `"/logo.png"` or `fetch("/data.json")` in `src/` — import assets, or use `` `${import.meta.env.BASE_URL}logo.png` `` for files in `public/`. (Root-absolute paths in `index.html` are fine; Vite rewrites them.) Locally, `bun run dev` then serves at `http://localhost:5173/<slug>/`.
-10. The index page at `https://li.yishan.app/` uses the app README's first `# heading` as the name, the first paragraph after it as the description, and `artifacts/screenshot.png` as the thumbnail — keep those meaningful.
+10. The index page at `https://li.yishan.app/` uses the app README's first `# heading` as the name, the first paragraph after it as the description, `artifacts/screenshot.png` as the thumbnail, and the `built` date of the app's entry in `tracking/seen-bookmarks.json` for ordering (newest first) — keep those meaningful and always set `slug` + `built` on the tracking entry. The same list is published as `https://li.yishan.app/demos.json`, which yishan.li reads to show the latest demos (demos without a `built` date are hidden there).
 11. Don't add your own "back to index" link: `scripts/build-all.ts` injects a small fixed `← xbm demos` pill (`#xbm-home-link`, bottom-left) linking to `https://li.yishan.app/` before `</body>` of every built `dist/<slug>/**/*.html`. Keep the bottom-left ~120×30px corner free of essential controls.
 12. Before opening a PR, `bash scripts/build-all.sh` from the repo root must succeed (it fails the deploy if any app fails to build).
 

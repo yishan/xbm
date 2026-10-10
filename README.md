@@ -24,7 +24,7 @@ New `apps/<slug>/` directories are picked up automatically at `https://li.yishan
 ## Build everything (what Vercel runs)
 
 ```bash
-bash scripts/build-all.sh     # -> dist/index.html + dist/<slug>/
+bash scripts/build-all.sh     # -> dist/index.html + dist/demos.json + dist/<slug>/
 python3 -m http.server 4391 --directory dist   # then open http://localhost:4391/
 ```
 
