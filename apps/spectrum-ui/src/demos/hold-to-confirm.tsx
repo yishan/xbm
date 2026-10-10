@@ -7,7 +7,7 @@ export function HoldToConfirmDemo() {
   return (
     <div className="flex flex-col items-center justify-center gap-3 p-4">
       <HoldToConfirm onConfirm={() => setCount((c) => c + 1)} />
-      <p className="text-xs text-zinc-500">Confirmed {count} {count === 1 ? "time" : "times"}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">Confirmed {count} {count === 1 ? "time" : "times"}</p>
     </div>
   )
 }

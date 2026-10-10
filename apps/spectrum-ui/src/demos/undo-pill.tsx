@@ -32,11 +32,11 @@ export function UndoPillDemo() {
         {archived ? (
           showPill ? null : (
             <div className="flex items-center gap-3">
-              <span className="text-zinc-400">Archived</span>
+              <span className="text-zinc-400 dark:text-zinc-500">Archived</span>
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs font-medium text-sky-600 hover:text-sky-700"
+                className="text-xs font-medium text-sky-600 hover:text-sky-700 dark:hover:text-sky-300"
               >
                 Reset
               </button>
@@ -44,12 +44,12 @@ export function UndoPillDemo() {
           )
         ) : (
           <div className="flex items-center gap-3">
-            <span className="text-zinc-700">Weekly report from Nova</span>
+            <span className="text-zinc-700 dark:text-zinc-300">Weekly report from Nova</span>
             <button
               type="button"
               data-testid="undo-archive"
               onClick={handleArchive}
-              className="rounded-md bg-zinc-100 px-2 py-1 text-xs font-medium text-zinc-600 hover:bg-zinc-200"
+              className="rounded-md bg-zinc-100 dark:bg-zinc-800 px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 dark:hover:bg-zinc-800"
             >
               Archive
             </button>

@@ -100,15 +100,15 @@ export function UndoPill({
           onMouseLeave={() => setPaused(false)}
           data-testid="undo-pill"
           className={cn(
-            "inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-3 py-1.5 shadow-sm",
+            "inline-flex items-center gap-2 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-3 py-1.5 shadow-sm",
             className
           )}
         >
-          <span className="text-sm text-zinc-700">{message}</span>
+          <span className="text-sm text-zinc-700 dark:text-zinc-300">{message}</span>
           <button
             type="button"
             onClick={handleUndo}
-            className="text-sm font-medium text-sky-600 hover:text-sky-700"
+            className="text-sm font-medium text-sky-600 hover:text-sky-700 dark:hover:text-sky-300"
           >
             Undo
           </button>
@@ -135,7 +135,7 @@ export function UndoPill({
                 className="text-sky-600"
               />
             </svg>
-            <span className="absolute text-[10px] font-medium text-zinc-600">
+            <span className="absolute text-[10px] font-medium text-zinc-600 dark:text-zinc-400">
               {Math.ceil(remaining)}
             </span>
           </span>

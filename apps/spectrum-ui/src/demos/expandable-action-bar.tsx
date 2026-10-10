@@ -9,7 +9,7 @@ export function ExpandableActionBarDemo() {
       <ExpandableActionBar
         onActionClick={(_, label) => setLastAction(label)}
       />
-      <p className="text-xs text-zinc-500">Last: {lastAction}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">Last: {lastAction}</p>
     </div>
   )
 }

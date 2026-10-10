@@ -15,7 +15,7 @@ export function BeamSearchDemo() {
             key={chip}
             type="button"
             onClick={() => setQuery(chip)}
-            className="whitespace-nowrap rounded-full border border-zinc-200 bg-white px-2 py-0.5 text-xs font-medium text-zinc-600 transition-colors hover:bg-zinc-50"
+            className="whitespace-nowrap rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-0.5 text-xs font-medium text-zinc-600 dark:text-zinc-400 transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-950"
           >
             {chip}
           </button>

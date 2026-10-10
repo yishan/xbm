@@ -106,12 +106,12 @@ export function HoldToConfirm({ onConfirm, className }: HoldToConfirmProps) {
       onKeyDown={handleKeyDown}
       onKeyUp={handleKeyUp}
       className={cn(
-        "relative flex items-center gap-2 overflow-hidden rounded-xl border border-rose-200 bg-white px-4 py-2 text-sm font-medium text-rose-600 shadow-sm transition-colors",
+        "relative flex items-center gap-2 overflow-hidden rounded-xl border border-rose-200 dark:border-rose-800 bg-white dark:bg-zinc-900 px-4 py-2 text-sm font-medium text-rose-600 shadow-sm transition-colors",
         className
       )}
     >
       <motion.div
-        className="absolute inset-0 origin-left bg-rose-50"
+        className="absolute inset-0 origin-left bg-rose-50 dark:bg-rose-950/40"
         style={{ scaleX: progress }}
       />
 

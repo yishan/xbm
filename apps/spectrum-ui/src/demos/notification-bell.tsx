@@ -30,7 +30,7 @@ export function NotificationBellDemo() {
           type="button"
           onClick={addAlert}
           data-testid="bell-add"
-          className="rounded-md border border-zinc-200 bg-white px-2 py-1 text-xs font-medium text-zinc-700 shadow-sm hover:bg-zinc-50"
+          className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-300 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-950"
         >
           New alert
         </button>
@@ -38,13 +38,13 @@ export function NotificationBellDemo() {
           type="button"
           onClick={clear}
           data-testid="bell-clear"
-          className="rounded-md border border-zinc-200 bg-white px-2 py-1 text-xs font-medium text-zinc-700 shadow-sm hover:bg-zinc-50"
+          className="rounded-md border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 px-2 py-1 text-xs font-medium text-zinc-700 dark:text-zinc-300 shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-950"
         >
           Mark read
         </button>
       </div>
 
-      <p className="text-xs text-zinc-500">{MESSAGES[messageIndex]}</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">{MESSAGES[messageIndex]}</p>
     </div>
   )
 }

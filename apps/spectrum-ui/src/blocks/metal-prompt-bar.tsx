@@ -69,7 +69,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
     "conic-gradient(from 0deg, #f5f5f5, #a1a1aa, #fafafa, #71717a, #f5f5f5)"
 
   return (
-    <div className={cn("w-[320px] rounded-2xl border border-zinc-200 bg-white p-3 shadow-sm", className)}>
+    <div className={cn("w-[320px] rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-3 shadow-sm", className)}>
       <form
         onSubmit={(e) => {
           e.preventDefault()
@@ -85,7 +85,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
             placeholder="Describe a task for your agent…"
             data-testid="metal-prompt"
             disabled={sent}
-            className="h-9 w-full rounded-lg bg-transparent px-2 text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
+            className="h-9 w-full rounded-lg bg-transparent px-2 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none"
           />
           <AnimatePresence>
             {sentText ? (
@@ -94,7 +94,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
                 animate={{ opacity: 0, y: -28 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
-                className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm text-zinc-900"
+                className="pointer-events-none absolute left-2 top-1/2 -translate-y-1/2 text-sm text-zinc-900 dark:text-zinc-100"
               >
                 {sentText}
               </motion.span>
@@ -120,7 +120,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
           />
           <span className="absolute inset-0 rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.65),transparent_65%)]" />
           <span className="relative z-10">
-            {sent ? <Check className="h-4 w-4 text-zinc-900" /> : <ArrowUp className="h-4 w-4 text-zinc-800" />}
+            {sent ? <Check className="h-4 w-4 text-zinc-900 dark:text-zinc-100" /> : <ArrowUp className="h-4 w-4 text-zinc-800 dark:text-zinc-200" />}
           </span>
         </button>
       </form>
@@ -135,8 +135,8 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
               type="button"
               onClick={() => toggleChip(chip.label)}
               className={cn(
-                "relative flex items-center gap-1.5 overflow-hidden rounded-full border border-zinc-200 px-3 py-1 text-xs font-medium transition-colors",
-                active ? "text-zinc-900" : "text-zinc-500 hover:text-zinc-800"
+                "relative flex items-center gap-1.5 overflow-hidden rounded-full border border-zinc-200 dark:border-zinc-800 px-3 py-1 text-xs font-medium transition-colors",
+                active ? "text-zinc-900 dark:text-zinc-100" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800 dark:hover:text-zinc-200"
               )}
             >
               {active && !reducedMotion ? (
@@ -145,7 +145,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
                   style={{ background: chipSheen }}
                 />
               ) : active ? (
-                <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-zinc-100 via-zinc-200 to-zinc-100" />
+                <span className="pointer-events-none absolute inset-0 rounded-full bg-gradient-to-r from-zinc-100 dark:from-zinc-800 via-zinc-200 dark:via-zinc-800 to-zinc-100 dark:to-zinc-800" />
               ) : null}
               <Icon className="relative z-10 h-3.5 w-3.5" />
               <span className="relative z-10">{chip.label}</span>

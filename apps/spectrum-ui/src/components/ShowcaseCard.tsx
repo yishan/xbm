@@ -37,7 +37,7 @@ export function ShowcaseCard({ def, index }: { def: BlockDef; index: number }) {
   return (
     <Card className="gap-0 py-0" data-testid={`card-${def.id}`}>
       <div className="relative flex h-64 items-center justify-center overflow-hidden border-b bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.06)_1px,transparent_1px)] [background-size:16px_16px]">
-        <span className="absolute top-3 right-3 font-mono text-[10px] text-zinc-400">
+        <span className="absolute top-3 right-3 font-mono text-[10px] text-zinc-400 dark:text-zinc-500">
           {String(index + 1).padStart(2, "0")}
         </span>
 
@@ -113,7 +113,7 @@ export function ShowcaseCard({ def, index }: { def: BlockDef; index: number }) {
                 <p className="mb-2 pt-1 font-mono text-[11px] text-muted-foreground">
                   src/blocks/{def.file}
                 </p>
-                <pre className="max-h-72 overflow-auto rounded-lg bg-zinc-950 p-3 font-mono text-[11px] leading-relaxed text-zinc-200">
+                <pre className="max-h-72 overflow-auto rounded-lg bg-zinc-950 dark:bg-zinc-800 p-3 font-mono text-[11px] leading-relaxed text-zinc-200 dark:text-zinc-700">
                   <code>{def.source}</code>
                 </pre>
               </div>

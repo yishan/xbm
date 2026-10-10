@@ -43,7 +43,7 @@ export function SwipeToDelete({ children, onDelete, className }: SwipeToDeletePr
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-xl border border-zinc-200 bg-white",
+        "relative overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900",
         className
       )}
     >
@@ -106,7 +106,7 @@ export function SwipeToDelete({ children, onDelete, className }: SwipeToDeletePr
         tabIndex={0}
         role="button"
         aria-label="Delete row"
-        className="relative z-10 flex w-full items-center bg-white p-3"
+        className="relative z-10 flex w-full items-center bg-white dark:bg-zinc-900 p-3"
       >
         {children}
       </motion.div>

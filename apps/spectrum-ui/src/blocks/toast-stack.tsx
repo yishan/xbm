@@ -148,7 +148,7 @@ export function ToastStack({ toasts, onDismiss, className }: ToastStackProps) {
                   onDismiss(toast.id)
                 }
               }}
-              className="absolute bottom-0 left-0 right-0 mx-auto overflow-hidden rounded-xl border border-zinc-200 bg-white shadow-sm"
+              className="absolute bottom-0 left-0 right-0 mx-auto overflow-hidden rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 shadow-sm"
               style={{ width: TOAST_WIDTH, height: TOAST_HEIGHT, zIndex }}
             >
               <div
@@ -177,7 +177,7 @@ export function ToastStack({ toasts, onDismiss, className }: ToastStackProps) {
                       ) : toast.status === "error" ? (
                         <X className="h-3.5 w-3.5 text-rose-500" />
                       ) : (
-                        <Info className="h-3.5 w-3.5 text-zinc-500" />
+                        <Info className="h-3.5 w-3.5 text-zinc-500 dark:text-zinc-400" />
                       )}
                     </motion.span>
                   </AnimatePresence>
@@ -185,11 +185,11 @@ export function ToastStack({ toasts, onDismiss, className }: ToastStackProps) {
 
                 <div className="min-w-0 flex-1">
                   <div className="flex items-baseline gap-1.5">
-                    <p className="max-w-[65%] shrink-0 truncate text-xs font-semibold text-zinc-900">
+                    <p className="max-w-[65%] shrink-0 truncate text-xs font-semibold text-zinc-900 dark:text-zinc-100">
                       {toast.title}
                     </p>
                     {toast.description ? (
-                      <p className="min-w-0 truncate text-xs text-zinc-500">{toast.description}</p>
+                      <p className="min-w-0 truncate text-xs text-zinc-500 dark:text-zinc-400">{toast.description}</p>
                     ) : null}
                   </div>
                 </div>
@@ -199,7 +199,7 @@ export function ToastStack({ toasts, onDismiss, className }: ToastStackProps) {
                     <button
                       type="button"
                       onClick={toast.action.onClick}
-                      className="rounded bg-zinc-100 px-1.5 py-0.5 text-[10px] font-medium text-zinc-700 transition-colors hover:bg-zinc-200"
+                      className="rounded bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 text-[10px] font-medium text-zinc-700 dark:text-zinc-300 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-800"
                     >
                       {toast.action.label}
                     </button>
@@ -208,7 +208,7 @@ export function ToastStack({ toasts, onDismiss, className }: ToastStackProps) {
                     type="button"
                     aria-label="Dismiss toast"
                     onClick={() => onDismiss(toast.id)}
-                    className="rounded p-0.5 text-zinc-400 transition-colors hover:text-zinc-700"
+                    className="rounded p-0.5 text-zinc-400 dark:text-zinc-500 transition-colors hover:text-zinc-700 dark:hover:text-zinc-300"
                   >
                     <X className="h-3.5 w-3.5" />
                   </button>
