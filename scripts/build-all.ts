@@ -3,11 +3,11 @@
  * Build every demo under apps/<slug>/ and assemble one static site in ./dist:
  *
  *   dist/index.html        index page listing all demos (newest first)
- *   dist/demos.json        the same list as JSON, for yishan.li's "每日实验" section (fetched at its build time)
+ *   dist/demos.json        the same list as JSON, for yishan.li's "随手试验" section (fetched at its build time)
  *   dist/<slug>/           apps/<slug>/dist (each app sets vite `base: "/<slug>/"`)
  *   dist/_thumbs/<slug>.png  copied from apps/<slug>/artifacts/screenshot.png (if present)
  *
- * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← xbm demos" pill
+ * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← Experiments" pill
  * linking back to the index (injectHomeLink) — apps should not add their own.
  *
  * Used by the root vercel.json (via scripts/build-all.sh). Run locally with:
@@ -125,12 +125,12 @@ function buildApp(slug: string): boolean {
 }
 
 /**
- * Self-contained "← xbm demos" pill injected before </body> of every built demo page.
+ * Self-contained "← Experiments" pill injected before </body> of every built demo page.
  * target="_top" so it also leaves the app when a page is shown in an iframe (answer-me-with-html).
  * `all:initial` shields it from app CSS (Tailwind preflight, global `a` styles, …).
  */
 const HOME_LINK_ID = "xbm-home-link"
-const HOME_LINK_SNIPPET = `<style id="${HOME_LINK_ID}-style">#${HOME_LINK_ID}{all:initial;position:fixed;z-index:2147483000;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));display:inline-block;box-sizing:border-box;padding:3px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(24,24,27,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 1px 3px rgba(0,0,0,.25);color:#e4e4e7;font:500 11px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer;opacity:.78;transition:opacity .15s}#${HOME_LINK_ID}:hover,#${HOME_LINK_ID}:focus-visible{opacity:1;color:#fafafa;background:rgba(24,24,27,.9)}#${HOME_LINK_ID}:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}@media print{#${HOME_LINK_ID}{display:none!important}}</style><a id="${HOME_LINK_ID}" href="${SITE}/" target="_top" title="All xbm demos · li.yishan.app">← xbm demos</a>`
+const HOME_LINK_SNIPPET = `<style id="${HOME_LINK_ID}-style">#${HOME_LINK_ID}{all:initial;position:fixed;z-index:2147483000;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));display:inline-block;box-sizing:border-box;padding:3px 9px;border-radius:999px;border:1px solid rgba(255,255,255,.18);background:rgba(24,24,27,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 1px 3px rgba(0,0,0,.25);color:#e4e4e7;font:500 11px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer;opacity:.78;transition:opacity .15s}#${HOME_LINK_ID}:hover,#${HOME_LINK_ID}:focus-visible{opacity:1;color:#fafafa;background:rgba(24,24,27,.9)}#${HOME_LINK_ID}:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}@media print{#${HOME_LINK_ID}{display:none!important}}</style><a id="${HOME_LINK_ID}" href="${SITE}/" target="_top" title="All demos · li.yishan.app">← Experiments</a>`
 
 function htmlFiles(dir: string): string[] {
   const out: string[] = []
@@ -182,8 +182,8 @@ function indexHtml(demos: Demo[]): string {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>xbm demos</title>
-<meta name="description" content="xbm — weekday tech demos from X bookmarks. 每个 demo 一个路径。">
+<title>Experiments</title>
+<meta name="description" content="Experiments — 来自 X 书签和 GitHub 星标的技术 demo，每个 demo 一个路径。">
 <link rel="canonical" href="${SITE}/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181b'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' fill='%23fafafa' text-anchor='middle'%3Exbm%3C/text%3E%3C/svg%3E">
 <style>
@@ -216,11 +216,10 @@ function indexHtml(demos: Demo[]): string {
 <main>
   <header>
     <div class="top">
-      <h1>xbm demos</h1>
+      <h1>Experiments</h1>
       <a class="by" href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a>
     </div>
-    <p>Weekday tech demos rebuilt from X bookmarks — one path per demo.</p>
-    <p class="zh">来自 X 书签的技术 demo 合集，每个 demo 一个路径。</p>
+    <p>来自 X 书签和 GitHub 星标的技术 demo</p>
   </header>
   <ul>
 ${cards}
