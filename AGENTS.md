@@ -8,6 +8,7 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 - `apps/<kebab-slug>/worker/` — optional Cloudflare Worker backend for that app (see **Backends** below)
 - `skills/project-planning/` — planning skill (read before coding)
 - `tracking/seen-bookmarks.json` — proposed/built bookmark ids (do not re-propose)
+- `.github/workflows/rebuild-yishan-li.yml` — after each successful Production deploy, calls yishan.li's Vercel deploy hook (secret `YISHAN_LI_DEPLOY_HOOK`) so its demo list refreshes. Do not edit per demo.
 - `vercel.json` + `scripts/` — **shared deploy setup** (one Vercel project `xbm`, custom domain `li.yishan.app`). `scripts/build-all.sh` builds every `apps/*/` with a `package.json` into `dist/<slug>/` and generates the index page `dist/index.html`. Do not edit per demo.
 
 ## Hard rules
