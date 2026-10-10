@@ -2,7 +2,8 @@
 /**
  * Build every demo under apps/<slug>/ and assemble one static site in ./dist:
  *
- *   dist/index.html        index page listing all demos
+ *   dist/index.html        index page listing all demos (newest first)
+ *   dist/demos.json        the same list as JSON, for yishan.li's "随手试验" section (fetched at its build time)
  *   dist/<slug>/           apps/<slug>/dist (each app sets vite `base: "/<slug>/"`)
  *   dist/_thumbs/<slug>.png  copied from apps/<slug>/artifacts/screenshot.png (if present)
  *
@@ -21,7 +22,7 @@ const APPS = join(ROOT, "apps")
 const OUT = join(ROOT, "dist")
 const SITE = "https://li.yishan.app"
 
-type Demo = { slug: string; name: string; description: string; thumb: string | null }
+type Demo = { slug: string; name: string; description: string; thumb: string | null; date: string | null }
 
 function run(cmd: string[], cwd: string): boolean {
   console.log(`[build-all] (${cwd.replace(ROOT + "/", "")}) $ ${cmd.join(" ")}`)
@@ -63,6 +64,40 @@ function readMeta(dir: string, slug: string): { name: string; description: strin
   let description = stripMd(para.join(" "))
   if (description.length > 240) description = description.slice(0, 237).replace(/\s+\S*$/, "") + "…"
   return { name, description }
+}
+
+/** Build date per slug, from the `built` field the nightly appends to tracking/seen-bookmarks.json. */
+function readBuiltDates(): Map<string, string> {
+  const file = join(ROOT, "tracking", "seen-bookmarks.json")
+  const dates = new Map<string, string>()
+  if (!existsSync(file)) return dates
+  const { built = [] } = JSON.parse(readFileSync(file, "utf8")) as { built?: { slug?: string; built?: string }[] }
+  for (const b of built) if (b.slug && b.built) dates.set(b.slug, b.built)
+  return dates
+}
+
+/** Newest first; undated demos last, then by slug. */
+function byDateDesc(a: Demo, b: Demo): number {
+  return (b.date ?? "").localeCompare(a.date ?? "") || a.slug.localeCompare(b.slug)
+}
+
+function demosJson(demos: Demo[]): string {
+  return JSON.stringify(
+    {
+      site: `${SITE}/`,
+      count: demos.length,
+      demos: demos.map((d) => ({
+        slug: d.slug,
+        title: d.name,
+        desc: d.description,
+        thumb: d.thumb ? `${SITE}${d.thumb}` : null,
+        date: d.date,
+        url: `${SITE}/${d.slug}/`,
+      })),
+    },
+    null,
+    2,
+  ) + "\n"
 }
 
 function esc(s: string): string {
@@ -136,7 +171,7 @@ function indexHtml(demos: Demo[]): string {
           <div class="body">
             <h2>${esc(d.name)}</h2>
             <p>${esc(d.description || "—")}</p>
-            <span class="url">li.yishan.app/${esc(d.slug)}/</span>
+            <span class="url">${d.date ? `<time datetime="${esc(d.date)}">${esc(d.date)}</time> · ` : ""}li.yishan.app/${esc(d.slug)}/</span>
           </div>
         </a>
       </li>`
@@ -207,6 +242,7 @@ function main() {
   rmSync(OUT, { recursive: true, force: true })
   mkdirSync(join(OUT, "_thumbs"), { recursive: true })
 
+  const dates = readBuiltDates()
   const demos: Demo[] = []
   const failed: string[] = []
   for (const slug of slugs) {
@@ -221,11 +257,15 @@ function main() {
       cpSync(shot, join(OUT, "_thumbs", `${slug}.png`))
       thumb = `/_thumbs/${slug}.png`
     }
-    demos.push({ slug, ...readMeta(dir, slug), thumb })
+    const date = dates.get(slug) ?? null
+    if (!date) console.warn(`[build-all] ${slug}: no "built" date in tracking/seen-bookmarks.json — listed last, hidden on yishan.li`)
+    demos.push({ slug, ...readMeta(dir, slug), thumb, date })
   }
 
+  demos.sort(byDateDesc)
   writeFileSync(join(OUT, "index.html"), indexHtml(demos))
-  console.log(`\n[build-all] wrote dist/index.html with ${demos.length} demos: ${demos.map((d) => d.slug).join(", ")}`)
+  writeFileSync(join(OUT, "demos.json"), demosJson(demos))
+  console.log(`\n[build-all] wrote dist/index.html + dist/demos.json with ${demos.length} demos: ${demos.map((d) => d.slug).join(", ")}`)
   if (failed.length) {
     // Fail the deploy rather than silently shipping a site with missing demos.
     console.error(`[build-all] FAILED: ${failed.join(", ")}`)

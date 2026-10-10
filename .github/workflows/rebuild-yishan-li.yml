@@ -1,0 +1,21 @@
+# After each successful Production deploy of li.yishan.app (reported by Vercel),
+# rebuild yishan.li so its 每日实验 section picks up the new dist/demos.json.
+# Needs repo secret YISHAN_LI_DEPLOY_HOOK = a Vercel Deploy Hook URL of the `portfolio` project.
+name: Rebuild yishan.li
+
+on: deployment_status
+
+jobs:
+  rebuild:
+    if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger yishan.li deploy hook
+        env:
+          HOOK: ${{ secrets.YISHAN_LI_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "::warning::YISHAN_LI_DEPLOY_HOOK not set, skipping"
+            exit 0
+          fi
+          curl -fsS -X POST "$HOOK" -o /dev/null -w "deploy hook: HTTP %{http_code}\n"
