@@ -147,7 +147,7 @@ function indexHtml(demos: Demo[]): string {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>xbm demos</title>
+<title>Labs</title>
 <meta name="description" content="xbm — weekday tech demos from X bookmarks. 每个 demo 一个路径。">
 <link rel="canonical" href="${SITE}/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2318181b'/%3E%3Ctext x='16' y='21' font-family='monospace' font-size='13' fill='%23fafafa' text-anchor='middle'%3Exbm%3C/text%3E%3C/svg%3E">
@@ -181,11 +181,10 @@ function indexHtml(demos: Demo[]): string {
 <main>
   <header>
     <div class="top">
-      <h1>xbm demos</h1>
+      <h1>Labs</h1>
       <a class="by" href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a>
     </div>
-    <p>Weekday tech demos rebuilt from X bookmarks — one path per demo.</p>
-    <p class="zh">来自 X 书签的技术 demo 合集，每个 demo 一个路径。</p>
+    <p>来自 X 书签和 GitHub 星标的技术 demo</p>
   </header>
   <ul>
 ${cards}
