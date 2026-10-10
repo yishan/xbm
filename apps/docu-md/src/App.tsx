@@ -18,7 +18,9 @@ const BOOKMARK_URL = "https://x.com/kiwiflysky/status/2075195594797453646"
 export default function App() {
   const [activeId, setActiveId] = useState<string>(DOCS[0]!.id)
   const [viewMode, setViewMode] = useState<ViewMode>("split")
-  const [theme, setTheme] = useState<ThemeMode>("light")
+  const [theme, setTheme] = useState<ThemeMode>(() =>
+    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light",
+  )
 
   const activeDoc = useMemo(() => getDoc(activeId), [activeId])
 

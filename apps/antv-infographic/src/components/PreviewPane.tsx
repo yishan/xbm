@@ -13,9 +13,10 @@ import { InfographicCanvas } from "./InfographicCanvas";
 
 type PreviewPaneProps = {
   sample: TemplateSample;
+  dark?: boolean;
 };
 
-export function PreviewPane({ sample }: PreviewPaneProps) {
+export function PreviewPane({ sample, dark }: PreviewPaneProps) {
   const [showSource, setShowSource] = useState(true);
   const [copied, setCopied] = useState(false);
 
@@ -46,7 +47,7 @@ export function PreviewPane({ sample }: PreviewPaneProps) {
 
       <Card className="overflow-hidden">
         <CardContent className="bg-white p-4 dark:bg-zinc-950">
-          <InfographicCanvas syntax={sample.syntax} className="min-h-[520px] w-full" />
+          <InfographicCanvas syntax={sample.syntax} dark={dark} className="min-h-[520px] w-full" />
         </CardContent>
       </Card>
 
