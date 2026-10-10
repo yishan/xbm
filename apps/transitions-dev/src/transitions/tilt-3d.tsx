@@ -61,12 +61,12 @@ export function Tilt3D({ trigger }: DemoProps) {
       onPointerMove={onMove}
       onPointerLeave={reset}
     >
-      <div className="t-tilt-card flex h-[140px] w-[228px] flex-col justify-between rounded-2xl bg-gradient-to-br from-zinc-900 via-zinc-800 to-violet-900 p-4 text-white shadow-xl shadow-violet-950/20">
+      <div className="t-tilt-card flex h-[140px] w-[228px] flex-col justify-between rounded-2xl bg-gradient-to-br from-zinc-900 dark:from-zinc-700 via-zinc-800 dark:via-zinc-600 to-violet-900 p-4 text-white shadow-xl shadow-violet-950/20">
         <div className="flex items-center justify-between">
           <span className="text-xs font-medium tracking-wide text-white/70">Northwind</span>
           <span className="text-sm font-semibold italic">credit</span>
         </div>
-        <div className="h-6 w-8 rounded-md bg-gradient-to-br from-amber-200 to-amber-400 opacity-90" />
+        <div className="h-6 w-8 rounded-md bg-gradient-to-br from-amber-200 dark:from-amber-900/60 to-amber-400 opacity-90" />
         <div className="flex items-end justify-between">
           <span className="font-mono text-[13px] tracking-widest">4242 •••• 1837</span>
           <span className="text-[10px] text-white/70">12/29</span>

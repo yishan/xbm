@@ -133,6 +133,10 @@
     background-image: radial-gradient(circle at 1px 1px, oklch(0.9 0 0) 1px, transparent 0);
     background-size: 16px 16px;
 }
+.dark .preview-bg {
+    background-color: oklch(0.17 0 0);
+    background-image: radial-gradient(circle at 1px 1px, oklch(0.3 0 0) 1px, transparent 0);
+}
 
 /* Card code panel: height animates via grid rows */
 .code-collapse {
