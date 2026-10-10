@@ -22,7 +22,7 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 8. One Vercel project for all demos (path per app), not one project per app. Every app is served at `https://li.yishan.app/<slug>/` and picked up automatically by the root build — no deploy config per app.
 9. Every app's `vite.config.ts` must set `base: "/<slug>/"` (slug = directory name). Keep asset paths base-aware: no hard-coded root-absolute URLs like `"/logo.png"` or `fetch("/data.json")` in `src/` — import assets, or use `` `${import.meta.env.BASE_URL}logo.png` `` for files in `public/`. (Root-absolute paths in `index.html` are fine; Vite rewrites them.) Locally, `bun run dev` then serves at `http://localhost:5173/<slug>/`.
 10. The index page at `https://li.yishan.app/` uses the app README's first `# heading` as the name, the first paragraph after it as the description, and `artifacts/screenshot.png` as the thumbnail — keep those meaningful.
-11. Don't add your own "back to index" link: `scripts/build-all.ts` injects a small fixed `← Labs` pill (`#xbm-home-link`, bottom-left) linking to `https://li.yishan.app/` before `</body>` of every built `dist/<slug>/**/*.html`. Keep the bottom-left ~120×30px corner free of essential controls.
+11. Don't add your own "back to index" link: `scripts/build-all.ts` injects a small fixed `← Experiments` pill (`#xbm-home-link`, bottom-left) linking to `https://li.yishan.app/` before `</body>` of every built `dist/<slug>/**/*.html`. Keep the bottom-left ~120×30px corner free of essential controls.
 12. Before opening a PR, `bash scripts/build-all.sh` from the repo root must succeed (it fails the deploy if any app fails to build).
 
 ## Backends (standing rule): Cloudflare Workers via `cf`
