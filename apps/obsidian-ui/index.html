@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -9,8 +9,21 @@
       content="ObsidianUI showcase — xbm demo. WebGL, canvas, GSAP and Motion effects rebuilt with React and Tailwind."
     />
     <title>ObsidianUI showcase — xbm demo</title>
+    <script>
+      // Apply the theme before first paint (no flash). Key matches src/components/theme-provider.tsx.
+      (() => {
+        let t = "system";
+        try {
+          const v = localStorage.getItem("obsidian-ui-theme");
+          if (v === "light" || v === "dark") t = v;
+        } catch {}
+        const dark = t === "dark" || (t === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      })();
+    </script>
   </head>
-  <body class="bg-[#09090b]">
+  <body class="bg-zinc-50 dark:bg-[#09090b]">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

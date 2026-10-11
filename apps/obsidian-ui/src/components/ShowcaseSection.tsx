@@ -13,7 +13,7 @@ const categoryDot: Record<BlockDef["category"], string> = {
 }
 
 const dotGrid = {
-  backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)",
+  backgroundImage: "radial-gradient(var(--dot-grid) 1px, transparent 1px)",
   backgroundSize: "16px 16px",
 }
 
@@ -31,10 +31,10 @@ export function ShowcaseSection({
   return (
     <section
       data-testid={`section-${def.id}`}
-      className="overflow-hidden rounded-3xl border border-white/10 bg-zinc-900/40"
+      className="overflow-hidden rounded-3xl border border-zinc-900/10 dark:border-white/10 bg-white/70 dark:bg-zinc-900/40"
     >
       <div
-        className="relative h-[420px] overflow-hidden bg-zinc-950"
+        className="relative h-[420px] overflow-hidden bg-zinc-50 dark:bg-zinc-950"
         style={dotGrid}
       >
         <div
@@ -43,7 +43,7 @@ export function ShowcaseSection({
         >
           <DemoComponent />
         </div>
-        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-white/10 bg-black/40 px-3 py-1 text-xs text-zinc-300 backdrop-blur">
+        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-zinc-900/10 dark:border-white/10 bg-white/70 dark:bg-black/40 px-3 py-1 text-xs text-zinc-700 dark:text-zinc-300 backdrop-blur">
           <span className="font-mono text-zinc-500">{number}</span>
           <span>{def.title}</span>
         </div>
@@ -53,7 +53,7 @@ export function ShowcaseSection({
           size="icon-sm"
           aria-label="Remount demo"
           onClick={() => setRemountKey((k) => k + 1)}
-          className="absolute right-3 top-3 bg-black/40 text-zinc-300 backdrop-blur"
+          className="absolute right-3 top-3 bg-white/70 dark:bg-black/40 text-zinc-700 dark:text-zinc-300 backdrop-blur"
         >
           <RotateCcw className="h-3.5 w-3.5" />
         </Button>
@@ -62,8 +62,8 @@ export function ShowcaseSection({
       <div className="p-5">
         <div className="grid gap-5 md:grid-cols-[1fr_auto]">
           <div>
-            <h2 className="text-lg font-medium text-zinc-100">{def.title}</h2>
-            <p className="mt-1 text-sm leading-relaxed text-zinc-400">
+            <h2 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">{def.title}</h2>
+            <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               {def.description}
             </p>
             <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500">
@@ -75,14 +75,14 @@ export function ShowcaseSection({
                 <Badge
                   key={tech}
                   variant="outline"
-                  className="border-white/10 text-[10px] text-zinc-400"
+                  className="border-zinc-900/10 dark:border-white/10 text-[10px] text-zinc-600 dark:text-zinc-400"
                 >
                   {tech}
                 </Badge>
               ))}
               <Badge
                 variant="outline"
-                className="ml-auto gap-1.5 border-white/10 text-[10px] text-zinc-400"
+                className="ml-auto gap-1.5 border-zinc-900/10 dark:border-white/10 text-[10px] text-zinc-600 dark:text-zinc-400"
               >
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${categoryDot[def.category]}`}

@@ -127,6 +127,59 @@ const refractExit = (dir: Point, normal: Point, ior: number): Point | null => {
   return length < 1e-9 ? null : { x: refracted.x / length, y: refracted.y / length };
 };
 
+// Theme palette: additive white light on the dark stage, a dark "ink" beam
+// (normal blending) on the light stage. Read per frame from the <html> class.
+type Palette = {
+  bgInner: string;
+  bgOuter: string;
+  prismFill: string;
+  prismStroke: string;
+  highlightTop: string;
+  highlightBottom: string;
+  beamGlow: string;
+  beamCore: string;
+  innerGlow: string;
+  innerCore: string;
+  dot: string;
+  dotShadow: string;
+  blend: GlobalCompositeOperation;
+};
+
+const DARK_PALETTE: Palette = {
+  bgInner: "rgba(88, 28, 135, 0.30)",
+  bgOuter: "#09090b",
+  prismFill: "rgba(255, 255, 255, 0.08)",
+  prismStroke: "rgba(255, 255, 255, 0.4)",
+  highlightTop: "rgba(255, 255, 255, 0.18)",
+  highlightBottom: "rgba(255, 255, 255, 0.02)",
+  beamGlow: "rgba(255,255,255,0.18)",
+  beamCore: "rgba(255,255,255,0.95)",
+  innerGlow: "rgba(255,255,255,0.14)",
+  innerCore: "rgba(255,255,255,0.7)",
+  dot: "rgba(255,255,255,0.9)",
+  dotShadow: "white",
+  blend: "lighter",
+};
+
+const LIGHT_PALETTE: Palette = {
+  bgInner: "rgba(167, 139, 250, 0.22)",
+  bgOuter: "#fafafa",
+  prismFill: "rgba(255, 255, 255, 0.55)",
+  prismStroke: "rgba(24, 24, 27, 0.35)",
+  highlightTop: "rgba(255, 255, 255, 0.7)",
+  highlightBottom: "rgba(255, 255, 255, 0.1)",
+  beamGlow: "rgba(24,24,27,0.10)",
+  beamCore: "rgba(24,24,27,0.85)",
+  innerGlow: "rgba(24,24,27,0.08)",
+  innerCore: "rgba(24,24,27,0.55)",
+  dot: "rgba(24,24,27,0.9)",
+  dotShadow: "rgba(24,24,27,0.4)",
+  blend: "source-over",
+};
+
+const currentPalette = (): Palette =>
+  document.documentElement.classList.contains("dark") ? DARK_PALETTE : LIGHT_PALETTE;
+
 const drawRay = (
   ctx: CanvasRenderingContext2D,
   p1: Point,
@@ -135,9 +188,10 @@ const drawRay = (
   coreColor: string,
   glowWidth = 10,
   coreWidth = 1.5,
+  blend: GlobalCompositeOperation = "lighter",
 ) => {
   ctx.save();
-  ctx.globalCompositeOperation = "lighter";
+  ctx.globalCompositeOperation = blend;
   ctx.lineCap = "round";
   ctx.shadowBlur = 16;
   ctx.shadowColor = glowColor;
@@ -165,6 +219,7 @@ const drawScene = (
   prismScale: number,
 ) => {
   const { w, h } = state;
+  const p = currentPalette();
 
   ctx.clearRect(0, 0, w, h);
 
@@ -176,8 +231,8 @@ const drawScene = (
     h / 2,
     Math.max(w, h) * 0.9,
   );
-  backgroundGradient.addColorStop(0, "rgba(88, 28, 135, 0.30)");
-  backgroundGradient.addColorStop(1, "#09090b");
+  backgroundGradient.addColorStop(0, p.bgInner);
+  backgroundGradient.addColorStop(1, p.bgOuter);
 
   ctx.fillStyle = backgroundGradient;
   ctx.fillRect(0, 0, w, h);
@@ -198,15 +253,15 @@ const drawScene = (
   ctx.lineTo(bottomLeft.x, bottomLeft.y);
   ctx.lineTo(bottomRight.x, bottomRight.y);
   ctx.closePath();
-  ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+  ctx.fillStyle = p.prismFill;
   ctx.fill();
-  ctx.strokeStyle = "rgba(255, 255, 255, 0.4)";
+  ctx.strokeStyle = p.prismStroke;
   ctx.lineWidth = 2;
   ctx.stroke();
 
   const highlight = ctx.createLinearGradient(apex.x, apex.y, cx, cy + triHeight / 3);
-  highlight.addColorStop(0, "rgba(255, 255, 255, 0.18)");
-  highlight.addColorStop(1, "rgba(255, 255, 255, 0.02)");
+  highlight.addColorStop(0, p.highlightTop);
+  highlight.addColorStop(1, p.highlightBottom);
   ctx.fillStyle = highlight;
   ctx.fill();
 
@@ -222,10 +277,11 @@ const drawScene = (
       ctx,
       source,
       { x: source.x + direction.x * 2000, y: source.y + direction.y * 2000 },
-      "rgba(255,255,255,0.18)",
-      "rgba(255,255,255,0.95)",
+      p.beamGlow,
+      p.beamCore,
       12,
       2.5,
+      p.blend,
     );
     return;
   }
@@ -237,16 +293,17 @@ const drawScene = (
     ctx,
     source,
     entryPoint,
-    "rgba(255,255,255,0.18)",
-    "rgba(255,255,255,0.95)",
+    p.beamGlow,
+    p.beamCore,
     12,
     2.5,
+    p.blend,
   );
 
   ctx.save();
-  ctx.fillStyle = "rgba(255,255,255,0.9)";
+  ctx.fillStyle = p.dot;
   ctx.shadowBlur = 18;
-  ctx.shadowColor = "white";
+  ctx.shadowColor = p.dotShadow;
   ctx.beginPath();
   ctx.arc(entryPoint.x, entryPoint.y, 3.5, 0, Math.PI * 2);
   ctx.fill();
@@ -273,7 +330,7 @@ const drawScene = (
       if (!hit) return;
       const normal = edges[hit.edgeIndex].normal;
 
-      drawRay(ctx, from, hit.point, "rgba(255,255,255,0.14)", "rgba(255,255,255,0.7)", 5, 1.0);
+      drawRay(ctx, from, hit.point, p.innerGlow, p.innerCore, 5, 1.0, p.blend);
 
       const out = refractExit(dir, normal, ior);
       if (out) {
@@ -296,6 +353,7 @@ const drawScene = (
       color,
       6,
       1.5,
+      p.blend,
     );
   });
 };
@@ -523,7 +581,12 @@ export function PrismBeam({
 
     intersectionObserver.observe(wrapper);
 
+    // Repaint when the theme flips (the animated loop picks it up next frame anyway).
+    const themeObserver = new MutationObserver(() => drawStatic());
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
     return () => {
+      themeObserver.disconnect();
       if (rafId !== null) cancelAnimationFrame(rafId);
       intersectionObserver.disconnect();
       resizeObserver.disconnect();
@@ -541,7 +604,7 @@ export function PrismBeam({
       ref={wrapperRef}
       tabIndex={0}
       className={cn(
-        "relative h-full w-full overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 focus:outline-none",
+        "relative h-full w-full overflow-hidden rounded-3xl border border-zinc-900/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950 focus:outline-none",
         className,
       )}
       data-testid="prism-canvas"

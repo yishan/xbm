@@ -143,6 +143,8 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       uniform sampler2D uTex;
       uniform float uStrength;
       uniform float uTileAspect;
+      uniform vec3 uBg;
+      uniform float uLight;
 
       void main() {
         vec2 fragCoord = gl_FragCoord.xy;
@@ -179,11 +181,11 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
           texture2D(uTex, atlasUV - vec2(chroma, 0.0)).b
         );
 
-        float vig = smoothstep(1.1, 0.35, length(p));
-        color *= mix(0.35, 1.0, vig);
+        // Dark theme: vignette darkens the edges. Light theme: it fades them into the page.
+        float vig = mix(0.35, 1.0, smoothstep(1.1, 0.35, length(p)));
+        color = mix(color * vig, mix(uBg, color, vig), uLight);
 
-        vec3 bg = vec3(0.035, 0.035, 0.04);
-        vec3 finalColor = mix(bg, color, mask);
+        vec3 finalColor = mix(uBg, color, mask);
         gl_FragColor = vec4(finalColor, 1.0);
       }
     `;
@@ -205,6 +207,8 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
     const uStrength = gl.getUniformLocation(program, "uStrength");
     const uTileAspect = gl.getUniformLocation(program, "uTileAspect");
     const uTex = gl.getUniformLocation(program, "uTex");
+    const uBg = gl.getUniformLocation(program, "uBg");
+    const uLight = gl.getUniformLocation(program, "uLight");
     const aPosition = gl.getAttribLocation(program, "aPosition");
 
     const positionBuffer = gl.createBuffer();
@@ -243,6 +247,11 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       gl.uniform2f(uOffset, offsetX, offsetY);
       gl.uniform1f(uStrength, strengthRef.current);
       gl.uniform1f(uTileAspect, tileAspect);
+      // Theme: gap/edge colour follows the page (zinc-50 light, near-black dark).
+      const light = !document.documentElement.classList.contains("dark");
+      if (light) gl.uniform3f(uBg, 0.98, 0.98, 0.98);
+      else gl.uniform3f(uBg, 0.035, 0.035, 0.04);
+      gl.uniform1f(uLight, light ? 1 : 0);
       gl.activeTexture(gl.TEXTURE0);
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.uniform1i(uTex, 0);
@@ -417,7 +426,12 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       render();
     }
 
+    // Repaint immediately when the theme flips (matters when the loop is paused).
+    const themeObserver = new MutationObserver(() => render());
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+
     return () => {
+      themeObserver.disconnect();
       stopLoop();
       if (resizeObserver) resizeObserver.disconnect();
       if (intersectionObserver) intersectionObserver.disconnect();
@@ -453,7 +467,7 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
       data-testid="lens-gallery"
       tabIndex={0}
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-white/10 bg-zinc-950 outline-none focus-visible:ring-1 focus-visible:ring-violet-400/70",
+        "relative overflow-hidden rounded-3xl border border-zinc-900/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950 outline-none focus-visible:ring-1 focus-visible:ring-violet-400/70",
         className
       )}
     >
@@ -468,7 +482,7 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
           WebGL not available
         </div>
       ) : null}
-      <div className="pointer-events-none absolute bottom-3 left-3 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-zinc-400 backdrop-blur">
+      <div className="pointer-events-none absolute bottom-3 left-3 rounded-full border border-zinc-900/10 dark:border-white/10 bg-white/75 dark:bg-white/5 px-3 py-1 text-xs text-zinc-700 dark:text-zinc-400 backdrop-blur">
         drag to explore
       </div>
     </div>

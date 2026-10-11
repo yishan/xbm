@@ -128,10 +128,16 @@
     @apply font-sans;
     }
 }
-/* xbm: dark "obsidian" page + reduced-motion kill switch (OS setting or in-app toggle) */
+/* xbm: page background per theme ("obsidian" dark / soft light) + reduced-motion kill switch */
 html {
+  color-scheme: light;
+  background: #fafafa;
+  --dot-grid: rgba(24, 24, 27, 0.08);
+}
+html.dark {
   color-scheme: dark;
   background: #09090b;
+  --dot-grid: rgba(255, 255, 255, 0.07);
 }
 html.reduce-motion *,
 html.reduce-motion *::before,

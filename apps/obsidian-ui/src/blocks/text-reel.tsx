@@ -98,7 +98,7 @@ export function TextReel({
           prevEl.style.backgroundImage = "none";
           prevEl.style.webkitBackgroundClip = "border-box";
           prevEl.style.backgroundClip = "border-box";
-          prevEl.style.color = "#ffffff";
+          prevEl.style.color = ""; // back to the theme-aware text class
         }
 
         if (nearestIndex !== -1) {
@@ -246,7 +246,7 @@ export function TextReel({
                   ref={(el) => {
                     wordRefs.current[i] = el;
                   }}
-                  className="block font-semibold tracking-tight text-white"
+                  className="block font-semibold tracking-tight text-zinc-950 dark:text-white"
                   style={{ opacity: 0.25 }}
                 >
                   {word}
@@ -258,7 +258,7 @@ export function TextReel({
       </div>
 
       <div className="mt-4 flex w-full max-w-xs items-center gap-3">
-        <div className="h-1 w-24 overflow-hidden rounded-full bg-white/10">
+        <div className="h-1 w-24 overflow-hidden rounded-full bg-zinc-900/10 dark:bg-white/10">
           <div
             ref={speedBarRef}
             className="h-full rounded-full bg-violet-500"
