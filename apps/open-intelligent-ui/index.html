@@ -5,6 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Open Intelligent UI · 生成式界面演示</title>
+    <script>
+      // Apply the theme before first paint (no light flash). Key matches src/components/theme-provider.tsx.
+      (() => {
+        let t = "system";
+        try {
+          const v = localStorage.getItem("open-intelligent-ui-theme");
+          if (v === "light" || v === "dark") t = v;
+        } catch {}
+        const dark = t === "dark" || (t === "system" && matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", dark);
+        document.documentElement.style.colorScheme = dark ? "dark" : "light";
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

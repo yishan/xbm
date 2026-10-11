@@ -29,14 +29,14 @@ export function MetricChart({ title, unit, series, deltaPct }: MetricChartProps)
   const dotY = (d: { value: number }) => 100 - (d.value / max) * 100
 
   return (
-    <div className="w-full rounded-xl border border-neutral-200 bg-white p-4 text-sm">
+    <div className="w-full rounded-xl border border-border bg-card p-4 text-sm text-card-foreground">
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
         <div className="flex min-w-0 items-center gap-2">
-          <h3 className="truncate text-sm font-medium text-neutral-900">{title}</h3>
+          <h3 className="truncate text-sm font-medium text-foreground">{title}</h3>
           <span
             className={cn(
               "inline-flex shrink-0 items-center gap-0.5 rounded-full px-2 py-0.5 text-xs font-medium",
-              up ? "bg-emerald-50 text-emerald-600" : "bg-red-50 text-red-600",
+              up ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-500/15 dark:text-emerald-400" : "bg-red-50 text-red-600 dark:bg-red-500/15 dark:text-red-400",
             )}
           >
             {up ? <ArrowUpRight className="h-3 w-3" /> : <ArrowDownRight className="h-3 w-3" />}
@@ -48,7 +48,7 @@ export function MetricChart({ title, unit, series, deltaPct }: MetricChartProps)
           type="button"
           data-testid="chart-mode"
           onClick={() => setMode((m) => (m === "bar" ? "line" : "bar"))}
-          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-neutral-200 bg-white px-2.5 py-1 text-xs text-neutral-600 transition-colors hover:bg-neutral-50"
+          className="inline-flex shrink-0 items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1 text-xs text-foreground/75 transition-colors hover:bg-muted hover:text-foreground"
         >
           {mode === "bar" ? <BarChart3 className="h-3.5 w-3.5" /> : <LineChart className="h-3.5 w-3.5" />}
           {mode === "bar" ? "柱状图" : "折线图"}
@@ -74,19 +74,19 @@ export function MetricChart({ title, unit, series, deltaPct }: MetricChartProps)
                       onFocus={() => setActive(i)}
                       onBlur={() => setActive(null)}
                       className={cn(
-                        "h-full w-full rounded-t-md bg-neutral-800 transition-colors",
-                        active === i && "bg-neutral-900",
+                        "h-full w-full rounded-t-md bg-foreground/80 transition-colors",
+                        active === i && "bg-foreground",
                       )}
                     />
                     {active === i && (
-                      <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-neutral-900 px-2 py-1 text-[10px] font-medium text-white shadow-sm">
+                      <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-1.5 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium text-background shadow-sm">
                         {d.value}
                         {unit}
                       </div>
                     )}
                   </div>
                 </div>
-                <span className="w-full truncate text-center text-[10px] text-neutral-500">{d.label}</span>
+                <span className="w-full truncate text-center text-[10px] text-muted-foreground">{d.label}</span>
               </div>
             ))}
           </div>
@@ -96,12 +96,12 @@ export function MetricChart({ title, unit, series, deltaPct }: MetricChartProps)
               <svg
                 viewBox="0 0 100 100"
                 preserveAspectRatio="none"
-                className={cn("h-full w-full transition-opacity duration-700", mounted ? "opacity-100" : "opacity-0")}
+                className={cn("h-full w-full text-foreground/80 transition-opacity duration-700", mounted ? "opacity-100" : "opacity-0")}
               >
                 <polyline
                   points={points}
                   fill="none"
-                  stroke="#262626"
+                  stroke="currentColor"
                   strokeWidth={2}
                   vectorEffect="non-scaling-stroke"
                   strokeLinecap="round"
@@ -119,12 +119,12 @@ export function MetricChart({ title, unit, series, deltaPct }: MetricChartProps)
                     onFocus={() => setActive(i)}
                     onBlur={() => setActive(null)}
                     className={cn(
-                      "h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white transition-colors",
-                      active === i ? "border-neutral-900" : "border-neutral-700",
+                      "h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-card transition-colors",
+                      active === i ? "border-foreground" : "border-foreground/70",
                     )}
                   />
                   {active === i && (
-                    <div className="pointer-events-none absolute bottom-1 left-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-neutral-900 px-2 py-1 text-[10px] font-medium text-white shadow-sm">
+                    <div className="pointer-events-none absolute bottom-1 left-0 z-10 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-[10px] font-medium text-background shadow-sm">
                       {d.value}
                       {unit}
                     </div>
