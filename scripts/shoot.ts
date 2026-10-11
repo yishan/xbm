@@ -49,7 +49,7 @@ async function shoot(browser: Browser, url: string, scheme: "light" | "dark"): P
     const page = await ctx.newPage()
     await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 }).catch(() => page.waitForLoadState("load"))
     await page.waitForTimeout(1200)
-    // The injected "← Experiments" pill isn't part of the demo.
+    // The injected "← XG Experiments" pill isn't part of the demo.
     await page.evaluate(() => document.querySelectorAll("#xbm-home-link, #xbm-home-link-style").forEach((el) => el.remove()))
     return await page.screenshot()
   } finally {
