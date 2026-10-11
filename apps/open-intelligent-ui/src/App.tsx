@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Bookmark, Send, Sparkles } from "lucide-react"
 
+import { ThemeToggle } from "@/components/theme-toggle"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -65,12 +66,12 @@ function CallBlock({ call, open }: { call: UiCall; open: boolean }) {
     <details
       open={open}
       data-testid="call-block"
-      className="overflow-hidden rounded-lg border border-neutral-200 bg-white"
+      className="overflow-hidden rounded-lg border border-border bg-card"
     >
-      <summary className="cursor-pointer select-none px-3 py-2 font-mono text-[11px] text-neutral-500 transition-colors hover:text-neutral-800">
+      <summary className="cursor-pointer select-none px-3 py-2 font-mono text-[11px] text-muted-foreground transition-colors hover:text-foreground">
         {call.tool}(…)
       </summary>
-      <pre className="max-h-64 overflow-auto border-t border-neutral-200 px-3 py-2 text-[11px] leading-relaxed text-neutral-600">
+      <pre className="max-h-64 overflow-auto border-t border-border bg-muted/40 px-3 py-2 text-[11px] leading-relaxed text-foreground/80">
         <code>{`${call.tool}(${JSON.stringify(call.props, null, 2)})`}</code>
       </pre>
     </details>
@@ -83,7 +84,7 @@ function Dots() {
       {[0, 1, 2].map((index) => (
         <span
           key={index}
-          className="h-1.5 w-1.5 animate-pulse rounded-full bg-neutral-400"
+          className="h-1.5 w-1.5 animate-pulse rounded-full bg-muted-foreground/60"
           style={{ animationDelay: `${index * 160}ms` }}
         />
       ))}
@@ -219,8 +220,8 @@ export default function App() {
       onClick={() => pickScenario(scenario)}
       disabled={busy}
       className={cn(
-        "rounded-full border border-neutral-200 bg-white px-3 py-1.5 text-xs text-neutral-600",
-        "transition-colors hover:border-neutral-300 hover:bg-neutral-50 hover:text-neutral-900",
+        "rounded-full border border-border bg-card px-3 py-1.5 text-xs text-foreground/75",
+        "transition-colors hover:border-foreground/20 hover:bg-muted hover:text-foreground",
         "disabled:cursor-not-allowed disabled:opacity-50",
       )}
     >
@@ -229,31 +230,34 @@ export default function App() {
   )
 
   return (
-    <div className="flex min-h-screen flex-col bg-neutral-50 text-neutral-900">
-      <header className="sticky top-0 z-10 border-b border-neutral-200 bg-white/90 backdrop-blur">
+    <div className="flex min-h-screen flex-col bg-neutral-50 text-foreground dark:bg-background">
+      <header className="sticky top-0 z-10 border-b border-border bg-background/90 backdrop-blur">
         <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-3.5">
           <div className="min-w-0">
-            <h1 className="text-sm font-semibold tracking-tight text-neutral-900">Open Intelligent UI</h1>
-            <p className="truncate text-xs text-neutral-500">智能体用你的设计系统组件来回答</p>
+            <h1 className="text-sm font-semibold tracking-tight text-foreground">Open Intelligent UI</h1>
+            <p className="truncate text-xs text-muted-foreground">智能体用你的设计系统组件来回答</p>
           </div>
-          <Badge
-            variant="outline"
-            className="shrink-0 rounded-full border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium text-amber-700"
-          >
-            示例数据 · 无真实模型
-          </Badge>
+          <div className="flex shrink-0 items-center gap-2">
+            <Badge
+              variant="outline"
+              className="shrink-0 rounded-full border-amber-200 bg-amber-50 px-2.5 py-1 text-[11px] font-medium text-amber-700 dark:border-amber-400/30 dark:bg-amber-400/10 dark:text-amber-300"
+            >
+              示例数据 · 无真实模型
+            </Badge>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 
       <main className="mx-auto flex w-full max-w-6xl flex-1 items-start justify-center gap-8 px-4 py-6">
         <section className="w-full max-w-[640px]">
-          <div className="flex h-[min(70vh,700px)] flex-col overflow-hidden rounded-xl border border-neutral-200 bg-white shadow-sm">
+          <div className="flex h-[min(70vh,700px)] flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm">
             <div ref={listRef} className="flex-1 space-y-4 overflow-y-auto px-4 py-5">
               {messages.length === 0 ? (
                 <div className="flex h-full flex-col items-center justify-center gap-4 text-center">
                   <div className="space-y-1">
-                    <p className="text-sm font-medium text-neutral-900">试试这些场景</p>
-                    <p className="text-xs text-neutral-500">智能体会调用注册表里的组件来回答</p>
+                    <p className="text-sm font-medium text-foreground">试试这些场景</p>
+                    <p className="text-xs text-muted-foreground">智能体会调用注册表里的组件来回答</p>
                   </div>
                   <div className="flex max-w-[440px] flex-wrap justify-center gap-2">
                     {SCENARIOS.map((scenario) => renderChip(scenario, "chip-"))}
@@ -264,7 +268,7 @@ export default function App() {
                   if (message.role === "user") {
                     return (
                       <div key={message.id} className="flex justify-end">
-                        <div className="max-w-[85%] rounded-xl bg-neutral-900 px-3.5 py-2 text-sm leading-relaxed text-white">
+                        <div className="max-w-[85%] rounded-xl bg-primary px-3.5 py-2 text-sm leading-relaxed text-primary-foreground">
                           {message.text}
                         </div>
                       </div>
@@ -273,9 +277,9 @@ export default function App() {
 
                   return (
                     <div key={message.id} className="flex justify-start">
-                      <div className="w-full max-w-[92%] space-y-2.5 rounded-xl border border-neutral-200 bg-neutral-50/80 px-3.5 py-3 text-sm text-neutral-800">
+                      <div className="w-full max-w-[92%] space-y-2.5 rounded-xl border border-border bg-muted/50 px-3.5 py-3 text-sm text-foreground">
                         {message.status === "thinking" ? (
-                          <div className="flex items-center gap-2 text-neutral-500">
+                          <div className="flex items-center gap-2 text-muted-foreground">
                             <Dots />
                             <span>{message.text}</span>
                           </div>
@@ -284,7 +288,7 @@ export default function App() {
                             <p className="leading-relaxed whitespace-pre-wrap">
                               {message.text}
                               {message.status === "streaming" ? (
-                                <span className="ml-0.5 inline-block h-3.5 w-1.5 animate-pulse rounded-sm bg-neutral-400 align-middle" />
+                                <span className="ml-0.5 inline-block h-3.5 w-1.5 animate-pulse rounded-sm bg-muted-foreground/60 align-middle" />
                               ) : null}
                             </p>
 
@@ -301,7 +305,7 @@ export default function App() {
                             ) : null}
 
                             {message.call ? (
-                              <p className="text-[11px] text-neutral-400">示例数据 · scripted reply</p>
+                              <p className="text-[11px] text-muted-foreground">示例数据 · scripted reply</p>
                             ) : null}
                           </>
                         )}
@@ -312,10 +316,13 @@ export default function App() {
               )}
             </div>
 
-            <div className="border-t border-neutral-200 bg-white px-3 pt-2 pb-3">
-              <div className="flex flex-wrap gap-1.5 pb-2">
-                {SCENARIOS.map((scenario) => renderChip(scenario, "chip-quick-"))}
-              </div>
+            <div className="border-t border-border bg-card px-3 pt-2 pb-3">
+              {/* The empty state already lists every scenario; only show quick chips once a chat has started. */}
+              {messages.length > 0 ? (
+                <div className="-mx-3 flex gap-1.5 overflow-x-auto px-3 pb-2 [scrollbar-width:none] sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 [&>button]:shrink-0">
+                  {SCENARIOS.map((scenario) => renderChip(scenario, "chip-quick-"))}
+                </div>
+              ) : null}
               <form
                 className="flex items-center gap-2"
                 onSubmit={(event) => {
@@ -348,8 +355,8 @@ export default function App() {
         <aside className="hidden w-[17rem] shrink-0 lg:block">
           <div className="sticky top-20 space-y-3">
             <div className="flex items-center gap-2">
-              <Sparkles className="h-4 w-4 text-neutral-400" />
-              <h2 className="text-sm font-semibold text-neutral-900">设计系统注册表</h2>
+              <Sparkles className="h-4 w-4 text-muted-foreground" />
+              <h2 className="text-sm font-semibold text-foreground">设计系统注册表</h2>
             </div>
             <ul className="space-y-2">
               {TOOL_REGISTRY.map((entry) => {
@@ -359,35 +366,35 @@ export default function App() {
                     key={entry.tool}
                     data-testid={`registry-${entry.tool}`}
                     className={cn(
-                      "rounded-xl border bg-white px-3 py-2.5 transition-colors",
+                      "rounded-xl border bg-card px-3 py-2.5 transition-colors",
                       active
-                        ? "border-neutral-300 bg-neutral-900/[0.03] shadow-sm"
-                        : "border-neutral-200",
+                        ? "border-foreground/25 bg-muted/60 shadow-sm"
+                        : "border-border",
                     )}
                   >
-                    <p className="font-mono text-[11px] text-neutral-500">{entry.tool}</p>
-                    <p className="text-sm font-medium text-neutral-900">{entry.component}</p>
-                    <p className="text-xs text-neutral-500">{entry.description}</p>
+                    <p className="font-mono text-[11px] text-muted-foreground">{entry.tool}</p>
+                    <p className="text-sm font-medium text-foreground">{entry.component}</p>
+                    <p className="text-xs text-muted-foreground">{entry.description}</p>
                   </li>
                 )
               })}
             </ul>
-            <p className="text-[11px] leading-relaxed text-neutral-400">
+            <p className="text-[11px] leading-relaxed text-muted-foreground">
               智能体只会调用注册表里的组件，参数全部来自示例数据。
             </p>
           </div>
         </aside>
       </main>
 
-      <footer className="mt-auto border-t border-neutral-200 bg-white py-4">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 pl-[140px] text-xs text-neutral-500 sm:pl-4">
+      <footer className="mt-auto border-t border-border bg-background py-4">
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center justify-center gap-x-4 gap-y-2 px-4 pl-[140px] text-xs text-muted-foreground sm:pl-4">
           <span>
             灵感来自{" "}
             <a
               href="https://github.com/CopilotKit/OpenIntelligentUI"
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-neutral-700 underline-offset-2 hover:underline"
+              className="font-medium text-foreground/80 underline-offset-2 hover:underline"
             >
               CopilotKit / OpenIntelligentUI
             </a>{" "}
@@ -397,7 +404,7 @@ export default function App() {
             href="https://x.com/CopilotKit/status/2108555099241128416"
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-1.5 font-medium text-neutral-700 underline-offset-2 hover:underline"
+            className="inline-flex items-center gap-1.5 font-medium text-foreground/80 underline-offset-2 hover:underline"
           >
             <Bookmark className="h-3.5 w-3.5" />
             推文
