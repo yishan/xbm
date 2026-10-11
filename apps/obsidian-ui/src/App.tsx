@@ -9,6 +9,7 @@ import { BLOCKS } from "@/blocks/index"
 import type { BlockDef } from "@/blocks/types"
 import { ShowcaseCard } from "@/components/ShowcaseCard"
 import { ShowcaseSection } from "@/components/ShowcaseSection"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 type BlockGroup =
   | { kind: "section"; def: BlockDef; index: number }
@@ -50,20 +51,20 @@ export default function App() {
 
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
-      <div className="min-h-svh overflow-x-clip bg-[#09090b] text-zinc-100">
+      <div className="min-h-svh overflow-x-clip bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.25),rgba(14,165,233,0.12)_50%,transparent_75%)] blur-3xl"
         />
 
         <header className="relative mx-auto w-full max-w-6xl px-5 pt-12 pb-10 sm:px-8">
-          <div className="flex items-center justify-between gap-4">
-            <Badge variant="outline" className="border-white/10 text-zinc-300">
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+            <Badge variant="outline" className="border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
               xbm demo
             </Badge>
-            <div className="flex items-center gap-3 text-xs text-zinc-500">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-500">
               <a
-                className="hover:text-zinc-200"
+                className="whitespace-nowrap hover:text-zinc-800 dark:hover:text-zinc-200"
                 href="https://obsidianui.dev"
                 target="_blank"
                 rel="noreferrer"
@@ -71,9 +72,9 @@ export default function App() {
                 Inspired by ObsidianUI{" "}
                 <ArrowUpRight className="inline h-3 w-3" />
               </a>
-              <span className="text-zinc-700">·</span>
+              <span className="text-zinc-300 dark:text-zinc-700">·</span>
               <a
-                className="hover:text-zinc-200"
+                className="whitespace-nowrap hover:text-zinc-800 dark:hover:text-zinc-200"
                 href="https://x.com/athrix_codes/status/2104101588466074028"
                 target="_blank"
                 rel="noreferrer"
@@ -81,24 +82,25 @@ export default function App() {
                 via @athrix_codes{" "}
                 <ArrowUpRight className="inline h-3 w-3" />
               </a>
+              <ThemeToggle />
             </div>
           </div>
 
           <div className="mt-10 flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
-              <h1 className="text-4xl font-semibold tracking-tight text-zinc-100 sm:text-5xl">
+              <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
                 Obsidian-grade effects,{" "}
-                <span className="bg-gradient-to-r from-zinc-200 to-zinc-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-zinc-900 dark:from-zinc-200 to-zinc-500 bg-clip-text text-transparent">
                   rebuilt.
                 </span>
               </h1>
-              <p className="mt-4 text-sm leading-relaxed text-zinc-400 sm:text-base">
+              <p className="mt-4 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400 sm:text-base">
                 Eleven signature pieces from{" "}
                 <a
                   href="https://obsidianui.dev"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-zinc-200 underline underline-offset-4 hover:text-white"
+                  className="text-zinc-800 dark:text-zinc-200 underline underline-offset-4 hover:text-zinc-950 dark:hover:text-white"
                 >
                   ObsidianUI
                 </a>{" "}
@@ -108,7 +110,7 @@ export default function App() {
               </p>
             </div>
             <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-              <label className="flex items-center gap-2 text-sm text-zinc-300">
+              <label className="flex items-center gap-2 text-sm text-zinc-700 dark:text-zinc-300">
                 <Switch
                   data-testid="reduce-motion"
                   aria-label="Reduce motion"
@@ -137,15 +139,15 @@ export default function App() {
 
           <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500">
             <span>5 sections</span>
-            <span className="text-zinc-700">·</span>
+            <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>6 components</span>
-            <span className="text-zinc-700">·</span>
+            <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>WebGL</span>
-            <span className="text-zinc-700">·</span>
+            <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>Canvas</span>
-            <span className="text-zinc-700">·</span>
+            <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>GSAP</span>
-            <span className="text-zinc-700">·</span>
+            <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>Motion</span>
           </div>
         </header>
@@ -174,15 +176,15 @@ export default function App() {
           })}
         </main>
 
-        <footer className="relative border-t border-white/10">
-          <div className="mx-auto w-full max-w-6xl px-5 py-8 text-xs leading-relaxed text-zinc-500 sm:px-8">
+        <footer className="relative border-t border-zinc-900/10 dark:border-white/10">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-8 pb-14 text-xs leading-relaxed text-zinc-500 sm:px-8">
             <p>
               Piece names and behaviour ideas come from{" "}
               <a
                 href="https://obsidianui.dev"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-4 hover:text-zinc-200"
+                className="underline underline-offset-4 hover:text-zinc-800 dark:hover:text-zinc-200"
               >
                 ObsidianUI
               </a>{" "}
@@ -194,7 +196,7 @@ export default function App() {
                 href="https://obsidianui.dev"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-4 hover:text-zinc-200"
+                className="underline underline-offset-4 hover:text-zinc-800 dark:hover:text-zinc-200"
               >
                 obsidianui.dev
               </a>{" "}
@@ -203,7 +205,7 @@ export default function App() {
                 href="https://github.com/Atharvsinh-codez/ObsidianUI"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-4 hover:text-zinc-200"
+                className="underline underline-offset-4 hover:text-zinc-800 dark:hover:text-zinc-200"
               >
                 GitHub repo
               </a>
@@ -215,7 +217,7 @@ export default function App() {
                 href="https://x.com/athrix_codes/status/2104101588466074028"
                 target="_blank"
                 rel="noreferrer"
-                className="underline underline-offset-4 hover:text-zinc-200"
+                className="underline underline-offset-4 hover:text-zinc-800 dark:hover:text-zinc-200"
               >
                 this X post
               </a>
@@ -225,7 +227,7 @@ export default function App() {
           </div>
         </footer>
 
-        <Toaster theme="dark" position="bottom-right" />
+        <Toaster position="bottom-right" />
       </div>
     </MotionConfig>
   )

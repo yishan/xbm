@@ -14,7 +14,7 @@ const categoryDot: Record<BlockDef["category"], string> = {
 }
 
 const dotGrid = {
-  backgroundImage: "radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px)",
+  backgroundImage: "radial-gradient(var(--dot-grid) 1px, transparent 1px)",
   backgroundSize: "16px 16px",
 }
 
@@ -32,10 +32,10 @@ export function ShowcaseCard({
   return (
     <Card
       data-testid={`card-${def.id}`}
-      className="gap-0 overflow-hidden border-white/10 bg-zinc-900/40 py-0"
+      className="gap-0 overflow-hidden border-zinc-900/10 dark:border-white/10 bg-white/70 dark:bg-zinc-900/40 py-0"
     >
       <div
-        className="relative flex h-64 items-center justify-center overflow-hidden border-b border-white/10 bg-zinc-950"
+        className="relative flex h-64 items-center justify-center overflow-hidden border-b border-zinc-900/10 dark:border-white/10 bg-zinc-50 dark:bg-zinc-950"
         style={dotGrid}
       >
         <div
@@ -50,21 +50,21 @@ export function ShowcaseCard({
           size="icon-sm"
           aria-label="Remount demo"
           onClick={() => setRemountKey((k) => k + 1)}
-          className="absolute left-2 top-2 bg-black/40 text-zinc-300 backdrop-blur"
+          className="absolute left-2 top-2 bg-white/70 dark:bg-black/40 text-zinc-700 dark:text-zinc-300 backdrop-blur"
         >
           <RotateCcw className="h-3.5 w-3.5" />
         </Button>
-        <span className="absolute right-3 top-2 font-mono text-xs text-zinc-600">
+        <span className="absolute right-3 top-2 font-mono text-xs text-zinc-400 dark:text-zinc-600">
           {number}
         </span>
       </div>
 
       <div className="flex flex-col gap-3 p-4">
         <div>
-          <h2 className="text-[15px] font-medium text-zinc-100">
+          <h2 className="text-[15px] font-medium text-zinc-900 dark:text-zinc-100">
             {def.title}
           </h2>
-          <p className="mt-1 text-[13px] leading-relaxed text-zinc-400">
+          <p className="mt-1 text-[13px] leading-relaxed text-zinc-600 dark:text-zinc-400">
             {def.description}
           </p>
         </div>
@@ -75,7 +75,7 @@ export function ShowcaseCard({
               <Badge
                 key={tech}
                 variant="outline"
-                className="border-white/10 text-[10px] text-zinc-400"
+                className="border-zinc-900/10 dark:border-white/10 text-[10px] text-zinc-600 dark:text-zinc-400"
               >
                 {tech}
               </Badge>
@@ -83,7 +83,7 @@ export function ShowcaseCard({
           </div>
           <Badge
             variant="outline"
-            className="gap-1.5 border-white/10 text-[10px] text-zinc-400"
+            className="gap-1.5 border-zinc-900/10 dark:border-white/10 text-[10px] text-zinc-600 dark:text-zinc-400"
           >
             <span
               className={`h-1.5 w-1.5 rounded-full ${categoryDot[def.category]}`}

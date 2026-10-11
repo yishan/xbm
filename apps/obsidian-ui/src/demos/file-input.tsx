@@ -18,7 +18,7 @@ export function FileInputDemo() {
         type="button"
         onClick={useSampleFiles}
         data-testid="file-sample"
-        className="text-xs font-medium text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-200 hover:underline"
+        className="text-xs font-medium text-zinc-600 dark:text-zinc-400 underline-offset-4 transition-colors hover:text-zinc-800 dark:hover:text-zinc-200 hover:underline"
       >
         Use sample files
       </button>

@@ -243,10 +243,10 @@ export function HoverImage({
     const shouldDim = hoveredIndex !== -1 && !isHovered && !isActive
 
     return cn(
-      "group flex items-center justify-between border-b border-white/10 py-2",
+      "group flex items-center justify-between border-b border-zinc-900/10 dark:border-white/10 py-2",
       "cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-      isHovered ? "text-white" : "",
-      shouldDim ? "text-zinc-600" : "text-zinc-200",
+      isHovered ? "text-zinc-950 dark:text-white" : "",
+      shouldDim ? "text-zinc-400 dark:text-zinc-600" : "text-zinc-800 dark:text-zinc-200",
     )
   }
 

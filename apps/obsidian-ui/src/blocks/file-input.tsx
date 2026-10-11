@@ -175,7 +175,7 @@ export function FileInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-              className="flex h-[150px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-white/15 bg-zinc-950/50 px-4 text-center cursor-pointer transition-colors hover:border-white/25"
+              className="flex h-[150px] w-full flex-col items-center justify-center rounded-2xl border border-dashed border-zinc-900/15 dark:border-white/15 bg-white/60 dark:bg-zinc-950/50 px-4 text-center cursor-pointer transition-colors hover:border-zinc-900/25 dark:hover:border-white/25"
               role="button"
               tabIndex={0}
               onClick={openPicker}
@@ -190,11 +190,11 @@ export function FileInput({
               <motion.div
                 animate={{ y: 0, scale: 1 }}
                 transition={{ duration: reducedMotion ? 0 : 0.2 }}
-                className="rounded-xl border border-white/10 bg-zinc-900 p-3"
+                className="rounded-xl border border-zinc-900/10 dark:border-white/10 bg-white dark:bg-zinc-900 p-3"
               >
-                <UploadCloud className="h-5 w-5 text-zinc-300" />
+                <UploadCloud className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               </motion.div>
-              <p className="mt-3 text-sm font-medium text-zinc-100">Drop files here</p>
+              <p className="mt-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">Drop files here</p>
               <p className="mt-1 text-xs text-zinc-500">or click to browse · max {maxSizeInMB} MB</p>
             </motion.div>
           )}
@@ -216,7 +216,7 @@ export function FileInput({
               >
                 <UploadCloud className="h-5 w-5 text-violet-300" />
               </motion.div>
-              <p className="mt-3 text-sm font-medium text-zinc-100">Release to upload</p>
+              <p className="mt-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">Release to upload</p>
             </motion.div>
           )}
 
@@ -228,16 +228,16 @@ export function FileInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-              className="flex w-full flex-col gap-2 rounded-2xl border border-white/10 bg-zinc-950/70 p-3"
+              className="flex w-full flex-col gap-2 rounded-2xl border border-zinc-900/10 dark:border-white/10 bg-white/80 dark:bg-zinc-950/70 p-3"
             >
               {uploading.map((item) => (
                 <motion.div key={item.id} layout>
                   <div className="flex items-center gap-2">
-                    <Loader2 className={cn("h-4 w-4 text-zinc-400", reducedMotion ? "" : "animate-spin")} />
-                    <p className="min-w-0 flex-1 truncate text-sm text-zinc-200">{item.file.name}</p>
+                    <Loader2 className={cn("h-4 w-4 text-zinc-600 dark:text-zinc-400", reducedMotion ? "" : "animate-spin")} />
+                    <p className="min-w-0 flex-1 truncate text-sm text-zinc-800 dark:text-zinc-200">{item.file.name}</p>
                     <span className="text-xs text-zinc-500">{Math.round(item.progress)}%</span>
                   </div>
-                  <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
+                  <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-zinc-900/10 dark:bg-white/10">
                     <motion.div
                       className="h-full rounded-full bg-gradient-to-r from-violet-500 to-sky-400"
                       initial={{ width: "0%" }}
@@ -258,7 +258,7 @@ export function FileInput({
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={reducedMotion ? { duration: 0 } : { duration: 0.2, ease: "easeOut" }}
-              className="flex w-full flex-col gap-2 rounded-2xl border border-white/10 bg-zinc-950/70 p-3"
+              className="flex w-full flex-col gap-2 rounded-2xl border border-zinc-900/10 dark:border-white/10 bg-white/80 dark:bg-zinc-950/70 p-3"
             >
               <motion.div
                 initial={{ scale: 0 }}
@@ -279,20 +279,20 @@ export function FileInput({
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.9 }}
                       transition={{ duration: reducedMotion ? 0 : 0.15 }}
-                      className="flex max-w-[180px] items-center gap-1.5 rounded-lg border border-white/10 bg-zinc-900 px-2 py-1"
+                      className="flex max-w-[180px] items-center gap-1.5 rounded-lg border border-zinc-900/10 dark:border-white/10 bg-white dark:bg-zinc-900 px-2 py-1"
                     >
                       {item.file.type.startsWith("image/") ? (
-                        <ImageIcon className="h-3.5 w-3.5 shrink-0 text-zinc-400" />
+                        <ImageIcon className="h-3.5 w-3.5 shrink-0 text-zinc-600 dark:text-zinc-400" />
                       ) : (
-                        <FileText className="h-3.5 w-3.5 shrink-0 text-zinc-400" />
+                        <FileText className="h-3.5 w-3.5 shrink-0 text-zinc-600 dark:text-zinc-400" />
                       )}
-                      <span className="min-w-0 flex-1 truncate text-xs text-zinc-200">{item.file.name}</span>
+                      <span className="min-w-0 flex-1 truncate text-xs text-zinc-800 dark:text-zinc-200">{item.file.name}</span>
                       <span className="text-[10px] text-zinc-500">{formatBytes(item.file.size)}</span>
                       <button
                         type="button"
                         aria-label={`Remove ${item.file.name}`}
                         onClick={() => setCompleted((prev) => prev.filter((f) => f.id !== item.id))}
-                        className="ml-0.5 text-zinc-500 transition-colors hover:text-zinc-200"
+                        className="ml-0.5 text-zinc-500 transition-colors hover:text-zinc-800 dark:hover:text-zinc-200"
                       >
                         <X className="h-3.5 w-3.5" />
                       </button>

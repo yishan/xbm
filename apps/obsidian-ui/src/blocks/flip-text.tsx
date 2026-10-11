@@ -124,7 +124,7 @@ export function FlipText({
   return (
     <span
       className={cn(
-        "inline-block cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-white/20",
+        "inline-block cursor-pointer select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900/20 dark:focus-visible:ring-white/20",
         className,
       )}
       style={{ perspective: "600px" }}

@@ -87,7 +87,7 @@ function PartnerCard({
       onFocus={onFocus}
       onBlur={onBlur}
       className={cn(
-        "group relative flex flex-col justify-between overflow-hidden rounded-[20px] border border-white/10 bg-zinc-900/80 p-6 text-left",
+        "group relative flex flex-col justify-between overflow-hidden rounded-[20px] border border-zinc-900/10 dark:border-white/10 bg-white/85 dark:bg-zinc-900/80 p-6 text-left",
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-400",
       )}
       initial={false}
@@ -105,7 +105,7 @@ function PartnerCard({
         }}
       />
       <div className="relative flex items-start justify-between gap-4">
-        <div className="rounded-xl border border-white/10 bg-white/5 p-2 text-zinc-100">
+        <div className="rounded-xl border border-zinc-900/10 dark:border-white/10 bg-zinc-900/[0.04] dark:bg-white/5 p-2 text-zinc-900 dark:text-zinc-100">
           <Icon className="h-5 w-5" />
         </div>
         <span className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500">
@@ -113,9 +113,9 @@ function PartnerCard({
         </span>
       </div>
       <div className="relative mt-8">
-        <h3 className="text-2xl font-semibold tracking-tight text-zinc-100">{item.name}</h3>
-        <p className="mt-2 text-sm leading-relaxed text-zinc-400">{item.description}</p>
-        <div className="mt-5 flex items-center gap-2 text-sm font-medium text-zinc-200">
+        <h3 className="text-2xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">{item.name}</h3>
+        <p className="mt-2 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">{item.description}</p>
+        <div className="mt-5 flex items-center gap-2 text-sm font-medium text-zinc-800 dark:text-zinc-200">
           <span>{item.cta}</span>
           <motion.span
             initial={false}
@@ -168,7 +168,7 @@ function Divider({
             key={i}
             className={cn(
               "h-1.5 w-1.5 rounded-full",
-              brightened ? "bg-zinc-200" : activeSide ? "bg-zinc-600" : "bg-zinc-700",
+              brightened ? "bg-zinc-800 dark:bg-zinc-200" : activeSide ? "bg-zinc-400 dark:bg-zinc-600" : "bg-zinc-300 dark:bg-zinc-700",
             )}
             initial={false}
             animate={{ scale, opacity }}

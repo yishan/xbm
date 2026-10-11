@@ -30,11 +30,11 @@ export function ClickSparkDemo() {
             type="button"
             aria-label="Spark"
             data-testid="spark-button"
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-zinc-900 border border-white/10 p-0"
+            className="flex h-16 w-16 items-center justify-center rounded-full bg-white dark:bg-zinc-900 border border-zinc-900/10 dark:border-white/10 p-0"
           >
             <Zap />
           </button>
-          <p className="text-sm text-zinc-400">Click anywhere</p>
+          <p className="text-sm text-zinc-600 dark:text-zinc-400">Click anywhere</p>
           <p className="text-xs text-zinc-500">{sparkCount} {sparkCount === 1 ? "spark" : "sparks"}</p>
         </div>
       </ClickSpark>

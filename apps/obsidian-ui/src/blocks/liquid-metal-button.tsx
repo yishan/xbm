@@ -258,8 +258,8 @@ export function LiquidMetalButton({
         className="pointer-events-none absolute inset-0 h-full w-full rounded-full"
         aria-hidden="true"
       />
-      <span className="pointer-events-none absolute inset-[3px] rounded-full bg-zinc-950 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]" />
-      <span className="relative z-10 inline-flex items-center gap-2 text-sm font-medium text-zinc-100">
+      <span className="pointer-events-none absolute inset-[3px] rounded-full bg-zinc-50 dark:bg-zinc-950 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.9)] dark:shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]" />
+      <span className="relative z-10 inline-flex items-center gap-2 text-sm font-medium text-zinc-900 dark:text-zinc-100">
         {children ?? (
           <>
             <Sparkles className="h-4 w-4" aria-hidden="true" />
