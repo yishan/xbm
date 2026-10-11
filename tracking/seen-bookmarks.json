@@ -162,6 +162,18 @@
       "folder": "unfiled",
       "why": "MIT TypeScript library of plain monospace motion that matches Yishan's short plain-text style; gallery of all pieces plus an agent-fleet status page built from pieces with real data (git log, nightly runs); approved by Yishan 2026-10-09 00:07, manual start 00:24",
       "built": "2026-10-09"
+    },
+    {
+      "id": "2108555099241128416",
+      "title": "Open Intelligent UI (CopilotKit)",
+      "url": "https://x.com/CopilotKit/status/2108555099241128416",
+      "date": "2026-10-09",
+      "tech": "Generative UI pattern from CopilotKit/OpenIntelligentUI (MIT), re-implemented as a pure front end with scripted replies (示例数据); no model, no Worker",
+      "repo": "https://github.com/CopilotKit/OpenIntelligentUI",
+      "slug": "open-intelligent-ui",
+      "folder": "unfiled",
+      "why": "Agent answers with live components from your own design system; maps to Yishan's agent-UI product/UX work; approved 2026-10-10 20:27 with no-real-model tweak",
+      "built": "2026-10-11"
     }
   ],
   "skipped": []
