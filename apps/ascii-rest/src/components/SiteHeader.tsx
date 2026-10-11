@@ -24,7 +24,7 @@ export function SiteHeader({ page }: { page: Page }) {
           className="flex shrink-0 items-baseline gap-1.5 font-mono text-sm font-semibold text-foreground"
         >
           ascii.rest
-          <span className="hidden text-xs font-normal text-muted-foreground sm:inline">&times; xbm</span>
+          <span className="hidden text-xs font-normal text-muted-foreground sm:inline">&times; xge</span>
         </a>
 
         <nav className="flex min-w-0 items-center gap-3 overflow-x-auto font-mono text-xs">

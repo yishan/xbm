@@ -91,7 +91,7 @@ export function Fleet() {
             subtitle={`${FLEET.demos.length} live demos · ${FLEET.merges.length} merged PRs · since ${firstDay}`}
             source={FLEET.sources.demos}
           >
-            <Piece id="big-text" options={{ text: "xbm fleet" }} tone="text-signal" />
+            <Piece id="big-text" options={{ text: "xge fleet" }} tone="text-signal" />
           </FleetPanel>
 
           <FleetPanel
