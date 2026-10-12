@@ -551,7 +551,7 @@ const body = `<figure class="iso-figure dp"><div class="iso-plate">${corners}${s
 
 const CSS = readFileSync(join(HERE, "dps6.css"), "utf8");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("__MODEL__", readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export /gm, "").replace(/^export \{[^}]*\};?$/m, ""));
-const page = k.pageHtml({ title: "PowerShift DPS6 · XBM", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("dps6", THEME)}${body}${FOOT}`, script: kitScript() + LIVE, width: 980 });
+const page = k.pageHtml({ title: "PowerShift DPS6 · Focus Mk3, opened up", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("dps6")}${body}${FOOT}`, script: kitScript() + LIVE, width: 980 });
 const file = write("dps6", THEME, page);
 console.log("wrote", file, `${(page.length / 1024).toFixed(0)} KB`, `${R.items.length} items`, `${R.solids.length} shapes`);
 A.auditOrExit(R, P, { allow: [["clutch.spring2", "clutch.spring1"], ["clutch.bearing2", "clutch.bearing1"]] });

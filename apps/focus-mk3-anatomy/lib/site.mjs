@@ -5,7 +5,7 @@ import { fileURLToPath } from "node:url";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 export const KIT = join(ROOT, "vendor/anatomy");
-export const SITE = join(ROOT, "site");
+export const SITE = join(ROOT, "dist");
 
 // Ordered the way power flows through the car: engine → gearbox → steering → suspension.
 export const FIGURES = [
@@ -15,7 +15,7 @@ export const FIGURES = [
   { id: "blade", fig: "Fig 4", title: "Control Blade rear axle", blurb: "Four links, each holding the wheel in one direction." },
 ];
 export const figureOf = (id) => FIGURES.find((f) => f.id === id);
-export const fileOf = (id, theme) => (theme === "dark" ? `${id}-dark.html` : `${id}.html`);
+export const fileOf = (id) => `${id}.html`;
 export const themeOf = (argv = process.argv) => (argv.includes("--dark") ? "dark" : "light");
 
 export const NAV_CSS = `
@@ -27,20 +27,24 @@ export const NAV_CSS = `
 .xbm-links a[aria-current]{color:var(--anatomy-strong);text-decoration:underline;text-underline-offset:4px}
 .xbm-foot{margin-top:40px;font-size:12px;color:var(--anatomy-muted)}
 .xbm-foot a{color:inherit}
+.xbm-theme{appearance:none;font:inherit;letter-spacing:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer;text-transform:lowercase}
+.xbm-theme:hover{color:var(--anatomy-strong)}
+.iso-page{margin-bottom:120px}
 `;
 
-export function nav(current, theme) {
-  const links = FIGURES.map((f) => `<a href="${fileOf(f.id, theme)}"${f.id === current ? ' aria-current="page"' : ""}>${f.fig.replace("Fig ", "")} · ${f.title}</a>`).join("");
-  const other = theme === "dark" ? "light" : "dark";
-  const swap = current ? fileOf(current, other) : other === "dark" ? "index-dark.html" : "index.html";
-  return `<nav class="xbm-nav" aria-label="XBM figures"><a class="xbm-home" href="${theme === "dark" ? "index-dark.html" : "index.html"}">XBM · Focus Mk3, opened up</a><span class="xbm-links">${links}<a href="${swap}">${other} theme</a></span></nav>`;
+// Runs first in <body>: follow the system colour scheme unless the reader picked one, before anything paints.
+const THEME_BOOT = `<script>(()=>{const b=document.body,m=matchMedia("(prefers-color-scheme: dark)"),k="xbm-theme",set=(t)=>{b.dataset.theme=t;const n=document.querySelector("[data-theme-toggle]");if(n)n.textContent=t==="dark"?"light theme":"dark theme"};set(localStorage.getItem(k)||(m.matches?"dark":"light"));m.addEventListener("change",(e)=>{if(!localStorage.getItem(k))set(e.matches?"dark":"light")});addEventListener("DOMContentLoaded",()=>{set(b.dataset.theme);document.querySelector("[data-theme-toggle]")?.addEventListener("click",()=>{const t=b.dataset.theme==="dark"?"light":"dark";localStorage.setItem(k,t);set(t)})})})()</script>`;
+
+export function nav(current) {
+  const links = FIGURES.map((f) => `<a href="${fileOf(f.id)}"${f.id === current ? ' aria-current="page"' : ""}>${f.fig.replace("Fig ", "")} · ${f.title}</a>`).join("");
+  return `${THEME_BOOT}<nav class="xbm-nav" aria-label="Figures"><a class="xbm-home" href="index.html">Focus Mk3, opened up</a><span class="xbm-links">${links}<button type="button" class="xbm-theme" data-theme-toggle>dark theme</button></span></nav>`;
 }
 
 export const FOOT = `<p class="xbm-foot">Interactive figures of a Ford Focus Mk3 sedan (C346, 1.6 Ti-VCT, PowerShift automatic). Drawn with the MIT-licensed anatomy isometric kit. Not affiliated with Ford.</p>`;
 
 export function write(id, theme, html) {
   mkdirSync(SITE, { recursive: true });
-  const file = join(SITE, id === "index" ? (theme === "dark" ? "index-dark.html" : "index.html") : fileOf(id, theme));
+  const file = join(SITE, id === "index" ? "index.html" : fileOf(id));
   writeFileSync(file, html);
   return file;
 }

@@ -13,8 +13,8 @@ A single-user web demo of four working, interactive isometric "anatomy" figures 
   - EPAS: torsion-bar torque sensor, speed-dependent assist, belt-driven rack, Ackermann knuckles
   - Control Blade: multi-link kinematics solved live (camber, toe-in, blade flex through bump and rebound)
 - Interaction on every figure: drag, buttons, keyboard, idle tour, reduced-motion still
-- Light and dark themes, phone layout, an index page with thumbnails
-- Runnable with `bun install && bun run dev` from this directory; static output in `site/`
+- Follows the system light/dark setting (with a toggle), phone layout, an index page with thumbnails
+- Runnable with `bun install && bun run dev` from this directory; static output in `dist/`, served by the shared deploy at `li.yishan.app/focus-mk3-anatomy/`
 
 **Explicitly out of scope**
 - Other Focus systems (start-stop, ABS/ESC, torque vectoring)

@@ -198,7 +198,7 @@ const body = `<figure class="iso-figure ep"><div class="iso-plate">${corners}${s
 const CSS = readFileSync(join(HERE, "epas.css"), "utf8");
 const MODEL = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export \{[^}]*\};?$/m, "").replace(/^export /gm, "");
 const LIVE = BELT_LIVE + readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("__MODEL__", MODEL);
-const page = k.pageHtml({ title: "Electric power steering · XBM", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("epas", THEME)}${body}${FOOT}`, script: kitScript() + latheScript() + LIVE, width: 980 });
+const page = k.pageHtml({ title: "Electric power steering · Focus Mk3, opened up", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("epas")}${body}${FOOT}`, script: kitScript() + latheScript() + LIVE, width: 980 });
 const file = write("epas", THEME, page);
 console.log("wrote", file, `${(page.length / 1024).toFixed(0)} KB`, `${R.items.length} items`);
 A.auditOrExit(R, P, { cover: ["belt.inner", "belt.outer"], allow: [["wheel.hub", "wheel.spokes"], ["wheel.rim", "wheel.spokes"]] });

@@ -1,4 +1,4 @@
-site/
+dist/
 node_modules/
 shots/
 .DS_Store

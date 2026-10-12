@@ -1,6 +1,6 @@
-# focus-mk3-anatomy
+# Focus Mk3, opened up
 
-Four interactive isometric figures of a Ford Focus Mk3 sedan (C346, 1.6 Ti-VCT, PowerShift automatic):
+Four working isometric models of a Ford Focus Mk3 sedan (1.6 Ti-VCT, PowerShift automatic): cam phasers, the DPS6 twin-clutch gearbox, electric power steering and the Control Blade rear axle. Drag, press keys or let each one run its tour.
 
 | Fig | Figure | Interaction |
 |---|---|---|
@@ -16,7 +16,7 @@ bun install
 bun run dev
 ```
 
-Then open http://localhost:4321. `bun run build` writes the static site to `site/` (deployable as-is); `bun run audit` re-runs every figure's geometry audit; `bun run thumbs` refreshes the index thumbnails (needs Chrome and Node).
+Then open http://localhost:4321. `bun run build` writes the static site to `dist/` (picked up by the root `scripts/build-all.sh` as `li.yishan.app/focus-mk3-anatomy/`); `bun run audit` re-runs every figure's geometry audit; `bun run thumbs` refreshes the index thumbnails (needs Chrome and Node). Pages follow the system light/dark setting, with a toggle in the nav.
 
 ## Layout
 

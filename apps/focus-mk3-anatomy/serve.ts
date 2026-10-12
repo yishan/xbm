@@ -1,7 +1,7 @@
 // Zero-dependency static server for the built site.
 import { join, normalize } from "node:path";
 
-const root = join(import.meta.dir, "site");
+const root = join(import.meta.dir, "dist");
 const port = Number(process.env.PORT ?? 4321);
 
 Bun.serve({

@@ -11,7 +11,6 @@ const k = await import(join(KIT, "kit/iso-kit.mjs"));
 const run = (dir, args) => execFileSync(process.execPath, ["build.mjs", ...args], { cwd: join(ROOT, "figures", dir), stdio: "inherit" });
 for (const { id } of FIGURES) {
   run(id, []);
-  run(id, ["--dark"]);
   if (process.argv.includes("--audit")) run(id, ["--audit"]);
 }
 
@@ -20,7 +19,7 @@ if (process.argv.includes("--thumbs")) {
   mkdirSync(THUMBS, { recursive: true });
   for (const { id } of FIGURES)
     for (const theme of ["light", "dark"])
-      execFileSync(process.execPath, [join(KIT, "scripts/capture.mjs"), join(SITE, fileOf(id, theme)), "--out", join(THUMBS, `${id}-${theme}.png`), "--width", "1100", "--scale", "1", "--reduced", "--select", ".iso-stage"], { stdio: "inherit" });
+      execFileSync(process.execPath, [join(KIT, "scripts/capture.mjs"), join(SITE, fileOf(id)), "--out", join(THUMBS, `${id}-${theme}.png`), "--width", "1100", "--scale", "1", "--reduced", "--theme", theme, "--select", ".iso-stage"], { stdio: "inherit" });
 }
 
 if (existsSync(THUMBS)) cpSync(THUMBS, join(SITE, "thumbs"), { recursive: true });
@@ -36,14 +35,14 @@ const CSS = `
 .xbm-card .xbm-fig{font-family:var(--anatomy-mono);font-size:10.5px;letter-spacing:.06em;color:var(--anatomy-muted)}
 .xbm-card h2{margin:4px 0 4px;font-size:16px;font-weight:600;color:var(--anatomy-strong)}
 .xbm-card p{margin:0;font-size:13px;color:var(--anatomy-text)}
+.iso[data-theme="dark"] .xbm-thumb-light,.iso:not([data-theme="dark"]) .xbm-thumb-dark{display:none}
 `;
-for (const theme of ["light", "dark"]) {
+{
   const cards = FIGURES.map((f) => {
-    const thumb = `thumbs/${f.id}-${theme}.png`;
-    const img = existsSync(join(SITE, thumb)) ? `<img src="${thumb}" alt="" loading="lazy">` : "";
-    return `<a class="xbm-card" href="${fileOf(f.id, theme)}">${img}<span class="xbm-fig">${f.fig}</span><h2>${f.title}</h2><p>${f.blurb}</p></a>`;
+    const img = ["light", "dark"].map((t) => (existsSync(join(THUMBS, `${f.id}-${t}.png`)) ? `<img class="xbm-thumb-${t}" src="thumbs/${f.id}-${t}.png" alt="" loading="lazy">` : "")).join("");
+    return `<a class="xbm-card" href="${fileOf(f.id)}">${img}<span class="xbm-fig">${f.fig}</span><h2>${f.title}</h2><p>${f.blurb}</p></a>`;
   }).join("");
-  const body = `${nav(null, theme)}<header class="xbm-hero"><h1>A Focus Mk3, opened up</h1><p>Four working models of the machinery in a Ford Focus Mk3 sedan (C346) with the 1.6 Ti-VCT engine and the PowerShift automatic: the cam phasers, the twin-clutch gearbox, the electric power steering and the Control Blade rear axle. Every figure moves; drag, press keys or let it run its tour. The numbers come from Ford's published specifications where they exist, and each caption says where the drawing is illustrative.</p></header><main class="xbm-grid">${cards}</main>${FOOT}`;
-  write("index", theme, k.pageHtml({ title: "XBM · Ford Focus Mk3, opened up", theme, body: `<style>${NAV_CSS}${CSS}</style>${body}`, width: 1040 }));
+  const body = `${nav(null)}<header class="xbm-hero"><h1>A Focus Mk3, opened up</h1><p>Four working models of the machinery in a Ford Focus Mk3 sedan (C346) with the 1.6 Ti-VCT engine and the PowerShift automatic: the cam phasers, the twin-clutch gearbox, the electric power steering and the Control Blade rear axle. Every figure moves; drag, press keys or let it run its tour. The numbers come from Ford's published specifications where they exist, and each caption says where the drawing is illustrative.</p></header><main class="xbm-grid">${cards}</main>${FOOT}`;
+  write("index", "light", k.pageHtml({ title: "Focus Mk3, opened up", theme: "light", body: `<style>${NAV_CSS}${CSS}</style>${body}`, width: 1040 }));
 }
 console.log("site ready:", SITE);

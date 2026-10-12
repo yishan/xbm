@@ -174,6 +174,17 @@
       "folder": "unfiled",
       "why": "Agent answers with live components from your own design system; maps to Yishan's agent-UI product/UX work; approved 2026-10-10 20:27 with no-real-model tweak",
       "built": "2026-10-11"
+    },
+    {
+      "id": "manual-focus-mk3-anatomy",
+      "title": "Focus Mk3, opened up",
+      "url": null,
+      "date": "2026-10-12",
+      "tech": "anatomy isometric kit (MIT, vendored): static SVG built from pure models, vanilla live scripts; no framework",
+      "slug": "focus-mk3-anatomy",
+      "folder": "unfiled",
+      "why": "Owner's request (not a bookmark pick): interactive anatomy of the owner's own Focus Mk3 sedan — Ti-VCT, DPS6, EPAS, Control Blade",
+      "built": "2026-10-12"
     }
   ],
   "skipped": []

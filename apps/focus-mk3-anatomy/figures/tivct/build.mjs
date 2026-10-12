@@ -260,7 +260,7 @@ const body = `<figure class="iso-figure tv"><div class="iso-plate">${corners}${s
 const CSS = readFileSync(join(HERE, "tivct.css"), "utf8");
 const MODEL = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export \{[^}]*\};?$/m, "").replace(/^export /gm, "");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("__MODEL__", MODEL);
-const page = k.pageHtml({ title: "Ti-VCT cam phasers · XBM", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("tivct", THEME)}${body}${FOOT}`, script: kitScript() + LIVE, width: 980 });
+const page = k.pageHtml({ title: "Ti-VCT cam phasers · Focus Mk3, opened up", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("tivct")}${body}${FOOT}`, script: kitScript() + LIVE, width: 980 });
 const file = write("tivct", THEME, page);
 console.log("wrote", file, `${(page.length / 1024).toFixed(0)} KB`, `${R.items.length} items`);
 A.auditOrExit(R, P, { cover: ["timing.belt.inner", "timing.belt.outer", "stand.pointer.bar"] });

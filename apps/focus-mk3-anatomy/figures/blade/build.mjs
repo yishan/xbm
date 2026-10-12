@@ -131,7 +131,7 @@ const body = `<figure class="iso-figure bl"><div class="iso-plate">${corners}${s
 const CSS = readFileSync(join(HERE, "blade.css"), "utf8");
 const MODEL = readFileSync(join(HERE, "model.mjs"), "utf8").replace(/^export \{[^}]*\};?$/m, "").replace(/^export /gm, "");
 const LIVE = readFileSync(join(HERE, "live.js"), "utf8").replace("__DATA__", JSON.stringify(DATA)).replace("__MODEL__", MODEL);
-const page = k.pageHtml({ title: "Control Blade rear axle · XBM", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("blade", THEME)}${body}${FOOT}`, script: kitScript() + latheScript() + LIVE, width: 980 });
+const page = k.pageHtml({ title: "Control Blade rear axle · Focus Mk3, opened up", theme: THEME, body: `<style>${CSS}${NAV_CSS}</style>${nav("blade")}${body}${FOOT}`, script: kitScript() + latheScript() + LIVE, width: 980 });
 const file = write("blade", THEME, page);
 console.log("wrote", file, `${(page.length / 1024).toFixed(0)} KB`, `${R.items.length} items`);
 A.auditOrExit(R, P);
