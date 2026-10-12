@@ -1,0 +1,13 @@
+{
+  "name": "focus-mk3-anatomy",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "bun build.mjs",
+    "dev": "bun build.mjs && bun serve.ts",
+    "preview": "bun serve.ts",
+    "audit": "bun build.mjs --audit",
+    "thumbs": "node build.mjs --thumbs"
+  }
+}
