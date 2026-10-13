@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+/* Tailwind v4 directive: class-based dark mode (driven by `html.dark` from
+   useTheme) instead of the default `prefers-color-scheme` media query. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  /* Page surface colors live in variables so the element selectors below
+     only have to be declared once. */
+  :root {
+    --page-bg: #fafafa;
+    --page-fg: #171717;
+    color-scheme: light;
+    min-height: 100%;
+  }
+
+  :root.dark {
+    --page-bg: #0a0a0a;
+    --page-fg: #f5f5f5;
+    color-scheme: dark;
+  }
+
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100%;
+    background-color: var(--page-bg);
+    color: var(--page-fg);
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      "Segoe UI",
+      Roboto,
+      "Helvetica Neue",
+      "PingFang SC",
+      "Microsoft YaHei",
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
