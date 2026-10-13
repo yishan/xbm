@@ -185,6 +185,17 @@
       "folder": "unfiled",
       "why": "Owner's request (not a bookmark pick): interactive anatomy of the owner's own Focus Mk3 sedan — Ti-VCT, DPS6, EPAS, Control Blade",
       "built": "2026-10-12"
+    },
+    {
+      "id": "2109633034396090728",
+      "title": "snapcn — Remotion components for product demo videos",
+      "url": "https://x.com/shadcnlabs/status/2109633034396090728",
+      "date": "2026-10-12",
+      "tech": "Remotion 4.0.473 Player + vendored snapcn registry source (MIT); Vite + React + Tailwind",
+      "slug": "snapcn",
+      "folder": "unfiled",
+      "why": "shadcn-style Remotion components for product demo videos (chat stream, terminal, device frames, captions); maps to product/UX demo work; approved 2026-10-13 21:55",
+      "built": "2026-10-14"
     }
   ],
   "skipped": []
