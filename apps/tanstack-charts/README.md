@@ -1,8 +1,8 @@
 # TanStack Charts
 
-A one-page dashboard built with TanStack Charts 1.0 — five responsive SVG charts with hover tooltips, keyboard focus and light/dark themes, using real data: the xbm gallery's own merge history and cited numbers on AI agent cost (Jev latency and rule compliance, SemiAnalysis subscription value and margins).
+A one-page dashboard built with TanStack Charts 1.1 — six responsive SVG charts, including a demo launch timeline with the new brushX date-range brush (start/end dates drawn at the handles), with hover tooltips, keyboard focus and light/dark themes, using real data: the xbm gallery's own merge history and cited numbers on AI agent cost (Jev latency and rule compliance, SemiAnalysis subscription value and margins).
 
-> Charts are rendered with **[TanStack Charts](https://github.com/TanStack/charts)** (`@tanstack/charts` 1.0.0 and its React adapter `@tanstack/charts/react`), by TanStack, **MIT License**. This demo is not affiliated with TanStack.
+> Charts are rendered with **[TanStack Charts](https://github.com/TanStack/charts)** (`@tanstack/charts` 1.1.0 — updated from 1.0.0 on 2026-10-15 — and its React adapter `@tanstack/charts/react`), by TanStack, **MIT License**. This demo is not affiliated with TanStack.
 
 - Live: https://li.yishan.app/tanstack-charts/
 - Bookmark: https://x.com/tan_stack/status/2107141729111736483
@@ -13,6 +13,7 @@ A one-page dashboard built with TanStack Charts 1.0 — five responsive SVG char
 | # | Chart | Marks | Interaction | Source |
 |---|-------|-------|-------------|--------|
 | 1 | xbm gallery timeline — merged PRs per day by kind | stacked `barY` / multi-series `lineY` | **Per day ↔ cumulative toggle, kind filter**, grouped tooltip | `yishan/xbm` git history |
+| 1b | Demo launch timeline (new in 1.1 update) | `barY` + dashed `lineY` + `text` handle labels | **`brushX`** over launch days: drag / handles / arrow keys, start & end dates at the handles, list of demos in range, reset | `tracking/seen-bookmarks.json` `built` dates via `scripts/gen-launches.ts` |
 | 2 | Jev latency, 1 vs 32 questions in one call | `barX` + `text` | tooltip | Paweł Huryn, *A New Kind of AI Model: Jev and Quick Wins for PMs* |
 | 3 | Jev rule compliance, 24/24 vs 5/24 | stacked `barY` + `text` | grouped tooltip | same article |
 | 4 | API-equivalent value used on a $200 plan | `barY` + `ruleY` + `text` | tooltip | SemiAnalysis, *Anthropic Subscriptions Offer 5x+ More Value Than OpenAI* |

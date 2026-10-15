@@ -135,7 +135,8 @@
       "slug": "tanstack-charts",
       "folder": "unfiled",
       "why": "MIT TypeScript chart grammar on D3 primitives with a React adapter; first data-chart library in the gallery; dashboard of xbm merge history and agent-cost numbers from Nutrient's 2026-10-06 brief; approved by Yishan 2026-10-06 21:45",
-      "built": "2026-10-07"
+      "built": "2026-10-07",
+      "updates": [{"date": "2026-10-15", "version": "1.1.0", "changes": "升级 @tanstack/charts 1.0.0 → 1.1.0：新增「Demo launch timeline」，用 1.1 的 brushX 选择首发日期范围，两个手柄上标出起止日期"}]
     },
     {
       "id": "2107410561545928983",
