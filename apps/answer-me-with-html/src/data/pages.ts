@@ -52,6 +52,22 @@ export const PAGES: DemoPage[] = [
     components: ['list', 'callout', 'table'],
     source: 'xbm AGENTS.md, STE rules from upstream',
   },
+  {
+    id: '06-er-requirement-change',
+    title: '需求变更的数据模型（er · v0.5）',
+    summary: 'A product-requirement schema change drawn with the new er component; switch Before / Changes / After under the diagram.',
+    components: ['er', 'callout', 'table', 'ask'],
+    source: '示例数据 (a made-up task app)',
+    exampleData: true,
+  },
+  {
+    id: '07-remark-feedback',
+    title: '用「标注」把意见发回给 Agent（Remark · v0.5）',
+    summary: 'Turn on 标注, mark blocks as 建议 / 保留 / 疑问 / 关注, add a note, and copy them back to the agent in the Reply.',
+    components: ['remark', 'callout', 'table', 'list'],
+    source: '示例数据 (a made-up release note draft)',
+    exampleData: true,
+  },
 ]
 
 export const pageUrl = (id: string) => `${import.meta.env.BASE_URL}pages/${id}.html`

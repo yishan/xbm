@@ -148,7 +148,8 @@
       "slug": "answer-me-with-html",
       "folder": "unfiled",
       "why": "MIT agent output format with an STE100 mode that matches the running STE trial; pages explain xbm itself (nightly pipeline, Vercel-vs-Worker rule, gallery timeline); approved by Yishan 2026-10-08 00:23, manual start after the 22:17 skip",
-      "built": "2026-10-08"
+      "built": "2026-10-08",
+      "updates": [{"date": "2026-10-15", "version": "0.5.2", "changes": "升级 am CLI v0.4.14 → v0.5.2 并重新渲染全部页面；新增两页（示例数据）：er 实体关系图展示需求变更的数据模型（改前/变更/改后切换），Remark「标注」演示把块级批注随回复发回 Agent"}]
     },
     {
       "id": "2107800389395636271",
