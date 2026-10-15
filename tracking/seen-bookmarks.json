@@ -163,7 +163,8 @@
       "slug": "ascii-rest",
       "folder": "unfiled",
       "why": "MIT TypeScript library of plain monospace motion that matches Yishan's short plain-text style; gallery of all pieces plus an agent-fleet status page built from pieces with real data (git log, nightly runs); approved by Yishan 2026-10-09 00:07, manual start 00:24",
-      "built": "2026-10-09"
+      "built": "2026-10-09",
+      "updates": [{"date": "2026-10-15", "version": "0.4.0", "changes": "升级 ascii.rest 0.2.1 → 0.4.0（217 个作品），移除 0.2.1 的安装年龄例外；Fleet 页用新 ascii.rest/kit 的 barChart 画每周上线 demo 数、typewriter 打出标题"}]
     },
     {
       "id": "2108555099241128416",

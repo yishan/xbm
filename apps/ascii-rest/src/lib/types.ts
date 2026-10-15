@@ -6,7 +6,7 @@ export type Category =
   | "scenes" | "shapes" | "space" | "physics" | "nature" | "creatures" | "objects"
   | "generative" | "effects" | "ui" | "data" | "type" | "logos" | "companies" | "distros"
 
-/** One piece's meta, read from ascii.rest 0.2.1 by scripts/gen-data.ts. */
+/** One piece's meta, read from ascii.rest 0.4.0 by scripts/gen-data.ts. */
 export type PieceInfo = {
   id: PieceName
   name: string
@@ -37,9 +37,10 @@ export type Merge = { date: string; pr: number; branch: string }
 export type Fleet = {
   generated: string
   head: string
-  sources: Record<"demos" | "prs", string>
+  sources: Record<"demos" | "prs" | "shipped", string>
   demos: Demo[]
   merges: Merge[]
   perWeek: { labels: string[]; demos: number[]; prs: number[] }
+  shippedPerWeek: { labels: string[]; demos: number[] }
 }
 export const FLEET = fleetJson as Fleet

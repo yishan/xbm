@@ -1,10 +1,11 @@
 {
- "generated": "2026-10-08T16:39:25.663Z",
+ "generated": "2026-10-15T02:52:17.798Z",
  "sources": {
-  "demos": "git log --first-parent origin/main (head 1850b4c), first commit adding apps/<slug>/package.json",
-  "prs": "git log --first-parent --merges origin/main"
+  "demos": "git log --first-parent origin/main (head 4a0d820), first commit adding apps/<slug>/package.json",
+  "prs": "git log --first-parent --merges origin/main",
+  "shipped": "tracking/seen-bookmarks.json built dates (first release per demo), weeks start Monday"
  },
- "head": "1850b4c",
+ "head": "4a0d820",
  "demos": [
   {
    "slug": "figures4papers",
@@ -77,9 +78,93 @@
    "merged": "2026-10-08 01:20",
    "commit": "1850b4c",
    "pr": 16
+  },
+  {
+   "slug": "ascii-rest",
+   "merged": "2026-10-09 01:06",
+   "commit": "9bbfddb",
+   "pr": 17
+  },
+  {
+   "slug": "open-intelligent-ui",
+   "merged": "2026-10-11 12:47",
+   "commit": "89c5d78",
+   "pr": 21
+  },
+  {
+   "slug": "focus-mk3-anatomy",
+   "merged": "2026-10-12 16:52",
+   "commit": "2ce49b6",
+   "pr": 27
+  },
+  {
+   "slug": "snapcn",
+   "merged": "2026-10-14 07:31",
+   "commit": "4a0d820",
+   "pr": 28
   }
  ],
  "merges": [
+  {
+   "date": "2026-10-14",
+   "pr": 28,
+   "branch": "demo/snapcn"
+  },
+  {
+   "date": "2026-10-12",
+   "pr": 27,
+   "branch": "demo/focus-mk3-anatomy"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 26,
+   "branch": "fix/obsidian-ui-theme"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 25,
+   "branch": "fix/open-intelligent-ui-theme"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 21,
+   "branch": "demo/open-intelligent-ui"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 24,
+   "branch": "chore/xg-experiments"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 23,
+   "branch": "feat/dark-light-only-demos"
+  },
+  {
+   "date": "2026-10-11",
+   "pr": 22,
+   "branch": "feat/theme-thumbs"
+  },
+  {
+   "date": "2026-10-10",
+   "pr": 20,
+   "branch": "chore/labs-title"
+  },
+  {
+   "date": "2026-10-10",
+   "pr": 19,
+   "branch": "feat/demos-json"
+  },
+  {
+   "date": "2026-10-10",
+   "pr": 18,
+   "branch": "chore/site-links"
+  },
+  {
+   "date": "2026-10-09",
+   "pr": 17,
+   "branch": "demo/ascii-rest"
+  },
   {
    "date": "2026-10-08",
    "pr": 16,
@@ -160,17 +245,34 @@
   "labels": [
    "09-21",
    "09-28",
-   "10-05"
+   "10-05",
+   "10-12"
   ],
   "demos": [
    2,
    5,
-   5
+   7,
+   2
   ],
   "prs": [
    2,
    7,
-   6
+   16,
+   2
+  ]
+ },
+ "shippedPerWeek": {
+  "labels": [
+   "09-21",
+   "09-28",
+   "10-05",
+   "10-12"
+  ],
+  "demos": [
+   2,
+   5,
+   7,
+   2
   ]
  }
 }

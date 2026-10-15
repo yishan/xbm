@@ -6,7 +6,7 @@
       "name": "ascii-rest",
       "dependencies": {
         "@tailwindcss/vite": "^4.3.3",
-        "ascii.rest": "0.2.1",
+        "ascii.rest": "0.4.0",
         "class-variance-authority": "^0.7.1",
         "clsx": "^2.1.1",
         "lucide-react": "^1.49.0",
@@ -333,7 +333,7 @@
 
     "aria-hidden": ["aria-hidden@1.2.6", "", { "dependencies": { "tslib": "^2.0.0" } }, "sha512-ik3ZgC9dY/lYVVM++OISsaYDeg1tb0VtP5uL3ouh1koGOaUMDPpbFIei4JkFimWUFPn90sbMNMXQAIVOlnYKJA=="],
 
-    "ascii.rest": ["ascii.rest@0.2.1", "", { "peerDependencies": { "react": ">=18" }, "optionalPeers": ["react"], "bin": { "ascii.rest": "dist/cli.js" } }, "sha512-9PY859MpGBo2SQtXO+YTQ9/tuAMG2QUcptXC3PZx5/q8Pk7GFjQPGgOC+AF1+QFQGprVqZBDRPX6k/5TB7MIVw=="],
+    "ascii.rest": ["ascii.rest@0.4.0", "", { "peerDependencies": { "react": ">=18" }, "optionalPeers": ["react"], "bin": { "ascii.rest": "dist/cli.js" } }, "sha512-lqKcesbm3Ij5ENvgs/CTRWF3HrjAogOoMJdqOh8rlRmdzG3uRSyqS/3chfnjJfcIeqj69MWI8+NstMZ/Br9Ivw=="],
 
     "ast-types": ["ast-types@0.16.3", "", { "dependencies": { "tslib": "^2.0.1" } }, "sha512-FvWoWYfSCM6kRxCSH+MGLHIKKGRL6A6AW7Zek2O32REPQRdg131428uRTKMBYAeRd3XXAaHDS60Wpri7CdKDrA=="],
 

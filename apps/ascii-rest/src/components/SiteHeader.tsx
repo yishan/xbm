@@ -50,12 +50,12 @@ export function SiteHeader({ page }: { page: Page }) {
 
         <div className="ml-auto flex shrink-0 items-center gap-2">
           <a
-            href="https://www.npmjs.com/package/ascii.rest/v/0.2.1"
+            href="https://www.npmjs.com/package/ascii.rest/v/0.4.0"
             target="_blank"
             rel="noreferrer"
             className="hidden items-center gap-1 font-mono text-xs text-muted-foreground transition-colors hover:text-foreground sm:inline-flex"
           >
-            npm 0.2.1
+            npm 0.4.0
             <ExternalLink className="h-3 w-3" aria-hidden="true" />
           </a>
 

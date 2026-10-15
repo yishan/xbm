@@ -1,6 +1,6 @@
 # PLAN — ascii.rest (xbm 2026-10-09)
 
-**Goal:** show what [ascii.rest](https://ascii.rest) ([bas3line/ascii](https://github.com/bas3line/ascii), MIT, v0.2.1) does, and use its pieces for one real page about Yishan's agent fleet.
+**Goal:** show what [ascii.rest](https://ascii.rest) ([bas3line/ascii](https://github.com/bas3line/ascii), MIT, v0.4.0; first built on v0.2.1) does, and use its pieces for one real page about Yishan's agent fleet.
 
 ## MVP scope
 - **Gallery** (`index.html`, React): all 208 pieces read from the installed package, by category (15), with filter, fps (native / 24 / 8 / still) and mono toggles, light/dark.
@@ -14,7 +14,7 @@
 - Any backend / Cloudflare Worker.
 
 ## Tasks
-1. Scaffold (`bun create vite` react-ts), bunfig with the one-package release-age exception, Tailwind v4 + shadcn base, pin `ascii.rest` 0.2.1.
+1. Scaffold (`bun create vite` react-ts), bunfig with the release-age rule (0.2.1 needed a one-package exception, removed in the 0.4.0 update), Tailwind v4 + shadcn base, pin `ascii.rest` (0.2.1 at first release, 0.4.0 since 2026-10-15).
 2. `scripts/gen-data.ts` → `src/data/pieces.json` (package meta) and `src/data/fleet.json` (git log + nightly notes).
 3. Components by DeepSeek (aider, one per request): AsciiFrame, SiteHeader, SiteFooter, GalleryToolbar, PieceCard, Gallery, FleetPanel, Fleet, plain.html.
 4. Build (pi trial on the first failure), hand fixes, root build-all, Playwright QA 1280×800 / 390×844 × light/dark, screenshot + video.
@@ -22,4 +22,4 @@
 ## Stack
 - Vite multi-page + React 19 + TS: repo standard; three static pages under one base.
 - Tailwind v4 + shadcn button: repo standard, minimal.
-- ascii.rest 0.2.1 from npm (not vendored), pinned exactly.
+- ascii.rest 0.4.0 (was 0.2.1) from npm (not vendored), pinned exactly.
