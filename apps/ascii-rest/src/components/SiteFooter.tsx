@@ -17,7 +17,7 @@ export function SiteFooter() {
   return (
     <footer className="w-full border-t border-border max-w-6xl mx-auto px-4 py-8 text-xs text-muted-foreground font-mono">
       <p>
-        pieces by <ExternalLink href="https://ascii.rest">ascii.rest</ExternalLink> 0.2.1 — MIT ©{" "}
+        pieces by <ExternalLink href="https://ascii.rest">ascii.rest</ExternalLink> 0.4.0 — MIT ©{" "}
         <ExternalLink href="https://github.com/bas3line">@bas3line</ExternalLink> ·{" "}
         <ExternalLink href="https://github.com/bas3line/ascii">source</ExternalLink>
       </p>
@@ -29,8 +29,8 @@ export function SiteFooter() {
         · xge demo 2026-10-09
       </p>
       <p className="mt-2">
-        pinned to exactly 0.2.1; the 3-day release-age rule is waived for this one package (it
-        was published 2026-10-08).
+        pinned to exactly 0.4.0 (released 2026-10-10); it passes the 3-day release-age rule, so no
+        exception is needed.
       </p>
     </footer>
   );

@@ -51,7 +51,7 @@ export function Gallery() {
         <section className="flex flex-col gap-2">
           <h1 className="font-mono text-xl font-semibold">ascii.rest gallery</h1>
           <p className="max-w-2xl text-sm text-muted-foreground">
-            Every piece in ascii.rest 0.2.1 — {PIECES.length} animated ascii
+            Every piece in ascii.rest 0.4.0 — {PIECES.length} animated ascii
             pieces in 15 categories, drawn live in this page with the React
             component from ascii.rest/react. Pieces only animate while on
             screen. Coloured pieces draw on a canvas; mono draws them as text in

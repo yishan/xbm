@@ -6,7 +6,7 @@
  *   bun scripts/gen-data.ts
  */
 import { load, names, canvas } from "ascii.rest"
-import { readdirSync, writeFileSync } from "node:fs"
+import { readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join, resolve } from "node:path"
 
 const APP = resolve(import.meta.dir, "..")
@@ -24,7 +24,6 @@ writeFileSync(join(APP, "src/data/pieces.json"), JSON.stringify(pieces, null, 1)
 // 2. demos: first first-parent commit on origin/main that added apps/<slug>/package.json
 const head = sh(["git", "rev-parse", "--short", "origin/main"])
 const demos = readdirSync(join(REPO, "apps"))
-  .filter((s) => s !== "ascii-rest")
   .map((slug) => {
     const line = sh(["git", "log", "--first-parent", "origin/main", "--diff-filter=A", "--date=format:%Y-%m-%d %H:%M", "--format=%ad|%h|%s", "--", `apps/${slug}/package.json`]).split("\n").pop() ?? ""
     const [when, hash, subject] = line.split("|")
@@ -47,16 +46,24 @@ const perWeek = {
   prs: weeks.map((w) => merges.filter((m) => monday(m.date) === w).length),
 }
 
+// 3. demos shipped per week: first release (`built`) dates in tracking/seen-bookmarks.json
+const tracking = JSON.parse(readFileSync(join(REPO, "tracking/seen-bookmarks.json"), "utf8")) as { built: { slug?: string; built?: string }[] }
+const builtDates = tracking.built.filter((b) => b.slug && b.built).map((b) => b.built!).sort()
+const shipWeeks = [...new Set(builtDates.map(monday))].sort()
+const shippedPerWeek = { labels: shipWeeks.map((w) => w.slice(5)), demos: shipWeeks.map((w) => builtDates.filter((d) => monday(d) === w).length) }
+
 const fleet = {
   generated: new Date().toISOString(),
   sources: {
     demos: `git log --first-parent origin/main (head ${head}), first commit adding apps/<slug>/package.json`,
     prs: "git log --first-parent --merges origin/main",
+    shipped: "tracking/seen-bookmarks.json built dates (first release per demo), weeks start Monday",
   },
   head,
   demos,
   merges,
   perWeek,
+  shippedPerWeek,
 }
 writeFileSync(join(APP, "src/data/fleet.json"), JSON.stringify(fleet, null, 1) + "\n")
 console.log(`pieces ${pieces.length}, demos ${demos.length}, merges ${merges.length}, `)

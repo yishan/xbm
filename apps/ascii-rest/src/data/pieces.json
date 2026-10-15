@@ -1,5 +1,29 @@
 [
  {
+  "id": "a0",
+  "name": "a0",
+  "category": "companies",
+  "note": "the rounded a with a round hole, glinting now and then",
+  "cols": 59,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "agentmail",
+  "name": "agentmail",
+  "category": "companies",
+  "note": "the agent in a brimmed hat, glinting now and then",
+  "cols": 58,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
   "id": "almalinux",
   "name": "almalinux",
   "category": "distros",
@@ -106,6 +130,18 @@
   "canvas": true,
   "clock": false,
   "cell": 1
+ },
+ {
+  "id": "autumn",
+  "name": "autumn",
+  "category": "companies",
+  "note": "the leaf with a slash for its vein, glinting now and then",
+  "cols": 29,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
  },
  {
   "id": "bar-chart",
@@ -339,8 +375,8 @@
   "id": "coderabbit",
   "name": "coderabbit",
   "category": "companies",
-  "note": "the rabbit in its orange disc, glinting now and then",
-  "cols": 64,
+  "note": "the sitting rabbit in its orange disc, glinting now and then",
+  "cols": 56,
   "rows": 28,
   "fps": 30,
   "canvas": true,
@@ -356,6 +392,18 @@
   "rows": 24,
   "fps": 20,
   "canvas": false,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "collabute",
+  "name": "collabute",
+  "category": "companies",
+  "note": "the disc shading white to black, in a black ring, glinting now and then",
+  "cols": 56,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
   "clock": false,
   "cell": 2
  },
@@ -653,6 +701,18 @@
   "category": "logos",
   "note": "the purple drop, glinting now and then",
   "cols": 38,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "elm",
+  "name": "elm",
+  "category": "logos",
+  "note": "seven tangram pieces in a square, glinting now and then",
+  "cols": 56,
   "rows": 28,
   "fps": 30,
   "canvas": true,
@@ -1056,6 +1116,18 @@
   "cell": 2
  },
  {
+  "id": "helmcode",
+  "name": "helmcode",
+  "category": "companies",
+  "note": "the helmcode hexagon in its violet, glinting now and then",
+  "cols": 53,
+  "rows": 30,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
   "id": "hilbert-curve",
   "name": "hilbert curve",
   "category": "generative",
@@ -1170,6 +1242,18 @@
   "note": "the blue dragon, scanned now and then",
   "cols": 71,
   "rows": 27,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "keiki",
+  "name": "keiki",
+  "category": "companies",
+  "note": "the rocking horse, glinting now and then",
+  "cols": 62,
+  "rows": 28,
   "fps": 30,
   "canvas": true,
   "clock": false,
@@ -2141,6 +2225,30 @@
   "category": "companies",
   "note": "the green bolt, glinting now and then",
   "cols": 55,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "supermemory",
+  "name": "supermemory",
+  "category": "companies",
+  "note": "the two mirrored strokes, glinting now and then",
+  "cols": 68,
+  "rows": 28,
+  "fps": 30,
+  "canvas": true,
+  "clock": false,
+  "cell": 2
+ },
+ {
+  "id": "svelte",
+  "name": "svelte",
+  "category": "logos",
+  "note": "the orange ribbon folded round an s, glinting now and then",
+  "cols": 47,
   "rows": 28,
   "fps": 30,
   "canvas": true,

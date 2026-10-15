@@ -1,6 +1,6 @@
 # ascii.rest
 
-用 ascii.rest 0.2.1（bas3line/ascii，MIT）的动画 ASCII 作品做了三页：208 个作品按 15 个分类的画廊（fps / mono 开关、浅色/深色），一个只用 ascii.rest 作品拼出的“agent fleet terminal”状态页（真实数据：上线 demo、每周 demo 数和合并的 PR 数），以及一个只用 `<ascii-art>` 标签的纯 HTML 页。
+用 ascii.rest 0.4.0（bas3line/ascii，MIT）的动画 ASCII 作品做了三页：217 个作品按 15 个分类的画廊（fps / mono 开关、浅色/深色），一个只用 ascii.rest 作品拼出的“agent fleet terminal”状态页（真实数据：上线 demo、每周 demo 数和合并的 PR 数；0.4 起用 `ascii.rest/kit` 的 barChart 画「每周上线 demo 数」、typewriter 打出标题），以及一个只用 `<ascii-art>` 标签的纯 HTML 页。
 
 - Live: https://li.yishan.app/ascii-rest/ · fleet: https://li.yishan.app/ascii-rest/fleet.html · plain: https://li.yishan.app/ascii-rest/plain.html
 - Upstream: https://ascii.rest · https://github.com/bas3line/ascii — MIT License, Copyright (c) 2026 bas3line. Full notice in `LICENSE-ascii.rest`. Thanks to @bas3line.
@@ -21,9 +21,9 @@
 - **Example data:** the `uptime-bar` panel. The piece draws its own 60-day bars; only the three routine names are real. The panel says so.
 - Regenerate with `bun run data` (needs the xbm git checkout; set `XBM_NIGHTLY` if the notes live elsewhere). Output is committed, so `bun run build` needs neither.
 
-## Dependency exception (approved by Yishan, 2026-10-09 00:24 Asia/Shanghai)
+## Dependency version
 
-`ascii.rest` 0.2.1 was published on 2026-10-08 14:16 UTC, so the repo's 3-day `minimumReleaseAge = 259200` blocks it (`bun add` fails with "blocked by minimum-release-age"). `bunfig.toml` keeps `minimumReleaseAge = 259200` for everything and adds `minimumReleaseAgeExcludes = ["ascii.rest"]` for this one package only (a 1-day-old react canary is still blocked). `package.json` pins `"ascii.rest": "0.2.1"` exactly (no caret), so the exception cannot pull in a newer, unreviewed release.
+`ascii.rest` is pinned to exactly `0.4.0` (published 2026-10-10, updated from 0.2.1 on 2026-10-15). It is older than the repo's 3-day `minimumReleaseAge = 259200`, so the earlier one-package `minimumReleaseAgeExcludes` exception for 0.2.1 has been removed from `bunfig.toml`.
 
 ```bash
 bun install && bun run dev    # http://localhost:5173/ascii-rest/  (also /fleet.html, /plain.html)
