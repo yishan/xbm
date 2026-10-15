@@ -12,6 +12,10 @@
  * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← XG Experiments" pill
  * linking back to the index (injectHomeLink) — apps should not add their own.
  *
+ * Update records: a tracking entry may carry `updates: [{ date, version, changes }]` (`built` stays the first
+ * release date). Each top-level HTML page of that demo gets a small fixed "更新记录" panel (bottom-right,
+ * injectUpdateLog), the index card shows the latest update, and dist/demos.json includes `built` + `updates`.
+ *
  * Used by the root vercel.json (via scripts/build-all.sh). Run locally with:
  *   bash scripts/build-all.sh            # all apps
  *   bash scripts/build-all.sh obsidian-ui  # only some apps (index still lists built ones)
@@ -24,7 +28,8 @@ const APPS = join(ROOT, "apps")
 const OUT = join(ROOT, "dist")
 const SITE = "https://li.yishan.app"
 
-type Demo = { slug: string; name: string; description: string; thumb: string | null; thumbDark: string | null; date: string | null }
+type Update = { date: string; version?: string; changes?: string }
+type Demo = { slug: string; name: string; description: string; thumb: string | null; thumbDark: string | null; date: string | null; updates: Update[] }
 
 function run(cmd: string[], cwd: string): boolean {
   console.log(`[build-all] (${cwd.replace(ROOT + "/", "")}) $ ${cmd.join(" ")}`)
@@ -78,6 +83,20 @@ function readBuiltDates(): Map<string, string> {
   return dates
 }
 
+/** Update records per slug (`updates: [{ date, version, changes }]` on the tracking entry), oldest first. */
+function readUpdates(): Map<string, Update[]> {
+  const file = join(ROOT, "tracking", "seen-bookmarks.json")
+  const out = new Map<string, Update[]>()
+  if (!existsSync(file)) return out
+  const { built = [] } = JSON.parse(readFileSync(file, "utf8")) as { built?: { slug?: string; updates?: Update[] }[] }
+  for (const b of built) {
+    if (!b.slug || !Array.isArray(b.updates)) continue
+    const ups = b.updates.filter((u) => u && typeof u.date === "string").sort((x, y) => x.date.localeCompare(y.date))
+    if (ups.length) out.set(b.slug, ups)
+  }
+  return out
+}
+
 /** Newest first; undated demos last, then by slug. */
 function byDateDesc(a: Demo, b: Demo): number {
   return (b.date ?? "").localeCompare(a.date ?? "") || a.slug.localeCompare(b.slug)
@@ -95,6 +114,8 @@ function demosJson(demos: Demo[]): string {
         thumb: d.thumb ? `${SITE}${d.thumb}` : null,
         thumbDark: d.thumbDark ? `${SITE}${d.thumbDark}` : null,
         date: d.date,
+        built: d.date,
+        updates: d.updates,
         url: `${SITE}/${d.slug}/`,
       })),
     },
@@ -162,6 +183,41 @@ function injectHomeLink(slug: string): number {
   return n
 }
 
+/**
+ * Self-contained "更新记录" panel (a <details> pill, bottom-right) injected before </body> of each top-level HTML
+ * page of a demo that has update records: first release date, then each update date, upstream version, changes.
+ * Follows prefers-color-scheme; `all:initial` shields it from app CSS.
+ */
+const UPDATE_LOG_ID = "xbm-update-log"
+function updateLogSnippet(built: string | null, updates: Update[]): string {
+  const I = UPDATE_LOG_ID
+  const rows = [
+    ...updates.slice().reverse().map((u) => `<li><b>${esc(u.date)}</b>${u.version ? ` · <code>${esc(u.version)}</code>` : ""}${u.changes ? `<br>${esc(u.changes)}` : ""}</li>`),
+    built ? `<li><b>${esc(built)}</b> · 首次发布</li>` : "",
+  ].join("")
+  const css = `#${I}{all:initial;position:fixed;z-index:2147482999;right:calc(10px + env(safe-area-inset-right,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));max-width:min(360px,calc(100vw - 180px));font:12px/1.5 ui-sans-serif,system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;color:#27272a}#${I} summary{all:unset;display:inline-block;float:right;cursor:pointer;padding:3px 9px;border-radius:999px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.85);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 1px 3px rgba(0,0,0,.15);font:500 11px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;opacity:.85}#${I} summary:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}#${I}[open] summary{opacity:1}#${I} .b{clear:both;margin-bottom:6px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.96);box-shadow:0 4px 16px rgba(0,0,0,.12);max-height:50vh;overflow:auto}#${I} ul{margin:0;padding:0 0 0 14px}#${I} li{margin:0 0 6px}#${I} b{font-weight:600}#${I} code{font:11px ui-monospace,SFMono-Regular,Menlo,monospace}#${I} h4{all:unset;display:block;font-weight:600;margin-bottom:6px}@media (prefers-color-scheme:dark){#${I}{color:#e4e4e7}#${I} summary{border-color:rgba(255,255,255,.18);background:rgba(24,24,27,.8)}#${I} .b{border-color:rgba(255,255,255,.16);background:rgba(24,24,27,.96)}}@media print{#${I}{display:none!important}}`
+  const last = updates[updates.length - 1]
+  return `<style id="${I}-style">${css}</style><details id="${I}"><summary title="更新记录">更新 ${esc(last.date)}${last.version ? ` · ${esc(last.version)}` : ""}</summary><div class="b"><h4>更新记录</h4><ul>${rows}</ul></div></details>`
+}
+
+/** Inject the update panel into each top-level dist/<slug>/*.html (idempotent; nested pages are left alone). */
+function injectUpdateLog(slug: string, built: string | null, updates: Update[]): number {
+  if (!updates.length) return 0
+  const snippet = updateLogSnippet(built, updates)
+  let n = 0
+  for (const name of readdirSync(join(OUT, slug))) {
+    const file = join(OUT, slug, name)
+    if (!/\.html?$/i.test(name) || statSync(file).isDirectory()) continue
+    const html = readFileSync(file, "utf8")
+    if (html.includes(`id="${UPDATE_LOG_ID}"`)) continue
+    const i = html.toLowerCase().lastIndexOf("</body>")
+    if (i < 0) continue
+    writeFileSync(file, html.slice(0, i) + snippet + "\n" + html.slice(i))
+    n++
+  }
+  return n
+}
+
 function indexHtml(demos: Demo[]): string {
   const cards = demos
     .map((d) => {
@@ -177,6 +233,7 @@ function indexHtml(demos: Demo[]): string {
           <div class="body">
             <h2>${esc(d.name)}</h2>
             <p>${esc(d.description || "—")}</p>
+            ${d.updates.length ? (() => { const u = d.updates[d.updates.length - 1]; return `<span class="upd" title="${esc(u.changes ?? "")}">更新 <time datetime="${esc(u.date)}">${esc(u.date)}</time>${u.version ? ` · ${esc(u.version)}` : ""}${d.updates.length > 1 ? ` · 共 ${d.updates.length} 次` : ""}</span>` })() : ""}
             <span class="url">${d.date ? `<time datetime="${esc(d.date)}">${esc(d.date)}</time> · ` : ""}li.yishan.app/${esc(d.slug)}/</span>
           </div>
         </a>
@@ -216,6 +273,7 @@ function indexHtml(demos: Demo[]): string {
   .body { padding:16px 18px 18px; display:flex; flex-direction:column; gap:8px; flex:1; }
   h2 { margin:0; font-size:17px; font-weight:600; }
   .body p { margin:0; color:var(--mute); font-size:14px; flex:1; }
+  .upd { align-self:flex-start; color:var(--mute); font:12px ui-monospace, SFMono-Regular, Menlo, monospace; border:1px solid var(--line); border-radius:999px; padding:1px 8px; }
   .url { color:var(--dim); font:12px ui-monospace, SFMono-Regular, Menlo, monospace; }
   footer { margin-top:48px; color:var(--dim); font-size:13px; }
   footer a { color:var(--mute); }
@@ -253,6 +311,7 @@ function main() {
   mkdirSync(join(OUT, "_thumbs"), { recursive: true })
 
   const dates = readBuiltDates()
+  const updates = readUpdates()
   const demos: Demo[] = []
   const failed: string[] = []
   for (const slug of slugs) {
@@ -275,7 +334,9 @@ function main() {
     }
     const date = dates.get(slug) ?? null
     if (!date) console.warn(`[build-all] ${slug}: no "built" date in tracking/seen-bookmarks.json — listed last, hidden on yishan.li`)
-    demos.push({ slug, ...readMeta(dir, slug), thumb, thumbDark, date })
+    const ups = updates.get(slug) ?? []
+    if (ups.length) console.log(`[build-all] ${slug}: ${ups.length} update record(s), panel in ${injectUpdateLog(slug, date, ups)} html file(s)`)
+    demos.push({ slug, ...readMeta(dir, slug), thumb, thumbDark, date, updates: ups })
   }
 
   demos.sort(byDateDesc)

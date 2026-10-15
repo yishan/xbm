@@ -1,6 +1,6 @@
 # Hairline 细线实验室
 
-探索全部 19 个等距交互图形，切换 7 类、明暗主题和交互强度；再用 Dicembre → Grok → Muse 的模拟任务体验规划、审阅、执行与交接。
+探索全部 33 个等距交互图形（Hairline 0.5.0），切换 9 类、明暗主题和交互强度；再用 Dicembre → Grok → Muse 的模拟任务体验规划、审阅、执行与交接；「03 Agent 工作流」用 0.5.0 新增的 Relay / Rebuild / Stack / Format / Settle 演示主 agent 把任务交给子 agent（示例数据）。
 
 ## 运行
 
@@ -35,9 +35,9 @@ Vite + React + TypeScript，官方 `@lucasmarkes/hairline/react` 入口，shadcn
 
 ## 包与许可
 
-[Hairline](https://github.com/lucasmarkes/hairline) © 2026 Lucas Marques，MIT。实际 npm 包锁定 `0.2.0`，React peer 为 `>=18`，无运行时依赖；19 个命名导出与官方分类已核对。[官方图形目录](https://hairline.lucasmarkes.com/figures)。许可保存在 `LICENSE-Hairline`。
+[Hairline](https://github.com/lucasmarkes/hairline) © 2026 Lucas Marques，MIT。实际 npm 包锁定 `0.5.0`（2026-10-15 从 0.2.0 升级；未用 0.5.1），React peer 为 `>=18`，无运行时依赖；33 个命名导出。[官方图形目录](https://hairline.lucasmarkes.com/figures)。许可保存在 `LICENSE-Hairline`。
 
-`0.2.0` 发布时间为 2026-10-03 21:23 UTC。用户在 2026-10-05 明确批准此单包三天安装门槛例外；`bunfig.toml` 仅将 `@lucasmarkes/hairline` 加入例外列表，`package.json` 精确锁定该版本，其他依赖继续遵守 `minimumReleaseAge = 259200`。
+`0.5.0` 发布于 2026-10-08，已超过三天门槛，原先针对 0.2.0 的 `minimumReleaseAgeExcludes` 例外已删除；所有依赖遵守 `minimumReleaseAge = 259200`。
 
 [shadcn/ui](https://github.com/shadcn-ui/ui) 按钮使用 MIT，完整许可保存在 `LICENSE-shadcn`。没有安装或运行第三方 agent Skill。
 
