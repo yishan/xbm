@@ -45,6 +45,7 @@ export const DRIVES: Record<string, Drive> = {
   "shadcn-admin": { feature: "open the Analytics dashboard tab", steps: [{ role: "tab", name: "Analytics" }] },
   "slideblocks": { feature: "go to the next slide", steps: [{ role: "button", name: "下一页" }] },
   "snapcn": { feature: "play the first Remotion player", steps: [{ role: "button", name: "Play video", nth: 0 }] },
+  "manimgx": { feature: "switch to the Fourier π scene tab", steps: [{ role: "tab", name: "傅里叶 π" }], expectText: /Fourier/ },
   "spectrum-ui": { feature: "run the agent task toast", steps: [{ role: "button", name: "Run agent task" }] },
   "tanstack-charts": { feature: "switch the main chart to Cumulative", steps: [{ css: '[aria-label="Cumulative"]' }] },
   "transitions-dev": { feature: "Next value on the number pop-in", steps: [{ role: "button", name: "Next value" }] },
