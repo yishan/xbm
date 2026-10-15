@@ -8,7 +8,7 @@ import { PAGES, THEMES, UPSTREAM } from '@/data/pages'
 import type { ModeId, ThemeId } from '@/data/pages'
 
 export default function App() {
-  const [activeId, setActiveId] = useState(PAGES[0].id)
+  const [activeId, setActiveId] = useState(() => PAGES.find((p) => `#${p.id}` === location.hash)?.id ?? PAGES[0].id)
   const [theme, setTheme] = useState<ThemeId>('blueprint')
   const [mode, setMode] = useState<ModeId>(() =>
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -36,7 +36,7 @@ export default function App() {
         <p className="text-sm text-muted-foreground break-words">
           Agent 只写一份短 Markdown
           草稿，上游 am CLI 把它渲染成带时序图、对比表、时间线的离线单页
-          HTML。这里用 v0.4.14 渲染了 5 页关于 xbm 自己的说明。
+          HTML。这里用 v0.5.2 渲染了 7 页：5 页关于 xbm 自己的说明，加上 v0.5 新功能的两页示例——er 实体关系图（改前 / 变更 / 改后切换）和「标注」Remark（把块级批注随回复发回 Agent）。
         </p>
         <p className="text-xs text-muted-foreground">
           上游：

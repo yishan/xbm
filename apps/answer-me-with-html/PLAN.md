@@ -1,6 +1,6 @@
 # PLAN — Answer me with HTML (xbm nightly 2026-10-08, manual start)
 
-**Goal:** show what the `am` CLI from [QingYunA/answer-me-with-html](https://github.com/QingYunA/answer-me-with-html) (MIT, v0.4.14) produces, using pages about xbm itself.
+**Goal:** show what the `am` CLI from [QingYunA/answer-me-with-html](https://github.com/QingYunA/answer-me-with-html) (MIT, v0.4.14 at first release; v0.5.2 since 2026-10-15) produces, using pages about xbm itself.
 
 ## MVP scope
 - 5 Markdown drafts in `drafts/`, rendered by the upstream CLI (`am render`) into single-file offline HTML in `public/pages/` (committed; the root build does not need the CLI).
