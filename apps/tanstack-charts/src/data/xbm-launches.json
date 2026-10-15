@@ -1,0 +1,85 @@
+{
+  "source": "tracking/seen-bookmarks.json (built dates, yishan/xbm)",
+  "rows": [
+    {
+      "slug": "figures4papers",
+      "title": "figures4papers",
+      "built": "2026-09-24"
+    },
+    {
+      "slug": "transitions-dev",
+      "title": "transitions.dev",
+      "built": "2026-09-25"
+    },
+    {
+      "slug": "spectrum-ui",
+      "title": "Spectrum UI",
+      "built": "2026-09-28"
+    },
+    {
+      "slug": "obsidian-ui",
+      "title": "ObsidianUI",
+      "built": "2026-09-29"
+    },
+    {
+      "slug": "docu-md",
+      "title": "docu.md",
+      "built": "2026-09-30"
+    },
+    {
+      "slug": "antv-infographic",
+      "title": "AntV Infographic",
+      "built": "2026-10-01"
+    },
+    {
+      "slug": "shadcn-admin",
+      "title": "shadcn-admin",
+      "built": "2026-10-02"
+    },
+    {
+      "slug": "hairline",
+      "title": "Hairline",
+      "built": "2026-10-05"
+    },
+    {
+      "slug": "pdfcn",
+      "title": "pdfcn",
+      "built": "2026-10-05"
+    },
+    {
+      "slug": "slideblocks",
+      "title": "SlideBlocks",
+      "built": "2026-10-06"
+    },
+    {
+      "slug": "tanstack-charts",
+      "title": "TanStack Charts",
+      "built": "2026-10-07"
+    },
+    {
+      "slug": "answer-me-with-html",
+      "title": "Answer me with HTML",
+      "built": "2026-10-08"
+    },
+    {
+      "slug": "ascii-rest",
+      "title": "ascii.rest",
+      "built": "2026-10-09"
+    },
+    {
+      "slug": "open-intelligent-ui",
+      "title": "Open Intelligent UI (CopilotKit)",
+      "built": "2026-10-11"
+    },
+    {
+      "slug": "focus-mk3-anatomy",
+      "title": "Focus Mk3, opened up",
+      "built": "2026-10-12"
+    },
+    {
+      "slug": "snapcn",
+      "title": "snapcn — Remotion components for product demo videos",
+      "built": "2026-10-14"
+    }
+  ]
+}
