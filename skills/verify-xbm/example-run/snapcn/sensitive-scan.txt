@@ -1,0 +1,2 @@
+email: hi@remotion.dev (dist/snapcn/assets/index-DzHSAOq8.js)
+(4 dist files + README + rendered text; denylist terms: 0)
