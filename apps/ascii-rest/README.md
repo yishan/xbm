@@ -1,6 +1,6 @@
 # ascii.rest
 
-用 ascii.rest 0.2.1（bas3line/ascii，MIT）的动画 ASCII 作品做了三页：208 个作品按 15 个分类的画廊（fps / mono 开关、浅色/深色），一个只用 ascii.rest 作品拼出的“agent fleet terminal”状态页（真实数据：nightly 流程、12 个上线 demo、合并的 PR、每晚运行结果），以及一个只用 `<ascii-art>` 标签的纯 HTML 页。
+用 ascii.rest 0.2.1（bas3line/ascii，MIT）的动画 ASCII 作品做了三页：208 个作品按 15 个分类的画廊（fps / mono 开关、浅色/深色），一个只用 ascii.rest 作品拼出的“agent fleet terminal”状态页（真实数据：上线 demo、每周 demo 数和合并的 PR 数），以及一个只用 `<ascii-art>` 标签的纯 HTML 页。
 
 - Live: https://li.yishan.app/ascii-rest/ · fleet: https://li.yishan.app/ascii-rest/fleet.html · plain: https://li.yishan.app/ascii-rest/plain.html
 - Upstream: https://ascii.rest · https://github.com/bas3line/ascii — MIT License, Copyright (c) 2026 bas3line. Full notice in `LICENSE-ascii.rest`. Thanks to @bas3line.
@@ -18,8 +18,6 @@
 
 - Demos and merge dates: `git log --first-parent origin/main`, first commit that added `apps/<slug>/package.json` (12 demos, 2026-09-24 → 2026-10-08).
 - Merged PRs per week: `git log --first-parent --merges origin/main` (15 PRs).
-- Nightly runs: `/workspace/xbm-nightly/<date>/status.md` on the build box (8 nights; finish time and result).
-- Tonight's board and schedule: 2026-10-09 `pick.md` / `status.md`, nightly pipeline 19:55 pick / 22:00 build / 05:53 report (Asia/Shanghai).
 - **Example data:** the `uptime-bar` panel. The piece draws its own 60-day bars; only the three routine names are real. The panel says so.
 - Regenerate with `bun run data` (needs the xbm git checkout; set `XBM_NIGHTLY` if the notes live elsewhere). Output is committed, so `bun run build` needs neither.
 

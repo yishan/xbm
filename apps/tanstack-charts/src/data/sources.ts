@@ -1,6 +1,5 @@
-// Sourced numbers for the dashboard. Every number here is quoted in
-// xbm-nightly/2026-10-07/pick.md, which cites Nutrient's 2026-10-06 Readwise brief.
-// Do not add numbers that are not in those sources.
+// Sourced numbers for the dashboard. Every number here comes from the two articles
+// below (title + author) or the xbm git history. Do not add numbers from other sources.
 
 export type Source = {
   title: string
@@ -12,12 +11,12 @@ export const SOURCES = {
   jev: {
     title: "A New Kind of AI Model: Jev and Quick Wins for PMs",
     author: "Paweł Huryn, The Product Compass",
-    note: "via Nutrient's Readwise brief, 2026-10-06",
+    note: "original article",
   },
   semi: {
     title: "Anthropic Subscriptions Offer 5x+ More Value Than OpenAI",
     author: "SemiAnalysis",
-    note: "via Nutrient's Readwise brief, 2026-10-06",
+    note: "original article",
   },
   xbm: {
     title: "yishan/xbm git history (merged PRs on main)",

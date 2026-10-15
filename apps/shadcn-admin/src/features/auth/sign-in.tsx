@@ -50,7 +50,7 @@ export function SignInPage() {
   const form = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "demo@li.yishan.app",
+      email: "demo@example.com",
       password: "password123",
       remember: true,
     },

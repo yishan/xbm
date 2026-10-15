@@ -2,9 +2,7 @@
  "generated": "2026-10-08T16:39:25.663Z",
  "sources": {
   "demos": "git log --first-parent origin/main (head 1850b4c), first commit adding apps/<slug>/package.json",
-  "prs": "git log --first-parent --merges origin/main",
-  "runs": "/workspace/xbm-nightly/<date>/status.md (nightly run notes on the build box)",
-  "schedule": "nightly pipeline: 19:55 pick, 22:00 build, 05:53 report (Asia/Shanghai)"
+  "prs": "git log --first-parent --merges origin/main"
  },
  "head": "1850b4c",
  "demos": [
@@ -174,63 +172,5 @@
    7,
    6
   ]
- },
- "runs": [
-  {
-   "date": "2026-09-30",
-   "slug": "docu-md",
-   "finished": "2026-09-30 00:21",
-   "at": "00:21",
-   "result": "done"
-  },
-  {
-   "date": "2026-10-01",
-   "slug": "antv-infographic",
-   "finished": "2026-09-30 22:20",
-   "at": "22:20",
-   "result": "done"
-  },
-  {
-   "date": "2026-10-02",
-   "slug": "shadcn-admin",
-   "finished": "2026-10-02 01:10",
-   "at": "01:10",
-   "result": "manual"
-  },
-  {
-   "date": "2026-10-05",
-   "slug": "pdfcn",
-   "finished": "2026-10-04 22:14",
-   "at": "22:14",
-   "result": "done"
-  },
-  {
-   "date": "2026-10-06",
-   "slug": "slideblocks",
-   "finished": "2026-10-05 22:30",
-   "at": "22:30",
-   "result": "done"
-  },
-  {
-   "date": "2026-10-07",
-   "slug": "tanstack-charts",
-   "finished": null,
-   "at": "22:20",
-   "result": "stopped"
-  },
-  {
-   "date": "2026-10-08",
-   "slug": "answer-me-with-html",
-   "finished": "2026-10-08 01:16",
-   "at": "01:16",
-   "result": "manual"
-  },
-  {
-   "date": "2026-10-09",
-   "slug": "ascii-rest",
-   "finished": null,
-   "at": "00:25",
-   "result": "running"
-  }
- ]
+ }
 }

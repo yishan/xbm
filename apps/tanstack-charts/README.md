@@ -18,7 +18,7 @@ A one-page dashboard built with TanStack Charts 1.0 — five responsive SVG char
 | 4 | API-equivalent value used on a $200 plan | `barY` + `ruleY` + `text` | tooltip | SemiAnalysis, *Anthropic Subscriptions Offer 5x+ More Value Than OpenAI* |
 | 5 | Subscription gross margin by model and utilization | grouped `barY` (`layout: group()`) + table | **utilization toggle**, grouped tooltip | same article |
 
-The article numbers were quoted in Nutrient's Readwise brief of 2026-10-06 and copied into `src/data/sources.ts`; no other numbers are used, and each chart caption names its source. There is no example data.
+The article numbers come from “A New Kind of AI Model: Jev and Quick Wins for PMs” (Paweł Huryn, The Product Compass) and “Anthropic Subscriptions Offer 5x+ More Value Than OpenAI” (SemiAnalysis), copied into `src/data/sources.ts`; no other numbers are used, and each chart caption names its source. There is no example data.
 
 The timeline data is `src/data/xbm-timeline.json`, generated from `git log --merges --first-parent origin/main` (dates in Asia/Shanghai):
 

@@ -1,10 +1,10 @@
-# PLAN — ascii.rest (xbm nightly 2026-10-09, manual start)
+# PLAN — ascii.rest (xbm 2026-10-09)
 
 **Goal:** show what [ascii.rest](https://ascii.rest) ([bas3line/ascii](https://github.com/bas3line/ascii), MIT, v0.2.1) does, and use its pieces for one real page about Yishan's agent fleet.
 
 ## MVP scope
 - **Gallery** (`index.html`, React): all 208 pieces read from the installed package, by category (15), with filter, fps (native / 24 / 8 / still) and mono toggles, light/dark.
-- **Agent fleet terminal** (`fleet.html`, React): a status page built only from ascii.rest pieces fed with real data — nightly pipeline (19:55 pick / 22:00 build / 05:53 report), the 12 live demos and merged PRs from `git log --first-parent origin/main`, nightly run results from `/workspace/xbm-nightly/<date>/status.md`. Anything the piece simulates is labelled "example data".
+- **Agent fleet terminal** (`fleet.html`, React): a status page built only from ascii.rest pieces fed with real data — the live demos and merged PRs from `git log --first-parent origin/main`. Anything the piece simulates is labelled "example data".
 - **Plain HTML** (`plain.html`): only `<ascii-art piece="…">` tags plus the `ascii.rest/element` module. No React.
 - Credit + MIT notice (README, footer, `LICENSE-ascii.rest`).
 

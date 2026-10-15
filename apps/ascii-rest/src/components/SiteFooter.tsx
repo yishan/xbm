@@ -26,7 +26,7 @@ export function SiteFooter() {
         <ExternalLink href="https://x.com/inlovewithgo/status/2107800389395636271">
           x.com/inlovewithgo/status/2107800389395636271
         </ExternalLink>{" "}
-        · xge nightly demo 2026-10-09
+        · xge demo 2026-10-09
       </p>
       <p className="mt-2">
         pinned to exactly 0.2.1; the 3-day release-age rule is waived for this one package (it

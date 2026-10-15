@@ -24,8 +24,9 @@ export function SiteFooter() {
           . This demo is not affiliated with TanStack.
         </p>
         <p>
-          Data: the yishan/xbm git history and two articles quoted in Nutrient&apos;s 2026-10-06
-          Readwise brief. Each chart cites its source.
+          Data: the yishan/xbm git history and two articles: &ldquo;A New Kind of AI Model: Jev and
+          Quick Wins for PMs&rdquo; by Paweł Huryn (The Product Compass) and &ldquo;Anthropic Subscriptions
+          Offer 5x+ More Value Than OpenAI&rdquo; by SemiAnalysis. Each chart cites its source.
         </p>
         <p>
           Source post:{" "}

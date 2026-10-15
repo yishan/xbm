@@ -1,56 +1,50 @@
 ---
 template: sheet
 theme: auto
-title: How the xbm nightly demo pipeline works
-subtitle: From an X bookmark to an unmerged PR
+title: How the xbm demo pipeline works
+subtitle: From a bookmark to an unmerged PR — 挑选、审批、构建、开 PR
 cols: 3
-source: xbm AGENTS.md, nightly pick/status notes 2026-10-08
+source: xbm AGENTS.md (generic flow, no schedule details)
 ---
 
 ## Sequence {span=2}
 
 ```sequence num
-participants: Scout, Yishan, Builder, GitHub, Report
-note Scout: 19:55 scan bookmarks
-Scout -> Yishan: pick.md (pending)
-Yishan -> Builder: approve in chat
-note Builder: 22:00 build if approved
-Builder -> GitHub: branch demo/slug, aider + DeepSeek
-Builder -> GitHub: build-all.sh, screenshot, video
-Builder -> GitHub: open one PR (no merge)
-Yishan -> GitHub: merge (Yishan only)
-note Report: 05:53
-Report -> Yishan: result report
+participants: Scout, Owner, Builder, GitHub
+note Scout: 挑选 · pick a bookmark
+Scout -> Owner: pick note (pending)
+Owner -> Builder: 审批 · approve
+note Builder: 构建 · build only if approved
+Builder -> GitHub: branch demo/slug, build-all.sh
+Builder -> GitHub: screenshot + video
+Builder -> GitHub: 开 PR · one PR (no merge)
+Owner -> GitHub: merge (owner only)
 ```
 
 ## Rules
 
-- Build only when `pick.md` shows `approved`.
+- Build only when the pick note shows `approved`.
 - One app per PR, under `apps/<slug>/`.
 - The PR has a screenshot and a video.
-- Never auto-merge. Yishan merges.
+- Never auto-merge. The owner merges.
 
 ## When approval is late
 
-```callout warn Manual start
-Tonight the 22:00 build checked at 22:17 and skipped. The status was pending.
-
-Yishan approved at 00:23 on 2026-10-08 and asked to start now.
-
-A manual run does the same build steps. The 05:53 report includes it.
+```callout info Manual start
+If the approval comes after the scheduled build has checked and skipped, the owner can ask for a manual run. A manual run does the same build steps.
 ```
 
 ```flow LR
-(pending) -> [Skipped at 22:17]: 22:00 check
-[Skipped at 22:17] -> [Approved 00:23]: Yishan in chat
-[Approved 00:23] -> *[Manual run] -> [(Unmerged PR)]
+(pending) -> [Skipped]: scheduled check
+[Skipped] -> [Approved]: owner
+[Approved] -> *[Manual run] -> [(Unmerged PR)]
 ```
 
-## Times
+## Steps
 
-| Time | Step | Output |
+| Step | Who | Output |
 | --- | --- | --- |
-| 19:55 Asia/Shanghai | Scout scans the X bookmark folders | pick.md, status pending |
-| before 22:00 | Yishan approves in chat | status approved |
-| 22:00 | Nightly build routine starts | branch `demo/<slug>`, app in `apps/<slug>/`, one PR |
-| 05:53 | Report routine | result to Yishan |
+| 挑选 Pick | Scout | pick note, status pending |
+| 审批 Approve | Owner | status approved |
+| 构建 Build | Builder | branch `demo/<slug>`, app in `apps/<slug>/` |
+| 开 PR Open PR | Builder | one unmerged PR with screenshot + video |
