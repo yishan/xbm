@@ -7,6 +7,7 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 - `apps/<kebab-slug>/` — one self-contained app per pick
 - `apps/<kebab-slug>/worker/` — optional Cloudflare Worker backend for that app (see **Backends** below)
 - `skills/project-planning/` — planning skill (read before coding)
+- `skills/verify-xbm/` — verification skill (also linked as `.cursor/skills/verify-xbm` and `.claude/skills/verify-xbm`): build, health-check, drive, screenshot/video and sensitive-scan a demo with `bun scripts/verify.ts <slug>`; `features/<slug>.md` is the per-demo map
 - `tracking/seen-bookmarks.json` — proposed/built bookmark ids (do not re-propose)
 - `.github/workflows/rebuild-yishan-li.yml` — after each successful Production deploy, calls yishan.li's Vercel deploy hook (secret `YISHAN_LI_DEPLOY_HOOK`) so its demo list refreshes. Do not edit per demo.
 - `vercel.json` + `scripts/` — **shared deploy setup** (one Vercel project `xbm`, custom domain `li.yishan.app`). `scripts/build-all.sh` builds every `apps/*/` with a `package.json` into `dist/<slug>/` and generates the index page `dist/index.html`. Do not edit per demo.
@@ -50,4 +51,5 @@ Frontends stay in this repo and deploy through the shared Vercel project at `htt
 
 1. Read `skills/project-planning/SKILL.md` and write `apps/<slug>/PLAN.md`.
 2. Implement only that app directory.
-3. Open one PR with screenshot + video artifacts.
+3. Verify with `skills/verify-xbm/SKILL.md` (`bash scripts/build-all.sh <slug> && bun scripts/verify.ts <slug>`) — all agents (Cursor, Claude, Codex, Grok) use it; add/update `features/<slug>.md` + its `DRIVES` entry for a new demo.
+4. Open one PR with screenshot + video artifacts and the verify `SUMMARY.md`.

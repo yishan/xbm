@@ -1,3 +1,7 @@
 # Root deploy build output (scripts/build-all.sh)
 /dist
 node_modules/
+
+# verify-xbm evidence + local-only denylist
+/.verify
+skills/verify-xbm/denylist.local.txt
