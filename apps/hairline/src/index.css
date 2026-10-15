@@ -240,3 +240,20 @@ footer a { display:flex; align-items:center; gap:6px; }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; }*,*:before,*:after { transition:none !important; animation:none !important; } }
 .main-figure, .agent-figure { --hairline-hi:#272721; --hairline-edge:#8a8a82; --hairline-mid:#adada4; --hairline-lo:#dbdbd3; }
 .dark .main-figure, .dark .agent-figure { --hairline-hi:#f2f1eb; --hairline-edge:#a7aa9d; --hairline-mid:#62675a; --hairline-lo:#343a2f; }
+/* 03 Agent 工作流 (Hairline 0.5.0) */
+.agent-flow { padding:8px 0 28px; }
+.af-layout { display:grid; grid-template-columns:minmax(0,1fr) 260px; border:1px solid var(--border); background:var(--paper); margin-top:18px; }
+.af-well { min-height:360px; }
+.af-layout .control-buttons { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+.af-steps { list-style:none; margin:14px 0 0; padding:0; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+.af-steps button { width:100%; display:grid; justify-items:start; gap:3px; text-align:left; padding:10px 12px 12px; border:1px solid var(--border); background:transparent; color:var(--foreground); border-radius:4px; cursor:pointer; }
+.af-steps button:hover { background:var(--muted); }
+.af-steps button[aria-pressed=true] { border-color:var(--foreground); box-shadow:inset 0 0 0 1px var(--foreground); }
+.af-steps strong { font-size:13px; font-weight:500; }.af-steps small { font-size:10px; color:var(--muted-foreground); }
+.af-mini { width:100%; max-width:150px; height:auto; justify-self:center; pointer-events:none; }
+.af-mini, .af-well .main-figure { --hairline-hi:#272721; --hairline-edge:#8a8a82; --hairline-mid:#adada4; --hairline-lo:#dbdbd3; }
+.dark .af-mini { --hairline-hi:#f2f1eb; --hairline-edge:#a7aa9d; --hairline-mid:#62675a; --hairline-lo:#343a2f; }
+.new-tag { font-size:10px !important; letter-spacing:.06em; padding:3px 6px; border:1px solid var(--border); border-radius:3px; color:var(--muted-foreground); align-self:center; }
+.new-dot { display:inline-block; width:5px; height:5px; border-radius:50%; background:currentColor; margin-left:5px; vertical-align:middle; opacity:.7; }
+@media(max-width:820px) { .af-layout { grid-template-columns:1fr; }.af-layout .inspector { border-left:0; border-top:1px solid var(--border); }.af-steps { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media(max-width:600px) { .af-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }

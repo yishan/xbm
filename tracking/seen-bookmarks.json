@@ -109,7 +109,8 @@
       "slug": "hairline",
       "folder": "unfiled",
       "why": "MIT React hairline figure library; built as apps/hairline/ and merged to main in PR #12 (2026-10-05 13:07 +08); tracking entry added later by the slideblocks run",
-      "built": "2026-10-05"
+      "built": "2026-10-05",
+      "updates": [{"date": "2026-10-15", "version": "0.5.0", "changes": "升级 Hairline 0.2.0 → 0.5.0：图形 19 → 33 个，新增「03 Agent 工作流」（Relay 交接、Rebuild 依赖更新、Stack 调用栈、Format、Settle，示例数据）"}]
     },
     {
       "id": "2103065656480690337",

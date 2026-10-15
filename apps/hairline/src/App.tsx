@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import * as Hairline from '@lucasmarkes/hairline/react'
 import { categories, figures, translateRead } from './features/catalogue'
 import { flowReducer, initialFlow, stages } from './features/collaboration'
+import { agentSteps } from './features/agent-flow'
 import type { Category } from './features/catalogue'
 import type { Action, Flow } from './features/collaboration'
 import type { Dispatch } from 'react'
@@ -88,10 +89,50 @@ function Collaboration({ flow, dispatch, intensity, theme }: { flow: Flow; dispa
   </section>
 }
 
+function AgentFlow({ intensity, theme }: { intensity: number; theme: Theme }) {
+  const [active, setActive] = useState(0)
+  const [auto, setAuto] = useState(true)
+  useEffect(() => {
+    if (!auto) return
+    const t = setInterval(() => setActive(a => (a + 1) % agentSteps.length), 2600)
+    return () => clearInterval(t)
+  }, [auto])
+  const step = agentSteps[active]
+  const Big = Hairline[step.figure]
+  return <section className="agent-flow" aria-labelledby="agent-flow-title" data-testid="agent-flow">
+    <div className="section-heading"><div><span className="eyebrow">03 / AGENT WORKFLOW · NEW IN 0.5.0</span><h2 id="agent-flow-title">Agent 工作流<span className="simulation-tag">示例数据</span></h2></div><span className="small-note">relay · rebuild · stack · format · settle</span></div>
+    <div className="af-layout">
+      <div className="figure-well af-well">
+        <span className="axis-label">STEP {active + 1} / {step.id.toUpperCase()}</span>
+        <Big key={step.id} className="main-figure" theme={theme} intensity={intensity} play label={`${step.title}：${step.detail}`} />
+        <span className="crosshair top-left">+</span><span className="crosshair bottom-right">+</span>
+      </div>
+      <aside className="inspector">
+        <span className="eyebrow">{step.who}</span>
+        <h3>{active + 1}. {step.title}</h3><p>{step.detail}</p>
+        <div className="explanation"><span className="eyebrow">交接物</span><p>{step.artifact}</p></div>
+        <div className="control-buttons">
+          <Button variant="outline" onClick={() => setAuto(a => !a)}>{auto ? <><Pause />暂停</> : <><Play />自动播放</>}</Button>
+          <Button variant="outline" onClick={() => { setAuto(false); setActive(a => (a + 1) % agentSteps.length) }}>下一步<ArrowRight /></Button>
+        </div>
+      </aside>
+    </div>
+    <ol className="af-steps">
+      {agentSteps.map((s, i) => { const F = Hairline[s.figure]; return <li key={s.id}>
+        <button aria-pressed={i === active} onClick={() => { setAuto(false); setActive(i) }}>
+          <F className="af-mini" theme={theme} intensity={intensity} label={s.title} />
+          <span className="agent-index">0{i + 1}</span><strong>{s.title}</strong><small>{s.who}</small>
+        </button>
+      </li> })}
+    </ol>
+    <p className="simulation-note">固定脚本的示例数据：主 agent、子 agent 与工具调用都是示意，不代表真实账号或产品集成。图形来自 Hairline 0.5.0 新增的 Relay、Rebuild、Stack、Format、Settle。</p>
+  </section>
+}
+
 export default function App() {
   const [theme, setTheme] = useState<Theme>('auto')
   const [intensity, setIntensity] = useState(.5)
-  const [view, setView] = useState<'gallery'|'flow'>('gallery')
+  const [view, setView] = useState<'gallery'|'flow'|'agents'>(() => location.hash === '#agents' ? 'agents' : 'gallery')
   const [category, setCategory] = useState<Category|'all'>('all')
   const [selected, setSelected] = useState('patch')
   const [flow, dispatch] = useReducer(flowReducer, initialFlow)
@@ -119,32 +160,33 @@ export default function App() {
     setCategory(id)
     if (id !== 'all' && entry.category !== id) setSelected(figures.find(f => f.category === id)!.id)
   }
-  function switchView(next: 'gallery'|'flow') {
-    if (next === 'gallery') dispatch({ type:'pause' })
+  function switchView(next: 'gallery'|'flow'|'agents') {
+    if (next !== 'flow') dispatch({ type:'pause' })
+    history.replaceState(null, '', next === 'agents' ? '#agents' : location.pathname)
     setView(next)
   }
   return <div className="app-shell">
     <a href="#experience" className="skip-link">跳转到体验区</a>
     <header className="site-header"><a className="brand" href={import.meta.env.BASE_URL}><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 9 14 3l11 6v10l-11 6L3 19ZM3 9l11 6 11-6M14 15v10M3 14l11 6 11-6" /></svg>hairline<span>实验室</span></a>
-      <nav aria-label="体验导航"><button aria-pressed={view==='gallery'} onClick={() => switchView('gallery')}>01 组件体验</button><button aria-pressed={view==='flow'} onClick={() => switchView('flow')}>02 协作场景</button></nav>
+      <nav aria-label="体验导航"><button aria-pressed={view==='gallery'} onClick={() => switchView('gallery')}>01 组件体验</button><button aria-pressed={view==='flow'} onClick={() => switchView('flow')}>02 协作场景</button><button aria-pressed={view==='agents'} onClick={() => switchView('agents')}>03 Agent 工作流</button></nav>
       <a className="source-link" href="https://github.com/lucasmarkes/hairline" target="_blank" rel="noreferrer">源码 <ExternalLink size={13}/></a>
     </header>
     <main id="experience">
-      <div className="intro"><div><span className="eyebrow">ISOMETRIC FIGURES / V0.2.0</span><h1>让细线，回应你的动作。</h1><p>19 个等距图形，一套交互语言。探索组件，也观察助手之间的任务流动。</p></div><div className="intro-index"><strong>19<span>/07</span></strong><span>图形 / 分类</span></div></div>
+      <div className="intro"><div><span className="eyebrow">ISOMETRIC FIGURES / V0.5.0</span><h1>让细线，回应你的动作。</h1><p>{figures.length} 个等距图形，一套交互语言。探索组件，也观察助手之间的任务流动。</p></div><div className="intro-index"><strong>{figures.length}<span>/{String(categories.length).padStart(2,'0')}</span></strong><span>图形 / 分类</span></div></div>
       <div className="toolbar"><div className="theme-control"><label htmlFor="theme">画布主题</label><select id="theme" value={theme} onChange={e => setTheme(e.target.value as Theme)}><option value="light">明亮</option><option value="dark">暗色</option><option value="auto">跟随系统</option></select></div>
         <div className="intensity-control"><label htmlFor="intensity">交互强度</label><span className="range-word">轻柔</span><input id="intensity" type="range" min="0" max="1" step="0.05" value={intensity} onChange={e=>setIntensity(Number(e.target.value))} /><span className="range-word">鲜明</span><output htmlFor="intensity">{intensity.toFixed(2)}</output></div>
         <span className="motion-mode">{reducedMotion ? '减少动态效果已启用' : 'SVG · 指针响应'}</span>
       </div>
       {view === 'gallery' ? <section className="gallery" aria-labelledby="gallery-title">
         <aside className="category-sidebar"><span className="eyebrow">01 / COLLECTION</span><h2 id="gallery-title">图形目录</h2><div className="category-list">
-          <button aria-pressed={category==='all'} onClick={()=>selectCategory('all')}><span>全部图形</span><small>19</small></button>
+          <button aria-pressed={category==='all'} onClick={()=>selectCategory('all')}><span>全部图形</span><small>{figures.length}</small></button>
           {categories.map(c=><button key={c.id} aria-pressed={category===c.id} onClick={()=>selectCategory(c.id)}><span>{c.name}<em>{c.en}</em></span><small>{figures.filter(f=>f.category===c.id).length.toString().padStart(2,'0')}</small></button>)}
         </div><div className="sidebar-foot"><ArrowDown size={17}/><p>选一个图形，<br/>在画布上探索。</p></div></aside>
-        <div className="gallery-main"><div className="figure-heading"><div><span className="eyebrow">{categories.find(c=>c.id===entry.category)!.en.toUpperCase()} / {String(figures.indexOf(entry)+1).padStart(2,'0')}</span><h2>{entry.name}<span>{entry.zh}</span></h2></div><div className="pager"><Button variant="outline" size="icon" aria-label="上一个图形" onClick={()=>setSelected(filtered[(index-1+filtered.length)%filtered.length].id)}><ArrowLeft/></Button><span>{index+1} / {filtered.length}</span><Button variant="outline" size="icon" aria-label="下一个图形" onClick={()=>setSelected(filtered[(index+1)%filtered.length].id)}><ArrowRight/></Button></div></div>
+        <div className="gallery-main"><div className="figure-heading"><div><span className="eyebrow">{categories.find(c=>c.id===entry.category)!.en.toUpperCase()} / {String(figures.indexOf(entry)+1).padStart(2,'0')}</span><h2>{entry.name}<span>{entry.zh}</span>{entry.since && <span className="new-tag">NEW {entry.since}</span>}</h2></div><div className="pager"><Button variant="outline" size="icon" aria-label="上一个图形" onClick={()=>setSelected(filtered[(index-1+filtered.length)%filtered.length].id)}><ArrowLeft/></Button><span>{index+1} / {filtered.length}</span><Button variant="outline" size="icon" aria-label="下一个图形" onClick={()=>setSelected(filtered[(index+1)%filtered.length].id)}><ArrowRight/></Button></div></div>
           <div className="figure-body"><FigureViewer key={entry.id} entry={entry} intensity={intensity} theme={theme}/></div>
-          <div className="figure-picker" aria-label="选择图形">{filtered.map(f=><button key={f.id} data-figure={f.id} aria-pressed={selected===f.id} onClick={()=>setSelected(f.id)}><span>{f.name}</span><small>{f.zh}</small></button>)}</div>
+          <div className="figure-picker" aria-label="选择图形">{filtered.map(f=><button key={f.id} data-figure={f.id} aria-pressed={selected===f.id} onClick={()=>setSelected(f.id)}><span>{f.name}{f.since && <i className="new-dot" aria-label="新" />}</span><small>{f.zh}</small></button>)}</div>
         </div>
-      </section> : <Collaboration flow={flow} dispatch={dispatch} intensity={intensity} theme={theme}/>}
+      </section> : view === 'flow' ? <Collaboration flow={flow} dispatch={dispatch} intensity={intensity} theme={theme}/> : <AgentFlow intensity={intensity} theme={theme}/>}
       <footer><span>基于 Hairline · Lucas Marques · MIT</span><a href="https://hairline.lucasmarkes.com/figures" target="_blank" rel="noreferrer">官方图形目录 <ExternalLink size={12}/></a><span>xbm / hairline</span></footer>
     </main>
   </div>
