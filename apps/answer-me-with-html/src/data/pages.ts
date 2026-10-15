@@ -19,10 +19,10 @@ export type DemoPage = {
 export const PAGES: DemoPage[] = [
   {
     id: '01-nightly-pipeline',
-    title: 'xbm nightly demo pipeline',
-    summary: '19:55 pick → approval → 22:00 build → 05:53 report, plus the manual start when approval is late.',
+    title: 'xbm demo pipeline',
+    summary: '挑选 → 审批 → 构建 → 开 PR, plus the manual start when approval is late.',
     components: ['sequence', 'flow', 'callout', 'table'],
-    source: 'xbm AGENTS.md + 2026-10-08 pick/status notes',
+    source: 'xbm AGENTS.md (generic flow)',
   },
   {
     id: '02-vercel-vs-worker',
@@ -47,7 +47,7 @@ export const PAGES: DemoPage[] = [
   },
   {
     id: '05-ste100-nightly',
-    title: 'Nightly build procedure (ASD-STE100)',
+    title: 'Demo build procedure (ASD-STE100)',
     summary: 'The build steps written in STE100 style and rendered with style: strict.',
     components: ['list', 'callout', 'table'],
     source: 'xbm AGENTS.md, STE rules from upstream',

@@ -102,9 +102,9 @@ function UserMenu({ onNavigate }: { onNavigate: () => void }) {
                 <AvatarFallback className="rounded-lg">YS</AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">Yishan</span>
+                <span className="truncate font-semibold">Demo</span>
                 <span className="truncate text-xs text-muted-foreground">
-                  demo@li.yishan.app
+                  demo@example.com
                 </span>
               </div>
               <ChevronsUpDown className="ml-auto size-4" />
@@ -123,9 +123,9 @@ function UserMenu({ onNavigate }: { onNavigate: () => void }) {
                   <AvatarFallback className="rounded-lg">YS</AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">Yishan</span>
+                  <span className="truncate font-semibold">Demo</span>
                   <span className="truncate text-xs text-muted-foreground">
-                    demo@li.yishan.app
+                    demo@example.com
                   </span>
                 </div>
               </div>

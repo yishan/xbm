@@ -142,7 +142,7 @@ export const DECK: Deck = {
         { name: "隐私", text: "代理登录邮箱和日历，接触的是高敏数据" },
         { name: "安全", text: "prompt injection 可能写进可写的记忆（Anthropic 文档警告）" },
         { name: "可靠执行", text: "ThinkingBox 上最强模型单次通过率约 65%，同一题 20 次都通过的只有约 25%" },
-        { name: "审批频率", text: "早期用户 Ali Abouelatta 给 Dot 配了公司邮箱和 Linear，抱怨审批太频繁（2026-10-04）" },
+        { name: "审批频率", text: "一位早期用户给 Dot 配了公司邮箱和 Linear，抱怨审批太频繁（2026-10-04）" },
         { name: "成本", text: "Dots 绑定 Pro 档，Grok Bot 绑定 SuperGrok / Cursor 付费档；云电脑实际费用：待补（公开信息不透明）" },
         { name: "评测", text: "还没有统一的个人助手基准；ThinkingBox 测的是有状态的业务流程，不是用户满意度" },
       ],

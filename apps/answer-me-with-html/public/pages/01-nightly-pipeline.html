@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Answer me with HTML 0.4.14">
-<title>How the xbm nightly demo pipeline works</title>
+<title>How the xbm demo pipeline works</title>
 <style>
 html[data-theme="blueprint"], html[data-theme="blueprint"][data-mode="light"] {
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -697,61 +697,59 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 <button class="am-btn" type="button" data-am="copy" data-done="Copied ✓">Copy source</button>
 </div>
 <main class="am-sheet">
-<header class="am-head"><h1>How the xbm nightly demo pipeline works</h1><p class="am-sub">From an X bookmark to an unmerged PR</p><div class="am-head-meta"><span><b>source</b>xbm AGENTS.md, nightly pick/status notes 2026-10-08</span></div></header>
+<header class="am-head"><h1>How the xbm demo pipeline works</h1><p class="am-sub">From a bookmark to an unmerged PR — 挑选、审批、构建、开 PR</p><div class="am-head-meta"><span><b>source</b>xbm AGENTS.md (generic flow, no schedule details)</span></div></header>
 <div class="am-frame">
 <div class="am-ruler am-ruler--top" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div><div class="am-ruler am-ruler--bottom" aria-hidden="true"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span></div><div class="am-ruler am-ruler--left" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div><div class="am-ruler am-ruler--right" aria-hidden="true"><span>A</span><span>B</span><span>C</span><span>D</span></div>
 <div class="am-grid" style="--cols: 3">
 <section class="am-panel am-span-wide" id="panel-A" style="grid-column: span 2" data-span="2">
 <header class="am-panel-head"><span class="am-panel-id">A</span><h2>Sequence</h2></header>
-<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 783 482" width="783" height="482" role="img" aria-label="Sequence diagram: Scout, Yishan, Builder, GitHub, Report" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="85" y1="42" x2="85" y2="478"/><g data-key="Scout"><rect class="am-actor" x="43" y="8" width="84" height="34" rx="2"/><text x="85" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Scout</text></g><line class="am-lifeline" x1="227.7" y1="42" x2="227.7" y2="478"/><g data-key="Yishan"><rect class="am-actor" x="185.7" y="8" width="84" height="34" rx="2"/><text x="227.7" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Yishan</text></g><line class="am-lifeline" x1="354.8" y1="42" x2="354.8" y2="478"/><g data-key="Builder"><rect class="am-actor" x="312.8" y="8" width="84" height="34" rx="2"/><text x="354.8" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Builder</text></g><line class="am-lifeline" x1="616.5" y1="42" x2="616.5" y2="478"/><g data-key="GitHub"><rect class="am-actor" x="574.5" y="8" width="84" height="34" rx="2"/><text x="616.5" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">GitHub</text></g><line class="am-lifeline" x1="728.5" y1="42" x2="728.5" y2="478"/><g data-key="Report"><rect class="am-actor" x="686.5" y="8" width="84" height="34" rx="2"/><text x="728.5" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Report</text></g><g data-step="0"><rect class="am-note" x="12" y="64" width="146" height="28" rx="2"/><text x="85" y="78" text-anchor="middle" dominant-baseline="central" font-size="12">19:55 scan bookmarks</text></g><g data-step="1"><text x="156.3" y="114" text-anchor="middle">pick.md (pending)</text><path class="am-edge" d="M85,124 L225.7,124" marker-end="url(#am1-arrow)"/><text class="am-step" x="91" y="118" text-anchor="start">1</text></g><g data-step="2"><text x="291.2" y="154" text-anchor="middle">approve in chat</text><path class="am-edge" d="M227.7,164 L352.8,164" marker-end="url(#am1-arrow)"/><text class="am-step" x="233.7" y="158" text-anchor="start">2</text></g><g data-step="3"><rect class="am-note" x="280.8" y="188" width="147.9" height="28" rx="2"/><text x="354.8" y="202" text-anchor="middle" dominant-baseline="central" font-size="12">22:00 build if approved</text></g><g data-step="4"><text x="485.6" y="238" text-anchor="middle">branch demo/slug, aider + DeepSeek</text><path class="am-edge" d="M354.8,248 L614.5,248" marker-end="url(#am1-arrow)"/><text class="am-step" x="360.8" y="242" text-anchor="start">3</text></g><g data-step="5"><text x="485.6" y="278" text-anchor="middle">build-all.sh, screenshot, video</text><path class="am-edge" d="M354.8,288 L614.5,288" marker-end="url(#am1-arrow)"/><text class="am-step" x="360.8" y="282" text-anchor="start">4</text></g><g data-step="6"><text x="485.6" y="318" text-anchor="middle">open one PR (no merge)</text><path class="am-edge" d="M354.8,328 L614.5,328" marker-end="url(#am1-arrow)"/><text class="am-step" x="360.8" y="322" text-anchor="start">5</text></g><g data-step="7"><text x="422.1" y="358" text-anchor="middle">merge (Yishan only)</text><path class="am-edge" d="M227.7,368 L614.5,368" marker-end="url(#am1-arrow)"/><text class="am-step" x="233.7" y="362" text-anchor="start">6</text></g><g data-step="8"><rect class="am-note" x="703.2" y="392" width="50.7" height="28" rx="2"/><text x="728.5" y="406" text-anchor="middle" dominant-baseline="central" font-size="12">05:53</text></g><g data-step="9"><text x="478.1" y="442" text-anchor="middle">result report</text><path class="am-edge" d="M728.5,452 L229.7,452" marker-end="url(#am1-arrow)"/><text class="am-step" x="722.5" y="446" text-anchor="end">7</text></g></svg></figure></div>
+<div class="am-panel-body"><figure class="am-diagram am-seq"><svg viewBox="0 0 639 398" width="639" height="398" role="img" aria-label="Sequence diagram: Scout, Owner, Builder, GitHub" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am1-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><line class="am-lifeline" x1="87.2" y1="42" x2="87.2" y2="394"/><g data-key="Scout"><rect class="am-actor" x="45.2" y="8" width="84" height="34" rx="2"/><text x="87.2" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Scout</text></g><line class="am-lifeline" x1="237.1" y1="42" x2="237.1" y2="394"/><g data-key="Owner"><rect class="am-actor" x="195.1" y="8" width="84" height="34" rx="2"/><text x="237.1" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Owner</text></g><line class="am-lifeline" x1="360" y1="42" x2="360" y2="394"/><g data-key="Builder"><rect class="am-actor" x="318" y="8" width="84" height="34" rx="2"/><text x="360" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">Builder</text></g><line class="am-lifeline" x1="584.6" y1="42" x2="584.6" y2="394"/><g data-key="GitHub"><rect class="am-actor" x="542.6" y="8" width="84" height="34" rx="2"/><text x="584.6" y="25" text-anchor="middle" dominant-baseline="central" font-weight="600">GitHub</text></g><g data-step="0"><rect class="am-note" x="12" y="64" width="150.3" height="28" rx="2"/><text x="87.2" y="78" text-anchor="middle" dominant-baseline="central" font-size="12">挑选 · pick a bookmark</text></g><g data-step="1"><text x="162.1" y="114" text-anchor="middle">pick note (pending)</text><path class="am-edge" d="M87.2,124 L235.1,124" marker-end="url(#am1-arrow)"/><text class="am-step" x="93.2" y="118" text-anchor="start">1</text></g><g data-step="2"><text x="298.6" y="154" text-anchor="middle">审批 · approve</text><path class="am-edge" d="M237.1,164 L358,164" marker-end="url(#am1-arrow)"/><text class="am-step" x="243.1" y="158" text-anchor="start">2</text></g><g data-step="3"><rect class="am-note" x="270.5" y="188" width="179.1" height="28" rx="2"/><text x="360" y="202" text-anchor="middle" dominant-baseline="central" font-size="12">构建 · build only if approved</text></g><g data-step="4"><text x="472.3" y="238" text-anchor="middle">branch demo/slug, build-all.sh</text><path class="am-edge" d="M360,248 L582.6,248" marker-end="url(#am1-arrow)"/><text class="am-step" x="366" y="242" text-anchor="start">3</text></g><g data-step="5"><text x="472.3" y="278" text-anchor="middle">screenshot + video</text><path class="am-edge" d="M360,288 L582.6,288" marker-end="url(#am1-arrow)"/><text class="am-step" x="366" y="282" text-anchor="start">4</text></g><g data-step="6"><text x="472.3" y="318" text-anchor="middle">开 PR · one PR (no merge)</text><path class="am-edge" d="M360,328 L582.6,328" marker-end="url(#am1-arrow)"/><text class="am-step" x="366" y="322" text-anchor="start">5</text></g><g data-step="7"><text x="410.9" y="358" text-anchor="middle">merge (owner only)</text><path class="am-edge" d="M237.1,368 L582.6,368" marker-end="url(#am1-arrow)"/><text class="am-step" x="243.1" y="362" text-anchor="start">6</text></g></svg></figure></div>
 </section>
 <section class="am-panel" id="panel-B">
 <header class="am-panel-head"><span class="am-panel-id">B</span><h2>Rules</h2></header>
 <div class="am-panel-body"><div class="am-md"><ul>
-<li>Build only when <code>pick.md</code> shows <code>approved</code>.</li>
+<li>Build only when the pick note shows <code>approved</code>.</li>
 <li>One app per PR, under <code>apps/&lt;slug&gt;/</code>.</li>
 <li>The PR has a screenshot and a video.</li>
-<li>Never auto-merge. Yishan merges.</li>
+<li>Never auto-merge. The owner merges.</li>
 </ul>
 </div></div>
 </section>
 <section class="am-panel am-span-wide" id="panel-C" style="grid-column: span 2">
 <header class="am-panel-head"><span class="am-panel-id">C</span><h2>When approval is late</h2></header>
-<div class="am-panel-body"><div class="am-callout am-callout--warn" role="note"><div class="am-callout-title">Manual start</div><div class="am-callout-body am-md"><p>Tonight the 22:00 build checked at 22:17 and skipped. The status was pending.</p>
-<p>Yishan approved at 00:23 on 2026-10-08 and asked to start now.</p>
-<p>A manual run does the same build steps. The 05:53 report includes it.</p>
+<div class="am-panel-body"><div class="am-callout am-callout--info" role="note"><div class="am-callout-title">Manual start</div><div class="am-callout-body am-md"><p>If the approval comes after the scheduled build has checked and skipped, the owner can ask for a manual run. A manual run does the same build steps.</p>
 </div></div>
-<figure class="am-diagram am-flow"><svg viewBox="0 0 924 77" width="924" height="77" role="img" aria-label="Flowchart: pending, Skipped at 22:17, Approved 00:23, Manual run, Unmerged PR" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M101.8,38.5 L132.6,38.5 Q163.4,38.5 194.2,38.5 L224.9,38.5" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="125.8" y="29.5" width="75.1" height="18" rx="3"/><text x="163.4" y="38.5" text-anchor="middle" dominant-baseline="central">22:00 check</text></g></g><g data-step="1"><path class="am-edge" d="M354.9,38.5 L388.7,38.5 Q422.5,38.5 456.3,38.5 L490.1,38.5" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="378.9" y="29.5" width="87.3" height="18" rx="3"/><text x="422.5" y="38.5" text-anchor="middle" dominant-baseline="central">Yishan in chat</text></g></g><g data-step="2"><path class="am-edge" d="M612,38.5 L623.5,38.5 Q635,38.5 646.5,38.5 L658,38.5" marker-end="url(#am2-arrow)"/></g><g data-step="2"><path class="am-edge" d="M753.1,38.5 L764.6,38.5 Q776.1,38.5 787.6,38.5 L799.1,38.5" marker-end="url(#am2-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="pending" data-step="0"><rect class="am-node-shape" x="14" y="21" width="87.8" height="35" rx="17.5"/><text x="57.9" y="38.5" text-anchor="middle" dominant-baseline="central">pending</text></g><g class="am-node am-node--rect" data-key="Skipped at 22:17" data-step="0"><rect class="am-node-shape" x="224.9" y="21" width="129.9" height="35" rx="3"/><text x="289.9" y="38.5" text-anchor="middle" dominant-baseline="central">Skipped at 22:17</text></g><g class="am-node am-node--rect" data-key="Approved 00:23" data-step="1"><rect class="am-node-shape" x="490.1" y="21" width="121.9" height="35" rx="3"/><text x="551.1" y="38.5" text-anchor="middle" dominant-baseline="central">Approved 00:23</text></g><g class="am-node am-node--rect am-node--hi" data-key="Manual run" data-step="2"><rect class="am-node-shape" x="658" y="21" width="95.1" height="35" rx="3"/><text x="705.5" y="38.5" text-anchor="middle" dominant-baseline="central">Manual run</text></g><g class="am-node am-node--db" data-key="Unmerged PR" data-step="2"><path class="am-node-shape" d="M799.1,21 A55.1,7 0 0 1 909.2,21 V56 A55.1,7 0 0 1 799.1,56 Z"/><path class="am-node-shape" d="M799.1,21 A55.1,7 0 0 0 909.2,21"/><text x="854.2" y="42.5" text-anchor="middle" dominant-baseline="central">Unmerged PR</text></g></g></svg></figure></div>
+<figure class="am-diagram am-flow"><svg viewBox="0 0 815 77" width="815" height="77" role="img" aria-label="Flowchart: pending, Skipped, Approved, Manual run, Unmerged PR" xmlns="http://www.w3.org/2000/svg"><defs><marker id="am2-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path class="am-arrow" d="M0,0 L10,5 L0,10 z"/></marker></defs><g></g><g><g data-step="0"><path class="am-edge" d="M101.8,38.5 L139.1,38.5 Q176.3,38.5 213.5,38.5 L250.7,38.5" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="125.8" y="29.5" width="100.9" height="18" rx="3"/><text x="176.3" y="38.5" text-anchor="middle" dominant-baseline="central">scheduled check</text></g></g><g data-step="1"><path class="am-edge" d="M328.1,38.5 L350.8,38.5 Q373.5,38.5 396.3,38.5 L419,38.5" marker-end="url(#am2-arrow)"/><g class="am-edge-label"><rect x="352.1" y="29.5" width="42.9" height="18" rx="3"/><text x="373.5" y="38.5" text-anchor="middle" dominant-baseline="central">owner</text></g></g><g data-step="2"><path class="am-edge" d="M503.7,38.5 L515.2,38.5 Q526.7,38.5 538.2,38.5 L549.7,38.5" marker-end="url(#am2-arrow)"/></g><g data-step="2"><path class="am-edge" d="M644.7,38.5 L656.2,38.5 Q667.7,38.5 679.2,38.5 L690.7,38.5" marker-end="url(#am2-arrow)"/></g></g><g><g class="am-node am-node--round" data-key="pending" data-step="0"><rect class="am-node-shape" x="14" y="21" width="87.8" height="35" rx="17.5"/><text x="57.9" y="38.5" text-anchor="middle" dominant-baseline="central">pending</text></g><g class="am-node am-node--rect" data-key="Skipped" data-step="0"><rect class="am-node-shape" x="250.7" y="21" width="77.4" height="35" rx="3"/><text x="289.4" y="38.5" text-anchor="middle" dominant-baseline="central">Skipped</text></g><g class="am-node am-node--rect" data-key="Approved" data-step="1"><rect class="am-node-shape" x="419" y="21" width="84.7" height="35" rx="3"/><text x="461.3" y="38.5" text-anchor="middle" dominant-baseline="central">Approved</text></g><g class="am-node am-node--rect am-node--hi" data-key="Manual run" data-step="2"><rect class="am-node-shape" x="549.7" y="21" width="95.1" height="35" rx="3"/><text x="597.2" y="38.5" text-anchor="middle" dominant-baseline="central">Manual run</text></g><g class="am-node am-node--db" data-key="Unmerged PR" data-step="2"><path class="am-node-shape" d="M690.7,21 A55.1,7 0 0 1 800.9,21 V56 A55.1,7 0 0 1 690.7,56 Z"/><path class="am-node-shape" d="M690.7,21 A55.1,7 0 0 0 800.9,21"/><text x="745.8" y="42.5" text-anchor="middle" dominant-baseline="central">Unmerged PR</text></g></g></svg></figure></div>
 </section>
 <section class="am-panel" id="panel-D">
-<header class="am-panel-head"><span class="am-panel-id">D</span><h2>Times</h2></header>
+<header class="am-panel-head"><span class="am-panel-id">D</span><h2>Steps</h2></header>
 <div class="am-panel-body"><div class="am-md"><div class="am-table-wrap"><table>
 <thead>
 <tr>
-<th>Time</th>
 <th>Step</th>
+<th>Who</th>
 <th>Output</th>
 </tr>
 </thead>
 <tbody><tr>
-<td>19:55 Asia/Shanghai</td>
-<td>Scout scans the X bookmark folders</td>
-<td>pick.md, status pending</td>
+<td>挑选 Pick</td>
+<td>Scout</td>
+<td>pick note, status pending</td>
 </tr>
 <tr>
-<td>before 22:00</td>
-<td>Yishan approves in chat</td>
+<td>审批 Approve</td>
+<td>Owner</td>
 <td>status approved</td>
 </tr>
 <tr>
-<td>22:00</td>
-<td>Nightly build routine starts</td>
-<td>branch <code>demo/&lt;slug&gt;</code>, app in <code>apps/&lt;slug&gt;/</code>, one PR</td>
+<td>构建 Build</td>
+<td>Builder</td>
+<td>branch <code>demo/&lt;slug&gt;</code>, app in <code>apps/&lt;slug&gt;/</code></td>
 </tr>
 <tr>
-<td>05:53</td>
-<td>Report routine</td>
-<td>result to Yishan</td>
+<td>开 PR Open PR</td>
+<td>Builder</td>
+<td>one unmerged PR with screenshot + video</td>
 </tr>
 </tbody></table></div>
 </div></div>
@@ -774,63 +772,57 @@ html[data-theme="paper"] .am-md table { font-family: var(--font-sans); }
 <div class="am-lightbox-canvas am-diagram"></div>
 </div>
 </div>
-<footer class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.4.14 · 2026-10-08 01:08</footer>
+<footer class="am-colophon">Generated by <a href="https://github.com/QingYunA/answer-me-with-html" target="_blank" rel="noopener">Answer me with HTML</a> 0.4.14 · 2026-10-15 10:28</footer>
 <textarea id="am-source" hidden readonly aria-hidden="true">---
 template: sheet
 theme: auto
-title: How the xbm nightly demo pipeline works
-subtitle: From an X bookmark to an unmerged PR
+title: How the xbm demo pipeline works
+subtitle: From a bookmark to an unmerged PR — 挑选、审批、构建、开 PR
 cols: 3
-source: xbm AGENTS.md, nightly pick/status notes 2026-10-08
+source: xbm AGENTS.md (generic flow, no schedule details)
 ---
 
 ## Sequence {span=2}
 
 ```sequence num
-participants: Scout, Yishan, Builder, GitHub, Report
-note Scout: 19:55 scan bookmarks
-Scout -&gt; Yishan: pick.md (pending)
-Yishan -&gt; Builder: approve in chat
-note Builder: 22:00 build if approved
-Builder -&gt; GitHub: branch demo/slug, aider + DeepSeek
-Builder -&gt; GitHub: build-all.sh, screenshot, video
-Builder -&gt; GitHub: open one PR (no merge)
-Yishan -&gt; GitHub: merge (Yishan only)
-note Report: 05:53
-Report -&gt; Yishan: result report
+participants: Scout, Owner, Builder, GitHub
+note Scout: 挑选 · pick a bookmark
+Scout -&gt; Owner: pick note (pending)
+Owner -&gt; Builder: 审批 · approve
+note Builder: 构建 · build only if approved
+Builder -&gt; GitHub: branch demo/slug, build-all.sh
+Builder -&gt; GitHub: screenshot + video
+Builder -&gt; GitHub: 开 PR · one PR (no merge)
+Owner -&gt; GitHub: merge (owner only)
 ```
 
 ## Rules
 
-- Build only when `pick.md` shows `approved`.
+- Build only when the pick note shows `approved`.
 - One app per PR, under `apps/&lt;slug&gt;/`.
 - The PR has a screenshot and a video.
-- Never auto-merge. Yishan merges.
+- Never auto-merge. The owner merges.
 
 ## When approval is late
 
-```callout warn Manual start
-Tonight the 22:00 build checked at 22:17 and skipped. The status was pending.
-
-Yishan approved at 00:23 on 2026-10-08 and asked to start now.
-
-A manual run does the same build steps. The 05:53 report includes it.
+```callout info Manual start
+If the approval comes after the scheduled build has checked and skipped, the owner can ask for a manual run. A manual run does the same build steps.
 ```
 
 ```flow LR
-(pending) -&gt; [Skipped at 22:17]: 22:00 check
-[Skipped at 22:17] -&gt; [Approved 00:23]: Yishan in chat
-[Approved 00:23] -&gt; *[Manual run] -&gt; [(Unmerged PR)]
+(pending) -&gt; [Skipped]: scheduled check
+[Skipped] -&gt; [Approved]: owner
+[Approved] -&gt; *[Manual run] -&gt; [(Unmerged PR)]
 ```
 
-## Times
+## Steps
 
-| Time | Step | Output |
+| Step | Who | Output |
 | --- | --- | --- |
-| 19:55 Asia/Shanghai | Scout scans the X bookmark folders | pick.md, status pending |
-| before 22:00 | Yishan approves in chat | status approved |
-| 22:00 | Nightly build routine starts | branch `demo/&lt;slug&gt;`, app in `apps/&lt;slug&gt;/`, one PR |
-| 05:53 | Report routine | result to Yishan |
+| 挑选 Pick | Scout | pick note, status pending |
+| 审批 Approve | Owner | status approved |
+| 构建 Build | Builder | branch `demo/&lt;slug&gt;`, app in `apps/&lt;slug&gt;/` |
+| 开 PR Open PR | Builder | one unmerged PR with screenshot + video |
 </textarea>
 <script>
 (() => {

@@ -13,7 +13,7 @@ In:
   3. **Jev rule compliance** — 24/24 with the rule in the prompt vs 5/24 without.
   4. **Subscription value per $200 plan** — API-equivalent value used: $2,485 of Fable 5.1 (Claude, 50 % quota left) vs $2,897 of GPT-6 Astra (OpenAI, quota used up), with a $200 reference rule.
   5. **Gross margin by model and utilization** — Opus 5.5 −369 % / Fable 5.1 ~1 % at full use, 6 % / 80 % at 20 % use. Interactive utilization toggle + a shadcn table with the same 4 numbers.
-- Numbers come ONLY from `xbm-nightly/2026-10-07/pick.md` (which quotes Nutrient's 2026-10-06 Readwise brief) and the xbm git history. Every chart caption cites its source. Nothing invented; no example data is needed.
+- Numbers come ONLY from the two cited articles (Paweł Huryn, The Product Compass; SemiAnalysis) and the xbm git history. Every chart caption cites its source. Nothing invented; no example data is needed.
 - Hover tooltips on every chart (built-in `tooltip` extension); keyboard focus works through the library.
 - Light / dark / system theme. Chart paint follows `currentColor` and `--ts-chart-*` CSS variables.
 - Responsive grid: 1 column on phones, 2 on desktop.

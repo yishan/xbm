@@ -33,8 +33,8 @@ export function ProfileForm() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      username: "yishan",
-      email: "demo@li.yishan.app",
+      username: "demo",
+      email: "demo@example.com",
       bio: "Building one demo a night.",
       role: "admin",
       website: "https://li.yishan.app",

@@ -2,17 +2,15 @@
 /**
  * Regenerates the committed data files from real sources (run from apps/ascii-rest):
  *   src/data/pieces.json  every piece's meta, read from the installed ascii.rest package
- *   src/data/fleet.json   xbm demos from `git log --first-parent origin/main` and the
- *                         nightly run notes in /workspace/xbm-nightly/<date>/status.md
+ *   src/data/fleet.json   xbm demos from `git log --first-parent origin/main`
  *   bun scripts/gen-data.ts
  */
 import { load, names, canvas } from "ascii.rest"
-import { existsSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
+import { readdirSync, writeFileSync } from "node:fs"
 import { join, resolve } from "node:path"
 
 const APP = resolve(import.meta.dir, "..")
 const REPO = resolve(APP, "../..")
-const NIGHTLY = process.env.XBM_NIGHTLY ?? "/workspace/xbm-nightly"
 const sh = (cmd: string[]) => new TextDecoder().decode(Bun.spawnSync(cmd, { cwd: REPO }).stdout).trim()
 
 // 1. pieces
@@ -49,35 +47,16 @@ const perWeek = {
   prs: weeks.map((w) => merges.filter((m) => monday(m.date) === w).length),
 }
 
-// 3. nightly runs: one line per dated folder, read from its status.md
-const runs = existsSync(NIGHTLY) ? readdirSync(NIGHTLY).filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)).sort().map((date) => {
-  const f = join(NIGHTLY, date, "status.md")
-  const pick = join(NIGHTLY, date, "pick.md")
-  const text = existsSync(f) ? readFileSync(f, "utf8") : ""
-  const slug = (text.match(/\(`?([a-z0-9-]+)`?\)/) ?? (existsSync(pick) ? readFileSync(pick, "utf8").match(/\*\*slug:\*\*\s*([a-z0-9-]+)/) : null))?.[1] ?? ""
-  const finished = text.match(/\*\*finished:\*\*\s*(\d{4}-\d{2}-\d{2}) (\d{2}:\d{2})/)
-  const manual = /manual/i.test(text)
-  let result = "running"
-  if (/not finished/i.test(text)) result = "stopped"
-  else if (finished) result = manual ? "manual" : "done"
-  // HH:MM shown on the board: finish time, else when it stopped or started
-  const at = finished?.[2] ?? text.match(/stopped around (\d{2}:\d{2})/)?.[1] ?? text.match(/(\d{2}:\d{2}) Manual build started/)?.[1] ?? null
-  return { date, slug, finished: finished ? `${finished[1]} ${finished[2]}` : null, at, result }
-}) : []
-
 const fleet = {
   generated: new Date().toISOString(),
   sources: {
     demos: `git log --first-parent origin/main (head ${head}), first commit adding apps/<slug>/package.json`,
     prs: "git log --first-parent --merges origin/main",
-    runs: "/workspace/xbm-nightly/<date>/status.md (nightly run notes on the build box)",
-    schedule: "nightly pipeline: 19:55 pick, 22:00 build, 05:53 report (Asia/Shanghai)",
   },
   head,
   demos,
   merges,
   perWeek,
-  runs,
 }
 writeFileSync(join(APP, "src/data/fleet.json"), JSON.stringify(fleet, null, 1) + "\n")
-console.log(`pieces ${pieces.length}, demos ${demos.length}, merges ${merges.length}, runs ${runs.length}`)
+console.log(`pieces ${pieces.length}, demos ${demos.length}, merges ${merges.length}, `)

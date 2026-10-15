@@ -120,7 +120,7 @@ export default function App() {
         <p className="break-words">
           页面由上游 am CLI（MIT License, Copyright (c) 2026 Answer me with HTML
           contributors）在提交时渲染，HTML 已提交到 public/pages/。未使用 am
-          video / ElevenLabs。xbm nightly 2026-10-08。
+          video / ElevenLabs。xbm demo 流程示例。
         </p>
         <p>
           <a

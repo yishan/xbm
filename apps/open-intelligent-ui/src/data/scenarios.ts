@@ -31,11 +31,11 @@ export const SCENARIOS: Scenario[] = [
     chip: "本周访问量",
     keywords: ["访问量", "数据", "指标", "统计", "图表", "趋势", "metric", "chart", "analytics", "visits", "traffic"],
     thinking: "汇总本周 xbm demo 的访问数据并生成趋势图…",
-    text: "这是本周 xbm demo 的访问量，周四到周五增长明显，整体比上周提升了约 18%。",
+    text: "这是本周 xbm demo 的访问量（示例数据），周四到周五增长明显，整体比上周提升了约 18%。",
     call: {
       tool: "render_metric_chart",
       props: {
-        title: "本周 xbm demo 访问量",
+        title: "本周 xbm demo 访问量（示例数据）",
         unit: "次",
         series: [
           { label: "周一", value: 320 },
@@ -77,11 +77,11 @@ export const SCENARIOS: Scenario[] = [
       props: {
         title: "发布清单",
         tasks: [
-          { id: "t1", label: "冻结代码并拉发布分支", owner: "小夏", done: true },
-          { id: "t2", label: "回归测试全量用例", owner: "阿泽", done: false },
-          { id: "t3", label: "更新变更日志", owner: "小夏", done: false },
-          { id: "t4", label: "通知运营与客服", owner: "林可", done: false },
-          { id: "t5", label: "灰度发布到 5% 流量", owner: "阿泽", done: false },
+          { id: "t1", label: "冻结代码并拉发布分支", owner: "成员 A", done: true },
+          { id: "t2", label: "回归测试全量用例", owner: "成员 B", done: false },
+          { id: "t3", label: "更新变更日志", owner: "成员 A", done: false },
+          { id: "t4", label: "通知运营与客服", owner: "成员 C", done: false },
+          { id: "t5", label: "灰度发布到 5% 流量", owner: "成员 B", done: false },
         ],
       },
     },

@@ -34,14 +34,12 @@ export type FpsChoice = "native" | 24 | 8 | 0
 
 export type Demo = { slug: string; merged: string; commit: string; pr: number | null }
 export type Merge = { date: string; pr: number; branch: string }
-export type Run = { date: string; slug: string; finished: string | null; at: string | null; result: "done" | "manual" | "stopped" | "running" }
 export type Fleet = {
   generated: string
   head: string
-  sources: Record<"demos" | "prs" | "runs" | "schedule", string>
+  sources: Record<"demos" | "prs", string>
   demos: Demo[]
   merges: Merge[]
   perWeek: { labels: string[]; demos: number[]; prs: number[] }
-  runs: Run[]
 }
 export const FLEET = fleetJson as Fleet
