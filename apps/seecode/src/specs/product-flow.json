@@ -1,0 +1,20 @@
+{"type":"flowchart","lang":"zh-CN","eyebrow":"示例数据 · 流程图","title":"通用产品流程（示例数据）","subtitle":"需求评审 → 设计 → 开发 → 上线，通用示意，非真实项目","motion":"trace","dir":"TB",
+"nodes":[
+ {"id":"req","label":"需求提出","shape":"terminal","row":0,"col":1},
+ {"id":"review","label":"评审通过？","shape":"decision","focal":true,"row":1,"col":1},
+ {"id":"more","label":"补充信息","kind":"muted","row":1,"col":0},
+ {"id":"design","label":"交互设计","icon":"document","row":2,"col":1},
+ {"id":"dev","label":"开发","icon":"code","row":3,"col":1},
+ {"id":"test","label":"测试通过？","shape":"decision","row":4,"col":1},
+ {"id":"fix","label":"修复问题","kind":"muted","row":4,"col":2},
+ {"id":"launch","label":"上线","shape":"terminal","icon":"flag","row":5,"col":1}],
+"edges":[
+ ["req","review","","primary"],
+ ["review","more","否"],
+ ["more","req","补充后重提","return"],
+ ["review","design","是","primary"],
+ ["design","dev","","primary"],
+ ["dev","test","","primary"],
+ ["test","fix","否"],
+ ["fix","dev","重新提测","return"],
+ ["test","launch","是","primary"]]}

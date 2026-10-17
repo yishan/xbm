@@ -1,0 +1,20 @@
+{"type":"architecture","lang":"zh-CN","eyebrow":"流程 · 架构图","title":"xbm 夜间 demo 流水线","subtitle":"从书签到 PR：每一步都需要人确认后才继续","motion":"trace","dir":"LR",
+"nodes":[
+ {"id":"bookmarks","label":"X 书签","sub":"公开收藏","kind":"input","icon":"star","row":0,"col":0},
+ {"id":"pick","label":"挑选","sub":"候选 + 计划","icon":"document","row":0,"col":1},
+ {"id":"approval","label":"审批","sub":"聊天确认","kind":"security","focal":true,"icon":"chat","row":0,"col":2},
+ {"id":"build","label":"构建","sub":"Bun + Vite","icon":"code","row":0,"col":3},
+ {"id":"verify","label":"验证","sub":"verify-xbm","icon":"check","row":1,"col":3},
+ {"id":"pr","label":"PR","sub":"未合并，待审","kind":"external","icon":"flag","row":1,"col":4},
+ {"id":"report","label":"报告","sub":"截图 + 视频","icon":"mail","row":0,"col":4},
+ {"id":"skip","label":"跳过","sub":"未批准不构建","kind":"muted","row":1,"col":2},
+ {"id":"seen","label":"已看书签","sub":"tracking JSON","kind":"store","row":1,"col":1}],
+"edges":[
+ ["bookmarks","pick","新收藏","primary"],
+ ["pick","approval","提案","primary"],
+ ["approval","build","批准","primary"],
+ ["approval","skip","未批准","async"],
+ ["build","verify","构建产物","primary"],
+ ["verify","pr","通过","primary"],
+ ["pr","report","链接","primary"],
+ ["pick","seen","记录"]]}
