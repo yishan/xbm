@@ -30,6 +30,7 @@ H1 title + one paragraph, then exactly: `Sub-features`, `How to get to it (user 
 - [obsidian-ui](./obsidian-ui.md) — `obsidian-ui`
 - [Open Intelligent UI](./open-intelligent-ui.md) — `open-intelligent-ui`
 - [pdfcn](./pdfcn.md) — `pdfcn`
+- [SeeCode 交互图解](./seecode.md) — `seecode`
 - [Shadcn Admin](./shadcn-admin.md) — `shadcn-admin`
 - [SlideBlocks](./slideblocks.md) — `slideblocks`
 - [snapcn 产品演示组件](./snapcn.md) — `snapcn`
