@@ -237,6 +237,18 @@
       "folder": "unfiled",
       "why": "Manim-compatible Rust+wgpu explainer engine; curated gallery of official scenes with code beside playback; approved 2026-10-15 20:07",
       "built": "2026-10-15"
+    },
+    {
+      "id": "2111064619808948697",
+      "title": "SeeCode",
+      "url": "https://x.com/GitHub_Daily/status/2111064619808948697",
+      "date": "2026-10-16",
+      "tech": "SeeCode v0.6.1 renderer (MIT, Aryan Utkarsh; vendored release, not on npm) rendered at build time; Vite + React + Tailwind + shadcn",
+      "repo": "https://github.com/Aryanutkarsh/SeeCode",
+      "slug": "seecode",
+      "folder": "unfiled",
+      "why": "JSON spec → animated, explorable HTML diagrams (hover trace, focus panel, step-through); 5 diagrams of the public xbm pipeline + 示例数据; approved 2026-10-18 00:11",
+      "built": "2026-10-18"
     }
   ],
   "skipped": []

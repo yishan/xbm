@@ -1,0 +1,19 @@
+{"type":"sequence","lang":"zh-CN","eyebrow":"对话 · 时序图","title":"审批对话","subtitle":"候选先发给 Yishan，批准后才开始构建","motion":"trace","numbered":true,
+"participants":[
+ {"id":"routine","label":"夜间任务","sub":"定时挑选","icon":"clock"},
+ {"id":"owner","label":"Yishan","sub":"聊天里审批","kind":"external","focal":true,"icon":"person"},
+ {"id":"agent","label":"构建代理","sub":"子任务","icon":"code"},
+ {"id":"github","label":"GitHub","sub":"yishan/xbm","kind":"store","icon":"server"}],
+"messages":[
+ ["routine","owner","发送候选与计划"],
+ ["owner","routine","批准","primary"],
+ ["routine","agent","开始构建","primary"],
+ ["owner","routine","暂不批准","reply"],
+ ["routine","routine","本次跳过"],
+ ["agent","github","推送分支并开 PR","primary"],
+ ["github","agent","PR 链接","reply"],
+ ["agent","owner","截图、视频与报告","primary"],
+ ["owner","github","审阅后自行合并","async"]],
+"fragments":[
+ {"kind":"alt","label":"已批准","from":1,"to":4,"else":3,"elseLabel":"未批准"},
+ {"kind":"opt","label":"满意才合并","from":8,"to":8}]}

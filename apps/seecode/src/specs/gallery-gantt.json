@@ -1,0 +1,166 @@
+{
+ "type": "gantt",
+ "lang": "zh-CN",
+ "eyebrow": "公开数据 · 甘特图",
+ "title": "画廊上线时间线",
+ "subtitle": "每条从收藏日期到上线日期，数据来自公开的 tracking/seen-bookmarks.json",
+ "motion": "reveal",
+ "today": "2026-10-18",
+ "tasks": [
+  {
+   "id": "figures4papers",
+   "label": "figures4papers",
+   "section": "九月",
+   "start": "2026-09-24",
+   "end": "2026-09-25",
+   "done": true
+  },
+  {
+   "id": "transitions_dev",
+   "label": "transitions.dev",
+   "section": "九月",
+   "start": "2026-09-25",
+   "end": "2026-09-26",
+   "done": true
+  },
+  {
+   "id": "spectrum_ui",
+   "label": "Spectrum UI",
+   "section": "九月",
+   "start": "2026-09-28",
+   "end": "2026-09-29",
+   "done": true
+  },
+  {
+   "id": "obsidian_ui",
+   "label": "ObsidianUI",
+   "section": "九月",
+   "start": "2026-09-29",
+   "end": "2026-09-30",
+   "done": true
+  },
+  {
+   "id": "docu_md",
+   "label": "docu.md",
+   "section": "九月",
+   "start": "2026-09-30",
+   "end": "2026-10-01",
+   "done": true
+  },
+  {
+   "id": "antv_infographic",
+   "label": "AntV Infographic",
+   "section": "十月",
+   "start": "2026-10-01",
+   "end": "2026-10-02",
+   "done": true
+  },
+  {
+   "id": "shadcn_admin",
+   "label": "shadcn-admin",
+   "section": "十月",
+   "start": "2026-10-02",
+   "end": "2026-10-03",
+   "done": true
+  },
+  {
+   "id": "pdfcn",
+   "label": "pdfcn",
+   "section": "十月",
+   "start": "2026-10-04",
+   "end": "2026-10-06",
+   "done": true
+  },
+  {
+   "id": "hairline",
+   "label": "Hairline",
+   "section": "十月",
+   "start": "2026-10-04",
+   "end": "2026-10-06",
+   "done": true
+  },
+  {
+   "id": "slideblocks",
+   "label": "SlideBlocks",
+   "section": "十月",
+   "start": "2026-09-24",
+   "end": "2026-10-07",
+   "done": true
+  },
+  {
+   "id": "tanstack_charts",
+   "label": "TanStack Charts",
+   "section": "十月",
+   "start": "2026-10-05",
+   "end": "2026-10-08",
+   "done": true
+  },
+  {
+   "id": "answer_me_with_html",
+   "label": "Answer me with HTML",
+   "section": "十月",
+   "start": "2026-10-06",
+   "end": "2026-10-09",
+   "done": true
+  },
+  {
+   "id": "ascii_rest",
+   "label": "ascii.rest",
+   "section": "十月",
+   "start": "2026-10-07",
+   "end": "2026-10-10",
+   "done": true
+  },
+  {
+   "id": "open_intelligent_ui",
+   "label": "Open Intelligent UI",
+   "section": "十月",
+   "start": "2026-10-09",
+   "end": "2026-10-12",
+   "done": true
+  },
+  {
+   "id": "focus_mk3_anatomy",
+   "label": "Focus Mk3, opened up",
+   "section": "十月",
+   "start": "2026-10-12",
+   "end": "2026-10-13",
+   "done": true
+  },
+  {
+   "id": "snapcn",
+   "label": "snapcn",
+   "section": "十月",
+   "start": "2026-10-12",
+   "end": "2026-10-15",
+   "done": true
+  },
+  {
+   "id": "manimgx",
+   "label": "ManimGX",
+   "section": "十月",
+   "start": "2026-10-15",
+   "end": "2026-10-16",
+   "done": true
+  },
+  {
+   "id": "seecode",
+   "label": "SeeCode",
+   "section": "十月",
+   "start": "2026-10-16",
+   "end": "2026-10-19",
+   "focal": true
+  }
+ ],
+ "milestones": [
+  {
+   "label": "首个 demo",
+   "date": "2026-09-24"
+  },
+  {
+   "label": "SeeCode 上线",
+   "date": "2026-10-18",
+   "focal": true
+  }
+ ]
+}
