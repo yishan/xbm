@@ -1,16 +1,77 @@
-# After each successful Production deploy of li.yishan.app (reported by Vercel),
-# rebuild yishan.li so its 每日实验 section picks up the new dist/demos.json.
+# After a successful Production deploy of li.yishan.app (reported by Vercel),
+# rebuild yishan.li so its 每日实验 section picks up the new dist/demos.json —
+# but ONLY when the deploy added a new top-level directory under apps/.
+# "New" = present in the deployed commit but absent in the commit of the previous
+# Production deployment (falls back to the deployed commit's first parent).
 # Needs repo secret YISHAN_LI_DEPLOY_HOOK = a Vercel Deploy Hook URL of the `portfolio` project.
 name: Rebuild yishan.li
 
 on: deployment_status
+
+permissions:
+  contents: read
+  deployments: read
 
 jobs:
   rebuild:
     if: github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout (full history)
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.deployment.sha }}
+          fetch-depth: 0
+
+      - name: Detect new apps/ directories
+        id: detect
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.event.deployment.sha }}
+          DEPLOY_ID: ${{ github.event.deployment.id }}
+          ENVIRONMENT: ${{ github.event.deployment.environment }}
+        run: |
+          set -euo pipefail
+          # Previous Production deployment (newest first) with a different sha and a success status.
+          PREV=""
+          for row in $(gh api "repos/$REPO/deployments?environment=$ENVIRONMENT&per_page=30" \
+                        --jq '.[] | "\(.id):\(.sha)"'); do
+            id="${row%%:*}"; sha="${row#*:}"
+            [ "$id" = "$DEPLOY_ID" ] && continue
+            [ "$sha" = "$SHA" ] && continue
+            [ "$id" -gt "$DEPLOY_ID" ] && continue
+            state=$(gh api "repos/$REPO/deployments/$id/statuses?per_page=100" \
+                     --jq '[.[] | select(.state=="success")] | length')
+            if [ "$state" -gt 0 ] && git cat-file -e "$sha^{commit}" 2>/dev/null; then
+              PREV="$sha"; break
+            fi
+          done
+          if [ -z "$PREV" ]; then
+            PREV=$(git rev-parse "$SHA^1")
+            echo "No previous successful Production deployment found; comparing with parent $PREV"
+          else
+            echo "Previous Production deployment commit: $PREV"
+          fi
+
+          # Top-level app dirs that exist now but did not exist at PREV.
+          git ls-tree -d --name-only "$PREV" apps/ 2>/dev/null | sort > /tmp/before.txt || true
+          git ls-tree -d --name-only "$SHA" apps/ | sort > /tmp/after.txt
+          NEW=$(comm -13 /tmp/before.txt /tmp/after.txt | tr '\n' ' ')
+          # Cross-check with added files (diff-filter=A), for the log.
+          echo "Added files under apps/ ($PREV..$SHA):"
+          git diff --name-only --diff-filter=A "$PREV" "$SHA" -- apps/ | cut -d/ -f1-2 | sort -u || true
+
+          if [ -n "${NEW// /}" ]; then
+            echo "New app directories: $NEW"
+            echo "new_apps=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "No new app directories under apps/; skipping yishan.li rebuild"
+            echo "new_apps=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Trigger yishan.li deploy hook
+        if: steps.detect.outputs.new_apps == 'true'
         env:
           HOOK: ${{ secrets.YISHAN_LI_DEPLOY_HOOK }}
         run: |
