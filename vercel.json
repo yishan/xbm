@@ -4,5 +4,11 @@
   "installCommand": "echo 'skip: scripts/build-all.sh installs each app'",
   "buildCommand": "bash scripts/build-all.sh",
   "outputDirectory": "dist",
-  "trailingSlash": true
+  "trailingSlash": true,
+  "git": {
+    "deploymentEnabled": {
+      "**": false,
+      "main": true
+    }
+  }
 }
