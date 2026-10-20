@@ -249,6 +249,16 @@
       "folder": "unfiled",
       "why": "JSON spec → animated, explorable HTML diagrams (hover trace, focus panel, step-through); 5 diagrams of the public xbm pipeline + 示例数据; approved 2026-10-18 00:11",
       "built": "2026-10-18"
+    },
+    {
+      "id": "own-grok-2026-10-20",
+      "title": "我怎么用 Grok Bot",
+      "date": "2026-10-20",
+      "tech": "plain static HTML (inline CSS/JS, monospace) via Vite",
+      "slug": "grok",
+      "folder": "own",
+      "why": "Own content, not a bookmark: talk page on how Yishan uses Grok Bot",
+      "built": "2026-10-20"
     }
   ],
   "skipped": []

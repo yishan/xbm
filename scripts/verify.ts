@@ -42,6 +42,7 @@ export const DRIVES: Record<string, Drive> = {
   "obsidian-ui": { feature: "open the Code view of the first effect (Prism Beam)", steps: [{ role: "button", name: "Code", nth: 0 }] },
   "open-intelligent-ui": { feature: "ask the scripted 上海天气 prompt and get a weather card", steps: [{ role: "button", name: "上海天气" }] },
   "pdfcn": { feature: "switch the document to Resume", steps: [{ role: "button", name: /^Resume/ }] },
+  "grok": { feature: "jump to 协作流程 via the section nav", steps: [{ css: 'a[href="#flows-h"]' }], expectText: /协作流程/ },
   "seecode": { feature: "open the 审批对话 tab and step the sequence once", steps: [{ role: "tab", name: "审批对话" }, { role: "button", name: "下一步" }], expectText: /第 1 步/ },
   "shadcn-admin": { feature: "open the Analytics dashboard tab", steps: [{ role: "tab", name: "Analytics" }] },
   "slideblocks": { feature: "go to the next slide", steps: [{ role: "button", name: "下一页" }] },
