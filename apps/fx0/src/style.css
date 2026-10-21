@@ -1,0 +1,19 @@
+:root{--bg:#fff;--fg:#111;--mute:#666;--line:#e5e5e5;--card:#fafafa;--acc:#111;color-scheme:light}
+[data-theme=dark]{--bg:#0b0b0c;--fg:#ececec;--mute:#9a9a9a;--line:#2a2a2a;--card:#141415;--acc:#ececec;color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 system-ui,-apple-system,'PingFang SC',sans-serif}
+#app{max-width:1280px;margin:0 auto;padding:20px 24px 60px}
+.top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}h1{margin:0;font-size:22px}.top p{margin:4px 0;color:var(--mute)}
+.badge{margin-left:8px;font-size:12px;border:1px solid var(--line);padding:1px 8px;border-radius:99px;color:var(--fg)}
+button,select{font:inherit;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer}
+button[aria-pressed=true],button[aria-selected=true]{background:var(--acc);color:var(--bg);border-color:var(--acc)}
+.themes{display:flex;gap:4px}.brief{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.tabs{display:flex;gap:6px;margin:12px 0}
+.cmp{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}figure{margin:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+figcaption{display:flex;gap:10px;align-items:baseline;padding:8px 12px;border-bottom:1px solid var(--line)}figcaption span{color:var(--mute);font-size:12px}
+iframe{width:100%;height:420px;border:0;display:block}
+.strip{display:flex;gap:8px;list-style:none;padding:0;margin:0 0 12px}.strip button{text-align:left}.strip small{display:block;font-size:11px;opacity:.75}
+.flow{display:grid;grid-template-columns:300px 1fr;gap:14px}.chat{border:1px solid var(--line);border-radius:10px;padding:12px}
+.role{font-size:12px;color:var(--mute);margin:8px 0 4px}.bubble,.out{margin:0;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 10px}
+.chat label{display:block;margin-top:14px}.big{border:1px solid var(--line);border-radius:10px;height:560px}
+footer{margin-top:24px;color:var(--mute);font-size:12px}a{color:inherit}
+@media (max-width:800px){.cmp,.flow{grid-template-columns:1fr}.top{flex-direction:column}}

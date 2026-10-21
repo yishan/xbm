@@ -38,6 +38,7 @@ export const DRIVES: Record<string, Drive> = {
   "docu-md": { feature: "open the API Notes sample doc", steps: [{ role: "button", name: /^API Notes/ }], expectText: /Endpoints/ },
   "figures4papers": { feature: "switch the chart to Radar", steps: [{ role: "tab", name: "Radar" }] },
   "focus-mk3-anatomy": { feature: "open the DPS6 gearbox model page", steps: [{ css: 'a[href="dps6.html"]' }], expectText: /DPS6/ },
+  "fx0": { feature: "open 逐轮版本 and pick 第 2 轮", steps: [{ role: "tab", name: "逐轮版本" }, { role: "button", name: /^第 2 轮/ }], expectText: /版本 v2/ },
   "hairline": { feature: "switch to 02 协作场景 (simulated agent task)", steps: [{ role: "button", name: /^02 协作场景/ }] },
   "obsidian-ui": { feature: "open the Code view of the first effect (Prism Beam)", steps: [{ role: "button", name: "Code", nth: 0 }] },
   "open-intelligent-ui": { feature: "ask the scripted 上海天气 prompt and get a weather card", steps: [{ role: "button", name: "上海天气" }] },

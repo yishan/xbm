@@ -1,0 +1,11 @@
+fx0 demo (xbm/apps/fx0)
+
+This demo is a static gallery inspired by fx0 (https://github.com/vercel-labs/fx0),
+Copyright Vercel, Inc., licensed under the Apache License 2.0 (see LICENSE-fx0).
+It does not include fx0 source code; it reproduces the idea of design.md presets
+and per-turn versions with pre-generated sample output (示例数据).
+
+The style preset names and color tokens are taken from fx0's bundled design.md
+presets (lib/design-md/), which come from VoltAgent/awesome-design-md
+(https://github.com/VoltAgent/awesome-design-md), Copyright (c) 2026 VoltAgent,
+MIT License (see LICENSE-design-md).
