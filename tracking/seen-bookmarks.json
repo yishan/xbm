@@ -259,6 +259,19 @@
       "folder": "own",
       "why": "Own content, not a bookmark: talk page on how Yishan uses Grok Bot",
       "built": "2026-10-20"
+    },
+    {
+      "id": "2112245199808434614",
+      "title": "fx0",
+      "url": "https://x.com/i/status/2112245199808434614",
+      "date": "2026-10-21",
+      "tech": "Vite + TypeScript static gallery (pre-generated HTML in iframes)",
+      "site": "https://fx0.vercel.dev",
+      "repo": "https://github.com/vercel-labs/fx0",
+      "slug": "fx0",
+      "folder": "unfiled",
+      "why": "Vercel Labs mini v0 design agent; one brief across design.md presets + per-turn versions; approved 2026-10-21 22:10",
+      "built": "2026-10-21"
     }
   ],
   "skipped": []
