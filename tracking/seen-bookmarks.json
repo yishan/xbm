@@ -272,6 +272,30 @@
       "folder": "unfiled",
       "why": "Vercel Labs mini v0 design agent; one brief across design.md presets + per-turn versions; approved 2026-10-21 22:10",
       "built": "2026-10-21"
+    },
+    {
+      "id": "2113618712066711970",
+      "title": "Agent status component design",
+      "url": "https://x.com/eliakuratli/status/2113618712066711970",
+      "author": "@eliakuratli",
+      "date": "2026-10-23",
+      "tech": "Vite + React + Tailwind v4 + shadcn/ui + Motion (own-idea components, example data)",
+      "slug": "agent-status",
+      "folder": "unfiled",
+      "built": "2026-10-25",
+      "why": "Agent status UX (state, approval, elapsed) — own-idea demo with credits meter; approved 2026-10-24 20:03"
+    },
+    {
+      "id": "2112882320978104612",
+      "title": "Agent credits usage",
+      "url": "https://x.com/PostiauxCharles/status/2112882320978104612",
+      "author": "@PostiauxCharles",
+      "date": "2026-10-21",
+      "tech": "Vite + React + Tailwind v4 + shadcn/ui + Motion (own-idea components, example data)",
+      "slug": "agent-status",
+      "folder": "unfiled",
+      "built": "2026-10-25",
+      "why": "Credits/usage meter half of the agent-status demo; approved 2026-10-24 20:03"
     }
   ],
   "skipped": []
