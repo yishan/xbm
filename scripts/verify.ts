@@ -36,6 +36,7 @@ export const DRIVES: Record<string, Drive> = {
   "answer-me-with-html": { feature: "open the second rendered page from the list", steps: [{ role: "button", name: /^02 Vercel/ }] },
   "antv-infographic": { feature: "filter templates to Sequence", steps: [{ role: "button", name: "Sequence", nth: 0 }], expectText: /Sequence/ },
   "ascii-rest": { feature: "filter gallery to the data category", steps: [{ role: "button", name: /^data \d+/ }] },
+  "dithercn": { feature: "switch the GLSL playground to the 等高线 contours preset", steps: [{ css: '[data-testid="preset-contours"]' }] },
   "docu-md": { feature: "open the API Notes sample doc", steps: [{ role: "button", name: /^API Notes/ }], expectText: /Endpoints/ },
   "figures4papers": { feature: "switch the chart to Radar", steps: [{ role: "tab", name: "Radar" }] },
   "focus-mk3-anatomy": { feature: "open the DPS6 gearbox model page", steps: [{ css: 'a[href="dps6.html"]' }], expectText: /DPS6/ },
