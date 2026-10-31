@@ -308,6 +308,18 @@
       "folder": "unfiled",
       "built": "2026-10-29",
       "why": "Very visual shader/dither demo; engine + agent skill mirrors the bot fleet; dashboard uses morning-brief style sample numbers; approved 2026-10-28 20:51"
+    },
+    {
+      "id": "2116338539189489755",
+      "title": "INITIĀLIS — generative decorated initials",
+      "url": "https://x.com/azlenelza/status/2116338539189489755",
+      "author": "@azlenelza",
+      "date": "2026-10-31",
+      "tech": "Vite + React 19 + Tailwind v4 + shadcn/ui + vendored INITIĀLIS lib (WebGL2 workers; MIT)",
+      "slug": "initialis",
+      "folder": "unfiled",
+      "built": "2026-11-01",
+      "why": "Highly visual generative typography; ties into 有所启发 article openings; approved 2026-10-31 22:26"
     }
   ],
   "skipped": []
