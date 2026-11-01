@@ -84,3 +84,12 @@ pre.art {
   white-space: pre;
   font-variant-ligatures: none;
 }
+
+/* iOS zooms into inputs under 16px on focus; keep touch input text at 16px. */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

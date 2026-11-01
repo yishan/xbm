@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 
-const SWATCHES: DitherColor[] = ["ink", "blue", "purple", "green", "orange", "pink"];
+const SWATCHES: DitherColor[] = ["ink", "red", "blue", "green", "grey"];
 const MATRICES: DitherMatrix[] = ["bayer2", "bayer4", "bayer8", "blue-noise"];
 
 function Control({
@@ -46,6 +46,7 @@ function Control({
         <span className="text-xs tabular-nums">{format ? format(value) : value}</span>
       </div>
       <Slider
+        aria-label={label}
         value={[value]}
         min={min}
         max={max}
@@ -97,7 +98,7 @@ export function FieldPlayground({
               className="absolute inset-0"
               data-testid="playground-shader"
             />
-            <div className="pointer-events-none absolute right-3 bottom-3 rounded-full bg-background/80 px-2.5 py-1 text-[11px] tabular-nums text-muted-foreground backdrop-blur">
+            <div className="pointer-events-none absolute right-3 bottom-3 rounded-md border border-border bg-background px-2.5 py-1 font-mono text-xs tabular-nums text-muted-foreground">
               {matrix} · cell {cell}px · {levels} 级
             </div>
           </div>
