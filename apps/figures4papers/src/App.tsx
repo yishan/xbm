@@ -110,14 +110,14 @@ export default function App() {
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="space-y-2">
-                <p className="text-sm font-medium">Figure</p>
+                <p id="figure-tabs-label" className="text-sm font-medium">Figure</p>
                 <Tabs
                   value={figure}
                   onValueChange={(v) => setFigure(v as FigureId)}
                 >
-                  <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2">
+                  <TabsList aria-labelledby="figure-tabs-label" className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2">
                     {FIGURE_ORDER.map((id) => (
-                      <TabsTrigger key={id} value={id} className="text-xs">
+                      <TabsTrigger key={id} value={id} aria-controls={undefined} className="text-xs">
                         {FIGURE_LABELS[id]}
                       </TabsTrigger>
                     ))}
@@ -126,19 +126,19 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm font-medium">Chart type</p>
+                <p id="kind-tabs-label" className="text-sm font-medium">Chart type</p>
                 <Tabs
                   value={kind}
                   onValueChange={(v) => setKind(v as ChartKind)}
                 >
-                  <TabsList className="w-full">
-                    <TabsTrigger value="bar" className="flex-1">
+                  <TabsList aria-labelledby="kind-tabs-label" className="w-full">
+                    <TabsTrigger value="bar" aria-controls={undefined} className="flex-1">
                       Bar
                     </TabsTrigger>
-                    <TabsTrigger value="radar" className="flex-1">
+                    <TabsTrigger value="radar" aria-controls={undefined} className="flex-1">
                       Radar
                     </TabsTrigger>
-                    <TabsTrigger value="line" className="flex-1">
+                    <TabsTrigger value="line" aria-controls={undefined} className="flex-1">
                       Line
                     </TabsTrigger>
                   </TabsList>

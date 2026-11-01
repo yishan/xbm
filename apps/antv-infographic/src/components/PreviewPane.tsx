@@ -86,6 +86,8 @@ export function PreviewPane({ sample, dark }: PreviewPaneProps) {
 
         {showSource ? (
           <pre
+            tabIndex={0}
+            aria-label="Infographic syntax"
             className="max-h-48 overflow-auto rounded-lg border border-border bg-muted/40 p-3 text-xs font-mono leading-relaxed text-foreground"
             data-testid="syntax-source"
           >

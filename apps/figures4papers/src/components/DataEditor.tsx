@@ -72,6 +72,7 @@ export function DataEditor({ kind, rows, onRowChange }: Props) {
                     className="h-8 min-w-[140px]"
                     value={row.short}
                     title={row.metric}
+                    aria-label={`Metric name: ${row.metric}`}
                     onChange={(e) => onRowChange(i, "short", e.target.value)}
                   />
                 </td>
@@ -81,6 +82,7 @@ export function DataEditor({ kind, rows, onRowChange }: Props) {
                     step="any"
                     className="h-8"
                     value={row.without}
+                    aria-label={`${row.short} — ${SERIES_KEYS.without}`}
                     onChange={(e) => onRowChange(i, "without", e.target.value)}
                   />
                 </td>
@@ -94,6 +96,7 @@ export function DataEditor({ kind, rows, onRowChange }: Props) {
                         ? formatCell(row.with, "$")
                         : row.with
                     }
+                    aria-label={`${row.short} — ${SERIES_KEYS.with}`}
                     onChange={(e) => onRowChange(i, "with", e.target.value)}
                   />
                 </td>
