@@ -80,6 +80,7 @@ export function ExpandableActionBar({
             onMouseEnter={() => setActive(item.id)}
             onFocus={() => setActive(item.id)}
             onClick={() => handleActionClick(item)}
+            aria-label={item.label}
             className={cn(
               "relative flex h-9 items-center rounded-full px-2.5 text-sm font-medium text-zinc-600 dark:text-zinc-400 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-300 dark:focus-visible:ring-zinc-700",
               isActive ? "text-zinc-900 dark:text-zinc-100" : "hover:text-zinc-700 dark:hover:text-zinc-300"

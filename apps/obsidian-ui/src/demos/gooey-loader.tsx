@@ -25,14 +25,14 @@ export function GooeyLoaderDemo() {
             onClick={() => setSpeed(item.value)}
             className={cn(
               "rounded-full px-3 py-1 text-xs font-medium transition-colors",
-              speed === item.value ? "bg-zinc-900/10 dark:bg-white/10 text-zinc-950 dark:text-white" : "text-zinc-500"
+              speed === item.value ? "bg-zinc-900/10 dark:bg-white/10 text-zinc-950 dark:text-white" : "text-zinc-500 dark:text-zinc-400"
             )}
           >
             {item.label}
           </button>
         ))}
       </div>
-      <p className="text-xs text-zinc-500">Syncing agents…</p>
+      <p className="text-xs text-zinc-500 dark:text-zinc-400">Syncing agents…</p>
     </div>
   )
 }

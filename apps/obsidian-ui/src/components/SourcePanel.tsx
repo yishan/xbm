@@ -79,7 +79,7 @@ export function SourcePanel({ def }: { def: BlockDef }) {
             className="overflow-hidden"
           >
             <div className="pt-2">
-              <div className="mb-2 font-mono text-[11px] text-zinc-500">
+              <div className="mb-2 font-mono text-[11px] text-zinc-500 dark:text-zinc-400">
                 src/blocks/{def.file}
               </div>
               <pre className="max-h-80 overflow-auto rounded-xl bg-zinc-100 dark:bg-black/60 border border-zinc-900/10 dark:border-white/10 p-3 font-mono text-[11px] leading-relaxed text-zinc-700 dark:text-zinc-300">

@@ -616,7 +616,7 @@ export function PrismBeam({
         role="img"
         aria-label="Light beam refracting through a prism"
       />
-      <p className="pointer-events-none absolute bottom-3 left-4 text-xs text-zinc-500">
+      <p className="pointer-events-none absolute bottom-3 left-4 text-xs text-zinc-500 dark:text-zinc-400">
         drag to aim the beam
       </p>
     </div>
