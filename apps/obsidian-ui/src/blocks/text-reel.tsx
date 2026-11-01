@@ -230,7 +230,7 @@ export function TextReel({
         }}
       >
         <div className="flex items-center gap-4">
-          <span className="text-zinc-500">{prefix}</span>
+          <span className="text-zinc-500 dark:text-zinc-400">{prefix}</span>
           <div
             className="relative overflow-hidden"
             style={{ height: `${WINDOW_LINES * LINE_HEIGHT}em` }}
@@ -265,7 +265,7 @@ export function TextReel({
             style={{ width: "0%" }}
           />
         </div>
-        <span ref={speedTextRef} className="text-xs tabular-nums text-zinc-500">
+        <span ref={speedTextRef} className="text-xs tabular-nums text-zinc-500 dark:text-zinc-400">
           0 px/s
         </span>
       </div>

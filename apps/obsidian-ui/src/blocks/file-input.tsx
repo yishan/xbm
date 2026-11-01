@@ -195,7 +195,7 @@ export function FileInput({
                 <UploadCloud className="h-5 w-5 text-zinc-700 dark:text-zinc-300" />
               </motion.div>
               <p className="mt-3 text-sm font-medium text-zinc-900 dark:text-zinc-100">Drop files here</p>
-              <p className="mt-1 text-xs text-zinc-500">or click to browse · max {maxSizeInMB} MB</p>
+              <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">or click to browse · max {maxSizeInMB} MB</p>
             </motion.div>
           )}
 
@@ -235,7 +235,7 @@ export function FileInput({
                   <div className="flex items-center gap-2">
                     <Loader2 className={cn("h-4 w-4 text-zinc-600 dark:text-zinc-400", reducedMotion ? "" : "animate-spin")} />
                     <p className="min-w-0 flex-1 truncate text-sm text-zinc-800 dark:text-zinc-200">{item.file.name}</p>
-                    <span className="text-xs text-zinc-500">{Math.round(item.progress)}%</span>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-400">{Math.round(item.progress)}%</span>
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-zinc-900/10 dark:bg-white/10">
                     <motion.div
@@ -287,12 +287,12 @@ export function FileInput({
                         <FileText className="h-3.5 w-3.5 shrink-0 text-zinc-600 dark:text-zinc-400" />
                       )}
                       <span className="min-w-0 flex-1 truncate text-xs text-zinc-800 dark:text-zinc-200">{item.file.name}</span>
-                      <span className="text-[10px] text-zinc-500">{formatBytes(item.file.size)}</span>
+                      <span className="text-[10px] text-zinc-500 dark:text-zinc-400">{formatBytes(item.file.size)}</span>
                       <button
                         type="button"
                         aria-label={`Remove ${item.file.name}`}
                         onClick={() => setCompleted((prev) => prev.filter((f) => f.id !== item.id))}
-                        className="ml-0.5 text-zinc-500 transition-colors hover:text-zinc-800 dark:hover:text-zinc-200"
+                        className="ml-0.5 text-zinc-500 dark:text-zinc-400 transition-colors hover:text-zinc-800 dark:hover:text-zinc-200"
                       >
                         <X className="h-3.5 w-3.5" />
                       </button>
@@ -300,7 +300,7 @@ export function FileInput({
                   ))}
                 </AnimatePresence>
                 {remainingCount > 0 && (
-                  <span className="text-xs text-zinc-500">+{remainingCount} more</span>
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400">+{remainingCount} more</span>
                 )}
               </div>
               <button

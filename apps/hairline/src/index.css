@@ -59,7 +59,7 @@
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
+    --muted-foreground: oklch(0.52 0 0);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
@@ -128,7 +128,7 @@
     }
 }
 /* App canvas: quiet paper, precise ink, one orange signal. */
-:root { --background:#f8f7f4; --foreground:#242421; --muted:#efeee9; --muted-foreground:#74746d; --border:#dcdcd4; --primary:#242421; --primary-foreground:#fff; --ring:#e95c30; --signal:#b83813; --paper:#fff; --radius:.375rem; }
+:root { --background:#f8f7f4; --foreground:#242421; --muted:#efeee9; --muted-foreground:#6a6a63; --border:#dcdcd4; --primary:#242421; --primary-foreground:#fff; --ring:#e95c30; --signal:#b83813; --paper:#fff; --radius:.375rem; }
 .dark { --background:#151615; --foreground:#efeee9; --muted:#242623; --muted-foreground:#a7a99f; --border:#353830; --primary:#efeee9; --primary-foreground:#181a16; --signal:#ff875d; --paper:#1a1c19; }
 html { scroll-behavior:smooth; }
 body { margin:0; font-family:'Avenir Next','PingFang SC',sans-serif; font-size:14px; -webkit-font-smoothing:antialiased; }
@@ -171,7 +171,7 @@ output { font:12px monospace; color:var(--signal); width:34px; }
 .category-sidebar h2 { font-size:16px; font-weight:500; margin-top:8px; }
 .category-list { display:flex; flex-direction:column; gap:4px; margin-top:21px; }
 .category-list button { display:flex; justify-content:space-between; align-items:center; text-align:left; background:none; border:1px solid transparent; border-radius:4px; padding:9px 10px; min-height:40px; color:var(--muted-foreground); }
-.category-list button em { font-size:10px; display:block; font-style:normal; opacity:.8; margin-top:3px; }
+.category-list button em { font-size:11px; display:block; font-style:normal; margin-top:3px; }
 .category-list button small { font:11px monospace; }
 .category-list button:hover { background:var(--muted); }
 .category-list button[aria-pressed=true] { background:var(--muted); border-color:var(--border); color:var(--foreground); }
@@ -269,3 +269,12 @@ footer a { display:flex; align-items:center; gap:6px; }
 .adopt-steps li { border-top:1px solid var(--border); padding-top:12px; display:flex; flex-direction:column; gap:6px; font-size:13px; color:var(--muted-foreground); }
 .adopt-steps strong { color:var(--foreground); font-weight:500; font-size:14px; }
 @media (max-width: 760px) { .adopt-grid { grid-template-columns:1fr; } .adopt-arrow { transform:rotate(90deg); justify-self:center; } .adopt-steps { grid-template-columns:1fr 1fr; } }
+
+/* iOS zooms into inputs under 16px on focus; keep touch input text at 16px. */
+@media (pointer: coarse) {
+  input,
+  textarea,
+  select {
+    font-size: 16px;
+  }
+}

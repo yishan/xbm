@@ -7,7 +7,7 @@ export function TextReelDemo() {
   return (
     <div className="flex h-full w-full flex-col items-center justify-center">
       <TextReel className="w-full" reducedMotion={reducedMotion} />
-      <p className="mt-4 text-xs text-zinc-500">
+      <p className="mt-4 text-xs text-zinc-500 dark:text-zinc-400">
         scroll or use the wheel over the reel
       </p>
     </div>

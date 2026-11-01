@@ -35,7 +35,7 @@ export function ScenePanel({ scene }: ScenePanelProps) {
               className="max-h-[420px] w-full rounded-md object-contain"
             />
           </div>
-          <pre className="max-h-[420px] overflow-auto rounded-md bg-zinc-100 p-4 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
+          <pre tabIndex={0} aria-label="场景代码" className="max-h-[420px] overflow-auto rounded-md bg-zinc-100 p-4 text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100">
             <code className="font-mono text-xs">{scene.code}</code>
           </pre>
         </div>
