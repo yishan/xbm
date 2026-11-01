@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 type DitherMethod = (typeof DITHER_METHODS)[number];
 
 /** Paper, ink, then the two extra tones used by the 彩色 switch (one stable identity for the hook). */
-const IMAGE_COLORS = ["--dither-paper", "--dither-ink", "--dither-color-blue", "--dither-color-orange"];
+const IMAGE_COLORS = ["--dither-paper", "--dither-ink", "--dither-color-blue", "--dither-color-red"];
 
 export function ImageDither({ className }: { className?: string }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);

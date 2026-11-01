@@ -76,7 +76,7 @@ export function ReadingGauge({ animate = true, className }: { animate?: boolean;
           <DitherShader
             field={GAUGE_GLOW}
             uniforms={{ gaugeLevel: fraction }}
-            palette={["--dither-paper", "green"]}
+            palette={["--dither-paper", "ink"]}
             cell={3}
             animate={animate}
             stillTime={4}
@@ -93,7 +93,7 @@ export function ReadingGauge({ animate = true, className }: { animate?: boolean;
               <FillPattern
                 id={valueId}
                 fill="gradient"
-                color="green"
+                color="ink"
                 ramp={{ edge: "left", at: 24, length: 192 }}
               />
             </defs>

@@ -8,7 +8,7 @@ import { MINI_FIELD } from "@/lib/fields";
 import { cn } from "@/lib/utils";
 
 const pill =
-  "absolute left-2 top-2 rounded-full border border-border bg-background/80 px-2 py-0.5 text-[11px] text-muted-foreground backdrop-blur";
+  "absolute left-2 top-2 rounded-md border border-border bg-background px-2 py-0.5 font-mono text-xs text-muted-foreground";
 
 const panel = "relative h-40 overflow-hidden rounded-xl border border-border bg-background";
 
