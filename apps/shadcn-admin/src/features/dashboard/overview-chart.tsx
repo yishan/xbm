@@ -51,7 +51,7 @@ export function OverviewChart() {
           tickFormatter={(v: number) => `$${v / 1000}k`}
         />
         <ChartTooltip cursor={false} content={<ChartTooltipContent />} />
-        <Bar dataKey="total" fill="var(--color-total)" radius={6} />
+        <Bar dataKey="total" fill="var(--color-total)" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ChartContainer>
   )
