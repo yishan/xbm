@@ -4,12 +4,13 @@ import { PageCard } from '@/components/PageCard'
 import { PageViewer } from '@/components/PageViewer'
 import { Benchmark } from '@/components/Benchmark'
 import { Button } from '@/components/ui/button'
-import { PAGES, THEMES, UPSTREAM } from '@/data/pages'
+import { CATALOG_THEMES, PAGES, THEMES, UPSTREAM } from '@/data/pages'
 import type { ModeId, ThemeId } from '@/data/pages'
 
 export default function App() {
   const [activeId, setActiveId] = useState(() => PAGES.find((p) => `#${p.id}` === location.hash)?.id ?? PAGES[0].id)
   const [theme, setTheme] = useState<ThemeId>('blueprint')
+  const [catalogTheme, setCatalogTheme] = useState<ThemeId>('comic')
   const [mode, setMode] = useState<ModeId>(() =>
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   )
@@ -21,6 +22,7 @@ export default function App() {
   }, [mode])
 
   const activePage = PAGES.find((page) => page.id === activeId) ?? PAGES[0]
+  const isCatalog = !!activePage.catalogThemes
 
   function open(id: string) {
     setActiveId(id)
@@ -36,7 +38,7 @@ export default function App() {
         <p className="text-sm text-muted-foreground break-words">
           Agent 只写一份短 Markdown
           草稿，上游 am CLI 把它渲染成带时序图、对比表、时间线的离线单页
-          HTML。这里用 v0.5.2 渲染了 7 页：5 页关于 xbm 自己的说明，加上 v0.5 新功能的两页示例——er 实体关系图（改前 / 变更 / 改后切换）和「标注」Remark（把块级批注随回复发回 Agent）。
+          HTML。这里用 v0.5.10 渲染了 8 页：5 页关于 xbm 自己的说明，v0.5 的 er 和「标注」两页示例，以及 v0.5.5 chart 代码块的「周报数字」页（示例数据，可切换 comic / manga / pop 主题，页面工具栏 A− / A+ 调字号）。
         </p>
         <p className="text-xs text-muted-foreground">
           上游：
@@ -53,17 +55,22 @@ export default function App() {
       </header>
 
       <div className="sticky top-0 z-10 bg-background/90 backdrop-blur py-2 border-b border-border flex flex-wrap gap-2 items-center">
-        {THEMES.map((t) => (
-          <Button
-            key={t.id}
-            variant={theme === t.id ? 'default' : 'outline'}
-            size="sm"
-            data-testid={`theme-${t.id}`}
-            onClick={() => setTheme(t.id)}
-          >
-            {t.label}
-          </Button>
-        ))}
+        <span className="text-xs text-muted-foreground select-none">{isCatalog ? '主题（catalog）' : '主题'}</span>
+        {(isCatalog ? CATALOG_THEMES : THEMES).map((t) => {
+          const active = isCatalog ? catalogTheme === t.id : theme === t.id
+          return (
+            <Button
+              key={t.id}
+              variant={active ? 'default' : 'outline'}
+              size="sm"
+              aria-pressed={active}
+              data-testid={`theme-${t.id}`}
+              onClick={() => (isCatalog ? setCatalogTheme(t.id) : setTheme(t.id))}
+            >
+              {t.label}
+            </Button>
+          )
+        })}
 
         <Button
           variant="outline"
@@ -95,7 +102,7 @@ export default function App() {
         </Button>
       </div>
 
-      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+      <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {PAGES.map((page, i) => (
           <PageCard
             key={page.id}
@@ -111,7 +118,12 @@ export default function App() {
         <h2 className="text-xl font-semibold text-foreground break-words">
           {activePage.title}
         </h2>
-        <PageViewer page={activePage} theme={theme} mode={mode} view={view} />
+        <PageViewer
+          page={activePage}
+          theme={isCatalog ? catalogTheme : theme}
+          mode={mode}
+          view={view}
+        />
       </section>
 
       <Benchmark />
