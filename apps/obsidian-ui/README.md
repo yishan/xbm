@@ -27,6 +27,8 @@ Video: [`artifacts/demo.webm`](./artifacts/demo.webm)
 | 09 | Draggable Marquee | section | GSAP ticker | Seamless looping card track with drag momentum, hover slow-down and ← → keys |
 | 10 | Text Reel | section | GSAP ticker | "Let's ___" word stream whose speed and direction follow page scroll / wheel, with a live speed meter — after `text-stream` |
 | 11 | Split Showcase | section | Motion | Two partner cards split by a dotted divider; the hovered side springs outward and rounds its corners |
+| 12 | Parallax Slider | section | Pointer / wheel + CSS transforms | Endless slider whose images drift against the drag; Portrait / Full image toggle; slides are other xbm demos' screenshots — ported from ObsidianUI (MIT) |
+| 13 | Golden Gate 404 | section | SVG + rAF | Not-found page with the Golden Gate's north tower, live traffic, boats and fog; follows light/dark — ported from ObsidianUI (MIT) |
 
 No three.js, postprocessing, lenis or shader packages: the WebGL pieces are raw `WebGLRenderingContext` + GLSL, the rest is Canvas 2D, GSAP core and Motion.
 
@@ -58,7 +60,7 @@ Like `spectrum-ui`, the component and app code was written by a coding CLI: **[a
 
 ## Credit & license note
 
-Piece names and behaviour ideas come from [ObsidianUI](https://obsidianui.dev) ([Atharvsinh-codez/ObsidianUI](https://github.com/Atharvsinh-codez/ObsidianUI)), which is **MIT-licensed** (© 2026 ObsidianUI) — adapting its source would be permitted with the copyright notice. Even so, **no ObsidianUI source is included here**: every piece is an independent re-implementation written from the public names and one-line descriptions, without three.js or its other dependencies. Demo imagery is procedural (gradients), not ObsidianUI's assets. For the real library — components, blocks, landing templates, the shadcn registry, `llms.txt` and the MCP server — go to the source.
+Piece names and behaviour ideas come from [ObsidianUI](https://obsidianui.dev) ([Atharvsinh-codez/ObsidianUI](https://github.com/Atharvsinh-codez/ObsidianUI)), which is **MIT-licensed** (© 2026 ObsidianUI) — adapting its source would be permitted with the copyright notice. Pieces 01–11 contain **no ObsidianUI source**: each is an independent re-implementation written from the public names and one-line descriptions, without three.js or its other dependencies. Demo imagery is procedural (gradients), not ObsidianUI's assets. Pieces 12–13 (added 2026-11-01, upstream commit `19c858d`) *are* adapted from ObsidianUI's MIT source (`parallax-slider`, `golden-gate-404` incl. its `north-tower.svg`); the MIT notice is kept in `src/blocks/OBSIDIANUI-LICENSE`. Changes: no `"use client"`, local Button, `BASE_URL` asset paths, the 404 no longer locks page scroll, its title is an `h2` inside the gallery, slider images are local xbm screenshots. For the real library — components, blocks, landing templates, the shadcn registry, `llms.txt` and the MCP server — go to the source.
 
 ## Stack
 

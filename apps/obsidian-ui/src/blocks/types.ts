@@ -1,6 +1,6 @@
 import type { ComponentType } from "react"
 
-export type Category = "WebGL" | "Canvas" | "GSAP" | "Motion"
+export type Category = "WebGL" | "Canvas" | "GSAP" | "Motion" | "SVG"
 
 /** "section" = full-width hero-scale preview; "card" = grid card (~360x256 preview). */
 export type Layout = "section" | "card"
@@ -17,4 +17,6 @@ export interface BlockDef {
   file: string
   Demo: ComponentType
   source: string
+  /** Preview height in px for section layouts; defaults to 420. */
+  previewHeight?: number
 }

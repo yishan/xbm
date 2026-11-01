@@ -11,6 +11,7 @@ const categoryDot: Record<BlockDef["category"], string> = {
   Canvas: "bg-amber-400",
   GSAP: "bg-emerald-400",
   Motion: "bg-sky-400",
+  SVG: "bg-rose-400",
 }
 
 const dotGrid = {

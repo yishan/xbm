@@ -45,7 +45,14 @@
       "repo": "https://github.com/Atharvsinh-codez/ObsidianUI",
       "slug": "obsidian-ui",
       "why": "Open-source React + Tailwind + Motion/GSAP component library (WebGL/canvas effects, shadcn registry, agent-friendly docs); strong screenshot/video demo fit",
-      "built": "2026-09-29"
+      "built": "2026-09-29",
+      "updates": [
+        {
+          "date": "2026-11-01",
+          "version": "upstream 19c858d (2026-10-31)",
+          "changes": "Added Parallax Slider (portrait/full toggle, xbm screenshots) and Golden Gate 404, ported from ObsidianUI MIT source"
+        }
+      ]
     },
     {
       "id": "2075195594797453646",
