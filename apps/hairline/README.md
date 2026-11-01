@@ -1,6 +1,6 @@
 # Hairline 细线实验室
 
-探索全部 33 个等距交互图形（Hairline 0.5.0），切换 9 类、明暗主题和交互强度；再用 Dicembre → Grok → Muse 的模拟任务体验规划、审阅、执行与交接；「03 Agent 工作流」用 0.5.0 新增的 Relay / Rebuild / Stack / Format / Settle 演示主 agent 把任务交给子 agent（示例数据）。
+探索全部 33 个等距交互图形（Hairline 0.5.1），切换 9 类、明暗主题和交互强度；再用 Dicembre → Grok → Muse 的模拟任务体验规划、审阅、执行与交接；「03 Agent 工作流」用 0.5.0 新增的 Relay / Rebuild / Stack / Format / Settle 演示主 agent 把任务交给子 agent（示例数据）；「04 SVG 转线稿」用 0.5.1 新增的 hairline-adopt 流程把一个手画的火箭 SVG 重建成等距线稿。
 
 ## 运行
 
@@ -35,7 +35,7 @@ Vite + React + TypeScript，官方 `@lucasmarkes/hairline/react` 入口，shadcn
 
 ## 包与许可
 
-[Hairline](https://github.com/lucasmarkes/hairline) © 2026 Lucas Marques，MIT。实际 npm 包锁定 `0.5.0`（2026-10-15 从 0.2.0 升级；未用 0.5.1），React peer 为 `>=18`，无运行时依赖；33 个命名导出。[官方图形目录](https://hairline.lucasmarkes.com/figures)。许可保存在 `LICENSE-Hairline`。
+[Hairline](https://github.com/lucasmarkes/hairline) © 2026 Lucas Marques，MIT。实际 npm 包锁定 `0.5.1`（2026-11-01 从 0.5.0 升级；更早于 2026-10-15 从 0.2.0 升级；未用 0.5.1），React peer 为 `>=18`，无运行时依赖；33 个命名导出。[官方图形目录](https://hairline.lucasmarkes.com/figures)。许可保存在 `LICENSE-Hairline`。
 
 `0.5.0` 发布于 2026-10-08，已超过三天门槛，原先针对 0.2.0 的 `minimumReleaseAgeExcludes` 例外已删除；所有依赖遵守 `minimumReleaseAge = 259200`。
 
@@ -50,3 +50,5 @@ Vite + React + TypeScript，官方 `@lucasmarkes/hairline/react` 入口，shadcn
 ## 发布范围
 
 只修改 `apps/hairline/`，Vite base 为 `/hairline/`。根构建自动纳入此 app，无共享构建脚本、Vercel 配置或 tracking 变更。草稿 PR 可触发已获许可的 Vercel 预览；不合并，也不执行正式部署。
+
+`0.5.1` 于 2026-10-14 发布到 npm，已超过三天门槛（`minimumReleaseAge = 259200`）。

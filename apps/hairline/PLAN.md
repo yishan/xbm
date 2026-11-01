@@ -28,3 +28,6 @@ Vite + React + TypeScript：沿用兄弟 app。Bun：仓库规定。Hairline Rea
 - 当前环境是用户 Mac，所有工作在任务独立克隆中完成。
 - 初始 main 为 e5a49f7；交付前同步到 6d14c1e（已合并 pdfcn PR #11），共享规则无变化。
 - 用户已批准草稿 PR 与正常自动预览；不合并、不正式部署。
+
+## 2026-11-01 更新到 0.5.1
+- 新增「04 SVG 转线稿」：用 hairline-adopt 流程把手画的 rocket.svg 重建成等距线稿（public/adopt/）。

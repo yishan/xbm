@@ -115,6 +115,11 @@
           "date": "2026-10-15",
           "version": "0.5.0",
           "changes": "升级 Hairline 0.2.0 → 0.5.0：图形 19 → 33 个，新增「03 Agent 工作流」（Relay 交接、Rebuild 依赖更新、Stack 调用栈、Format、Settle，示例数据）"
+        },
+        {
+          "date": "2026-11-01",
+          "version": "0.5.1",
+          "changes": "升级 @lucasmarkes/hairline 0.5.0 → 0.5.1；新增「SVG 转线稿」示例：用 hairline-adopt 把手画的火箭图标重建成会回应指针的等距线稿"
         }
       ]
     },
