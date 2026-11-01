@@ -178,16 +178,21 @@ export default function App() {
               <CardHeader className="pb-2">
                 <CardTitle>Preview</CardTitle>
                 <CardDescription>
-                  Paper-style figure canvas (white background).
+                  Shown on a paper sheet in both themes, as it will print.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div
-                  ref={figureRef}
-                  className="h-[520px] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm dark:border-neutral-700"
-                >
-                  <FigureChart figure={figure} kind={kind} rows={rows} />
-                </div>
+                <figure className="rounded-lg border border-border bg-muted/60 p-3 sm:p-5 dark:bg-neutral-950/60">
+                  <div
+                    ref={figureRef}
+                    className="h-[520px] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),0_8px_24px_-12px_rgb(0_0_0/0.25)] ring-1 ring-black/5 dark:shadow-[0_1px_2px_rgb(0_0_0/0.5),0_12px_32px_-12px_rgb(0_0_0/0.8)] dark:ring-white/10"
+                  >
+                    <FigureChart figure={figure} kind={kind} rows={rows} />
+                  </div>
+                  <figcaption className="text-muted-foreground mt-3 text-xs">
+                    Paper sheet · Export PNG saves exactly this white canvas.
+                  </figcaption>
+                </figure>
               </CardContent>
             </Card>
 
