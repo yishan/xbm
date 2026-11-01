@@ -22,7 +22,7 @@ const STATUS_MS = 2000;
 
 /** One-line explanation under the embed picker; always rendered so switching kinds doesn't shift the layout. */
 const EMBED_HINTS: Record<EmbedKind, string> = {
-  script: "从 CDN 加载 initialis.js，正文会绕着首字母排版。",
+  script: "从 CDN 加载 initialis.js，插入首字母元素。要让正文绕排，请用「图片」。",
   image: "先用「下载 PNG」导出图片，文件名需与代码一致。",
 };
 
@@ -102,7 +102,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
       return imageEmbed(letter, `${fileSlug(full)}-${size}`);
     }
     const defaults = await getDefaults();
-    return scriptEmbed(diffFromDefaults(full, defaults), letter);
+    return scriptEmbed(diffFromDefaults(full, defaults));
   }, [settings, embedKind, size]);
 
   useEffect(() => {

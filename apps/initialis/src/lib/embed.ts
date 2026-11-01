@@ -14,36 +14,17 @@ export function escapeAttr(s: string, quote: "'" | '"' = "'"): string {
     .replace(quote === "'" ? /'/g : /"/g, quote === "'" ? "&#39;" : "&quot;");
 }
 
-/** JSON that is safe to inline inside a `<script>`: `<` becomes `\u003c`. */
-function jsLiteral(diff: CapSettings): string {
-  return JSON.stringify(diff).replace(/</g, "\\u003c");
-}
-
 const LIB = "https://initialis.azlen.me/lib/initialis.js";
 
 /**
- * A self-contained snippet: the custom element for a plain drop cap, plus a small script that
- * rasterises the same initial and clips the surrounding text to its shape.
+ * The script embed: load the library from the CDN and place the custom element. Nothing else;
+ * wrapping text around the initial's shape is what the image embed is for.
  */
-export function scriptEmbed(diff: CapSettings, letter: string): string {
+export function scriptEmbed(diff: CapSettings): string {
   const attr = escapeAttr(JSON.stringify(diff));
-  const literal = jsLiteral(diff);
-  const alt = escapeAttr(letter, '"');
   return [
     `<script type="module" src="${LIB}"></script>`,
     `<initialis-cap settings='${attr}' size="200" grow></initialis-cap>`,
-    ``,
-    `<!-- 让正文绕着首字母的形状排版 -->`,
-    `<img id="cap" alt="${alt}" width="230" height="230" style="float:left; shape-margin:12px; shape-image-threshold:.2">`,
-    `<p>Your text…</p>`,
-    `<script type="module">`,
-    `  import { draw } from '${LIB}';`,
-    `  const canvas = document.createElement('canvas');`,
-    `  await draw(canvas, ${literal}, { size: 460 });`,
-    `  const img = document.querySelector('#cap'), url = canvas.toDataURL();`,
-    `  img.src = url;`,
-    "  img.style.shapeOutside = `url(\"${url}\")`;",
-    `</script>`,
   ].join("\n");
 }
 
