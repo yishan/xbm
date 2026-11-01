@@ -51,6 +51,26 @@ function FigureViewer({ entry, intensity, theme }: { entry: typeof figures[numbe
   </>
 }
 
+function Adopt({ theme }: { theme: Theme }) {
+  const dark = useMedia('(prefers-color-scheme: dark)')
+  const resolved = theme === 'auto' ? (dark ? 'dark' : 'light') : theme
+  const base = import.meta.env.BASE_URL
+  return <section className="adopt" aria-labelledby="adopt-title" data-testid="adopt">
+    <div className="section-heading"><div><span className="eyebrow">04 / HAIRLINE-ADOPT · NEW IN 0.5.1</span><h2 id="adopt-title">SVG 转线稿<span className="simulation-tag">示例图标</span></h2></div><span className="small-note">read.mjs → hairline-create → build.mjs</span></div>
+    <div className="adopt-grid">
+      <figure className="adopt-source"><span className="eyebrow">原图 · rocket.svg</span><img src={`${base}adopt/rocket.svg`} alt="一个扁平的火箭图标：机身、圆窗、两片尾翼和火焰" width={240} height={240} /><figcaption>为这个 demo 手画的 64×64 图标，不是任何公司的标志。</figcaption></figure>
+      <div className="adopt-arrow" aria-hidden="true"><ArrowRight size={18}/></div>
+      <figure className="adopt-figure"><span className="eyebrow">重建的等距线稿 · 上下移动指针调推力</span><iframe key={resolved} title="火箭线稿：指针越高，火焰越长、火箭略微升起" src={`${base}adopt/rocket.html?theme=${resolved}`} loading="lazy" onLoad={e => e.currentTarget.contentDocument?.querySelectorAll('#xbm-home-link, #xbm-home-link-style').forEach(n => n.remove())} /></figure>
+    </div>
+    <ol className="adopt-steps">
+      <li><strong>读图</strong><span>read.mjs 列出 5 个形状：#1 机身（1:1.7），#2 圆窗，#3/#4 对称尾翼，#5 火焰。</span></li>
+      <li><strong>留下的部件</strong><span>机身、圆窗、尾翼、火焰；颜色和粗描边是装饰，不保留。火焰是唯一的亮线。</span></li>
+      <li><strong>重建，不描摹</strong><span>按原图比例用实体重新搭出等距火箭，再给它一个手势：指针高度 = 推力。</span></li>
+      <li><strong>检查</strong><span>validate.mjs 静态检查通过；look.mjs --source 把原图放在静止画面旁边对照。</span></li>
+    </ol>
+  </section>
+}
+
 function Collaboration({ flow, dispatch, intensity, theme }: { flow: Flow; dispatch: Dispatch<Action>; intensity: number; theme: Theme }) {
   const active = stages[Math.min(Math.max(flow.step, 0), 2)]
   const status = flow.step === -1 ? '等待开始' : flow.step === 3 ? '待人工验收' : flow.running ? '自动运行中' : '已暂停 · 可单步'
@@ -132,7 +152,7 @@ function AgentFlow({ intensity, theme }: { intensity: number; theme: Theme }) {
 export default function App() {
   const [theme, setTheme] = useState<Theme>('auto')
   const [intensity, setIntensity] = useState(.5)
-  const [view, setView] = useState<'gallery'|'flow'|'agents'>(() => location.hash === '#agents' ? 'agents' : 'gallery')
+  const [view, setView] = useState<'gallery'|'flow'|'agents'|'adopt'>(() => location.hash === '#agents' ? 'agents' : location.hash === '#adopt' ? 'adopt' : 'gallery')
   const [category, setCategory] = useState<Category|'all'>('all')
   const [selected, setSelected] = useState('patch')
   const [flow, dispatch] = useReducer(flowReducer, initialFlow)
@@ -160,19 +180,19 @@ export default function App() {
     setCategory(id)
     if (id !== 'all' && entry.category !== id) setSelected(figures.find(f => f.category === id)!.id)
   }
-  function switchView(next: 'gallery'|'flow'|'agents') {
+  function switchView(next: 'gallery'|'flow'|'agents'|'adopt') {
     if (next !== 'flow') dispatch({ type:'pause' })
-    history.replaceState(null, '', next === 'agents' ? '#agents' : location.pathname)
+    history.replaceState(null, '', next === 'agents' ? '#agents' : next === 'adopt' ? '#adopt' : location.pathname)
     setView(next)
   }
   return <div className="app-shell">
     <a href="#experience" className="skip-link">跳转到体验区</a>
     <header className="site-header"><a className="brand" href={import.meta.env.BASE_URL}><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M3 9 14 3l11 6v10l-11 6L3 19ZM3 9l11 6 11-6M14 15v10M3 14l11 6 11-6" /></svg>hairline<span>实验室</span></a>
-      <nav aria-label="体验导航"><button aria-pressed={view==='gallery'} onClick={() => switchView('gallery')}>01 组件体验</button><button aria-pressed={view==='flow'} onClick={() => switchView('flow')}>02 协作场景</button><button aria-pressed={view==='agents'} onClick={() => switchView('agents')}>03 Agent 工作流</button></nav>
+      <nav aria-label="体验导航"><button aria-pressed={view==='gallery'} onClick={() => switchView('gallery')}>01 组件体验</button><button aria-pressed={view==='flow'} onClick={() => switchView('flow')}>02 协作场景</button><button aria-pressed={view==='agents'} onClick={() => switchView('agents')}>03 Agent 工作流</button><button aria-pressed={view==='adopt'} onClick={() => switchView('adopt')}>04 SVG 转线稿</button></nav>
       <a className="source-link" href="https://github.com/lucasmarkes/hairline" target="_blank" rel="noreferrer">源码 <ExternalLink size={13}/></a>
     </header>
     <main id="experience">
-      <div className="intro"><div><span className="eyebrow">ISOMETRIC FIGURES / V0.5.0</span><h1>让细线，回应你的动作。</h1><p>{figures.length} 个等距图形，一套交互语言。探索组件，也观察助手之间的任务流动。</p></div><div className="intro-index"><strong>{figures.length}<span>/{String(categories.length).padStart(2,'0')}</span></strong><span>图形 / 分类</span></div></div>
+      <div className="intro"><div><span className="eyebrow">ISOMETRIC FIGURES / V0.5.1</span><h1>让细线，回应你的动作。</h1><p>{figures.length} 个等距图形，一套交互语言。探索组件，也观察助手之间的任务流动。</p></div><div className="intro-index"><strong>{figures.length}<span>/{String(categories.length).padStart(2,'0')}</span></strong><span>图形 / 分类</span></div></div>
       <div className="toolbar"><div className="theme-control"><label htmlFor="theme">画布主题</label><select id="theme" value={theme} onChange={e => setTheme(e.target.value as Theme)}><option value="light">明亮</option><option value="dark">暗色</option><option value="auto">跟随系统</option></select></div>
         <div className="intensity-control"><label htmlFor="intensity">交互强度</label><span className="range-word">轻柔</span><input id="intensity" type="range" min="0" max="1" step="0.05" value={intensity} onChange={e=>setIntensity(Number(e.target.value))} /><span className="range-word">鲜明</span><output htmlFor="intensity">{intensity.toFixed(2)}</output></div>
         <span className="motion-mode">{reducedMotion ? '减少动态效果已启用' : 'SVG · 指针响应'}</span>
@@ -186,7 +206,7 @@ export default function App() {
           <div className="figure-body"><FigureViewer key={entry.id} entry={entry} intensity={intensity} theme={theme}/></div>
           <div className="figure-picker" aria-label="选择图形">{filtered.map(f=><button key={f.id} data-figure={f.id} aria-pressed={selected===f.id} onClick={()=>setSelected(f.id)}><span>{f.name}{f.since && <i className="new-dot" aria-label="新" />}</span><small>{f.zh}</small></button>)}</div>
         </div>
-      </section> : view === 'flow' ? <Collaboration flow={flow} dispatch={dispatch} intensity={intensity} theme={theme}/> : <AgentFlow intensity={intensity} theme={theme}/>}
+      </section> : view === 'flow' ? <Collaboration flow={flow} dispatch={dispatch} intensity={intensity} theme={theme}/> : view === 'agents' ? <AgentFlow intensity={intensity} theme={theme}/> : <Adopt theme={theme}/>}
       <footer><span>基于 Hairline · Lucas Marques · MIT</span><a href="https://hairline.lucasmarkes.com/figures" target="_blank" rel="noreferrer">官方图形目录 <ExternalLink size={12}/></a><span>xbm / hairline</span></footer>
     </main>
   </div>
