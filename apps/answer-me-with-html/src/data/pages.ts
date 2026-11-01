@@ -1,10 +1,16 @@
-export type ThemeId = 'blueprint' | 'shadcn' | 'paper'
+export type ThemeId = 'blueprint' | 'shadcn' | 'paper' | 'comic' | 'manga' | 'pop'
 export type ModeId = 'light' | 'dark'
 
 export const THEMES: { id: ThemeId; label: string }[] = [
   { id: 'blueprint', label: 'Blueprint' },
   { id: 'shadcn', label: 'Card (shadcn)' },
   { id: 'paper', label: 'Long-read (paper)' },
+]
+
+export const CATALOG_THEMES: { id: ThemeId; label: string }[] = [
+  { id: 'comic', label: 'Comic' },
+  { id: 'manga', label: 'Manga' },
+  { id: 'pop', label: 'Pop' },
 ]
 
 export type DemoPage = {
@@ -14,6 +20,7 @@ export type DemoPage = {
   components: string[] // am components used
   source: string // where the facts come from
   exampleData?: boolean
+  catalogThemes?: boolean
 }
 
 export const PAGES: DemoPage[] = [
@@ -68,9 +75,22 @@ export const PAGES: DemoPage[] = [
     source: '示例数据 (a made-up release note draft)',
     exampleData: true,
   },
+  {
+    id: '08-weekly-numbers',
+    title: '周报数字（chart · v0.5.5）',
+    summary:
+      '柱状图、折线图、环形图都由 chart 代码块从表格画出；用上方按钮切换 comic / manga / pop 主题，页面里的 A− / A+ 调字号。',
+    components: ['chart bar', 'chart line', 'chart pie', 'list'],
+    source: '示例数据（虚构的一周画廊运营数字）',
+    exampleData: true,
+    catalogThemes: true,
+  },
 ]
 
-export const pageUrl = (id: string) => `${import.meta.env.BASE_URL}pages/${id}.html`
+export const pageUrl = (id: string, theme?: ThemeId) =>
+  theme === 'manga' || theme === 'pop'
+    ? `${import.meta.env.BASE_URL}pages/${id}--${theme}.html`
+    : `${import.meta.env.BASE_URL}pages/${id}.html`
 export const draftUrl = (id: string) => `${import.meta.env.BASE_URL}drafts/${id}.md`
 
 export const UPSTREAM = 'https://github.com/QingYunA/answer-me-with-html'

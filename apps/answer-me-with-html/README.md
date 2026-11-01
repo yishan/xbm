@@ -1,6 +1,6 @@
 # Answer me with HTML
 
-用上游 `am` CLI（QingYunA/answer-me-with-html v0.5.2，MIT）把 7 份短 Markdown 草稿渲染成离线单页 HTML：xbm demo 流程时序图（挑选、审批、构建、开 PR）、Vercel vs Cloudflare Worker 对比表、画廊时间线、上游 TCP 示例、ASD-STE100 页面，以及 v0.5 新功能的两页示例数据：er 需求变更数据模型（改前/变更/改后切换）和「标注」Remark 发回 Agent，带主题切换和“草稿 vs 页面”对照。
+用上游 `am` CLI（QingYunA/answer-me-with-html v0.5.10，MIT）把 8 份短 Markdown 草稿渲染成离线单页 HTML：xbm demo 流程时序图（挑选、审批、构建、开 PR）、Vercel vs Cloudflare Worker 对比表、画廊时间线、上游 TCP 示例、ASD-STE100 页面，以及 v0.5 新功能的两页示例数据：er 需求变更数据模型（改前/变更/改后切换）和「标注」Remark 发回 Agent；v0.5.10 更新加了「周报数字」页（示例数据）：chart 代码块画柱状图、折线图、环形图，可切换 comic / manga / pop catalog 主题，页面工具栏 A− / A+ 调字号。带主题切换和“草稿 vs 页面”对照。
 
 - Live: https://li.yishan.app/answer-me-with-html/
 - Upstream: https://github.com/QingYunA/answer-me-with-html — MIT License, Copyright (c) 2026 Answer me with HTML contributors. Full notice in `LICENSE-answer-me-with-html`. Thanks to QingYunA.
@@ -14,7 +14,7 @@
 
 ```bash
 bun install && bun run dev          # http://localhost:5173/answer-me-with-html/
-git clone https://github.com/QingYunA/answer-me-with-html /tmp/amwh && (cd /tmp/amwh && git checkout v0.5.2 && npm ci)
+git clone https://github.com/QingYunA/answer-me-with-html /tmp/amwh && (cd /tmp/amwh && git checkout v0.5.10 && npm ci)
 AM_SRC=/tmp/amwh bun run render     # re-render public/pages/
 ```
 

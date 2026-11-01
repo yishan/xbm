@@ -19,9 +19,12 @@ export function PageViewer({
   function apply() {
     const doc = iframeRef.current?.contentDocument
     if (!doc?.documentElement) return
-    doc.documentElement.setAttribute("data-theme", theme)
+    if (!page.catalogThemes) {
+      doc.documentElement.setAttribute("data-theme", theme)
+    }
     doc.documentElement.setAttribute("data-mode", mode)
     for (const name of ["theme", "mode"] as const) {
+      if (name === "theme" && page.catalogThemes) continue
       const select = doc.querySelector(
         `select[data-am="${name}"]`
       ) as HTMLSelectElement | null
@@ -55,15 +58,16 @@ export function PageViewer({
     <div className="min-w-0">
       <iframe
         ref={iframeRef}
+        key={pageUrl(page.id, theme)}
         title={page.title}
         data-testid="page-frame"
-        src={pageUrl(page.id)}
+        src={pageUrl(page.id, theme)}
         onLoad={apply}
         className="h-[70vh] min-h-[480px] w-full rounded-lg border bg-white"
       />
       <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
         <a
-          href={pageUrl(page.id)}
+          href={pageUrl(page.id, theme)}
           target="_blank"
           rel="noreferrer"
           className="underline-offset-4 hover:text-foreground hover:underline"
