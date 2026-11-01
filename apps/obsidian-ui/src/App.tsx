@@ -52,17 +52,12 @@ export default function App() {
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
       <div className="min-h-svh overflow-x-clip bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.25),rgba(14,165,233,0.12)_50%,transparent_75%)] blur-3xl"
-        />
-
         <header className="relative mx-auto w-full max-w-6xl px-5 pt-12 pb-10 sm:px-8">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
             <Badge variant="outline" className="border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
               xbm demo
             </Badge>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-500">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-500 dark:text-zinc-400">
               <a
                 className="whitespace-nowrap hover:text-zinc-800 dark:hover:text-zinc-200"
                 href="https://obsidianui.dev"
@@ -90,7 +85,7 @@ export default function App() {
             <div className="max-w-2xl">
               <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
                 Obsidian-grade effects,{" "}
-                <span className="bg-gradient-to-r from-zinc-900 dark:from-zinc-200 to-zinc-500 bg-clip-text text-transparent">
+                <span className="text-zinc-500 dark:text-zinc-400">
                   rebuilt.
                 </span>
               </h1>
@@ -120,7 +115,7 @@ export default function App() {
                 />
                 Reduce motion
                 {systemReduced && (
-                  <span className="text-zinc-500"> (system)</span>
+                  <span className="text-zinc-500 dark:text-zinc-400"> (system)</span>
                 )}
               </label>
               <Button asChild variant="outline" size="sm">
@@ -137,7 +132,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500">
+          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
             <span>5 sections</span>
             <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>6 components</span>
@@ -177,7 +172,7 @@ export default function App() {
         </main>
 
         <footer className="relative border-t border-zinc-900/10 dark:border-white/10">
-          <div className="mx-auto w-full max-w-6xl px-5 pt-8 pb-14 text-xs leading-relaxed text-zinc-500 sm:px-8">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-8 pb-14 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 sm:px-8">
             <p>
               Piece names and behaviour ideas come from{" "}
               <a

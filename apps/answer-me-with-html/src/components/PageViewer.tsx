@@ -105,6 +105,8 @@ export function PageViewer({
           </div>
         ) : (
           <pre
+            tabIndex={0}
+            aria-label="HTML 源码"
             data-testid="draft-source"
             className="h-[70vh] min-h-[480px] overflow-auto rounded-lg border bg-muted p-4 text-xs leading-relaxed whitespace-pre-wrap break-words"
           >

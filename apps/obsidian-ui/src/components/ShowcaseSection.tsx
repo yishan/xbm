@@ -44,8 +44,8 @@ export function ShowcaseSection({
         >
           <DemoComponent />
         </div>
-        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-full border border-zinc-900/10 dark:border-white/10 bg-white/70 dark:bg-black/40 px-3 py-1 text-xs text-zinc-700 dark:text-zinc-300 backdrop-blur">
-          <span className="font-mono text-zinc-500">{number}</span>
+        <div className="absolute left-3 top-3 flex items-center gap-2 rounded-md border border-zinc-900/10 dark:border-white/10 bg-white dark:bg-zinc-950 px-3 py-1 text-xs text-zinc-700 dark:text-zinc-300">
+          <span className="font-mono text-zinc-500 dark:text-zinc-400">{number}</span>
           <span>{def.title}</span>
         </div>
         <Button
@@ -54,7 +54,7 @@ export function ShowcaseSection({
           size="icon-sm"
           aria-label="Remount demo"
           onClick={() => setRemountKey((k) => k + 1)}
-          className="absolute right-3 top-3 bg-white/70 dark:bg-black/40 text-zinc-700 dark:text-zinc-300 backdrop-blur"
+          className="absolute right-3 top-3 border border-zinc-900/10 dark:border-white/10 bg-white dark:bg-zinc-950 text-zinc-700 dark:text-zinc-300"
         >
           <RotateCcw className="h-3.5 w-3.5" />
         </Button>
@@ -67,7 +67,7 @@ export function ShowcaseSection({
             <p className="mt-1 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
               {def.description}
             </p>
-            <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500">
+            <div className="mt-3 flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
               <MousePointerClick className="h-3.5 w-3.5" />
               {def.hint}
             </div>

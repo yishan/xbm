@@ -51,7 +51,7 @@ export function ShowcaseCard({
           size="icon-sm"
           aria-label="Remount demo"
           onClick={() => setRemountKey((k) => k + 1)}
-          className="absolute left-2 top-2 bg-white/70 dark:bg-black/40 text-zinc-700 dark:text-zinc-300 backdrop-blur"
+          className="absolute left-2 top-2 border border-zinc-900/10 dark:border-white/10 bg-white dark:bg-zinc-950 text-zinc-700 dark:text-zinc-300"
         >
           <RotateCcw className="h-3.5 w-3.5" />
         </Button>
@@ -93,7 +93,7 @@ export function ShowcaseCard({
           </Badge>
         </div>
 
-        <div className="flex items-center gap-2 text-xs text-zinc-500">
+        <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400">
           <MousePointerClick className="h-3.5 w-3.5" />
           {def.hint}
         </div>

@@ -110,14 +110,14 @@ export default function App() {
             </CardHeader>
             <CardContent className="space-y-5">
               <div className="space-y-2">
-                <p className="text-sm font-medium">Figure</p>
+                <p id="figure-tabs-label" className="text-sm font-medium">Figure</p>
                 <Tabs
                   value={figure}
                   onValueChange={(v) => setFigure(v as FigureId)}
                 >
-                  <TabsList className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2">
+                  <TabsList aria-labelledby="figure-tabs-label" className="grid h-auto w-full grid-cols-1 gap-1 sm:grid-cols-2">
                     {FIGURE_ORDER.map((id) => (
-                      <TabsTrigger key={id} value={id} className="text-xs">
+                      <TabsTrigger key={id} value={id} aria-controls={undefined} className="text-xs">
                         {FIGURE_LABELS[id]}
                       </TabsTrigger>
                     ))}
@@ -126,19 +126,19 @@ export default function App() {
               </div>
 
               <div className="space-y-2">
-                <p className="text-sm font-medium">Chart type</p>
+                <p id="kind-tabs-label" className="text-sm font-medium">Chart type</p>
                 <Tabs
                   value={kind}
                   onValueChange={(v) => setKind(v as ChartKind)}
                 >
-                  <TabsList className="w-full">
-                    <TabsTrigger value="bar" className="flex-1">
+                  <TabsList aria-labelledby="kind-tabs-label" className="w-full">
+                    <TabsTrigger value="bar" aria-controls={undefined} className="flex-1">
                       Bar
                     </TabsTrigger>
-                    <TabsTrigger value="radar" className="flex-1">
+                    <TabsTrigger value="radar" aria-controls={undefined} className="flex-1">
                       Radar
                     </TabsTrigger>
-                    <TabsTrigger value="line" className="flex-1">
+                    <TabsTrigger value="line" aria-controls={undefined} className="flex-1">
                       Line
                     </TabsTrigger>
                   </TabsList>
@@ -178,16 +178,21 @@ export default function App() {
               <CardHeader className="pb-2">
                 <CardTitle>Preview</CardTitle>
                 <CardDescription>
-                  Paper-style figure canvas (white background).
+                  Shown on a paper sheet in both themes, as it will print.
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div
-                  ref={figureRef}
-                  className="h-[520px] overflow-hidden rounded-md border border-neutral-200 bg-white shadow-sm dark:border-neutral-700"
-                >
-                  <FigureChart figure={figure} kind={kind} rows={rows} />
-                </div>
+                <figure className="rounded-lg border border-border bg-muted/60 p-3 sm:p-5 dark:bg-neutral-950/60">
+                  <div
+                    ref={figureRef}
+                    className="h-[520px] overflow-hidden rounded-[2px] bg-white shadow-[0_1px_2px_rgb(0_0_0/0.08),0_8px_24px_-12px_rgb(0_0_0/0.25)] ring-1 ring-black/5 dark:shadow-[0_1px_2px_rgb(0_0_0/0.5),0_12px_32px_-12px_rgb(0_0_0/0.8)] dark:ring-white/10"
+                  >
+                    <FigureChart figure={figure} kind={kind} rows={rows} />
+                  </div>
+                  <figcaption className="text-muted-foreground mt-3 text-xs">
+                    Paper sheet · Export PNG saves exactly this white canvas.
+                  </figcaption>
+                </figure>
               </CardContent>
             </Card>
 
