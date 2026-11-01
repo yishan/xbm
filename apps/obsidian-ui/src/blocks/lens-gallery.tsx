@@ -478,7 +478,7 @@ export function LensGallery({ className, reducedMotion, strength = 0.35 }: LensG
         className="absolute inset-0 h-full w-full touch-none cursor-grab active:cursor-grabbing"
       />
       {webglFailed ? (
-        <div className="absolute inset-0 flex items-center justify-center text-sm text-zinc-500">
+        <div className="absolute inset-0 flex items-center justify-center text-sm text-zinc-500 dark:text-zinc-400">
           WebGL not available
         </div>
       ) : null}

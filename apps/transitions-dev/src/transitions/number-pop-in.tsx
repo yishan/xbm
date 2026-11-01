@@ -33,7 +33,8 @@ export function NumberPopIn({ trigger }: DemoProps) {
       <span className="text-xs font-medium tracking-wide text-muted-foreground uppercase">
         Balance
       </span>
-      <span className="t-num text-4xl font-semibold" aria-live="polite" aria-label={value}>
+      <span className="t-num text-4xl font-semibold" aria-live="polite">
+        <span className="sr-only">{value}</span>
         {chars.map((c) =>
           c.i === null ? (
             <span key={c.key} aria-hidden>
