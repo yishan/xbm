@@ -51,3 +51,7 @@ Stack: Vite + React 19 + TypeScript, Tailwind v4, shadcn/ui (radix-nova, neutral
 
 - SlideBlocks © 2026 SlideBlocks contributors (UniUni2000/slideblocks-skill), MIT License — https://github.com/UniUni2000/slideblocks-skill (copy of the license in `LICENSE-SlideBlocks`)
 - Code written mostly by DeepSeek (`deepseek-flash` via aider), one component per request; see `PLAN.md`.
+
+## 更新 2026-11-01
+
+新增「流程图：一个任务里的 bot 分工」（第 10 页）。按上游 SlideBlocks 的新流程，用 Mermaid 写源文件，由 [pele](https://www.npmjs.com/package/pele) 1.12.0 渲染成内联 SVG（`diagrams/A12.mmd`、`A12.svg`、receipt）。配色通过 `--pele-*` 跟随幻灯片的明暗主题。
