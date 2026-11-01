@@ -52,11 +52,6 @@ export default function App() {
   return (
     <MotionConfig reducedMotion={reduced ? "always" : "user"}>
       <div className="min-h-svh overflow-x-clip bg-zinc-50 dark:bg-[#09090b] text-zinc-900 dark:text-zinc-100">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(ellipse_at_top,rgba(139,92,246,0.25),rgba(14,165,233,0.12)_50%,transparent_75%)] blur-3xl"
-        />
-
         <header className="relative mx-auto w-full max-w-6xl px-5 pt-12 pb-10 sm:px-8">
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
             <Badge variant="outline" className="border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
@@ -90,7 +85,7 @@ export default function App() {
             <div className="max-w-2xl">
               <h1 className="text-4xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 sm:text-5xl">
                 Obsidian-grade effects,{" "}
-                <span className="bg-gradient-to-r from-zinc-900 dark:from-zinc-200 to-zinc-500 bg-clip-text text-transparent">
+                <span className="text-zinc-500 dark:text-zinc-400">
                   rebuilt.
                 </span>
               </h1>
