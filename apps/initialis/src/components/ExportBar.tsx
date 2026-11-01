@@ -20,6 +20,15 @@ type EmbedKind = (typeof EMBED_KINDS)[number]["value"];
 
 const STATUS_MS = 2000;
 
+/** One-line explanation under the embed picker; always rendered so switching kinds doesn't shift the layout. */
+const EMBED_HINTS: Record<EmbedKind, string> = {
+  script: "从 CDN 加载 initialis.js，正文会绕着首字母排版。",
+  image: "先用「下载 PNG」导出图片，文件名需与代码一致。",
+};
+
+/** Press feedback shared by every button in the bar. */
+const PRESS = "transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96]";
+
 function errorMessage(error: unknown, fallback: string): string {
   if (error instanceof Error && error.message.trim().length > 0) return error.message;
   if (typeof error === "string" && error.trim().length > 0) return error;
@@ -200,7 +209,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
               aria-pressed={value === size}
               onClick={() => setSize(value)}
               disabled={busy}
-              className="h-8 min-w-12 px-2.5 text-[13px] tabular-nums transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96] pointer-coarse:h-11"
+              className={`h-8 min-w-12 px-2.5 text-[13px] tabular-nums pointer-coarse:h-11 ${PRESS}`}
             >
               {value}
             </Button>
@@ -213,7 +222,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
           type="button"
           onClick={handleDownloadPng}
           disabled={busy}
-          className="transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.96]"
+          className={PRESS}
         >
           下载 PNG
         </Button>
@@ -222,7 +231,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
           variant="outline"
           onClick={handleCopy}
           disabled={busy}
-          className="transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96]"
+          className={PRESS}
         >
           复制设置
         </Button>
@@ -231,7 +240,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
           variant="outline"
           onClick={handleDownloadJson}
           disabled={busy}
-          className="transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96]"
+          className={PRESS}
         >
           下载 JSON
         </Button>
@@ -248,7 +257,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
               aria-pressed={value === embedKind}
               onClick={() => setEmbedKind(value)}
               disabled={busy}
-              className="h-8 min-w-12 px-2.5 text-[13px] tabular-nums transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96] pointer-coarse:h-11"
+              className={`h-8 min-w-12 px-2.5 text-[13px] pointer-coarse:h-11 ${PRESS}`}
             >
               {label}
             </Button>
@@ -256,11 +265,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
         </div>
       </div>
 
-      {embedKind === "image" ? (
-        <p className="text-[12px] text-muted-foreground text-pretty">
-          图片方式需要先用「下载 PNG」导出图片，文件名需与代码一致。
-        </p>
-      ) : null}
+      <p className="-mt-2 text-[12px] text-muted-foreground text-pretty">{EMBED_HINTS[embedKind]}</p>
 
       <div className="flex flex-wrap items-center gap-2">
         <Button
@@ -268,7 +273,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
           variant="outline"
           onClick={handleCopyEmbed}
           disabled={busy}
-          className="transition-[transform,background-color,color,border-color] duration-150 ease-out active:scale-[0.96]"
+          className={PRESS}
         >
           复制嵌入代码
         </Button>
@@ -278,7 +283,7 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
           onClick={() => setShowCode((open) => !open)}
           aria-expanded={showCode}
           aria-controls="embed-code"
-          className="transition-[transform,background-color,color] duration-150 ease-out active:scale-[0.96]"
+          className={PRESS}
         >
           {showCode ? "收起代码" : "查看代码"}
         </Button>
@@ -287,7 +292,9 @@ export function ExportBar({ settings }: { settings: CapSettings }) {
       {showCode ? (
         <pre
           id="embed-code"
-          className="max-h-64 overflow-auto rounded-lg bg-muted p-3 text-[12px] leading-relaxed font-mono whitespace-pre-wrap break-all text-foreground"
+          tabIndex={0}
+          aria-label="嵌入代码"
+          className="max-h-64 overflow-auto rounded-lg bg-muted p-3 outline-none focus-visible:ring-3 focus-visible:ring-ring/50 text-[12px] leading-relaxed font-mono whitespace-pre-wrap break-all text-foreground"
         >
           {code}
         </pre>
