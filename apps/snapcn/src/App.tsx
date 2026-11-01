@@ -26,6 +26,21 @@ const BG: Record<Mode, string> = {
 /*  Theme                                                                     */
 /* -------------------------------------------------------------------------- */
 
+/** Follows `prefers-reduced-motion`; the gallery then shows a still frame instead of autoplaying. */
+function usePrefersReducedMotion() {
+  const query = "(prefers-reduced-motion: reduce)"
+  const [reduce, setReduce] = useState(
+    () => typeof window !== "undefined" && window.matchMedia(query).matches,
+  )
+  useEffect(() => {
+    const mql = window.matchMedia(query)
+    const onChange = () => setReduce(mql.matches)
+    mql.addEventListener("change", onChange)
+    return () => mql.removeEventListener("change", onChange)
+  }, [])
+  return reduce
+}
+
 function useTheme() {
   const [mode, setMode] = useState<Mode>(() =>
     typeof window !== "undefined" &&
@@ -404,6 +419,7 @@ const GALLERY: Demo[] = [
 
 export default function App() {
   const { mode, toggle } = useTheme()
+  const reduceMotion = usePrefersReducedMotion()
   const dark = mode === "dark"
 
   return (
@@ -499,7 +515,8 @@ export default function App() {
                     fps={FPS}
                     controls
                     loop
-                    autoPlay
+                    autoPlay={!reduceMotion}
+                    initialFrame={reduceMotion ? item.durationInFrames - 1 : 0}
                     initiallyMuted
                     acknowledgeRemotionLicense
                     style={{ width: "100%" }}
