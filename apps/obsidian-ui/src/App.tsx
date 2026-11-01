@@ -57,7 +57,7 @@ export default function App() {
             <Badge variant="outline" className="border-zinc-900/10 dark:border-white/10 text-zinc-700 dark:text-zinc-300">
               xbm demo
             </Badge>
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-500">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-zinc-500 dark:text-zinc-400">
               <a
                 className="whitespace-nowrap hover:text-zinc-800 dark:hover:text-zinc-200"
                 href="https://obsidianui.dev"
@@ -115,7 +115,7 @@ export default function App() {
                 />
                 Reduce motion
                 {systemReduced && (
-                  <span className="text-zinc-500"> (system)</span>
+                  <span className="text-zinc-500 dark:text-zinc-400"> (system)</span>
                 )}
               </label>
               <Button asChild variant="outline" size="sm">
@@ -132,7 +132,7 @@ export default function App() {
             </div>
           </div>
 
-          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500">
+          <div className="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-zinc-500 dark:text-zinc-400">
             <span>5 sections</span>
             <span className="text-zinc-300 dark:text-zinc-700">·</span>
             <span>6 components</span>
@@ -172,7 +172,7 @@ export default function App() {
         </main>
 
         <footer className="relative border-t border-zinc-900/10 dark:border-white/10">
-          <div className="mx-auto w-full max-w-6xl px-5 pt-8 pb-14 text-xs leading-relaxed text-zinc-500 sm:px-8">
+          <div className="mx-auto w-full max-w-6xl px-5 pt-8 pb-14 text-xs leading-relaxed text-zinc-500 dark:text-zinc-400 sm:px-8">
             <p>
               Piece names and behaviour ideas come from{" "}
               <a

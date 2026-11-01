@@ -105,6 +105,7 @@ export function MetalPromptBar({ className }: MetalPromptBarProps) {
         <button
           type="submit"
           data-testid="metal-send"
+          aria-label="Send"
           disabled={!value.trim() || sent}
           className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-full shadow-sm disabled:opacity-50"
         >

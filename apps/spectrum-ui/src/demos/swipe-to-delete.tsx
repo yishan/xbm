@@ -72,7 +72,7 @@ export function SwipeToDeleteDemo() {
                     <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100">{row.title}</p>
                     <p className="text-xs text-zinc-500 dark:text-zinc-400">{row.subtitle}</p>
                   </div>
-                  <span className="text-xs tabular-nums text-zinc-400 dark:text-zinc-500">{row.time}</span>
+                  <span className="text-xs tabular-nums text-zinc-500 dark:text-zinc-400">{row.time}</span>
                 </div>
               </SwipeToDelete>
             </motion.div>

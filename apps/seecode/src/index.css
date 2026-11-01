@@ -59,7 +59,7 @@
     --secondary: oklch(0.97 0 0);
     --secondary-foreground: oklch(0.205 0 0);
     --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
+    --muted-foreground: oklch(0.52 0 0);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
     --destructive: oklch(0.577 0.245 27.325);
@@ -128,7 +128,7 @@
     }
 }
 /* App canvas: quiet paper, precise ink, one orange signal. */
-:root { --background:#f8f7f4; --foreground:#242421; --muted:#efeee9; --muted-foreground:#74746d; --border:#dcdcd4; --primary:#242421; --primary-foreground:#fff; --ring:#e95c30; --signal:#b83813; --paper:#fff; --radius:.375rem; }
+:root { --background:#f8f7f4; --foreground:#242421; --muted:#efeee9; --muted-foreground:#6a6a63; --border:#dcdcd4; --primary:#242421; --primary-foreground:#fff; --ring:#e95c30; --signal:#b83813; --paper:#fff; --radius:.375rem; }
 .dark { --background:#151615; --foreground:#efeee9; --muted:#242623; --muted-foreground:#a7a99f; --border:#353830; --primary:#efeee9; --primary-foreground:#181a16; --signal:#ff875d; --paper:#1a1c19; }
 html { scroll-behavior:smooth; }
 body { margin:0; font-family:'Avenir Next','PingFang SC',sans-serif; font-size:14px; -webkit-font-smoothing:antialiased; }

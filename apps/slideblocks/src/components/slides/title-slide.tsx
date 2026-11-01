@@ -1,30 +1,21 @@
 // SlideBlocks-style layout, inspired by UniUni2000/slideblocks-skill (MIT).
-import { AppWindow, Bot, CalendarDays, Globe, Mail, Monitor } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
-import type { SlideProps, TitleSlideData } from "@/lib/deck-types"
+import { DECK } from "@/lib/deck"
+import type { SlideProps, TimelineSlideData, TitleSlideData } from "@/lib/deck-types"
 
-const PANEL_W = 512
-const PANEL_H = 720
-const CENTER_X = PANEL_W / 2
-const CENTER_Y = PANEL_H / 2
-const OUTER_R = 205
-const INNER_R = 130
-
-const ORBIT: { Icon: LucideIcon; angle: number }[] = [
-  { Icon: Mail, angle: 270 },
-  { Icon: AppWindow, angle: 342 },
-  { Icon: Globe, angle: 54 },
-  { Icon: CalendarDays, angle: 126 },
-  { Icon: Monitor, angle: 198 },
-]
-
-function polar(angle: number, radius: number) {
-  const rad = (angle * Math.PI) / 180
-  return {
-    x: CENTER_X + radius * Math.cos(rad),
-    y: CENTER_Y + radius * Math.sin(rad),
-  }
-}
+// The cover's right panel previews the deck's own timeline: one row per year,
+// one tick per event. The newest year carries the accent.
+const TIMELINE = DECK.slides.find(
+  (s): s is TimelineSlideData => s.kind === "timeline",
+)
+const YEARS = TIMELINE
+  ? Array.from(
+      TIMELINE.events.reduce((acc, e) => {
+        acc.set(e.year, (acc.get(e.year) ?? 0) + 1)
+        return acc
+      }, new Map<string, number>()),
+    )
+  : []
+const EVENT_COUNT = TIMELINE?.events.length ?? 0
 
 export function TitleSlide({ slide, index, total }: SlideProps<TitleSlideData>) {
   const pageLabel = `${String(index + 1).padStart(2, "0")} / ${String(total).padStart(2, "0")}`
@@ -68,59 +59,42 @@ export function TitleSlide({ slide, index, total }: SlideProps<TitleSlideData>) 
 
       <div
         aria-hidden
-        className="relative w-[38%] overflow-hidden bg-[var(--sb-subtle)]"
+        className="flex w-[38%] flex-col justify-center border-l border-[color:var(--sb-border)] bg-[var(--sb-subtle)] px-[56px]"
       >
-        <svg
-          className="absolute inset-0 h-full w-full"
-          viewBox={`0 0 ${PANEL_W} ${PANEL_H}`}
-          fill="none"
-        >
-          <circle
-            cx={CENTER_X}
-            cy={CENTER_Y}
-            r={INNER_R}
-            stroke="var(--sb-border)"
-            strokeWidth={1}
-          />
-          <circle
-            cx={CENTER_X}
-            cy={CENTER_Y}
-            r={OUTER_R}
-            stroke="var(--sb-border)"
-            strokeWidth={1}
-          />
-          {ORBIT.map(({ angle }) => {
-            const p = polar(angle, OUTER_R)
+        <div className="text-[14px] text-[color:var(--sb-muted)]">
+          时间线 · {EVENT_COUNT} 个关键节点
+        </div>
+        <ol className="mt-[28px]">
+          {YEARS.map(([year, count], i) => {
+            const latest = i === YEARS.length - 1
             return (
-              <line
-                key={angle}
-                x1={CENTER_X}
-                y1={CENTER_Y}
-                x2={p.x}
-                y2={p.y}
-                stroke="var(--sb-border)"
-                strokeWidth={1}
-              />
+              <li
+                key={year}
+                className="flex items-center gap-[28px] border-t border-[color:var(--sb-border)] py-[22px]"
+              >
+                <span
+                  className={`w-[96px] text-[40px] font-semibold tabular-nums leading-none tracking-[-0.02em] ${
+                    latest
+                      ? "text-[color:var(--sb-heading)]"
+                      : "text-[color:var(--sb-muted)]"
+                  }`}
+                >
+                  {year}
+                </span>
+                <span className="flex gap-[8px]">
+                  {Array.from({ length: count }, (_, k) => (
+                    <span
+                      key={k}
+                      className={`h-[20px] w-[6px] ${
+                        latest ? "bg-[var(--sb-accent)]" : "bg-[var(--sb-fg)] opacity-40"
+                      }`}
+                    />
+                  ))}
+                </span>
+              </li>
             )
           })}
-        </svg>
-
-        <div className="absolute left-1/2 top-1/2 flex h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[var(--sb-accent)]">
-          <Bot size={48} className="text-[color:var(--sb-accent-fg)]" />
-        </div>
-
-        {ORBIT.map(({ Icon, angle }) => {
-          const p = polar(angle, OUTER_R)
-          return (
-            <div
-              key={angle}
-              className="absolute flex h-[52px] w-[52px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-[14px] border border-[color:var(--sb-border)] bg-[var(--sb-card)] shadow-[var(--sb-shadow)]"
-              style={{ left: p.x, top: p.y }}
-            >
-              <Icon size={24} className="text-[color:var(--sb-accent)]" />
-            </div>
-          )
-        })}
+        </ol>
       </div>
     </section>
   )

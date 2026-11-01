@@ -41,7 +41,7 @@ export function ThemeToggle() {
               "focus-visible:ring-2 focus-visible:ring-violet-400/60 focus-visible:outline-none",
               active
                 ? "bg-zinc-900 text-white shadow-sm dark:bg-white/15 dark:text-zinc-100"
-                : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-200",
+                : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200",
             )}
           >
             <Icon className="size-3.5" />

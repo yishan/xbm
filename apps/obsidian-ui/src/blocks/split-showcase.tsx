@@ -108,7 +108,7 @@ function PartnerCard({
         <div className="rounded-xl border border-zinc-900/10 dark:border-white/10 bg-zinc-900/[0.04] dark:bg-white/5 p-2 text-zinc-900 dark:text-zinc-100">
           <Icon className="h-5 w-5" />
         </div>
-        <span className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500">
+        <span className="text-xs font-medium uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400">
           {item.eyebrow}
         </span>
       </div>

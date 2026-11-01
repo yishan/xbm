@@ -280,7 +280,7 @@ export function HoverImage({
             }}
           >
             <span className="text-lg font-medium">{project.title}</span>
-            <span className="text-xs text-zinc-500">{project.label}</span>
+            <span className="text-xs text-zinc-500 dark:text-zinc-400">{project.label}</span>
           </div>
         ))}
       </div>
