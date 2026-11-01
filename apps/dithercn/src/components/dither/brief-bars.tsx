@@ -63,7 +63,7 @@ export function BriefBars({ className }: { className?: string }) {
             <FillPattern
               id={`${id}-max`}
               fill="gradient"
-              color="blue"
+              color="red"
               ramp={{ edge: "bottom", at: PLOT_BOTTOM, length: PLOT_HEIGHT }}
             />
           </defs>
