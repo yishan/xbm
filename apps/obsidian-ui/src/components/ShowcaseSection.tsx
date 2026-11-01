@@ -10,6 +10,7 @@ const categoryDot: Record<BlockDef["category"], string> = {
   Canvas: "bg-amber-400",
   GSAP: "bg-emerald-400",
   Motion: "bg-sky-400",
+  SVG: "bg-rose-400",
 }
 
 const dotGrid = {
@@ -34,8 +35,8 @@ export function ShowcaseSection({
       className="overflow-hidden rounded-3xl border border-zinc-900/10 dark:border-white/10 bg-white/70 dark:bg-zinc-900/40"
     >
       <div
-        className="relative h-[420px] overflow-hidden bg-zinc-50 dark:bg-zinc-950"
-        style={dotGrid}
+        className="relative overflow-hidden bg-zinc-50 dark:bg-zinc-950"
+        style={{ ...dotGrid, height: def.previewHeight ?? 420 }}
       >
         <div
           key={remountKey}

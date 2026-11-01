@@ -72,3 +72,11 @@ ObsidianUI ([Atharvsinh-codez/ObsidianUI](https://github.com/Atharvsinh-codez/Ob
 - Remaining ObsidianUI pieces (sidebar-stackbits, skeuomorphic music card, playground navbar, smooth-scroll, visitor count) — cut for scope
 - Syntax highlighting in the source viewer — plain `<pre>` is enough
 - Tests — visual components with no critical logic; build + lint + Playwright QA is the gate
+
+## Update 2026-11-01 — ObsidianUI Parallax Slider + Golden Gate 404
+
+- [x] Port `parallax-slider` (MIT) with a Portrait / Full image toggle; slides = local xbm screenshots (`public/parallax/*.webp`)
+- [x] Port `golden-gate-404` (MIT) + `public/golden-gate/north-tower.svg`; remove the page scroll lock; `h1` → `h2`
+- [x] `BlockDef.previewHeight`, new `SVG` category
+- [x] Artifacts: `artifacts/update-parallax*.png`, `update-404*.png`, `update-parallax-404.webm`
+

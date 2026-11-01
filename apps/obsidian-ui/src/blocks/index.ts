@@ -11,6 +11,8 @@ import { GooeyLoaderDemo } from "@/demos/gooey-loader"
 import { DraggableMarqueeDemo } from "@/demos/draggable-marquee"
 import { TextReelDemo } from "@/demos/text-reel"
 import { SplitShowcaseDemo } from "@/demos/split-showcase"
+import { ParallaxSliderDemo } from "@/demos/parallax-slider"
+import { GoldenGate404Demo } from "@/demos/golden-gate-404"
 
 import prismBeamSource from "./prism-beam.tsx?raw"
 import flipTextSource from "./flip-text.tsx?raw"
@@ -23,6 +25,8 @@ import gooeyLoaderSource from "./gooey-loader.tsx?raw"
 import draggableMarqueeSource from "./draggable-marquee.tsx?raw"
 import textReelSource from "./text-reel.tsx?raw"
 import splitShowcaseSource from "./split-showcase.tsx?raw"
+import parallaxSliderSource from "./parallax-slider.tsx?raw"
+import goldenGate404Source from "./golden-gate-404.tsx?raw"
 
 export const BLOCKS: BlockDef[] = [
   {
@@ -167,5 +171,33 @@ export const BLOCKS: BlockDef[] = [
     file: "split-showcase.tsx",
     Demo: SplitShowcaseDemo,
     source: splitShowcaseSource,
+  },
+  {
+    id: "parallax-slider",
+    title: "Parallax Slider",
+    layout: "section",
+    category: "Motion",
+    tech: ["Pointer drag", "Wheel", "CSS transforms"],
+    description:
+      "An endless slider whose images drift against the drag — tall portrait frames or wide full-image frames. Slides are screenshots of other xbm demos.",
+    hint: "Drag, swipe or scroll sideways; switch Portrait / Full image",
+    file: "parallax-slider.tsx",
+    Demo: ParallaxSliderDemo,
+    source: parallaxSliderSource,
+    previewHeight: 600,
+  },
+  {
+    id: "golden-gate-404",
+    title: "Golden Gate 404",
+    layout: "section",
+    category: "SVG",
+    tech: ["SVG", "Isometric", "requestAnimationFrame"],
+    description:
+      "A not-found page: the Golden Gate's north tower with live traffic, boats and fog, in light and dark.",
+    hint: "Watch the traffic and fog; the theme follows the page",
+    file: "golden-gate-404.tsx",
+    Demo: GoldenGate404Demo,
+    source: goldenGate404Source,
+    previewHeight: 560,
   },
 ]
