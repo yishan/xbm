@@ -46,6 +46,7 @@ function Control({
         <span className="text-xs tabular-nums">{format ? format(value) : value}</span>
       </div>
       <Slider
+        aria-label={label}
         value={[value]}
         min={min}
         max={max}
