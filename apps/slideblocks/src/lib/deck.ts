@@ -172,6 +172,17 @@ export const DECK: Deck = {
       ],
     },
     {
+      kind: "diagram",
+      id: "roles",
+      title: "流程图：一个任务里的 bot 分工",
+      caption: "通用示意，不对应任何具体团队或产品",
+      notes: [
+        "主 agent 只负责拆分和汇总",
+        "子 agent 各自带着验收条件干活",
+        "敏感动作和合并都回到人手里",
+      ],
+    },
+    {
       kind: "closing",
       id: "closing",
       title: "收尾",

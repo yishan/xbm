@@ -3,6 +3,7 @@ import type { SlideData } from "@/lib/deck-types"
 import { AgendaSlide } from "@/components/slides/agenda-slide"
 import { ChallengesSlide } from "@/components/slides/challenges-slide"
 import { ClosingSlide } from "@/components/slides/closing-slide"
+import { DiagramSlide } from "@/components/slides/diagram-slide"
 import { DefinitionSlide } from "@/components/slides/definition-slide"
 import { LayersSlide } from "@/components/slides/layers-slide"
 import { MetricsSlide } from "@/components/slides/metrics-slide"
@@ -31,6 +32,8 @@ export function SlideRenderer({ slide, index, total }: { slide: SlideData; index
       return <TrendsSlide slide={slide} index={index} total={total} />
     case "metrics":
       return <MetricsSlide slide={slide} index={index} total={total} />
+    case "diagram":
+      return <DiagramSlide slide={slide} index={index} total={total} />
     case "closing":
       return <ClosingSlide slide={slide} index={index} total={total} />
   }

@@ -175,3 +175,16 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+/* pele reads its palette from --pele-*; --pele-bg must be the real surface colour behind labels. */
+.sb-pele {
+  --pele-bg: var(--sb-card);
+  --pele-fg: var(--sb-heading);
+  --pele-muted: var(--sb-muted);
+  --pele-line: var(--sb-muted);
+  --pele-border: var(--sb-border);
+  --pele-surface: var(--sb-card);
+  --pele-surface-alt: var(--sb-accent-soft);
+  --pele-accent: var(--sb-accent);
+  --pele-font: var(--font-sans);
+}

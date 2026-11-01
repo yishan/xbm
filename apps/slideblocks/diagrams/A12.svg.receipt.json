@@ -1,0 +1,15 @@
+{
+  "source": "diagrams/A12.mmd",
+  "sourceSha256": "8b416d4be9b5ed36cdeac18c94323af3552163b7acca9e707e97632d7a9ff898",
+  "renderer": "pele",
+  "version": "1.12.0",
+  "type": "flowchart-v2",
+  "options": {
+    "fontFamily": "'Geist Variable', \"PingFang SC\", \"Noto Sans CJK SC\", sans-serif",
+    "fontSize": 24,
+    "maxWidth": 1100
+  },
+  "fontCss": "node_modules/@fontsource-variable/geist/index.css",
+  "svg": "diagrams/A12.svg",
+  "svgSha256": "ef515a49a43ffbafbadcd62b278aab973b30987b4ec068f93a41966f5b952830"
+}

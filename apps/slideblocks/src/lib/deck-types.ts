@@ -88,6 +88,14 @@ export type ClosingSlideData = {
   cta: string
 }
 
+export type DiagramSlideData = {
+  kind: "diagram"
+  id: string
+  title: string
+  caption: string
+  notes: string[]
+}
+
 export type SlideData =
   | TitleSlideData
   | AgendaSlideData
@@ -98,6 +106,7 @@ export type SlideData =
   | ChallengesSlideData
   | TrendsSlideData
   | MetricsSlideData
+  | DiagramSlideData
   | ClosingSlideData
 
 export type SlideKind = SlideData["kind"]

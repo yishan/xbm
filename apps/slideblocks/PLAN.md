@@ -47,3 +47,7 @@ DeepSeek (`openai/deepseek-flash` via aider) writes the slide layouts, viewer, t
 - Presenter view with notes and timer.
 - PDF export (would need the Cloudflare Browser Rendering Worker, as in pdfcn).
 - Slide transitions beyond a short fade.
+
+## 2026-11-01 更新：pele 渲染 Mermaid
+- 跟进上游 78d5074「Render Mermaid diagrams with pele」：新增第 10 页流程图（diagrams/A12.mmd → A12.svg，pele 1.12.0，内联 SVG，diagram:mermaid 路线）。
+- 生成脚本 `.slideblocks/render-mermaid.mjs` 与上游逐字节一致；它要 `playwright-chromium`，本仓库没装，生成时把它指向机器上已有的 playwright。
