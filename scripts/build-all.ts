@@ -153,8 +153,11 @@ function buildApp(slug: string): boolean {
  * target="_top" so it also leaves the app when a page is shown in an iframe (answer-me-with-html).
  * `all:initial` shields it from app CSS (Tailwind preflight, global `a` styles, …).
  */
+/** Vercel Web Analytics (enable it in the Vercel project's Analytics tab; no-op until then). */
+const ANALYTICS_SNIPPET = `<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)}</script><script defer src="/_vercel/insights/script.js"></script>`
+
 const HOME_LINK_ID = "xbm-home-link"
-const HOME_LINK_SNIPPET = `<style id="${HOME_LINK_ID}-style">#${HOME_LINK_ID}{all:initial;position:fixed;z-index:2147483000;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;box-sizing:border-box;min-height:28px;padding:0 10px;border-radius:999px;border:1px solid #3f3f46;background:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.2);color:#e4e4e7;font:500 12px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color .15s ease-out,color .15s ease-out}#${HOME_LINK_ID}::after{content:"";position:absolute;inset:-8px -4px}#${HOME_LINK_ID}:hover,#${HOME_LINK_ID}:focus-visible{color:#fafafa;background:#27272a}#${HOME_LINK_ID}:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}@media print{#${HOME_LINK_ID}{display:none!important}}</style><a id="${HOME_LINK_ID}" href="${SITE}/" target="_top" title="All demos · li.yishan.app">← XG Experiments</a>`
+const HOME_LINK_SNIPPET = `<style id="${HOME_LINK_ID}-style">#${HOME_LINK_ID}{all:initial;position:fixed;z-index:2147483000;left:calc(10px + env(safe-area-inset-left,0px));bottom:calc(10px + env(safe-area-inset-bottom,0px));display:inline-flex;align-items:center;box-sizing:border-box;min-height:28px;padding:0 10px;border-radius:999px;border:1px solid #3f3f46;background:#18181b;box-shadow:0 1px 2px rgba(0,0,0,.2);color:#e4e4e7;font:500 12px/16px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:0;text-decoration:none;white-space:nowrap;cursor:pointer;transition:background-color .15s ease-out,color .15s ease-out}#${HOME_LINK_ID}::after{content:"";position:absolute;inset:-8px -4px}#${HOME_LINK_ID}:hover,#${HOME_LINK_ID}:focus-visible{color:#fafafa;background:#27272a}#${HOME_LINK_ID}:focus-visible{outline:2px solid #a1a1aa;outline-offset:2px}@media print{#${HOME_LINK_ID}{display:none!important}}</style><a id="${HOME_LINK_ID}" href="${SITE}/" target="_top" title="All demos · li.yishan.app">← XG Experiments</a>${ANALYTICS_SNIPPET}`
 
 function htmlFiles(dir: string): string[] {
   const out: string[] = []
@@ -294,6 +297,7 @@ ${cards}
   </ul>
   <footer>${demos.length} demos · source: <a href="https://github.com/yishan/xbm">github.com/yishan/xbm</a> · by <a href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a></footer>
 </main>
+${ANALYTICS_SNIPPET}
 </body>
 </html>
 `
