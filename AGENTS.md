@@ -53,3 +53,7 @@ Frontends stay in this repo and deploy through the shared Vercel project at `htt
 2. Implement only that app directory.
 3. Verify with `skills/verify-xbm/SKILL.md` (`bash scripts/build-all.sh <slug> && bun scripts/verify.ts <slug>`) — all agents (Cursor, Claude, Codex, Grok) use it; add/update `features/<slug>.md` + its `DRIVES` entry for a new demo.
 4. Open one PR with screenshot + video artifacts and the verify `SUMMARY.md`.
+
+## Design
+
+Follow the design rules in [DESIGN.md](./DESIGN.md) for every demo.
