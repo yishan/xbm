@@ -1,5 +1,6 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { App } from "@/App"
@@ -12,5 +13,6 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </TooltipProvider>
     </ThemeProvider>
+    <Analytics />
   </StrictMode>,
 )

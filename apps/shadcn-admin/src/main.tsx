@@ -1,6 +1,7 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import { RouterProvider } from "@tanstack/react-router"
+import { Analytics } from "@vercel/analytics/react"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
 import { TooltipProvider } from "@/components/ui/tooltip"
@@ -15,5 +16,6 @@ createRoot(document.getElementById("root")!).render(
         <Toaster richColors position="top-right" />
       </TooltipProvider>
     </ThemeProvider>
+    <Analytics />
   </StrictMode>,
 )
