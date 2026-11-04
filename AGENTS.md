@@ -57,3 +57,12 @@ Frontends stay in this repo and deploy through the shared Vercel project at `htt
 ## Design
 
 Follow the design rules in [DESIGN.md](./DESIGN.md) for every demo.
+
+## Emil design review (required for every demo)
+
+Every demo goes through the emil skills. This is a standing rule.
+
+1. **Before building:** read `emil-typography`, `emil-color`, `emil-surfaces`, `emil-animations`.
+2. **After building:** run `emil-ui-review` plus `emil-touch-and-accessibility`, `emil-forms-and-inputs`, `emil-component-design` as a usability and interaction pass. Exercise it with Playwright on desktop (1280px) and mobile (390px), in light, dark, and `prefers-reduced-motion: reduce`. Check: 44px hit areas and `touch-action`, visible `:focus-visible` rings, keyboard-only flows, no animation on keyboard-initiated changes, only transform/opacity animate, AA contrast, accessible names/values, announced feedback, no horizontal scroll on mobile.
+3. **Then:** run `emil-ui-polish` and `emil-unslop-design`, and fix what they find before opening the PR.
+4. **PR description:** list the review results — what was found, what was fixed, how it was verified, and anything left unfixed.
