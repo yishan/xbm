@@ -1,0 +1,486 @@
+/* Base UI motion & surface lab.
+   Every value is driven by src/lab/tuning.ts and written to :root by App.tsx,
+   so portaled surfaces inherit the same tuning as the page. */
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+
+/* Tuning vars live on :root, not .lab: portals mount under <body>,
+   outside .lab, and would otherwise lose shadow/accent/radius. */
+:root {
+  --lab-accent: oklch(0.62 0.17 var(--lab-hue, 40));
+  --lab-accent-soft: oklch(0.95 0.04 var(--lab-hue, 40));
+  --lab-accent-ink: oklch(0.45 0.18 var(--lab-hue, 40));
+  --lab-accent-fg: oklch(0.99 0 0);
+  --lab-surface-shadow: var(--lab-shadow, 0 0 0 1px oklch(0 0 0 / 0.08));
+  --z-bar: 10;
+  --z-popup: 20;
+  --z-toast: 30;
+  --z-labels: 40;
+}
+
+:root.dark {
+  --lab-accent: oklch(0.7 0.15 var(--lab-hue, 40));
+  --lab-accent-soft: oklch(0.3 0.08 var(--lab-hue, 40));
+  --lab-accent-ink: oklch(0.85 0.1 var(--lab-hue, 40));
+  --lab-accent-fg: oklch(0.18 0 0);
+  --lab-surface-shadow: var(--lab-shadow-dark, 0 4px 16px oklch(0 0 0 / 0.4));
+}
+
+.lab {
+  min-height: 100vh;
+  color: var(--foreground);
+  background-color: var(--background);
+  background-image: radial-gradient(
+    64rem 32rem at 50% -14rem,
+    oklch(0.72 0.1 var(--lab-hue, 40) / 0.3),
+    transparent 70%
+  );
+  background-repeat: no-repeat;
+}
+
+.dark .lab {
+  background-image: radial-gradient(
+    64rem 32rem at 50% -14rem,
+    oklch(0.6 0.12 var(--lab-hue, 40) / 0.28),
+    transparent 70%
+  );
+}
+
+/* ---------- toolbar ---------- */
+
+.lab-bar {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-bar);
+  border-bottom: 1px solid var(--border);
+  background: color-mix(in oklch, var(--background) 80%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.lab-muted {
+  color: var(--muted-foreground);
+}
+
+.lab-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- popup surfaces (Popover, Menu, Select) ---------- */
+
+.lab-popup {
+  z-index: var(--z-popup);
+  padding: 6px;
+  border-radius: var(--lab-radius, 14px);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: var(--lab-surface-shadow);
+  /* --transform-origin is set on the Positioner, a parent of the popup. */
+  transform-origin: var(--transform-origin);
+  transition-property: transform, opacity;
+  transition-duration: var(--lab-duration, 220ms);
+  transition-timing-function: var(--lab-ease, ease);
+}
+
+.lab-popup[data-starting-style],
+.lab-popup[data-ending-style] {
+  opacity: 0;
+  transform: scale(var(--lab-scale, 0.92));
+}
+
+.lab-popup[data-ending-style] {
+  transition-duration: var(--lab-exit, 165ms);
+}
+
+[data-origin="center"] .lab-popup {
+  transform-origin: center;
+}
+
+[data-origin="top"] .lab-popup {
+  transform-origin: top center;
+}
+
+.lab-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: var(--lab-radius-inner, 8px);
+  font-size: 14px;
+  color: inherit;
+  cursor: default;
+  outline: none;
+  user-select: none;
+}
+
+.lab-item[data-highlighted] {
+  background: var(--lab-accent-soft);
+  color: var(--lab-accent-ink);
+}
+
+/* ---------- dialog ---------- */
+
+.lab-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-popup);
+  background: oklch(0 0 0 / 0.35);
+  backdrop-filter: blur(4px);
+  transition-property: opacity;
+  transition-duration: var(--lab-duration, 220ms);
+  transition-timing-function: var(--lab-ease, ease);
+}
+
+.lab-backdrop[data-starting-style],
+.lab-backdrop[data-ending-style] {
+  opacity: 0;
+}
+
+.lab-dialog {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: var(--z-popup);
+  width: min(420px, calc(100vw - 32px));
+  padding: 24px;
+  border-radius: calc(var(--lab-radius, 14px) + 6px);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: var(--lab-surface-shadow);
+  transform: translate(-50%, -50%) scale(1);
+  transform-origin: center;
+  transition-property: transform, opacity;
+  transition-duration: var(--lab-duration, 220ms);
+  transition-timing-function: var(--lab-ease, ease);
+}
+
+.lab-dialog[data-starting-style],
+.lab-dialog[data-ending-style] {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(var(--lab-scale, 0.92));
+}
+
+.lab-dialog[data-ending-style] {
+  transition-duration: var(--lab-exit, 165ms);
+}
+
+/* ---------- toast ---------- */
+
+.lab-toast-viewport {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: var(--z-toast);
+  width: 320px;
+  isolation: isolate;
+}
+
+.lab-toast {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--lab-radius, 14px);
+  background: var(--popover);
+  color: var(--popover-foreground);
+  box-shadow: var(--lab-surface-shadow);
+  transform-origin: bottom center;
+  transform: translateY(calc(var(--toast-index, 0) * -10px)) scale(calc(1 - var(--toast-index, 0) * 0.05));
+  z-index: calc(10 - var(--toast-index, 0));
+  transition-property: transform, opacity;
+  transition-duration: var(--lab-duration, 220ms);
+  transition-timing-function: var(--lab-ease, ease);
+}
+
+.lab-toast[data-starting-style] {
+  opacity: 0;
+  transform: translateY(120%);
+}
+
+.lab-toast[data-ending-style] {
+  opacity: 0;
+  transform: translateX(110%);
+}
+
+/* ---------- tabs ---------- */
+
+.lab-tabs-list {
+  position: relative;
+  display: inline-flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: var(--lab-radius, 14px);
+  background: var(--muted);
+}
+
+.lab-tab {
+  position: relative;
+  z-index: 1;
+  padding: 6px 12px;
+  border: 0;
+  border-radius: var(--lab-radius-inner, 8px);
+  background: none;
+  color: var(--muted-foreground);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.lab-tab[data-active] {
+  color: var(--foreground);
+}
+
+.lab-tab-indicator {
+  position: absolute;
+  left: 0;
+  top: var(--active-tab-top, 0px);
+  z-index: 0;
+  width: var(--active-tab-width, 0px);
+  height: var(--active-tab-height, 0px);
+  border-radius: var(--lab-radius-inner, 8px);
+  background: var(--background);
+  box-shadow: var(--lab-surface-shadow);
+  /* Exception to "transform/opacity only": the indicator travels between tabs,
+     a layout offset, so translate/width are the animated properties here. */
+  translate: var(--active-tab-left, 0px) 0;
+  transition-property: translate, width;
+  transition-duration: var(--lab-duration, 220ms);
+  transition-timing-function: var(--lab-ease, ease);
+}
+
+/* ---------- slider ---------- */
+
+.lab-slider {
+  width: 100%;
+}
+
+/* Thumbs are absolutely positioned by Base UI (top 50%, translate -50%),
+   so the control and track must be the positioning ancestors. */
+.lab-slider-control {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 20px;
+  touch-action: none;
+}
+
+.lab-slider-track {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--muted);
+}
+
+.lab-slider-indicator {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--lab-accent);
+}
+
+.lab-slider-thumb {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: white;
+  box-shadow:
+    0 0 0 1px oklch(0 0 0 / 0.15),
+    0 1px 3px oklch(0 0 0 / 0.2);
+  transition-property: scale, box-shadow;
+  transition-duration: 120ms, 150ms;
+  transition-timing-function: ease-out;
+}
+
+.lab-slider-thumb:focus-visible {
+  outline: 2px solid var(--lab-accent);
+  outline-offset: 2px;
+}
+
+.lab-slider-thumb[data-dragging] {
+  scale: 1.15;
+}
+
+/* ---------- switch ---------- */
+
+.lab-switch-row {
+  min-height: 34px;
+  padding: 0 6px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.lab-switch {
+  position: relative;
+  flex: none;
+  width: 32px;
+  height: 18px;
+  padding: 0;
+  border: 0;
+  border-radius: 99px;
+  background: var(--muted);
+  cursor: pointer;
+  transition: background-color 150ms;
+}
+
+.lab-switch[data-checked] {
+  background: var(--lab-accent);
+}
+
+.lab-switch-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  transition: transform 150ms ease-out;
+}
+
+.lab-switch[data-checked] .lab-switch-thumb {
+  transform: translateX(14px);
+}
+
+/* ---------- buttons ---------- */
+
+.lab-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: var(--lab-radius-inner, 8px);
+  background: var(--background);
+  color: var(--foreground);
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: var(--lab-surface-shadow);
+  cursor: pointer;
+  transition-property: scale, box-shadow, background-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+.lab-btn:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 2px;
+}
+
+.lab-btn:active {
+  scale: 0.96;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .lab-btn:hover {
+    background: color-mix(in oklch, var(--background), var(--foreground) 4%);
+  }
+}
+
+.lab-btn[data-popup-open],
+.lab-btn[aria-pressed="true"] {
+  background: var(--lab-accent-soft);
+  color: var(--lab-accent-ink);
+}
+
+.lab-btn-accent {
+  background: var(--lab-accent);
+  color: var(--lab-accent-fg);
+}
+
+.lab-btn-sm {
+  height: 26px;
+  padding: 0 8px;
+  gap: 4px;
+  font-size: 12px;
+}
+
+.lab-btn-icon {
+  width: 34px;
+  padding: 0;
+  justify-content: center;
+}
+
+/* ---------- cards ---------- */
+
+.lab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 180px;
+  padding: 6px;
+  border-radius: calc(var(--lab-radius, 14px) + 8px);
+  background: var(--card);
+  box-shadow: var(--lab-surface-shadow);
+}
+
+.lab-card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 10px 0;
+}
+
+.lab-card-name {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.lab-sample {
+  font-size: 11px;
+  color: var(--muted-foreground);
+}
+
+.lab-stage {
+  display: grid;
+  flex: 1;
+  place-items: center;
+  min-height: 140px;
+  padding: 12px;
+  /* card radius (--lab-radius + 8px) minus the 6px card padding */
+  border-radius: calc(var(--lab-radius, 14px) + 2px);
+  background-color: color-mix(in oklch, var(--card), oklch(0.6 0.12 var(--lab-hue, 40)) 4%);
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    oklch(0.6 0.12 var(--lab-hue, 40) / 0.22) 1px,
+    transparent 0
+  );
+  background-size: 14px 14px;
+}
+
+/* ---------- inspector outline ---------- */
+
+.lab[data-inspect] [data-part],
+body[data-inspect] [data-part] {
+  outline: 1px dashed oklch(0.6 0.2 var(--lab-hue, 40) / 0.7);
+  outline-offset: 2px;
+}
+
+/* ---------- misc ---------- */
+
+.lab-no-transition *,
+.lab-no-transition *::before,
+.lab-no-transition *::after {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lab-popup,
+  .lab-dialog,
+  .lab-backdrop,
+  .lab-toast,
+  .lab-tab-indicator,
+  .lab-btn,
+  .lab-switch-thumb,
+  .lab-slider-thumb {
+    transition-duration: 0ms !important;
+  }
+}

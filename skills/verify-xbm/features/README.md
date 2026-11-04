@@ -34,6 +34,7 @@ H1 title + one paragraph, then exactly: `Sub-features`, `How to get to it (user 
 - [Shadcn Admin](./shadcn-admin.md) — `shadcn-admin`
 - [SlideBlocks](./slideblocks.md) — `slideblocks`
 - [snapcn 产品演示组件](./snapcn.md) — `snapcn`
+- [base-ui](./base-ui.md) — `base-ui`
 - [spectrum-ui](./spectrum-ui.md) — `spectrum-ui`
 - [TanStack Charts](./tanstack-charts.md) — `tanstack-charts`
 - [transitions-dev](./transitions-dev.md) — `transitions-dev`

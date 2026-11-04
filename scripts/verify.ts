@@ -32,6 +32,7 @@ const DIST = join(ROOT, "dist")
 type Target = { role: "button" | "tab" | "link"; name: RegExp | string; nth?: number } | { css: string }
 type Drive = { feature: string; steps: Target[]; expectText?: RegExp | string }
 export const DRIVES: Record<string, Drive> = {
+  "base-ui": { feature: "open the Popover from its trigger", steps: [{ role: "button", name: "Open popover" }], expectText: /Rollout/ },
   "agent-status": { feature: "play the scripted agent run", steps: [{ role: "button", name: "播放" }], expectText: /理解任务|搜索文档/ },
   "answer-me-with-html": { feature: "open the second rendered page from the list", steps: [{ role: "button", name: /^02 Vercel/ }] },
   "antv-infographic": { feature: "filter templates to Sequence", steps: [{ role: "button", name: "Sequence", nth: 0 }], expectText: /Sequence/ },
@@ -158,7 +159,7 @@ async function verify(browser: Browser, slug: string, dir: string): Promise<Stat
   const errors: string[] = []
   page.on("pageerror", (e) => errors.push(`pageerror: ${e.message.split("\n")[0]}`))
   page.on("console", (m) => m.type() === "error" && !m.text().startsWith("Failed to load resource") && errors.push(`console: ${m.text().slice(0, 200)}`))
-  page.on("response", (r) => r.status() >= 400 && errors.push(`http ${r.status()}: ${r.url().replace(base!, "")}`))
+  page.on("response", (r) => r.status() >= 400 && !r.url().includes("/_vercel/insights/") && errors.push(`http ${r.status()}: ${r.url().replace(base!, "")}`))
   let bodyText = ""
   try {
     // doctor
