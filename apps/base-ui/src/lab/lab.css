@@ -224,7 +224,8 @@ html {
   border: 0;
   border-radius: var(--lab-radius-inner, 8px);
   background: none;
-  color: var(--muted-foreground);
+  /* muted-foreground on --muted measured 4.35:1; mix toward foreground for AA */
+  color: color-mix(in oklch, var(--foreground) 72%, var(--muted));
   font-size: 14px;
   cursor: pointer;
 }
@@ -238,15 +239,15 @@ html {
   left: 0;
   top: var(--active-tab-top, 0px);
   z-index: 0;
-  width: var(--active-tab-width, 0px);
+  width: 100px;
   height: var(--active-tab-height, 0px);
+  transform-origin: 0 0;
+  scale: var(--tab-sx, 0) 1;
   border-radius: var(--lab-radius-inner, 8px);
   background: var(--background);
   box-shadow: var(--lab-surface-shadow);
-  /* Exception to "transform/opacity only": the indicator travels between tabs,
-     a layout offset, so translate/width are the animated properties here. */
   translate: var(--active-tab-left, 0px) 0;
-  transition-property: translate, width;
+  transition-property: translate, scale;
   transition-duration: var(--lab-duration, 220ms);
   transition-timing-function: var(--lab-ease, ease);
 }
@@ -297,8 +298,8 @@ html {
   transition-timing-function: ease-out;
 }
 
-.lab-slider-thumb:focus-visible {
-  outline: 2px solid var(--lab-accent);
+.lab-slider-thumb:has(:focus-visible) {
+  outline: 2px solid var(--foreground);
   outline-offset: 2px;
 }
 
@@ -368,7 +369,11 @@ html {
   transition-timing-function: ease-out;
 }
 
-.lab-btn:focus-visible {
+.lab-btn:focus-visible,
+.lab-tab:focus-visible,
+.lab-switch:focus-visible,
+.lab-toast-close:focus-visible,
+.lab-bar a:focus-visible {
   outline: 2px solid var(--foreground);
   outline-offset: 2px;
 }
@@ -483,4 +488,73 @@ body[data-inspect] [data-part] {
   .lab-slider-thumb {
     transition-duration: 0ms !important;
   }
+}
+
+/* ---------- toast close: fixed size, 44px hit area ---------- */
+
+.lab-toast-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  /* undo the stack scale so every close button stays the same size */
+  scale: calc(1 / (1 - var(--toast-index, 0) * 0.05));
+  transform-origin: top right;
+}
+
+/* ---------- hit areas & touch ---------- */
+
+.lab-btn,
+.lab-tab,
+.lab-switch-row,
+.lab-item,
+.lab-toast-close,
+.lab-slider-control {
+  touch-action: manipulation;
+}
+
+.lab-slider-control {
+  touch-action: none;
+}
+
+/* invisible 44px hit areas around small controls */
+.lab-slider-thumb::after,
+.lab-toast-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 44px;
+  height: 44px;
+  translate: -50% -50%;
+}
+
+.lab-toast-close {
+  position: absolute;
+}
+
+@media (pointer: coarse) {
+  .lab-btn,
+  .lab-btn-sm,
+  .lab-switch-row,
+  .lab-tab {
+    min-height: 44px;
+  }
+  .lab-btn-icon {
+    width: 44px;
+  }
+}
+
+/* keyboard tab changes jump; pointer changes glide */
+.lab-tabs-list[data-kbd] .lab-tab-indicator {
+  transition: none;
 }

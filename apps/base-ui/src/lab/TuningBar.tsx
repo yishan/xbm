@@ -62,11 +62,13 @@ type LabSliderProps = {
   max: number
   step: number
   label: string
+  valueText: (value: number) => string
+  largeStep?: number
   onValueChange: (value: number) => void
   trackStyle?: CSSProperties
 }
 
-function LabSlider({ value, min, max, step, label, onValueChange, trackStyle }: LabSliderProps) {
+function LabSlider({ value, min, max, step, label, valueText, largeStep, onValueChange, trackStyle }: LabSliderProps) {
   return (
     <Slider.Root
       className="lab-slider"
@@ -74,12 +76,17 @@ function LabSlider({ value, min, max, step, label, onValueChange, trackStyle }: 
       min={min}
       max={max}
       step={step}
+      largeStep={largeStep}
       onValueChange={(next) => onValueChange(typeof next === "number" ? next : next[0])}
     >
       <Slider.Control className="lab-slider-control">
         <Slider.Track className="lab-slider-track" style={trackStyle}>
           <Slider.Indicator className="lab-slider-indicator" />
-          <Slider.Thumb className="lab-slider-thumb" aria-label={label} />
+          <Slider.Thumb
+            className="lab-slider-thumb"
+            aria-label={label}
+            getAriaValueText={(_, v) => valueText(v)}
+          />
         </Slider.Track>
       </Slider.Control>
     </Slider.Root>
@@ -161,6 +168,9 @@ export function TuningBar({
               {copied ? <Check size={15} /> : <Copy size={15} />}
               {copied ? "Copied" : "Copy CSS"}
             </button>
+            <span role="status" aria-live="polite" className="sr-only">
+              {copied ? "CSS copied to clipboard" : ""}
+            </span>
           </div>
         </div>
 
@@ -174,6 +184,7 @@ export function TuningBar({
             </div>
             <LabSlider
               label="Duration"
+              valueText={(v) => `${v} milliseconds`}
               min={0}
               max={1200}
               step={10}
@@ -233,6 +244,8 @@ export function TuningBar({
             </div>
             <LabSlider
               label="Scale"
+              valueText={(v) => `${v.toFixed(2)} times`}
+              largeStep={0.02}
               min={0.5}
               max={1}
               step={0.01}
@@ -263,6 +276,7 @@ export function TuningBar({
             </div>
             <LabSlider
               label="Radius"
+              valueText={(v) => `${v} pixels`}
               min={0}
               max={28}
               step={1}
@@ -278,6 +292,7 @@ export function TuningBar({
             </div>
             <LabSlider
               label="Shadow"
+              valueText={(v) => `${v} percent`}
               min={0}
               max={100}
               step={1}
@@ -293,6 +308,7 @@ export function TuningBar({
             </div>
             <LabSlider
               label="Hue"
+              valueText={(v) => `${v} degrees`}
               min={0}
               max={360}
               step={1}

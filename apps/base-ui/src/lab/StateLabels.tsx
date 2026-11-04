@@ -27,12 +27,26 @@ export function StateLabels({ enabled }: { enabled: boolean }) {
 
     let frame = 0
     let lastSerialized = ""
+    // Only label what the user is pointing at or focused on; labelling every
+    // part at once stacks badges on top of the component they describe.
+    let hovered: HTMLElement | null = null
+    const onOver = (e: PointerEvent) => {
+      hovered = (e.target as Element | null)?.closest<HTMLElement>("[data-part]") ?? null
+    }
+    const onLeave = () => {
+      hovered = null
+    }
+    document.addEventListener("pointerover", onOver)
+    document.documentElement.addEventListener("pointerleave", onLeave)
 
     const tick = () => {
       const next: Label[] = []
-      let index = 0
+      const focused = document.activeElement?.closest<HTMLElement>("[data-part]") ?? null
+      const targets = [...new Set([hovered, focused])].filter(
+        (el): el is HTMLElement => !!el && el.isConnected,
+      )
 
-      document.querySelectorAll<HTMLElement>("[data-part]").forEach((element) => {
+      targets.forEach((element, index) => {
         const rect = element.getBoundingClientRect()
         if (rect.width <= 0) return
 
@@ -48,14 +62,15 @@ export function StateLabels({ enabled }: { enabled: boolean }) {
           })
         }
 
+        // flip below when there is no room above
+        const above = rect.top - 20
         next.push({
           id: `${index}-${element.dataset.part ?? "part"}`,
           part: element.dataset.part ?? "",
           attrs,
           left: Math.round(rect.left),
-          top: Math.max(2, Math.round(rect.top - 18)),
+          top: Math.round(above < 2 ? rect.bottom + 4 : above),
         })
-        index += 1
       })
 
       const serialized = JSON.stringify(next)
@@ -71,6 +86,8 @@ export function StateLabels({ enabled }: { enabled: boolean }) {
 
     return () => {
       cancelAnimationFrame(frame)
+      document.removeEventListener("pointerover", onOver)
+      document.documentElement.removeEventListener("pointerleave", onLeave)
       delete document.body.dataset.inspect
     }
   }, [enabled])
@@ -92,23 +109,26 @@ export function StateLabels({ enabled }: { enabled: boolean }) {
           style={{
             position: "fixed",
             left: label.left,
+            maxWidth: "calc(100vw - 16px)",
+            translate: `min(0px, calc(100vw - 8px - ${label.left}px - 100%)) 0`,
             top: label.top,
             display: "flex",
             alignItems: "center",
             gap: 4,
             padding: "1px 5px",
             borderRadius: 4,
-            background: "oklch(0.22 0.02 265 / 0.9)",
+            background: "oklch(0.22 0 0 / 0.9)",
             color: "white",
             fontFamily:
               "ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace",
             fontSize: 10.5,
             lineHeight: 1.5,
             whiteSpace: "nowrap",
+            overflow: "hidden",
             pointerEvents: "none",
           }}
         >
-          <span style={{ color: "oklch(0.85 0.12 var(--lab-hue, 265))" }}>{label.part}</span>
+          <span style={{ color: "oklch(0.85 0.12 var(--lab-hue, 40))" }}>{label.part}</span>
           {label.attrs.map((attr) => (
             <span
               key={attr.key}
@@ -116,7 +136,7 @@ export function StateLabels({ enabled }: { enabled: boolean }) {
                 padding: "0 3px",
                 borderRadius: 3,
                 background: attr.hot ? "oklch(0.75 0.15 75)" : "transparent",
-                color: attr.hot ? "oklch(0.2 0.02 75)" : "oklch(0.88 0.02 265)",
+                color: attr.hot ? "oklch(0.2 0.02 75)" : "oklch(0.9 0 0)",
               }}
             >
               {attr.text}

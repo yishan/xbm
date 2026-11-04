@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 import { Dialog } from "@base-ui/react/dialog"
 import { Menu } from "@base-ui/react/menu"
 import { Popover } from "@base-ui/react/popover"
@@ -58,6 +58,16 @@ function ToastCard() {
 }
 
 export function Board() {
+  const [tab, setTab] = useState("overview")
+  const tabsList = useRef<HTMLDivElement>(null)
+  // The indicator has a fixed 100px base width and animates `scale` to the
+  // active tab's width, so motion stays on transform-class properties.
+  useLayoutEffect(() => {
+    const list = tabsList.current
+    const active = list?.querySelector<HTMLElement>(`[role="tab"][aria-selected="true"]`)
+    if (list && active) list.style.setProperty("--tab-sx", String(active.offsetWidth / 100))
+  }, [tab])
+
   return (
     <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-5 p-6 md:grid-cols-2 xl:grid-cols-3">
       <article className="lab-card">
@@ -231,8 +241,14 @@ export function Board() {
       <article className="lab-card">
         <CardHead name="Tabs" />
         <div className="lab-stage">
-          <Tabs.Root defaultValue="overview">
-            <Tabs.List data-part="Tabs.List" className="lab-tabs-list">
+          <Tabs.Root value={tab} onValueChange={(v) => setTab(v as string)}>
+            <Tabs.List
+              ref={tabsList}
+              data-part="Tabs.List"
+              className="lab-tabs-list"
+              onKeyDown={() => tabsList.current?.setAttribute("data-kbd", "")}
+              onPointerDown={() => tabsList.current?.removeAttribute("data-kbd")}
+            >
               <Tabs.Tab data-part="Tabs.Tab" value="overview" className="lab-tab">
                 Overview
               </Tabs.Tab>
@@ -246,6 +262,7 @@ export function Board() {
             </Tabs.List>
             <Tabs.Panel
               data-part="Tabs.Panel"
+              tabIndex={-1}
               value="overview"
               style={{ marginTop: 12, fontSize: 14, color: "var(--muted-foreground)" }}
             >
@@ -253,6 +270,7 @@ export function Board() {
             </Tabs.Panel>
             <Tabs.Panel
               data-part="Tabs.Panel"
+              tabIndex={-1}
               value="motion"
               style={{ marginTop: 12, fontSize: 14, color: "var(--muted-foreground)" }}
             >
@@ -260,6 +278,7 @@ export function Board() {
             </Tabs.Panel>
             <Tabs.Panel
               data-part="Tabs.Panel"
+              tabIndex={-1}
               value="surface"
               style={{ marginTop: 12, fontSize: 14, color: "var(--muted-foreground)" }}
             >
@@ -296,11 +315,13 @@ export function Board() {
                     data-part="Slider.Thumb"
                     className="lab-slider-thumb"
                     aria-label="Minimum"
+                    getAriaValueText={(_, v) => `minimum ${v}`}
                   />
                   <Slider.Thumb
                     data-part="Slider.Thumb"
                     className="lab-slider-thumb"
                     aria-label="Maximum"
+                    getAriaValueText={(_, v) => `maximum ${v}`}
                   />
                 </Slider.Track>
               </Slider.Control>
@@ -340,17 +361,7 @@ export function ToastList() {
             <Toast.Close
               data-part="Toast.Close"
               aria-label="Dismiss"
-              style={{
-                position: "absolute",
-                top: 8,
-                right: 8,
-                padding: 2,
-                border: 0,
-                borderRadius: 4,
-                background: "none",
-                color: "inherit",
-                cursor: "pointer",
-              }}
+              className="lab-toast-close"
             >
               <X size={14} />
             </Toast.Close>
