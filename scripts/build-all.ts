@@ -12,6 +12,10 @@
  * Every HTML file under dist/<slug>/ (recursive) with a </body> also gets a small fixed "← XG Experiments" pill
  * linking back to the index (injectHomeLink) — apps should not add their own.
  *
+ * Every HTML file under dist/ (index included) also gets a vendored Skullet skeleton
+ * (injectSkulletAll): styles + boot script from scripts/vendor/skullet/, copied to dist/_skullet/.
+ * skullet@0.0.3, MIT, https://skullet.lochie.me/ — no runtime CDN. Idempotent.
+ *
  * Update records: a tracking entry may carry `updates: [{ date, version, changes }]` (`built` stays the first
  * release date). Each top-level HTML page of that demo gets a small fixed "更新记录" panel (bottom-right,
  * injectUpdateLog), the index card shows the latest update, and dist/demos.json includes `built` + `updates`.
@@ -292,7 +296,7 @@ function indexHtml(demos: Demo[]): string {
     </div>
     <p>来自 X 书签和 GitHub 星标的技术 demo</p>
   </header>
-  <ul>
+  <ul data-xbm-skel="gallery">
 ${cards}
   </ul>
   <footer>${demos.length} demos · source: <a href="https://github.com/yishan/xbm">github.com/yishan/xbm</a> · by <a href="https://yishan.li" title="Yishan — 产品 &amp; 用户体验设计">yishan.li</a></footer>
@@ -301,6 +305,50 @@ ${ANALYTICS_SNIPPET}
 </body>
 </html>
 `
+}
+
+/**
+ * Skullet (skullet@0.0.3) page skeleton. Assets are vendored under scripts/vendor/skullet
+ * and copied to dist/_skullet/ so production does not fetch a CDN. The boot script is
+ * classic (parser-blocking) and sits after the home pill / update log so it runs before
+ * deferred app modules. Head snippet hides the page until boot draws a skeleton, and
+ * gives up after 12s if the script never arrives.
+ */
+const SKULLET_VENDOR = join(ROOT, "scripts/vendor/skullet")
+const SKULLET_HEAD = `<script id="xbm-skullet-hold">document.documentElement.classList.add("xbm-hold");setTimeout(function(){document.documentElement.classList.remove("xbm-hold")},12e3)</script><style id="xbm-skullet-hold-style">html.xbm-hold body::before{content:"";position:fixed;inset:0;z-index:2147481000;background:Canvas;pointer-events:none}html.xbm-hold [data-xbm-skel]{visibility:hidden}@media(prefers-color-scheme:light){:root{--skullet-base:rgb(0 0 0 / .08);--skullet-highlight:rgb(255 255 255 / .7)}}@media(prefers-color-scheme:dark){:root{--skullet-base:rgb(255 255 255 / .1);--skullet-highlight:rgb(255 255 255 / .16)}}:root{--skullet-radius:8px}@media print{html.xbm-hold body::before{content:none!important}}</style><link rel="stylesheet" href="/_skullet/styles.css" id="xbm-skullet-css">`
+const SKULLET_BOOT_TAG = `<script id="xbm-skullet-boot" src="/_skullet/boot.js"></script>`
+
+function copySkulletAssets() {
+  const dest = join(OUT, "_skullet")
+  mkdirSync(dest, { recursive: true })
+  for (const name of ["boot.js", "styles.css", "LICENSE"]) {
+    const from = join(SKULLET_VENDOR, name)
+    if (!existsSync(from)) throw new Error(`[build-all] missing vendored skullet file ${from}`)
+    cpSync(from, join(dest, name))
+  }
+}
+
+function injectSkullet(html: string): string {
+  if (html.includes('id="xbm-skullet-boot"')) return html
+  let out = html
+  const head = out.toLowerCase().lastIndexOf("</head>")
+  if (head >= 0) out = out.slice(0, head) + SKULLET_HEAD + out.slice(head)
+  const body = out.toLowerCase().lastIndexOf("</body>")
+  if (body < 0) return out
+  return out.slice(0, body) + SKULLET_BOOT_TAG + "\n" + out.slice(body)
+}
+
+/** Inject the skeleton into every HTML file under dist/ (index included). Idempotent. */
+function injectSkulletAll(): number {
+  let n = 0
+  for (const file of htmlFiles(OUT)) {
+    const html = readFileSync(file, "utf8")
+    const next = injectSkullet(html)
+    if (next === html) continue
+    writeFileSync(file, next)
+    n++
+  }
+  return n
 }
 
 function main() {
@@ -313,6 +361,7 @@ function main() {
 
   rmSync(OUT, { recursive: true, force: true })
   mkdirSync(join(OUT, "_thumbs"), { recursive: true })
+  copySkulletAssets()
 
   const dates = readBuiltDates()
   const updates = readUpdates()
@@ -346,6 +395,8 @@ function main() {
   demos.sort(byDateDesc)
   writeFileSync(join(OUT, "index.html"), indexHtml(demos))
   writeFileSync(join(OUT, "demos.json"), demosJson(demos))
+  const skel = injectSkulletAll()
+  console.log(`[build-all] skullet skeleton injected into ${skel} html file(s)`)
   console.log(`\n[build-all] wrote dist/index.html + dist/demos.json with ${demos.length} demos: ${demos.map((d) => d.slug).join(", ")}`)
   if (failed.length) {
     // Fail the deploy rather than silently shipping a site with missing demos.
