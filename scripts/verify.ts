@@ -33,6 +33,7 @@ type Target = { role: "button" | "tab" | "link"; name: RegExp | string; nth?: nu
 type Drive = { feature: string; steps: Target[]; expectText?: RegExp | string }
 export const DRIVES: Record<string, Drive> = {
   "base-ui": { feature: "open the Popover from its trigger", steps: [{ role: "button", name: "Open popover" }], expectText: /Rollout/ },
+  "fluid-functionalism": { feature: "open the sample dialog", steps: [{ role: "button", name: "打开对话框" }], expectText: /示例数据/ },
   "agent-status": { feature: "play the scripted agent run", steps: [{ role: "button", name: "播放" }], expectText: /理解任务|搜索文档/ },
   "answer-me-with-html": { feature: "open the second rendered page from the list", steps: [{ role: "button", name: /^02 Vercel/ }] },
   "antv-infographic": { feature: "filter templates to Sequence", steps: [{ role: "button", name: "Sequence", nth: 0 }], expectText: /Sequence/ },
