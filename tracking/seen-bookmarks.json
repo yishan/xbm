@@ -360,6 +360,25 @@
       "folder": "apps/base-ui",
       "built": "2026-11-05",
       "why": "Requested directly by Yishan: tune Base UI motion and surfaces live and copy the CSS."
+    },
+    {
+      "id": "2117080232658419970",
+      "title": "Fluid Functionalism — spring, hover and surface lab",
+      "url": "https://x.com/micka_design/status/2117080232658419970",
+      "author": "@micka_design",
+      "date": "2026-11-02",
+      "tech": [
+        "Fluid Functionalism registry (MIT, Micka Touillaud)",
+        "@base-ui/react 1.9.0",
+        "@radix-ui/react-slot 1.2.4",
+        "motion 14.8.0",
+        "Vite",
+        "Tailwind v4"
+      ],
+      "slug": "fluid-functionalism",
+      "folder": "apps/fluid-functionalism",
+      "built": "2026-11-08",
+      "why": "Yishan approved the Saturday lab: live spring speed, OKLCH accent, hover proximity, surface level and density on the real registry components, with slow motion and a copyable theme."
     }
   ],
   "skipped": []

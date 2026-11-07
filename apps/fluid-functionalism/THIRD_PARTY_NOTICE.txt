@@ -1,0 +1,16 @@
+Components, hooks and design tokens under src/components, src/hooks and src/lib
+(except src/lab) come from the Fluid Functionalism registry:
+
+  https://fluidfunctionalism.com
+  https://github.com/mickadesign/fluid-functionalism
+
+MIT License. Copyright (c) 2026 Micka Touillaud. See THIRD_PARTY_LICENSE.txt.
+
+src/components/ui/button-radix.tsx is the Radix flavor of Button from
+registry/radix/button.tsx in the same repository. The registry installs the
+Radix and Base UI flavors onto the same filenames, so only Button is vendored
+beside the Base UI board.
+
+Inter is loaded from @fontsource-variable/inter (SIL Open Font License).
+pdfjs-dist is a dependency of the upstream file-thumbnail component and is not
+used unless a message is given a file.
