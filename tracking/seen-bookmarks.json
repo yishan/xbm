@@ -379,6 +379,19 @@
       "folder": "apps/fluid-functionalism",
       "built": "2026-11-08",
       "why": "Yishan approved the Saturday lab: live spring speed, OKLCH accent, hover proximity, surface level and density on the real registry components, with slow motion and a copyable theme."
+    },
+    {
+      "id": "2119787088631435314",
+      "title": "unfake.js — clean AI pixel art into real 1x sprites",
+      "url": "https://x.com/dextune/status/2119787088631435314",
+      "author": "@dextune",
+      "date": "2026-11-09",
+      "tech": "Vite + React + Tailwind v4; unfake.js MIT pipeline ported to TypeScript; original median-cut quantizer; imagetracer.js (Unlicense)",
+      "repo": "https://github.com/jenissimo/unfake.js",
+      "slug": "unfake",
+      "folder": "unfiled",
+      "built": "2026-11-11",
+      "why": "Hands-on pixel and vector cleanup bench. Approved 2026-11-11 with an MIT quantizer instead of the upstream GPL palette core."
     }
   ],
   "skipped": []

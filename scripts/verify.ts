@@ -57,6 +57,7 @@ export const DRIVES: Record<string, Drive> = {
   "spectrum-ui": { feature: "run the agent task toast", steps: [{ role: "button", name: "Run agent task" }] },
   "tanstack-charts": { feature: "switch the main chart to Cumulative", steps: [{ css: '[aria-label="Cumulative"]' }] },
   "transitions-dev": { feature: "Next value on the number pop-in", steps: [{ role: "button", name: "Next value" }] },
+  "unfake": { feature: "switch the bench to Vector", steps: [{ role: "tab", name: "矢量" }], expectText: /去噪/ },
 }
 
 // ---------- sensitive-info scan ----------
