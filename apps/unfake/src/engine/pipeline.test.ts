@@ -4,7 +4,6 @@ import { join } from "node:path"
 import { contentAdaptive } from "./adaptive"
 import { alphaBinarize, jaggyClean } from "./cleanup"
 import { detectScale, runsBasedDetect } from "./detect"
-import { isKeyColor } from "./filters"
 import { quantize, remapColor } from "./quantize"
 import { emptyRaster, type Raster } from "./raster"
 import { snapToGrid } from "./snap"
@@ -186,19 +185,24 @@ describe("pixel pipeline", () => {
     expect(out.svg).toBe("<svg></svg>")
   })
 
-  test("vector key color stays out of the palette", () => {
-    const art = upscaleNearest(checker(1, 6), 4)
-    for (let y = 0; y < art.height; y++) {
-      for (let x = 0; x < art.width; x++) {
-        if (x < 4 || y < 4) art.data[(y * art.width + x) * 4 + 3] = 0
-      }
+  test("vector key color stays out of the chips and in the tracer palette", () => {
+    const img = emptyRaster(24, 24)
+    for (let y = 8; y < 16; y++) {
+      for (let x = 8; x < 16; x++) fillCell(img, x, y, [220, 32, 32])
     }
-    const out = processVector(art, { ...DEFAULT_VECTOR, maxColors: 8, smooth: 1 }, () => "<svg></svg>")
-    for (const color of out.palette) {
-      const n = Number.parseInt(color.slice(1), 16)
-      expect(isKeyColor((n >> 16) & 255, (n >> 8) & 255, n & 255)).toBe(false)
-    }
-    expect(out.palette.length).toBeGreaterThan(0)
+    let traced: string[] = []
+    const out = processVector(img, { ...DEFAULT_VECTOR, denoise: "off", smooth: 0, maxColors: 4 }, (_raster, _detail, colors) => {
+      traced = colors
+      return `<svg><path fill="rgb(255,0,255)" d="M0 0Z" /><path fill="rgb(220,32,32)" d="M8 8Z" /></svg>`
+    })
+    expect(traced.map((color) => color.toLowerCase())).toContain("#ff00ff")
+    expect(out.palette.map((color) => color.toLowerCase())).not.toContain("#ff00ff")
+    expect(out.svg).not.toContain("rgb(255,0,255)")
+    expect(out.svg).toContain("rgb(220,32,32)")
+    expect(out.raster.data[3]).toBe(0)
+    const center = (12 * 24 + 12) * 4
+    expect(out.raster.data[center]).toBeGreaterThan(180)
+    expect(out.raster.data[center + 3]).toBe(255)
   })
 
   test("content-adaptive keeps the requested size", () => {

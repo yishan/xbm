@@ -184,8 +184,11 @@ export function processVector(src: Raster, settings: VectorSettings, trace: (img
   if (masked) current = snapKey(current)
   const quantized = quantize(current, settings.maxColors, masked ? [MAGIC[0], MAGIC[1], MAGIC[2]] : undefined)
   current = quantized.raster
-  const palette = quantized.palette.filter((color) => color !== "#ff00ff")
-  let svg = trace(current, settings.detail, palette)
+  const palette = quantized.palette.filter((color) => color.toLowerCase() !== "#ff00ff")
+  // The tracer needs the key in its palette so background pixels stay a layer we can strip.
+  // The chips stay the visible colors only.
+  const forTrace = masked ? ["#ff00ff", ...palette] : palette
+  let svg = trace(current, settings.detail, forTrace)
   if (masked) svg = removeSvgBackground(svg)
   return {
     raster: masked ? knockout(current, MAGIC) : current,

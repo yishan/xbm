@@ -209,7 +209,7 @@ export function Stage({ source, result, grid, split, onSplit }: Props) {
         if (point) setSample(point)
       }}
     >
-      <canvas ref={beforeRef} className="layer" />
+      <canvas ref={beforeRef} className="layer" style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }} />
       <canvas ref={afterRef} className="layer after" style={{ clipPath: `inset(0 0 0 ${split}%)` }} />
       {grid && source && result && result.scale > 1 && (
         <svg
