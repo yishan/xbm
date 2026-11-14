@@ -171,7 +171,14 @@ export default function App() {
               <Segmented
                 label="选择"
                 value={flags.multiple ? "multi" : "single"}
-                onChange={(mode) => setFlags((current) => ({ ...current, multiple: mode === "multi" }))}
+                onChange={(mode) => {
+                  setFlags((current) => ({ ...current, multiple: mode === "multi" }))
+                  if (mode === "single") {
+                    setPicked((current) =>
+                      Object.fromEntries(Object.entries(current).map(([key, value]) => [key, value.slice(0, 1)])),
+                    )
+                  }
+                }}
                 options={[
                   { value: "single", label: "单选" },
                   { value: "multi", label: "多选" },
