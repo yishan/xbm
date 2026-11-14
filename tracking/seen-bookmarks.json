@@ -392,6 +392,20 @@
       "folder": "unfiled",
       "built": "2026-11-11",
       "why": "Hands-on pixel and vector cleanup bench. Approved 2026-11-11 with an MIT quantizer instead of the upstream GPL palette core."
+    },
+    {
+      "id": "2120950020249895314",
+      "title": "UI SDK",
+      "url": "https://x.com/vercel/status/2120950020249895314",
+      "author": "@vercel",
+      "date": "2026-11-12",
+      "tech": "@ui-sdk/react + @ui-sdk/core 0.1.0-beta.2 (Vercel Labs, Apache-2.0) — pinned, release-age exception for these two packages only",
+      "repo": "https://github.com/vercel-labs/ui",
+      "site": "https://ui-sdk.dev",
+      "slug": "ui-sdk",
+      "folder": "unfiled",
+      "built": "2026-11-14",
+      "why": "Yishan approved the UI SDK behavior lab: toggle popup, selection, typeahead and focus recovery, and assemble a sample requirements board control from those behaviors."
     }
   ],
   "skipped": []

@@ -1,0 +1,12 @@
+[install]
+minimumReleaseAge = 259200
+# Exception approved by Yishan on 2026-11-14 20:25 Asia/Shanghai for this demo only.
+# @ui-sdk/react and @ui-sdk/core 0.1.0-beta.2 were published 2026-11-13 13:04 UTC,
+# inside the 3-day window (clears ~2026-11-16 21:04 Asia/Shanghai).
+# Same shape as the ascii.rest 0.2.1 exception (apps/ascii-rest, 2026-10-09):
+# the two package names are excluded, and package.json pins each one to exactly
+# "0.1.0-beta.2" (no caret), so this cannot float onto a newer release.
+# Bun 1.4.2 ignores name@version exclude entries (install stays blocked) and does
+# not accept a scope pattern, so the exclude is these two names only.
+# Every other package still needs the 3-day age.
+minimumReleaseAgeExcludes = ["@ui-sdk/react", "@ui-sdk/core"]
