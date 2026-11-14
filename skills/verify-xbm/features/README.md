@@ -39,3 +39,4 @@ H1 title + one paragraph, then exactly: `Sub-features`, `How to get to it (user 
 - [TanStack Charts](./tanstack-charts.md) — `tanstack-charts`
 - [transitions-dev](./transitions-dev.md) — `transitions-dev`
 - [Unfake](./unfake.md) — `unfake`
+- [UI SDK](./ui-sdk.md) — `ui-sdk`

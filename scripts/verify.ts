@@ -58,6 +58,7 @@ export const DRIVES: Record<string, Drive> = {
   "tanstack-charts": { feature: "switch the main chart to Cumulative", steps: [{ css: '[aria-label="Cumulative"]' }] },
   "transitions-dev": { feature: "Next value on the number pop-in", steps: [{ role: "button", name: "Next value" }] },
   "unfake": { feature: "switch the bench to Vector", steps: [{ role: "tab", name: "矢量" }], expectText: /去噪/ },
+  "ui-sdk": { feature: "assemble the priority list from reorder", steps: [{ css: 'role=radio[name="拖动调整优先级"]' }], expectText: /createReorder/ },
 }
 
 // ---------- sensitive-info scan ----------
