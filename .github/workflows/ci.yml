@@ -1,0 +1,68 @@
+# Pull-request CI for xbm: build every demo the way Vercel does, then drive
+# the demos this PR touches with scripts/verify.ts. Free GitHub-hosted runner,
+# no secrets. The job name "build-and-verify" is the required status check on main.
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.4
+
+      - name: Install root tools
+        run: bun install --frozen-lockfile
+
+      - name: Build all demos (scripts/build-all.sh)
+        run: bash scripts/build-all.sh
+
+      - name: Find changed demos
+        id: changed
+        env:
+          BASE: ${{ github.event.pull_request.base.sha }}
+        run: |
+          set -euo pipefail
+          if [ -z "${BASE:-}" ]; then echo "slugs=" >> "$GITHUB_OUTPUT"; exit 0; fi
+          slugs=$(git diff --name-only "$BASE"...HEAD -- apps/ \
+            | cut -d/ -f2 | sort -u \
+            | while read -r s; do if [ -f "apps/$s/package.json" ]; then echo "$s"; fi; done \
+            | tr '\n' ' ')
+          echo "Changed demos: ${slugs:-none}"
+          echo "slugs=$slugs" >> "$GITHUB_OUTPUT"
+
+      - name: Install Playwright Chromium
+        if: steps.changed.outputs.slugs != ''
+        run: bunx playwright install --with-deps chromium ffmpeg
+
+      - name: Verify changed demos (scripts/verify.ts)
+        if: steps.changed.outputs.slugs != ''
+        env:
+          SLUGS: ${{ steps.changed.outputs.slugs }}
+        run: bun scripts/verify.ts --no-shoot $SLUGS
+
+      - name: Upload verify evidence
+        if: always() && steps.changed.outputs.slugs != ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-evidence
+          path: .verify/
+          retention-days: 7
+          if-no-files-found: ignore
