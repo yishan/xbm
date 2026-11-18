@@ -1,0 +1,274 @@
+/*
+ * mdxcn frame styles and accent families, copied from
+ * https://github.com/shadcn-labs/mdxcn (app/globals.css @ 884eba5).
+ * MIT License, Copyright (c) 2026 Keshav Bagaade. See ./LICENSE.
+ */
+
+
+html[data-accent="theme"] {
+  --graph-accent: oklch(0.32 0 0);
+  --graph-accent-2: oklch(0.5 0 0);
+  --graph-accent-3: oklch(0.42 0 0);
+}
+html.dark[data-accent="theme"] {
+  --graph-accent: oklch(0.92 0 0);
+  --graph-accent-2: oklch(0.72 0 0);
+  --graph-accent-3: oklch(0.55 0 0);
+}
+
+html[data-accent="mint"] {
+  --graph-accent: oklch(0.52 0.14 163);
+  --graph-accent-2: oklch(0.58 0.1 163);
+  --graph-accent-3: oklch(0.45 0.08 163);
+}
+html.dark[data-accent="mint"] {
+  --graph-accent: oklch(0.77 0.15 163);
+  --graph-accent-2: oklch(0.68 0.1 163);
+  --graph-accent-3: oklch(0.58 0.08 163);
+}
+
+html[data-accent="orange"] {
+  --graph-accent: oklch(0.58 0.16 55);
+  --graph-accent-2: oklch(0.5 0.12 55);
+  --graph-accent-3: oklch(0.42 0.08 55);
+}
+html.dark[data-accent="orange"] {
+  --graph-accent: oklch(0.76 0.14 55);
+  --graph-accent-2: oklch(0.66 0.12 55);
+  --graph-accent-3: oklch(0.55 0.08 55);
+}
+
+html[data-accent="green"] {
+  --graph-accent: oklch(0.5 0.14 145);
+  --graph-accent-2: oklch(0.58 0.1 145);
+  --graph-accent-3: oklch(0.42 0.08 145);
+}
+html.dark[data-accent="green"] {
+  --graph-accent: oklch(0.74 0.14 145);
+  --graph-accent-2: oklch(0.64 0.1 145);
+  --graph-accent-3: oklch(0.55 0.08 145);
+}
+
+html[data-accent="cyan"] {
+  --graph-accent: oklch(0.5 0.1 210);
+  --graph-accent-2: oklch(0.58 0.08 210);
+  --graph-accent-3: oklch(0.42 0.06 210);
+}
+html.dark[data-accent="cyan"] {
+  --graph-accent: oklch(0.76 0.1 210);
+  --graph-accent-2: oklch(0.66 0.08 210);
+  --graph-accent-3: oklch(0.55 0.06 210);
+}
+
+html[data-accent="blue"] {
+  --graph-accent: oklch(0.5 0.18 255);
+  --graph-accent-2: oklch(0.58 0.12 255);
+  --graph-accent-3: oklch(0.42 0.1 255);
+}
+html.dark[data-accent="blue"] {
+  --graph-accent: oklch(0.7 0.12 255);
+  --graph-accent-2: oklch(0.62 0.1 255);
+  --graph-accent-3: oklch(0.52 0.08 255);
+}
+
+html[data-accent="purple"] {
+  --graph-accent: oklch(0.5 0.16 300);
+  --graph-accent-2: oklch(0.58 0.12 300);
+  --graph-accent-3: oklch(0.42 0.08 300);
+}
+html.dark[data-accent="purple"] {
+  --graph-accent: oklch(0.72 0.12 300);
+  --graph-accent-2: oklch(0.62 0.1 300);
+  --graph-accent-3: oklch(0.55 0.08 300);
+}
+
+html[data-accent="pink"] {
+  --graph-accent: oklch(0.55 0.18 8);
+  --graph-accent-2: oklch(0.5 0.12 8);
+  --graph-accent-3: oklch(0.42 0.08 8);
+}
+html.dark[data-accent="pink"] {
+  --graph-accent: oklch(0.74 0.14 8);
+  --graph-accent-2: oklch(0.64 0.1 8);
+  --graph-accent-3: oklch(0.55 0.08 8);
+}
+
+html[data-accent="sunset"] {
+  --graph-accent: oklch(0.55 0.18 19);
+  --graph-accent-2: oklch(0.55 0.14 74);
+  --graph-accent-3: oklch(0.52 0.12 89);
+}
+html.dark[data-accent="sunset"] {
+  --graph-accent: oklch(0.7 0.19 19);
+  --graph-accent-2: oklch(0.86 0.12 74);
+  --graph-accent-3: oklch(0.92 0.1 89);
+}
+
+html[data-accent="ocean"] {
+  --graph-accent: oklch(0.5 0.14 228);
+  --graph-accent-2: oklch(0.48 0.18 259);
+  --graph-accent-3: oklch(0.5 0.14 248);
+}
+html.dark[data-accent="ocean"] {
+  --graph-accent: oklch(0.77 0.15 228);
+  --graph-accent-2: oklch(0.68 0.18 259);
+  --graph-accent-3: oklch(0.72 0.15 248);
+}
+
+html[data-accent="neon"] {
+  --graph-accent: oklch(0.48 0.16 129);
+  --graph-accent-2: oklch(0.48 0.14 162);
+  --graph-accent-3: oklch(0.5 0.12 220);
+}
+html.dark[data-accent="neon"] {
+  --graph-accent: oklch(0.92 0.23 129);
+  --graph-accent-2: oklch(0.89 0.18 162);
+  --graph-accent-3: oklch(0.8 0.15 220);
+}
+
+html[data-accent="aurora"] {
+  --graph-accent: oklch(0.55 0.2 351);
+  --graph-accent-2: oklch(0.5 0.14 307);
+  --graph-accent-3: oklch(0.48 0.14 244);
+}
+html.dark[data-accent="aurora"] {
+  --graph-accent: oklch(0.68 0.25 351);
+  --graph-accent-2: oklch(0.7 0.14 307);
+  --graph-accent-3: oklch(0.7 0.13 244);
+}
+
+html[data-accent="fire"] {
+  --graph-accent: oklch(0.55 0.18 33);
+  --graph-accent-2: oklch(0.52 0.18 1);
+  --graph-accent-3: oklch(0.55 0.14 72);
+}
+html.dark[data-accent="fire"] {
+  --graph-accent: oklch(0.67 0.22 33);
+  --graph-accent-2: oklch(0.68 0.2 1);
+  --graph-accent-3: oklch(0.82 0.15 72);
+}
+
+html[data-accent="prism"] {
+  --graph-accent: oklch(0.5 0.12 220);
+  --graph-accent-2: oklch(0.52 0.16 313);
+  --graph-accent-3: oklch(0.55 0.18 21);
+}
+html.dark[data-accent="prism"] {
+  --graph-accent: oklch(0.75 0.14 220);
+  --graph-accent-2: oklch(0.69 0.19 313);
+  --graph-accent-3: oklch(0.66 0.2 21);
+}
+
+@utility graph-frame {
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--graph-frame) 0 2px,
+      transparent 2px 7px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--graph-frame) 0 2px,
+      transparent 2px 7px
+    ),
+    repeating-linear-gradient(
+      to right,
+      var(--graph-frame) 0 2px,
+      transparent 2px 7px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--graph-frame) 0 2px,
+      transparent 2px 7px
+    );
+  background-repeat: repeat-x, repeat-y, repeat-x, repeat-y;
+  background-position:
+    0 0,
+    100% 0,
+    0 100%,
+    0 0;
+  background-size:
+    100% 1px,
+    1px 100%,
+    100% 1px,
+    1px 100%;
+}
+
+@utility graph-rule {
+  height: 1px;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--graph-frame) 0 2px,
+    transparent 2px 7px
+  );
+}
+
+@utility graph-rule-y {
+  width: 1px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    var(--graph-frame) 0 2px,
+    transparent 2px 7px
+  );
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-graph {
+  scrollbar-width: thin;
+  scrollbar-color: var(--graph-frame) transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--graph-frame);
+    border-radius: 0;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--graph-muted);
+    }
+  }
+}
+
+@utility graph-scroll-x {
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+html[data-accent-kind="gradient"] .graph-title-ink {
+  background-image: linear-gradient(
+    90deg,
+    var(--graph-accent),
+    var(--graph-accent-2),
+    var(--graph-accent-3)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .graph-motion {
+    animation: none;
+    transition: none;
+  }
+}
