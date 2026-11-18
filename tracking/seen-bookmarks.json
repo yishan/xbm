@@ -406,6 +406,20 @@
       "folder": "unfiled",
       "built": "2026-11-14",
       "why": "Yishan approved the UI SDK behavior lab: toggle popup, selection, typeahead and focus recovery, and assemble a sample requirements board control from those behaviors."
+    },
+    {
+      "id": "2121975538931912959",
+      "title": "mdxcn — Markdown figures for MDX, with an ASCII twin",
+      "url": "https://x.com/shadcnlabs/status/2121975538931912959",
+      "author": "@shadcnlabs",
+      "date": "2026-11-15",
+      "tech": "Vite + React 19 + Tailwind v4; mdxcn registry source vendored (MIT); @mdx-js/mdx evaluate + remark-gfm in the browser; components written with DeepSeek via aider",
+      "repo": "https://github.com/shadcn-labs/mdxcn",
+      "site": "https://mdxcn.dev",
+      "slug": "mdxcn",
+      "folder": "unfiled",
+      "built": "2026-11-18",
+      "why": "Yishan approved the Markdown figure lab: type mdxcn grammar, watch Flow / Tree / Board / Decision / Matrix figures redraw, tune accent, frame, density, font and speed, and copy the same figure as fenced ASCII."
     }
   ],
   "skipped": []
