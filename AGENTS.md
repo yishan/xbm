@@ -28,6 +28,12 @@ Sticky tech-demo monorepo. Never create a new GitHub repo for a demo.
 12. Before opening a PR, `bash scripts/build-all.sh` from the repo root must succeed (it fails the deploy if any app fails to build). Then run `bun install && bun scripts/shoot.ts <slug>` from the repo root and commit the resulting `artifacts/screenshot.png` / `screenshot-dark.png` — don't hand-pick or crop index thumbnails.
 13. Themes: every app must follow `prefers-color-scheme` on first load (a light/dark toggle is fine, but its default is the system setting), and anything rendered inside the app (charts, canvases, embedded libraries) must switch too. `scripts/shoot.ts` only writes `screenshot-dark.png` when the dark shot is clearly darker.
 
+## Merging (CI + auto-merge)
+
+- Every PR to `main` runs `.github/workflows/ci.yml` (job `build-and-verify`: `bash scripts/build-all.sh`, then `bun scripts/verify.ts --no-shoot` for each changed `apps/<slug>/`).
+- Auto-merge (`gh pr merge <n> --auto --merge`) is allowed only when CI passes **and** Codex has no unresolved serious (P0/P1) finding.
+- Otherwise — CI fails, a serious finding is open, or the PR needs a `minimumReleaseAge` exception — leave the PR open and wait for Yishan's 「合并」.
+
 ## Backends (standing rule): Cloudflare Workers via `cf`
 
 Frontends stay in this repo and deploy through the shared Vercel project at `https://li.yishan.app/<slug>/`. **Any backend a demo needs** (real export, AI calls, storage, realtime, …) is a Cloudflare Worker — never a Vercel function, never a separate server.
