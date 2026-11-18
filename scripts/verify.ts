@@ -59,6 +59,7 @@ export const DRIVES: Record<string, Drive> = {
   "transitions-dev": { feature: "Next value on the number pop-in", steps: [{ role: "button", name: "Next value" }] },
   "unfake": { feature: "switch the bench to Vector", steps: [{ role: "tab", name: "矢量" }], expectText: /去噪/ },
   "ui-sdk": { feature: "assemble the priority list from reorder", steps: [{ css: 'role=radio[name="拖动调整优先级"]' }], expectText: /createReorder/ },
+  "mdxcn": { feature: "switch the figure to Tree", steps: [{ css: 'role=radio[name="Tree"]' }], expectText: /APP/ },
 }
 
 // ---------- sensitive-info scan ----------
