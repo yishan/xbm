@@ -43,7 +43,7 @@ jobs:
           if [ -z "${BASE:-}" ]; then echo "slugs=" >> "$GITHUB_OUTPUT"; exit 0; fi
           slugs=$(git diff --name-only "$BASE"...HEAD -- apps/ \
             | cut -d/ -f2 | sort -u \
-            | while read -r s; do [ -f "apps/$s/package.json" ] && echo "$s"; done \
+            | while read -r s; do if [ -f "apps/$s/package.json" ]; then echo "$s"; fi; done \
             | tr '\n' ' ')
           echo "Changed demos: ${slugs:-none}"
           echo "slugs=$slugs" >> "$GITHUB_OUTPUT"
