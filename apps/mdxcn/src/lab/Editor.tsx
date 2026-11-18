@@ -34,17 +34,18 @@ export function Editor({ value, onChange, edited, onReset, error }: EditorProps)
     onChange(nextValue);
 
     requestAnimationFrame(() => {
-      const nextStart = start + token.before.length;
-      const nextEnd =
-        token.before.length > 0 && token.after.length > 0
-          ? nextStart + selected.length
-          : nextStart + token.before.length + token.after.length;
-
       textarea.focus();
-      textarea.setSelectionRange(
-        token.before.length > 0 && token.after.length > 0 ? nextStart : nextEnd,
-        token.before.length > 0 && token.after.length > 0 ? nextStart + selected.length : nextEnd,
-      );
+
+      const isWrapToken = token.before.length > 0 && token.after.length > 0;
+
+      if (isWrapToken) {
+        const selectionStart = start + token.before.length;
+        const selectionEnd = selectionStart + selected.length;
+        textarea.setSelectionRange(selectionStart, selectionEnd);
+      } else {
+        const caret = start + token.before.length + selected.length + token.after.length;
+        textarea.setSelectionRange(caret, caret);
+      }
     });
   };
 

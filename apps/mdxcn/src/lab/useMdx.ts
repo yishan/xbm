@@ -4,8 +4,14 @@ import remarkGfm from "remark-gfm";
 import { Component } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { ComponentType, ReactNode } from "react";
+import * as registry from "@/registry/default";
+import { remarkSafeMdx } from "./safeMdx";
 
 type MdxContent = ComponentType<{ components?: Record<string, unknown> }>;
+
+const REGISTRY_COMPONENTS = new Set(
+  Object.keys(registry).filter((name) => /^[A-Z]/.test(name)),
+);
 
 export function useMdx(source: string): {
   Content: MdxContent | null;
@@ -27,7 +33,10 @@ export function useMdx(source: string): {
         try {
           const mod = await evaluate(source, {
             ...runtime,
-            remarkPlugins: [remarkGfm],
+            remarkPlugins: [
+              remarkGfm,
+              [remarkSafeMdx, { components: REGISTRY_COMPONENTS }],
+            ],
           } as Parameters<typeof evaluate>[1]);
 
           if (cancelled || requestId !== requestRef.current) return;
