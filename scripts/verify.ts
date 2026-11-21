@@ -60,6 +60,7 @@ export const DRIVES: Record<string, Drive> = {
   "unfake": { feature: "switch the bench to Vector", steps: [{ role: "tab", name: "矢量" }], expectText: /去噪/ },
   "ui-sdk": { feature: "assemble the priority list from reorder", steps: [{ css: 'role=radio[name="拖动调整优先级"]' }], expectText: /createReorder/ },
   "mdxcn": { feature: "switch the figure to Tree", steps: [{ css: 'role=radio[name="Tree"]' }], expectText: /APP/ },
+  "monohud": { feature: "raise the alert to Red", steps: [{ css: 'role=radio[name="Red"]' }], expectText: /Alert red/ },
 }
 
 // ---------- sensitive-info scan ----------

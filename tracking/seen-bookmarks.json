@@ -420,6 +420,20 @@
       "folder": "unfiled",
       "built": "2026-11-18",
       "why": "Yishan approved the Markdown figure lab: type mdxcn grammar, watch Flow / Tree / Board / Decision / Matrix figures redraw, tune accent, frame, density, font and speed, and copy the same figure as fenced ASCII."
+    },
+    {
+      "id": "2122653563080024522",
+      "title": "Monohud — sci-fi React UI kit for game interfaces, built on Base UI",
+      "url": "https://x.com/jshguo/status/2122653563080024522",
+      "author": "@jshguo",
+      "date": "2026-11-17",
+      "tech": "Vite + React 19; @monohud/react + @monohud/css 0.1.0 (Base UI 1.9) with a light-scheme token remap; Geist Mono; components written with DeepSeek via aider",
+      "repo": "https://github.com/jshguo-labs/monohud",
+      "site": "https://jshguo-labs.github.io/monohud/",
+      "slug": "monohud",
+      "folder": "unfiled",
+      "built": "2026-11-22",
+      "why": "Yishan approved the cockpit playground: real Monohud radar, tactical volume, hologram, warp starfield and cell meters, with signal distortion, alert level, theme, warp, hull integrity and cell controls kept in the URL."
     }
   ],
   "skipped": []
