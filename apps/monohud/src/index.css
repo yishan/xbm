@@ -1,0 +1,89 @@
+/* Page base + light scheme for Monohud (the kit ships dark only).
+   Monohud rules live in cascade layers, so these unlayered overrides win without !important. */
+:root {
+  color-scheme: light dark;
+  font-synthesis: none;
+}
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: oklch(10% 0 0);
+}
+@media (prefers-color-scheme: light) {
+  html,
+  body {
+    background: oklch(97% 0 0);
+  }
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Light scheme: remap the token ramp, keep hue per theme, move only L for contrast. */
+.mh-root[data-scheme="light"] {
+  color-scheme: light;
+  --mh-bg-0: oklch(97% 0 0);
+  --mh-bg-1: oklch(94.5% 0 0);
+  --mh-bg-2: oklch(91% 0 0);
+  --mh-bg-3: oklch(85% 0 0);
+  --mh-line: oklch(62% 0 0);
+  --mh-line-strong: oklch(40% 0 0);
+  --mh-fg: oklch(18% 0 0);
+  --mh-fg-muted: oklch(36% 0 0);
+  --mh-fg-faint: oklch(46% 0 0);
+  --mh-info: oklch(36% 0 0);
+  --mh-ok: oklch(48% 0.14 155);
+  --mh-warn: oklch(52% 0.15 62);
+  --mh-danger: oklch(52% 0.2 27);
+  --mh-danger-fg: oklch(98% 0 0);
+  --mh-glow: none;
+  --mh-glow-strong: none;
+}
+.mh-root[data-scheme="light"][data-mh-theme="mono"] {
+  --mh-accent: oklch(20% 0 0);
+  --mh-accent-fg: oklch(98% 0 0);
+  --mh-accent-dim: oklch(20% 0 0 / 0.1);
+}
+.mh-root[data-scheme="light"][data-mh-theme="sodium"] {
+  --mh-accent: oklch(52% 0.13 78);
+  --mh-accent-fg: oklch(98% 0.01 78);
+  --mh-accent-dim: oklch(52% 0.13 78 / 0.14);
+}
+.mh-root[data-scheme="light"][data-mh-theme="ion"] {
+  --mh-accent: oklch(50% 0.1 190);
+  --mh-accent-fg: oklch(98% 0.01 190);
+  --mh-accent-dim: oklch(50% 0.1 190 / 0.14);
+}
+.mh-root[data-scheme="light"][data-mh-theme="ember"] {
+  --mh-accent: oklch(52% 0.17 40);
+  --mh-accent-fg: oklch(98% 0.01 40);
+  --mh-accent-dim: oklch(52% 0.17 40 / 0.14);
+}
+/* Space stays space, printed as a negative on paper. */
+.mh-root[data-scheme="light"] .mh-starfield {
+  filter: invert(1) hue-rotate(180deg);
+}
+/* Monohud hard-codes a few dark-only literals; give each a light twin. */
+.mh-root[data-scheme="light"] {
+  --mh-frame-fill: oklch(98.5% 0 0 / 0.88);
+}
+.mh-root[data-scheme="light"] .mh-readout[data-tone="danger"] .mh-readout__value,
+.mh-root[data-scheme="light"] .mh-log__entry[data-level="danger"] .mh-log__text,
+.mh-root[data-scheme="light"] .mh-datalist__row[data-tone="danger"] dd,
+.mh-root[data-scheme="light"] .mh-item[data-tone="danger"]:not([data-highlighted]),
+.mh-root[data-scheme="light"] .mh-field__error,
+.mh-root[data-scheme="light"] .mh-button[data-variant="danger"] {
+  color: oklch(48% 0.19 27);
+}
+.mh-root[data-scheme="light"] .mh-radar__tag {
+  color: var(--mh-bg-0);
+  background: color-mix(in oklch, var(--_tone) 88%, black);
+}
+.mh-root[data-scheme="light"] .mh-tape__value {
+  background: oklch(98% 0 0 / 0.9);
+}
+.mh-root[data-scheme="light"] > .mh-screen {
+  background: repeating-linear-gradient(0deg, oklch(0% 0 0 / 0.035) 0 1px, #0000 1px 3px);
+}
