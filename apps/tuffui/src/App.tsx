@@ -44,6 +44,7 @@ export default function App() {
   const [decision, setDecision] = useState<Decision>("pending");
   const [approvals, setApprovals] = useState(APPROVALS);
   const [checkpoints, setCheckpoints] = useState(CHECKPOINTS);
+  const [resetKey, setResetKey] = useState(0);
 
   const tickAccum = useRef(0);
 
@@ -170,6 +171,7 @@ export default function App() {
     setReviewed(new Set());
     setRunIndex(null);
     setRunKey(0);
+    setResetKey((k) => k + 1);
   };
 
   const gap = state.density === "compact" ? "gap-3" : "gap-5";
@@ -236,6 +238,7 @@ export default function App() {
             )}
           >
             <ToolApprovalQueue
+              key={`approvals-${resetKey}`}
               data={approvals}
               layout="grouped"
               onDecide={(reqs, decision) =>
@@ -258,6 +261,7 @@ export default function App() {
             />
 
             <CheckpointTimeline
+              key={`checkpoints-${resetKey}`}
               data={checkpoints}
               variant="timeline"
               onRestore={(cp) =>
