@@ -12,7 +12,7 @@ import { EvalResults } from "@/components/ui/eval-results";
 import { ToolApprovalQueue } from "@/components/ui/tool-approval-queue";
 import { CheckpointTimeline } from "@/components/ui/checkpoint-timeline";
 import { Toaster, toast } from "@/components/ui/toast-stack";
-import { useHashState, useTheme, useTicker } from "./review/prefs";
+import { useHashState, useMediaQuery, useTheme, useTicker } from "./review/prefs";
 import { ACCENT_HUE, BASE_TOKENS } from "./review/state";
 import {
   buildCases,
@@ -34,7 +34,9 @@ export default function App() {
   const [state, set, reset] = useHashState();
   const [dark, toggleTheme] = useTheme();
 
-  setMotionTokens({ durationMs: state.duration, bounce: state.bounce });
+  // Reduced motion zeroes the shared tokens, so TUFFUI fades stop too.
+  const reduceMotion = useMediaQuery("(prefers-reduced-motion: reduce)");
+  setMotionTokens({ durationMs: reduceMotion ? 0 : state.duration, bounce: state.bounce });
 
   const [runIndex, setRunIndex] = useState<number | null>(null);
   const [runKey, setRunKey] = useState(0);

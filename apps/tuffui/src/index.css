@@ -175,4 +175,8 @@
   * {
     scroll-behavior: auto !important;
   }
+  /* RunTrace pulses running spans; the "running" label already says it. */
+  .animate-pulse {
+    animation: none;
+  }
 }
