@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * TUFFUI theme tokens (from the registry `theme` item and tuffui.com globals),
+ * rewritten so the surface ramp hangs off two knobs the demo exposes:
+ *   --base-h  hue of the neutral surfaces
+ *   --base-c  how tinted they are (0 = pure gray)
+ *   --accent-h hue of --brand (Accent control); lightness/chroma follow the theme
+ * Status colors stay fixed so pass / fail never change meaning.
+ */
+:root {
+  --radius: 0.75rem;
+  --base-h: 286;
+  --base-c: 0.003;
+  --accent-h: 252;
+
+  --background: oklch(0.975 calc(var(--base-c) * 0.5) var(--base-h));
+  --foreground: oklch(0.2 calc(var(--base-c) * 1.3) var(--base-h));
+  --surface: oklch(0.948 calc(var(--base-c) * 0.7) var(--base-h));
+  --surface-inset: oklch(1 0 0);
+  --surface-raised: oklch(0.912 var(--base-c) var(--base-h));
+  --border: oklch(0.2 0.004 var(--base-h) / 0.07);
+  --muted-foreground: oklch(0.47 calc(var(--base-c) * 2.6) var(--base-h));
+  --ring: color-mix(in oklab, var(--brand) 55%, transparent);
+
+  --brand: oklch(0.56 0.2 var(--accent-h));
+  --brand-foreground: oklch(1 0 0);
+  --positive: oklch(0.55 0.15 146);
+  --negative: oklch(0.55 0.22 27);
+  --warning: oklch(0.56 0.18 45);
+
+  --button: linear-gradient(0deg, oklch(1 0 0) 0%, oklch(0.925 0 0) 100%);
+  --button-hover: linear-gradient(0deg, oklch(1 0 0) 0%, oklch(0.953 0 0) 100%);
+  --button-foreground: oklch(0.183 0 0);
+  --button-edge: oklch(0 0 0 / 0.1);
+  --button-shadow: 0 0 #0000;
+  --button-secondary: linear-gradient(180deg, oklch(0.912 0 0) 0%, oklch(0.94 0 0) 100%);
+  --button-secondary-hover: linear-gradient(180deg, oklch(0.89 0 0) 0%, oklch(0.918 0 0) 100%);
+}
+
+.dark {
+  --background: oklch(0.155 calc(var(--base-c) * 0.6) var(--base-h));
+  --foreground: oklch(0.97 0 0);
+  --surface: oklch(0.212 calc(var(--base-c) * 0.8) var(--base-h));
+  --surface-inset: oklch(0.172 calc(var(--base-c) * 0.7) var(--base-h));
+  --surface-raised: oklch(0.265 var(--base-c) var(--base-h));
+  --border: oklch(1 0 0 / 0.06);
+  --muted-foreground: oklch(0.7 calc(var(--base-c) * 1.3) var(--base-h));
+  --ring: color-mix(in oklab, var(--brand) 60%, transparent);
+
+  --brand: oklch(0.64 0.19 var(--accent-h));
+  --positive: oklch(0.76 0.19 146);
+  --negative: oklch(0.67 0.2 27);
+  --warning: oklch(0.78 0.16 70);
+
+  --button: linear-gradient(0deg, oklch(1 0 0) 0%, oklch(0.75 0 0) 100%);
+  --button-hover: linear-gradient(0deg, oklch(1 0 0) 0%, oklch(0.82 0 0) 100%);
+  --button-foreground: oklch(0.183 0 0);
+  --button-edge: oklch(1 0 0 / 0.5);
+  --button-shadow: 0 2px 2px 0 oklch(0 0 0 / 0.1);
+  --button-secondary: linear-gradient(180deg, oklch(0.227 0 0) 0%, oklch(0.262 0 0) 100%);
+  --button-secondary-hover: linear-gradient(180deg, oklch(0.256 0 0) 0%, oklch(0.29 0 0) 100%);
+}
+
+@theme inline {
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-inset: var(--surface-inset);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-positive: var(--positive);
+  --color-negative: var(--negative);
+  --color-warning: var(--warning);
+  --button: var(--button);
+  --button-hover: var(--button-hover);
+  --color-button-foreground: var(--button-foreground);
+  --color-button-edge: var(--button-edge);
+  --button-shadow: var(--button-shadow);
+  --button-secondary: var(--button-secondary);
+  --button-secondary-hover: var(--button-secondary-hover);
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in oklab, var(--foreground) 18%, transparent) transparent;
+  }
+
+  /* iOS Safari zooms into any field under 16px. */
+  @media (pointer: coarse) {
+    input,
+    textarea,
+    select,
+    [contenteditable="true"] {
+      font-size: max(16px, 1em) !important;
+    }
+  }
+
+  html {
+    color-scheme: light;
+    -webkit-text-size-adjust: 100%;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-synthesis: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--color-brand) 30%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+}
+
+/*
+ * Touch: TUFFUI sizes controls for a fine pointer. On coarse pointers lift the
+ * segmented controls to 48px, kill double-tap zoom, and grow the 20px
+ * checkboxes and slider thumbs to a 44px hit area without moving them.
+ */
+@media (pointer: coarse) {
+  button,
+  a,
+  [role="slider"] {
+    touch-action: manipulation;
+  }
+  [role="radiogroup"]:has(> [role="radio"]) {
+    height: 3rem;
+  }
+  [role="checkbox"] {
+    position: relative;
+  }
+  [role="checkbox"]::before,
+  [role="slider"]::before {
+    content: "";
+    position: absolute;
+    inset: -12px;
+  }
+}
+
+/* Theme switches never animate. */
+.theme-switching,
+.theme-switching * {
+  transition: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
