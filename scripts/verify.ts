@@ -61,6 +61,7 @@ export const DRIVES: Record<string, Drive> = {
   "ui-sdk": { feature: "assemble the priority list from reorder", steps: [{ css: 'role=radio[name="拖动调整优先级"]' }], expectText: /createReorder/ },
   "mdxcn": { feature: "switch the figure to Tree", steps: [{ css: 'role=radio[name="Tree"]' }], expectText: /APP/ },
   "monohud": { feature: "raise the alert to Red", steps: [{ css: 'role=radio[name="Red"]' }], expectText: /Alert red/ },
+  "tuffui": { feature: "hold the launch from the decision panel", steps: [{ role: "button", name: /^Hold$/ }], expectText: /On hold/ },
 }
 
 // ---------- sensitive-info scan ----------

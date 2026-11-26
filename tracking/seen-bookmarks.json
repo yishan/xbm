@@ -434,6 +434,20 @@
       "folder": "unfiled",
       "built": "2026-11-22",
       "why": "Yishan approved the cockpit playground: real Monohud radar, tactical volume, hologram, warp starfield and cell meters, with signal distortion, alert level, theme, warp, hull integrity and cell controls kept in the URL."
+    },
+    {
+      "id": "2120061404615192598",
+      "title": "TUFFUI — React + shadcn-registry components for agent product screens",
+      "url": "https://x.com/yurygok/status/2120061404615192598",
+      "author": "@yurygok",
+      "date": "2026-11-10",
+      "tech": "Vite + React 19 + Tailwind v4; TUFFUI registry items (eval-results, run-trace, tool-approval-queue, checkpoint-timeline, segmented-control, range-slider …) via shadcn add, motion 14; components written with DeepSeek via aider",
+      "repo": "https://github.com/yurigdesigner/tuffui",
+      "site": "https://tuffui.com",
+      "slug": "tuffui",
+      "folder": "unfiled",
+      "built": "2026-11-26",
+      "why": "Yishan approved the AI launch review desk: 20 sample eval cases worst first, failing run traces, a risk-grouped approval queue, checkpoints and a gated ship / hold decision, with TUFFUI's theme and motion tokens, density, RTL, run speed and failure rate on live controls."
     }
   ],
   "skipped": []
